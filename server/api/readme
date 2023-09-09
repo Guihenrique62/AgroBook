@@ -1,3 +1,4 @@
 Para iniciar instale os seguintes pacotes
 npm i moment // gerenciar timastamp em formato humano
 npm i twix // gerenciar timastamp em formato humano
+npm i mongodb // gerencia a conexao com o banco de dados
