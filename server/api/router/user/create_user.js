@@ -9,7 +9,12 @@ require('dotenv').config(); // SOLICITA AS VARIAVEIS DE AMBIENTE
 // Controla todas as rotas de criação de usuario
 router.post("/api/user/create_user", async (req, res) => {
 
-    const { nome, documento, email, senha, cargo, status } = req.body; // RESERVA TODAS AS VARIAVIS RECEBIDAS
+    var { nome, documento, email, senha, cargo, status } = req.body; // RESERVA TODAS AS VARIAVIS RECEBIDAS
+
+    // VERIFICA SE O DOCUMENTO NÃO ESTÁ VAZIO
+    if (!documento) {
+        documento = "00000000000";
+    }
 
     const validDocument = JSON.stringify(documento).length >= 11 ? cpf.isValid(JSON.stringify(documento)) : cnpj.isValid(JSON.stringify(documento)); // VERIFICA SE O VALOR NA ENTRADA [ DOCUMENTO ] É VÁLIDO
 
@@ -44,7 +49,7 @@ router.post("/api/user/create_user", async (req, res) => {
             // VERIFICA SE EXITES VALORES DUPLICADOS
             if (createUser.keyValue) {
 
-                // PASSOU NA VARREDURA MAIS ENCONTROU ERRRO CHAVES DUPLICADAS
+                // PASSOU NA VARREDURA MAIS ENCONTROU ERRRO [ CHAVES DUPLICADAS ]
                 res.status(401).json({
                     "codigo": process.env.CODE_FAIL,
                     "resposta": process.env.MSG_SUCCESS_FAIL,
@@ -63,7 +68,6 @@ router.post("/api/user/create_user", async (req, res) => {
                 return true;
 
             }
-
     } else {
         
         // REPROVOU NA VARREDURA
