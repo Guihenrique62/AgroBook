@@ -1,3 +1,9 @@
+/*
+CRIADO: JEAN CLEIDSON PEREIRA RODRIGUES
+MATRICULA: 202202257141
+EMAIL: jeantng2016@gmail.com  
+*/
+
 const express = require("express"); // EXTRAI O MODULO DO EXPRESS
 var router = express.Router(); // EXTRAR O MODULO DE ROTAS
 const md5 = require('md5'); // EXTRAR O MODULO MD5 PARA CRIPTOGRAFAR SENHA
@@ -12,7 +18,7 @@ router.post("/api/user/create_user", async (req, res) => {
 
     var { nome, documento, email, senha, cargo, status } = req.body; // RESERVA TODAS AS VARIAVIS RECEBIDAS
 
-    // VERIFICA SE O DOCUMENTO NÃO ESTÁ VAZIO
+    // VERIFICA SE O DOCUMENTO ESTÁ VAZIO
     if (!documento) {
         documento = "00000000000";
     }
@@ -96,6 +102,19 @@ router.post("/api/user/create_user", async (req, res) => {
         return true;
 
     }
+
+});
+
+// *************** ALL ***************
+// Mensagem de erro personalizada para rotas nao existemte apartir de /create_user
+router.all("/api/user/create_user*", async (req, res) => {
+
+    res.status(404).json({
+        "codigo": process.env.CODE_FAIL,
+        "resposta": process.env.MSG_SUCCESS_FAIL,
+        "mensagem":"O linkk expirou ou nao existe, experimente acessar a documentacao da API em htpp://localhost:57603/doc/create_user",
+        "data_base": ""
+    });
 
 });
 

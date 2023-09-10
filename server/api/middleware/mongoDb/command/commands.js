@@ -35,7 +35,11 @@ const createData = async (dataBase, collectionName, obj) => {
 
 }
 
+// R = READ | Função que cria um registro no mongoDb | Ex: [ db = 'books', collection = 'usuarios', obj = {nome: "user"} ]
 const readData = async () => {
+
+    const configParms = new configDB(); // RECUPERA A FUNCAO QUE VEIO DO AQUIVO DE CONEXAO
+    const client = await configParms.parmsConfigDB(); // RESERVA APENAS A FUNCAO DE CONEXAO
 
 }
 
