@@ -3,6 +3,7 @@ var router = express.Router(); // EXTRAR O MODULO DE ROTAS
 const md5 = require('md5'); // EXTRAR O MODULO MD5 PARA CRIPTOGRAFAR SENHA
 const commands = require('../../middleware/mongoDb/command/commands'); // EXTRAR OS COMANDOS NO MONGODB
 const { cpf, cnpj } = require('cpf-cnpj-validator'); // EXTRAI BIBLIOTECA PARA VALIDAR DOCUMENTO
+const { validate } = require("email-validator"); // EXTRAI BIBLIOTECA PARA VALIDAR EMAIL
 require('dotenv').config(); // SOLICITA AS VARIAVEIS DE AMBIENTE
 
 // *************** POST ***************
@@ -17,12 +18,25 @@ router.post("/api/user/create_user", async (req, res) => {
     }
 
     const validDocument = JSON.stringify(documento).length >= 11 ? cpf.isValid(JSON.stringify(documento)) : cnpj.isValid(JSON.stringify(documento)); // VERIFICA SE O VALOR NA ENTRADA [ DOCUMENTO ] É VÁLIDO
+    const validEmail = validate(email); // VALIDA A ENTRADA DE ENMAIL USANDO BIBLIOTECA EXTERNA
 
-    // VERIFICA SE O DOCUMENTO E VALIDO
+    // VERIFICA SE O DOCUMENTO E INVALIDO
     if (!validDocument) {
         res.status(401).json({
             "codigo": process.env.CODE_FAIL,
             "resposta": process.env.MSG_SUCCESS_FAIL,
+            "mensagem":"O documento informado e invalido",
+            "data_base": ""
+        });
+        return true;
+    }
+
+    // VERIFICA SE O EMAIL E INVALIDO
+    if (!validEmail) {
+        res.status(401).json({
+            "codigo": process.env.CODE_FAIL,
+            "resposta": process.env.MSG_SUCCESS_FAIL,
+            "mensagem":"O e-mail informado e invalido",
             "data_base": ""
         });
         return true;
@@ -53,6 +67,7 @@ router.post("/api/user/create_user", async (req, res) => {
                 res.status(401).json({
                     "codigo": process.env.CODE_FAIL,
                     "resposta": process.env.MSG_SUCCESS_FAIL,
+                    "mensagem":"Usuario ja existe, experimente redefinir a senha ou inserir outro usuario",
                     "data_base": createUser
                 });
                 return true;
@@ -63,6 +78,7 @@ router.post("/api/user/create_user", async (req, res) => {
                 res.status(200).json({
                     "codigo": process.env.CODE_SUCCESS,
                     "resposta": process.env.MSG_SUCCESS,
+                    "mensagem":"Usuario criado com sucesso",
                     "data_base": createUser
                 });
                 return true;
@@ -74,6 +90,7 @@ router.post("/api/user/create_user", async (req, res) => {
         res.status(401).json({
             "codigo": process.env.CODE_FAIL,
             "resposta": process.env.MSG_FAIL,
+            "mensagem":"Os dados informados nao segue o padrao do sistem, revise-os e tente novamente",
             "data_base": ""
         });
         return true;
