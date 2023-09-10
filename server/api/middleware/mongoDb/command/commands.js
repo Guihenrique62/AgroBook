@@ -82,7 +82,7 @@ const updateData = async (dataBase, collectionName, filter, updateFilds) => {
     const configParms = new configDB(); // RECUPERA A FUNCAO QUE VEIO DO AQUIVO DE CONEXAO
     const client = await configParms.parmsConfigDB(); // RESERVA APENAS A FUNCAO DE CONEXAO
 
-    // FUNCAO PARA LER REGISTROS
+    // FUNCAO PARA ATUALIZAR REGISTROS
     async function execute(dataBase, collectionName, filter, objetctNewFilds) {
 
         await client.connect(); // AGUARDA A CONEXAO COM O CLIENT

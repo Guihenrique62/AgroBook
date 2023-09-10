@@ -8,7 +8,7 @@ const mainAppUse = require('./config/express');
 const app = new mainAppUse;
 const https = require('https');
 
-/************* AGROBOOK *************/
+/************* AGROBOOK [ START ] *************/
 
 /************* AUTH [ START ] *************/
 /* ROUTER AUTH - Controla todas as entradas */
