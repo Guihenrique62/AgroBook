@@ -17,9 +17,9 @@ router.post("/api/user/create_user", async (req, res) => {
         documento = "00000000000";
     }
 
-    const validDocument = JSON.stringify(documento).length >= 11 ? cpf.isValid(JSON.stringify(documento)) : cnpj.isValid(JSON.stringify(documento)); // VERIFICA SE O VALOR NA ENTRADA [ DOCUMENTO ] É VÁLIDO
+    const validDocument = JSON.stringify(documento).length <= 11 ? cpf.isValid(JSON.stringify(documento)) : cnpj.isValid(JSON.stringify(documento)); // VERIFICA SE O VALOR NA ENTRADA [ DOCUMENTO ] É VÁLIDO
     const validEmail = validate(email); // VALIDA A ENTRADA DE ENMAIL USANDO BIBLIOTECA EXTERNA
-
+    
     // VERIFICA SE O DOCUMENTO E INVALIDO
     if (!validDocument) {
         res.status(401).json({
