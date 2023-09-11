@@ -11,9 +11,9 @@ const https = require('https');
 /************* AGROBOOK [ START ] *************/
 
 /************* AUTH [ START ] *************/
-/* ROUTER AUTH - Controla todas as entradas */
-var ROUTER_AUTH = require('./router/auth');
-app.use(ROUTER_AUTH);
+/* ROUTER AUTH - Controla todas rotas de entradas */
+var ROUTER_AUTH_ALL = require('./router/auth/all');
+app.use(ROUTER_AUTH_ALL);
 /************* AUTH [ END ] *************/
 
 /************* USER [ START ] *************/

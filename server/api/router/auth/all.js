@@ -9,8 +9,8 @@ var router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const md5 = require('md5');
-const check_user = require('../middleware/jwt/jwt');
-const user = require('../middleware/mongoDb/command/commands');
+const check_user = require('../../middleware/jwt/jwt');
+const user = require('../../middleware/mongoDb/command/commands');
 require('dotenv').config();
 
 // *************** GET ***************
