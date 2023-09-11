@@ -18,25 +18,25 @@ app.use(ROUTER_AUTH_ALL);
 
 /************* USER [ START ] *************/
 /* ROUTER CREATE USER - Controla todas as entradas de criação de usuario */
-var ROUTER_CREATE_USER = require('./router/user/create_user');
+var ROUTER_CREATE_USER = require('./router/api/user/create_user');
 app.use(ROUTER_CREATE_USER);
 
 /* ROUTER READ USER - Controla todas as entradas de listagem de usuarios */
-var ROUTER_READ_USER = require('./router/user/read_user');
+var ROUTER_READ_USER = require('./router/api/user/read_user');
 app.use(ROUTER_READ_USER);
 
 /* ROUTER UPDATE USER - Controla todas as entradas de atualizacao de usuario */
-var ROUTER_UPDATE_USER = require('./router/user/update_user');
+var ROUTER_UPDATE_USER = require('./router/api/user/update_user');
 app.use(ROUTER_UPDATE_USER);
 
 /* ROUTER DELETE USER - Controla todas as ordem de apagar usuario */
-var ROUTER_DELETE_USER = require('./router/user/delete_user');
+var ROUTER_DELETE_USER = require('./router/api/user/delete_user');
 app.use(ROUTER_DELETE_USER);
 /************* USER [ END ] *************/
 
 /************* TRELLO [ START ] *************/
 /* ROUTER TRELLO CARD UPDATE - Controla todas as entradas de alteracao no trello */
-var ROUTER_TRELLO_CARD_UPDATE = require('./router/trello/card_update');
+var ROUTER_TRELLO_CARD_UPDATE = require('./router/api/trello/card_update');
 app.use(ROUTER_TRELLO_CARD_UPDATE);
 /************* TRELLO [ END ] *************/
 

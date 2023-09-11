@@ -7,7 +7,7 @@ EMAIL: jeantng2016@gmail.com
 const express = require("express"); // EXTRAI O MODULO DO EXPRESS
 var router = express.Router(); // EXTRAR O MODULO DE ROTAS
 const md5 = require('md5'); // EXTRAR O MODULO MD5 PARA CRIPTOGRAFAR SENHA
-const commands = require('../../middleware/mongoDb/command/commands'); // EXTRAR OS COMANDOS NO MONGODB
+const commands = require('../../../middleware/mongoDb/command/commands'); // EXTRAR OS COMANDOS NO MONGODB
 const { cpf, cnpj } = require('cpf-cnpj-validator'); // EXTRAI BIBLIOTECA PARA VALIDAR DOCUMENTO
 const { validate } = require("email-validator"); // EXTRAI BIBLIOTECA PARA VALIDAR EMAIL
 require('dotenv').config(); // SOLICITA AS VARIAVEIS DE AMBIENTE
