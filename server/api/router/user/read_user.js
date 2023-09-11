@@ -42,7 +42,7 @@ router.get("/api/user/list_user", async (req, res) => {
     }
 
     // VERIFICA SE O [ limit ] ESTÁ VAZIO E SE RESPEITA TODAS AS REGRAS DE ENTRADA
-    if (!limit || typeof (limit) == `string`) {
+    if (!limit || typeof (limit) == `string` || typeof (limit) == `object`) {
 
         res.status(401).json({
             "codigo": process.env.CODE_FAIL,
