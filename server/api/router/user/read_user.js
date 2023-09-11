@@ -21,7 +21,7 @@ router.get("/api/user/list_user", async (req, res) => {
         res.status(401).json({
             "codigo": process.env.CODE_FAIL,
             "resposta": process.env.MSG_SUCCESS_FAIL,
-            "mensagem":"O campo [ filter ] não respeita uma ou mais regras de entrada, revise os dados e tente novamente",
+            "mensagem": "O campo [ filter ] não respeita uma ou mais regras de entrada, revise os dados e tente novamente",
             "data_base": ""
         });
         return true;
@@ -34,7 +34,7 @@ router.get("/api/user/list_user", async (req, res) => {
         res.status(401).json({
             "codigo": process.env.CODE_FAIL,
             "resposta": process.env.MSG_SUCCESS_FAIL,
-            "mensagem":"O campo [ sort ] não respeita uma ou mais regras de entrada, revise os dados e tente novamente",
+            "mensagem": "O campo [ sort ] não respeita uma ou mais regras de entrada, revise os dados e tente novamente",
             "data_base": ""
         });
         return true;
@@ -47,20 +47,20 @@ router.get("/api/user/list_user", async (req, res) => {
         res.status(401).json({
             "codigo": process.env.CODE_FAIL,
             "resposta": process.env.MSG_SUCCESS_FAIL,
-            "mensagem":"O campo [ limit ] não respeita uma ou mais regras de entrada, revise os dados e tente novamente",
+            "mensagem": "O campo [ limit ] não respeita uma ou mais regras de entrada, revise os dados e tente novamente",
             "data_base": ""
         });
         return true;
 
     }
-    
+
     const shell_commands = new commands(); // CRIA UM CONSTRUTOR
     const listUser = await shell_commands.commandReadData(`books`, `usuarios`, filter, sort, limit); // EXECULTA A FUNCAO QUE LER REGISTRO NO BANCO DE DADOS 
 
     res.status(200).json({
         "codigo": process.env.CODE_SUCCESS,
         "resposta": process.env.MSG_SUCCESS,
-        "mensagem":"Lista de usuarios recuperada com sucesso",
+        "mensagem": "Lista de usuarios recuperada com sucesso",
         "data_base": listUser
     });
 
@@ -73,7 +73,7 @@ router.all("/api/user/list_user*", async (req, res) => {
     res.status(404).json({
         "codigo": process.env.CODE_FAIL,
         "resposta": process.env.MSG_SUCCESS_FAIL,
-        "mensagem":"O linkk expirou ou não existe, experimente acessar a documentacao da API em htpp://localhost:57603/doc/list_user",
+        "mensagem": `O linkk expirou ou não existe, experimente acessar a documentacao da API em ${process.env.HOST_API_DOC}/doc/list_user`,
         "data_base": ""
     });
 

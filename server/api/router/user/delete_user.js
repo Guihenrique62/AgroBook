@@ -11,7 +11,7 @@ require('dotenv').config(); // SOLICITA AS VARIAVEIS DE AMBIENTE
 
 // *************** DELETE ***************
 // Controla todas as entrada de apagar usuario
-router.delete("/api/user/delete_user*", async (req, res) => {
+router.delete("/api/user/delete_user", async (req, res) => {
 
     const { filter } = req.body;
 

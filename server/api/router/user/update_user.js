@@ -60,7 +60,7 @@ router.all("/api/user/update_user*", async (req, res) => {
     res.status(404).json({
         "codigo": process.env.CODE_FAIL,
         "resposta": process.env.MSG_SUCCESS_FAIL,
-        "mensagem": "O linkk expirou ou não existe, experimente acessar a documentacao da API em http://localhost:57603/doc/update_user",
+        "mensagem": `O linkk expirou ou não existe, experimente acessar a documentacao da API em ${process.env.HOST_API_DOC}/doc/update_user`,
         "data_base": ""
     });
 
