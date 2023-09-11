@@ -24,10 +24,11 @@ router.post("/api/user/create_user", async (req, res) => {
     }
 
     const validDocument = JSON.stringify(documento).length <= 11 ? cpf.isValid(JSON.stringify(documento)) : cnpj.isValid(JSON.stringify(documento)); // VERIFICA SE O VALOR NA ENTRADA [ DOCUMENTO ] É VÁLIDO
-    const validEmail = validate(email); // VALIDA A ENTRADA DE ENMAIL USANDO BIBLIOTECA EXTERNA
+    const validEmail = validate(email); // VALIDA A ENTRADA DE EMAIL USANDO BIBLIOTECA EXTERNA
     
     // VERIFICA SE O DOCUMENTO E INVALIDO
     if (!validDocument) {
+
         res.status(401).json({
             "codigo": process.env.CODE_FAIL,
             "resposta": process.env.MSG_SUCCESS_FAIL,
@@ -35,10 +36,12 @@ router.post("/api/user/create_user", async (req, res) => {
             "data_base": ""
         });
         return true;
+
     }
 
     // VERIFICA SE O EMAIL E INVALIDO
     if (!validEmail) {
+
         res.status(401).json({
             "codigo": process.env.CODE_FAIL,
             "resposta": process.env.MSG_SUCCESS_FAIL,
@@ -46,6 +49,7 @@ router.post("/api/user/create_user", async (req, res) => {
             "data_base": ""
         });
         return true;
+        
     }
 
     // VERIFICA VALORES RECEBIDOS
