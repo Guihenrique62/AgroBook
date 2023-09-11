@@ -11,17 +11,17 @@ require('dotenv').config(); // SOLICITA AS VARIAVEIS DE AMBIENTE
 
 // *************** POST ***************
 // Controla todas as rotas de listagem e login de usuario
-router.get("/api/user/update_user", async (req, res) => {
+router.post("/api/user/update_user", async (req, res) => {
 
     const { filter, newValue } = req.body; // RESERVA VALORES DO BODY
 
     // VERIFICA SE A VARIAVEL FILTER ESTÁ VAZIA
-    if (!filter || Object.keys(filter).length === 0 || typeof(filter) !== `object`) {
+    if (!filter || Object.keys(filter).length === 0 || typeof (filter) !== `object`) {
 
         res.status(401).json({
             "codigo": process.env.CODE_SUCCESS_FAIL,
             "resposta": process.env.MSG_SUCCESS_FAIL,
-            "mensagem": "O campo [ filter ] nao respeita uma ou mais regra de entrada como nao ser vazia, texto e nao objeto ou objeto vazio, revise os dados e tente novamente",
+            "mensagem": "O campo [ filter ] não respeita uma ou mais regras de entrada, revise os dados e tente novamente",
             "data_base": ""
         });
         return true;
@@ -29,35 +29,38 @@ router.get("/api/user/update_user", async (req, res) => {
     }
 
     // VERIFICA SE O NOVO VALOR ESTÁ VAZIO
-    if (!newValue || Object.keys(newValue).length === 0 || typeof(filter) !== `object`) {
+    if (!newValue || Object.keys(newValue).length === 0 || typeof (newValue) !== `object`) {
 
         res.status(401).json({
             "codigo": process.env.CODE_SUCCESS_FAIL,
             "resposta": process.env.MSG_SUCCESS_FAIL,
-            "mensagem": "O campo [ newValue ] nao respeita uma ou mais regra de entrada como nao ser vazia, texto e nao objeto ou objeto vazio, revise os dados e tente novamente",
+            "mensagem": "O campo [ newValue ] não respeita uma ou mais regras de entrada, revise os dados e tente novamente",
             "data_base": ""
         });
         return true;
 
     }
 
+    const shell_commands = new commands(); // CRIA O CONSTRUTOR
+    const updateUser = await shell_commands.commandUpadateData('books', 'usuarios', filter, newValue); // INICIAR A FUNCAO ATUALIZAR REGISTRO NO MONGO DB
+
     res.status(200).json({
         "codigo": process.env.CODE_SUCCESS,
         "resposta": process.env.MSG_SUCCESS,
-        "mensagem": "Ola mundo",
-        "data_base": ""
+        "mensagem": "Registro atualizado com sucesso",
+        "data_base": updateUser
     });
 
 });
 
 // *************** ALL ***************
-// Mensagem de erro personalizada para rotas nao existemte apartir de /update_user
+// Mensagem de erro personalizada para rotas não existemte apartir de /update_user
 router.all("/api/user/update_user*", async (req, res) => {
 
     res.status(404).json({
         "codigo": process.env.CODE_FAIL,
         "resposta": process.env.MSG_SUCCESS_FAIL,
-        "mensagem": "O linkk expirou ou nao existe, experimente acessar a documentacao da API em http://localhost:57603/doc/update_user",
+        "mensagem": "O linkk expirou ou não existe, experimente acessar a documentacao da API em http://localhost:57603/doc/update_user",
         "data_base": ""
     });
 

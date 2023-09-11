@@ -19,7 +19,7 @@ router.get("/api/user/list_user", async (req, res) => {
         res.status(401).json({
             "codigo": process.env.CODE_FAIL,
             "resposta": process.env.MSG_SUCCESS_FAIL,
-            "mensagem":"Nenhum valor foi recebido pelo BODY, revise sua solicitacao e tente novamente",
+            "mensagem":"Nenhum valor foi recebido pelo BODY, revise sua solicitação e tente novamente",
             "data_base": ""
         });
         return true;
@@ -40,13 +40,13 @@ router.get("/api/user/list_user", async (req, res) => {
 });
 
 // *************** ALL ***************
-// Mensagem de erro personalizada para rotas nao existemte apartir de /list_user
+// Mensagem de erro personalizada para rotas não existemte apartir de /list_user
 router.all("/api/user/list_user*", async (req, res) => {
 
     res.status(404).json({
         "codigo": process.env.CODE_FAIL,
         "resposta": process.env.MSG_SUCCESS_FAIL,
-        "mensagem":"O linkk expirou ou nao existe, experimente acessar a documentacao da API em htpp://localhost:57603/doc/list_user",
+        "mensagem":"O linkk expirou ou não existe, experimente acessar a documentacao da API em htpp://localhost:57603/doc/list_user",
         "data_base": ""
     });
 
