@@ -28,6 +28,10 @@ app.use(ROUTER_READ_USER);
 /* ROUTER UPDATE USER - Controla todas as entradas de atualizacao de usuario */
 var ROUTER_UPDATE_USER = require('./router/user/update_user');
 app.use(ROUTER_UPDATE_USER);
+
+/* ROUTER DELETE USER - Controla todas as ordem de apagar usuario */
+var ROUTER_DELETE_USER = require('./router/user/delete_user');
+app.use(ROUTER_DELETE_USER);
 /************* USER [ END ] *************/
 
 /************* TRELLO [ START ] *************/

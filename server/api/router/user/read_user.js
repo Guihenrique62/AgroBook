@@ -13,20 +13,47 @@ require('dotenv').config(); // SOLICITA AS VARIAVEIS DE AMBIENTE
 // Controla todas as rotas de listagem e login de usuario
 router.get("/api/user/list_user", async (req, res) => {
 
-    // VERIFICA SE O BODY ESTA VAZIO
-    if (Object.keys(req.body).length === 0) {
+    const { filter, sort, limit } = req.body; // RECUPERA OS DADOS DO BODY
+
+    // VERIFICA SE O [ filter ] ESTÁ VAZIO E SE RESPEITA TODAS AS REGRAS DE ENTRADA
+    if (!filter || Object.keys(filter).length === 0 || typeof (filter) !== `object`) {
 
         res.status(401).json({
             "codigo": process.env.CODE_FAIL,
             "resposta": process.env.MSG_SUCCESS_FAIL,
-            "mensagem":"Nenhum valor foi recebido pelo BODY, revise sua solicitação e tente novamente",
+            "mensagem":"O campo [ filter ] não respeita uma ou mais regras de entrada, revise os dados e tente novamente",
             "data_base": ""
         });
         return true;
 
     }
 
-    const { filter, sort, limit } = req.body;
+    // VERIFICA SE O [ sort ] ESTÁ VAZIO E SE RESPEITA TODAS AS REGRAS DE ENTRADA
+    if (!sort || Object.keys(sort).length === 0 || typeof (sort) !== `object`) {
+
+        res.status(401).json({
+            "codigo": process.env.CODE_FAIL,
+            "resposta": process.env.MSG_SUCCESS_FAIL,
+            "mensagem":"O campo [ sort ] não respeita uma ou mais regras de entrada, revise os dados e tente novamente",
+            "data_base": ""
+        });
+        return true;
+
+    }
+
+    // VERIFICA SE O [ limit ] ESTÁ VAZIO E SE RESPEITA TODAS AS REGRAS DE ENTRADA
+    if (!limit || typeof (limit) == `string`) {
+
+        res.status(401).json({
+            "codigo": process.env.CODE_FAIL,
+            "resposta": process.env.MSG_SUCCESS_FAIL,
+            "mensagem":"O campo [ limit ] não respeita uma ou mais regras de entrada, revise os dados e tente novamente",
+            "data_base": ""
+        });
+        return true;
+
+    }
+    
     const shell_commands = new commands(); // CRIA UM CONSTRUTOR
     const listUser = await shell_commands.commandReadData(`books`, `usuarios`, filter, sort, limit); // EXECULTA A FUNCAO QUE LER REGISTRO NO BANCO DE DADOS 
 
