@@ -20,7 +20,9 @@ const linkType = async (url) => {
 // Controla todas as rotas de criação de livros
 router.post("/api/book/create_book", async (req, res) => {
 
-    var { titulo, capa, sinopse, qtdPaginas, categorias, autor, datLancamento, qtdEstoque } = req.body; // RESERVA TODAS AS VARIAVIS RECEBIDAS
+    var { titulo, capa, sinopse, paginas, categorias, autor, data_lancamento, total_estoque } = req.body; // RESERVA TODAS AS VARIAVIS RECEBIDAS
+
+    const dateNow = new Date();
 
     if (!capa) { //INSERE IMAGEM PADRÃO 
         capa = 'https://www.ira-sme.net/wp-content/themes/consultix/images/no-image-found-360x260.png';
@@ -36,11 +38,14 @@ router.post("/api/book/create_book", async (req, res) => {
             "titulo": titulo,
             "capa": capa,
             "sinopse": sinopse,
-            "qtdPaginas": qtdPaginas,
+            "paginas": paginas,
             "categorias": categorias,
             "autor": autor,
-            "datLancamento": datLancamento,
-            "qtdEstoque": qtdEstoque
+            "idioma": idioma,
+            "data_lancamento": data_lancamento,
+            "total_estoque": total_estoque,
+            "registro_criado_em": dateNow.getTime(),// DATA ATUAL DA CRIAÇÃO
+            "registro_atualizado_em": dateNow.getTime() // DATA ATUAL DA CRIAÇÃO
         }
 
         const shell_commands = new commands(); // CRIA UM CONSTRUTOR
