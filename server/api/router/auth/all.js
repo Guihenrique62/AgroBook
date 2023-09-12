@@ -26,12 +26,9 @@ router.get("/", async (req, res) => {
 
 // *************** GET ***************
 // Controla todas as entrada de api no metodo GET
-router.get("/api/", async (req, res) => {
+router.get("/api*", async (req, res, next) => {
 
-    res.send({
-        "status": "ok",
-        "router": "api"
-    })
+    next();
 
 });
 
