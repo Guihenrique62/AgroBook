@@ -26,7 +26,27 @@ router.get("/", async (req, res) => {
 
 // *************** GET ***************
 // Controla todas as entrada de api no metodo GET
-router.get("/api*", async (req, res, next) => {
+router.all("/api*", async (req, res, next) => {
+
+    const check_data = new check_user();
+    const result = await check_data.check(req);
+    const cookieData = result[0]['validToken'];
+
+    // VERIFICA SE O USUARIO ESTA DESLOGADO
+    if (cookieData["hash_mail_pass"] == "false") {
+
+        res.status(401).json({
+            "codigo": process.env.CODE_FAIL,
+            "resposta": process.env.MSG_FAIL,
+            "mensagem": "O usuário não está autenticado, realize o login e tente novamente",
+            "auth": cookieData,
+            "data_base": ""
+        });
+        return false;
+
+    }
+
+    console.log(req);
 
     next();
 

@@ -7,7 +7,14 @@ EMAIL: guilhermeportosantos1@gmail.com
 const express = require("express"); // EXTRAI O MODULO DO EXPRESS
 var router = express.Router(); // EXTRAR O MODULO DE ROTAS
 const commands = require('../../../middleware/mongoDb/command/commands'); // EXTRAR OS COMANDOS NO MONGODB
+const FileType = require('fs');
 require('dotenv').config(); // SOLICITA AS VARIAVEIS DE AMBIENTE
+
+// *************** LINK TYPE ***************
+// Verifica o tipo do link recebido pela api
+const linkType = async (url) => {
+    // A FAZER
+}
 
 // *************** POST ***************
 // Controla todas as rotas de criação de livros
@@ -15,15 +22,15 @@ router.post("/api/book/create_book", async (req, res) => {
 
     var { titulo, capa, sinopse, qtdPaginas, categorias, autor, datLancamento, qtdEstoque } = req.body; // RESERVA TODAS AS VARIAVIS RECEBIDAS
 
-    if(!capa){ //INSERE IMAGEM PADRÃO 
-        capa = 'https://www.ira-sme.net/wp-content/themes/consultix/images/no-image-found-360x260.png'
+    if (!capa) { //INSERE IMAGEM PADRÃO 
+        capa = 'https://www.ira-sme.net/wp-content/themes/consultix/images/no-image-found-360x260.png';
     }
 
     // VERIFICA VALORES RECEBIDOS
     if (
         titulo // VERIFICA SE O TITULO NAO ESTÁ VAZIO
         && sinopse // VERIFICA SE A SINOPSE NAO ESTA VAZIO
-       ) {
+    ) {
 
         const query = { // CRIA O OBJETO
             "titulo": titulo,
@@ -35,7 +42,7 @@ router.post("/api/book/create_book", async (req, res) => {
             "datLancamento": datLancamento,
             "qtdEstoque": qtdEstoque
         }
-        
+
         const shell_commands = new commands(); // CRIA UM CONSTRUTOR
         const createBook = await shell_commands.commandCreateData('books', 'livros', query); // INICIAR A FUNÇÃO EXPORTADA
 
@@ -46,7 +53,7 @@ router.post("/api/book/create_book", async (req, res) => {
             res.status(401).json({
                 "codigo": process.env.CODE_FAIL,
                 "resposta": process.env.MSG_SUCCESS_FAIL,
-                "mensagem": "Livro ja existente no sistema",
+                "mensagem": "Livro já existente no sistema",
                 "data_base": createBook
             });
             return true;
@@ -63,6 +70,7 @@ router.post("/api/book/create_book", async (req, res) => {
             return true;
 
         }
+
     } else {
 
         // REPROVOU NA VARREDURA
@@ -85,7 +93,7 @@ router.all("/api/user/create_book*", async (req, res) => {
     res.status(404).json({
         "codigo": process.env.CODE_FAIL,
         "resposta": process.env.MSG_SUCCESS_FAIL,
-        "mensagem": `O linkk expirou ou não existe, experimente acessar a documentacao da API em ${process.env.HOST_API_DOC}/doc/create_book`,
+        "mensagem": `O link expirou ou não existe, experimente acessar a documentacao da API em ${process.env.HOST_API_DOC}/doc/create_book`,
         "data_base": ""
     });
 

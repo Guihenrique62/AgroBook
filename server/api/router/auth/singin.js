@@ -140,7 +140,7 @@ router.post("/auth/singin/valid", async (req, res) => {
         res.status(401).json({
             "codigo": process.env.CODE_FAIL,
             "resposta": process.env.MSG_FAIL,
-            "mensagem": "O usuario nao esta autenticado, realize o login e tente novamente",
+            "mensagem": "O usuário não está autenticado, realize o login e tente novamente",
             "auth": cookieData,
             "data_base": ""
         });
@@ -151,7 +151,7 @@ router.post("/auth/singin/valid", async (req, res) => {
     res.status(200).json({
         "codigo": process.env.CODE_SUCCESS,
         "resposta": process.env.MSG_SUCCESS,
-        "mensagem": "O usuario esta com a sessao valida",
+        "mensagem": "O usuário está com a sessão válida",
         "auth": cookieData,
         "data_base": ""
     });
