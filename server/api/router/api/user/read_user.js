@@ -57,6 +57,21 @@ router.get("/api/user/list_user", async (req, res) => {
     const shell_commands = new commands(); // CRIA UM CONSTRUTOR
     const listUser = await shell_commands.commandReadData(`books`, `usuarios`, filter, sort, limit); // EXECULTA A FUNCAO QUE LER REGISTRO NO BANCO DE DADOS 
 
+    console.log(listUser["result"].length);
+
+    // VERIFICA SE RECEBEU UM VALOR VAZIO
+    if (!listUser["result"].length) {
+
+        res.status(401).json({
+            "codigo": process.env.CODE_FAIL,
+            "resposta": process.env.MSG_SUCCESS_FAIL,
+            "mensagem": "Nenhum registro localizado, tente realizar uma nova consulta mudando os paramêtros",
+            "data_base": listUser
+        });
+        return true;
+
+    }
+
     res.status(200).json({
         "codigo": process.env.CODE_SUCCESS,
         "resposta": process.env.MSG_SUCCESS,
