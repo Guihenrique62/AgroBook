@@ -13,6 +13,8 @@ const session = require('express-session'); // EXTRAI MODULO PARA CONTROLAR SESS
 const check_user = require('../../middleware/jwt/jwt'); // EXTRAIR FUNÇOES PARA MANIPULAR O JWT
 const command = require('../../middleware/mongoDb/command/commands'); // EXTRAR OS COMANDOS NO MONGODB
 const { validate } = require("email-validator"); // EXTRAI BIBLIOTECA PARA VALIDAR EMAIL
+const moment = require('moment'); // EXTRAI O MODULO QUE NORMALIZA TIMASTAMP
+moment.locale('pt-BR');
 require('dotenv').config(); // SOLICITA AS VARIAVEIS DE AMBIENTE
 
 // *************** DLC [ GERAR HASH ] ***************
@@ -41,7 +43,7 @@ const gerarHash = async (email, senha, user, req) => {
                 },
                     process.env.SECRET_JWT, // PUXA O SECREAT DO ARQUIVO .ENV
                     {
-                        expiresIn: "1h", // DEFINE A VALIDADE DO HASH
+                        expiresIn: !JSON.parse(process.env.EXPIRATE_JWT)[0][user["cargo"]] ? "30min" : JSON.parse(process.env.EXPIRATE_JWT)[0][user["cargo"]], // DEFINE A VALIDADE DO HASH
                     }
                 );
 
@@ -131,9 +133,9 @@ router.post("/auth/singin", async (req, res) => {
 // Controla todas as entradas de validacao da autenticação
 router.post("/auth/singin/valid", async (req, res) => {
 
-    const check_data = new check_user();
-    const result = await check_data.check(req);
-    const cookieData = result[0]['validToken'];
+    const check_data = new check_user(); // CRIA UM CONSTRUTOR
+    const result = await check_data.check(req); // EXECULTA A FUNÇÃO DENTRO DO CONTRUTOR
+    var cookieData = result[0]['validToken']; // RESERVA O VALOR RECEBIDO
 
     // VERIFICA SE O USUARIO ESTA DESLOGADO
     if (cookieData["hash_mail_pass"] == "false") {
