@@ -38,6 +38,12 @@ var ROUTER_DELETE_USER = require('./router/api/user/delete_user');
 app.use(ROUTER_DELETE_USER);
 /************* USER [ END ] *************/
 
+/************* BOOKS [ START ] *************/
+/* ROUTER BOOKS CREATE - Controla todas as entradas de criação de livro */
+var ROUTER_BOOKS_CREATE = require('./router/api/book/create_book');
+app.use(ROUTER_BOOKS_CREATE);
+/************* BOOKS [ END ] *************/
+
 /************* TRELLO [ START ] *************/
 /* ROUTER TRELLO CARD UPDATE - Controla todas as entradas de alteracao no trello */
 var ROUTER_TRELLO_CARD_UPDATE = require('./router/api/trello/card_update');

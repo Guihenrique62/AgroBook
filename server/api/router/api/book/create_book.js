@@ -15,6 +15,10 @@ router.post("/api/book/create_book", async (req, res) => {
 
     var { titulo, capa, sinopse, qtdPaginas, categorias, autor, datLancamento, qtdEstoque } = req.body; // RESERVA TODAS AS VARIAVIS RECEBIDAS
 
+    if(!capa){ //INSERE IMAGEM PADRÃO 
+        capa = 'https://www.ira-sme.net/wp-content/themes/consultix/images/no-image-found-360x260.png'
+    }
+
     // VERIFICA VALORES RECEBIDOS
     if (
         titulo // VERIFICA SE O TITULO NAO ESTÁ VAZIO
