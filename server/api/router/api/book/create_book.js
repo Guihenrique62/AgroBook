@@ -10,7 +10,7 @@ const commands = require('../../../middleware/mongoDb/command/commands'); // EXT
 require('dotenv').config(); // SOLICITA AS VARIAVEIS DE AMBIENTE
 
 // *************** POST ***************
-// Controla todas as rotas de criação de usuario
+// Controla todas as rotas de criação de livros
 router.post("/api/book/create_book", async (req, res) => {
 
     var { titulo, capa, sinopse, qtdPaginas, categorias, autor, datLancamento, qtdEstoque } = req.body; // RESERVA TODAS AS VARIAVIS RECEBIDAS
@@ -31,6 +31,7 @@ router.post("/api/book/create_book", async (req, res) => {
             "datLancamento": datLancamento,
             "qtdEstoque": qtdEstoque
         }
+        
         const shell_commands = new commands(); // CRIA UM CONSTRUTOR
         const createBook = await shell_commands.commandCreateData('books', 'livros', query); // INICIAR A FUNÇÃO EXPORTADA
 
@@ -80,7 +81,7 @@ router.all("/api/user/create_book*", async (req, res) => {
     res.status(404).json({
         "codigo": process.env.CODE_FAIL,
         "resposta": process.env.MSG_SUCCESS_FAIL,
-        "mensagem": `O linkk expirou ou não existe, experimente acessar a documentacao da API em ${process.env.HOST_API_DOC}/doc/create_user`,
+        "mensagem": `O linkk expirou ou não existe, experimente acessar a documentacao da API em ${process.env.HOST_API_DOC}/doc/create_book`,
         "data_base": ""
     });
 
