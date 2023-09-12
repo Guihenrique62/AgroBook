@@ -14,6 +14,10 @@ const https = require('https');
 /* ROUTER AUTH - Controla todas rotas de entradas */
 var ROUTER_AUTH_ALL = require('./router/auth/all');
 app.use(ROUTER_AUTH_ALL);
+
+/* ROUTER AUTH SINGIN - Controla todas rotas de entradas de login */
+var ROUTER_AUTH_SINGIN = require('./router/auth/singin');
+app.use(ROUTER_AUTH_SINGIN);
 /************* AUTH [ END ] *************/
 
 /************* USER [ START ] *************/
