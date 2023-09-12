@@ -13,7 +13,7 @@ require('dotenv').config(); // SOLICITA AS VARIAVEIS DE AMBIENTE
 // Controla todas as rotas de criação de livros
 router.post("/api/book/create_book", async (req, res) => {
 
-    var { titulo, capa, sinopse, paginas, categorias, autor, data_lancamento, total_estoque } = req.body; // RESERVA TODAS AS VARIAVIS RECEBIDAS
+    var { titulo, capa, sinopse, paginas, categorias, autor, idioma, data_lancamento, total_estoque } = req.body; // RESERVA TODAS AS VARIAVIS RECEBIDAS
 
     const dateNow = new Date();
 
