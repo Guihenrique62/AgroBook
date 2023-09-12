@@ -46,7 +46,7 @@ router.all("/api*", async (req, res, next) => {
 
     }
 
-    console.log(req);
+    console.log(req.params);
 
     next();
 

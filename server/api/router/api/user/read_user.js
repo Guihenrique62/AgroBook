@@ -57,8 +57,6 @@ router.get("/api/user/list_user", async (req, res) => {
     const shell_commands = new commands(); // CRIA UM CONSTRUTOR
     const listUser = await shell_commands.commandReadData(`books`, `usuarios`, filter, sort, limit); // EXECULTA A FUNCAO QUE LER REGISTRO NO BANCO DE DADOS 
 
-    console.log(listUser["result"].length);
-
     // VERIFICA SE RECEBEU UM VALOR VAZIO
     if (!listUser["result"].length) {
 
