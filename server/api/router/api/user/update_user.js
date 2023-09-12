@@ -44,6 +44,21 @@ router.post("/api/user/update_user", async (req, res) => {
     const shell_commands = new commands(); // CRIA O CONSTRUTOR
     const updateUser = await shell_commands.commandUpadateData('books', 'usuarios', filter, newValue); // INICIAR A FUNCAO ATUALIZAR REGISTRO NO MONGO DB
 
+    console.log();
+
+    // VERIFICA SE NÃO FOI FEITA NENHUMA ALTERAÇÃO
+    if (!updateUser["result"]["modifiedCount"]) {
+
+        res.status(401).json({
+            "codigo": process.env.CODE_FAIL,
+            "resposta": process.env.MSG_SUCCESS_FAIL,
+            "mensagem": "Nenhum registro foi alterado, verifique os valores informado e tente novamente",
+            "data_base": updateUser
+        });
+        return false;
+
+    }
+
     res.status(200).json({
         "codigo": process.env.CODE_SUCCESS,
         "resposta": process.env.MSG_SUCCESS,
