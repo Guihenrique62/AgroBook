@@ -24,9 +24,10 @@ const gerarHash = async (email, senha, user, req) => {
     // CRIPTOGRAFA O EMAIL E SENHA
     return bcrypt.hash(email + '+' + senha, saltRounds).then(function (hash) {
 
+        // FAZ A COMPARAÇÃO DO HASH A FIM DE VERIFICAR SE E VALIDO
         return bcrypt.compare(email + '+' + senha, hash).then(function (result) {
 
-            // SALVA NOS COKIES O HASH
+            // SALVA NOS COKIES O HASH CASO SEJA VALIDO
             if (result) {
 
                 var token = jwt.sign({
@@ -38,14 +39,14 @@ const gerarHash = async (email, senha, user, req) => {
                     "cargo": user["cargo"],
                     "status": user["status"],
                 },
-                    process.env.SECRET_JWT,
+                    process.env.SECRET_JWT, // PUXA O SECREAT DO ARQUIVO .ENV
                     {
-                        expiresIn: "1h",
+                        expiresIn: "1h", // DEFINE A VALIDADE DO HASH
                     }
                 );
 
-                req.session.HASH_MAIL_PASS = token;
-                return token;
+                req.session.HASH_MAIL_PASS = token; // DEFINE O SESSION NO CACHE
+                return token; // RETORNA O TOKEN
 
             }
 

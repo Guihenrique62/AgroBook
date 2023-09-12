@@ -55,9 +55,7 @@ router.get("/api/book/list_book", async (req, res) => {
     }
 
     const shell_commands = new commands(); // CRIA UM CONSTRUTOR
-    const listBook = await shell_commands.commandReadData(`books`, `livros`, filter, sort, limit); // EXECULTA A FUNCAO QUE LER REGISTRO NO BANCO DE DADOS 
-
-    console.log(listBook["result"].length);
+    const listBook = await shell_commands.commandReadData(`books`, 'livros', filter, sort, limit); // EXECULTA A FUNCAO QUE LER REGISTRO NO BANCO DE DADOS 
 
     // VERIFICA SE RECEBEU UM VALOR VAZIO
     if (!listBook["result"].length) {
