@@ -20,7 +20,7 @@ const saveLog = async (obj) => {
     const shell_commands = new command(); // CRIA UM CONSTRUTOR
     const insertData = await shell_commands.commandCreateData('books', 'log', obj); // EXECULTA COMANDO DE CRIAR REGISTRO
     return true;
-    
+
 }
 
 // *************** GET ***************
@@ -45,6 +45,7 @@ router.all("/api*", async (req, res, next) => {
 
     // INSERE VALORES NO OBJETO VAZIO
     obj.acao = "acessar_api";
+    obj.rota = req.params;
     obj.responsavel_acao = !cookieData.id ? "" : cookieData.id;
     obj.responsavel_objeto = cookieData;
     obj.id_usuario = "";
