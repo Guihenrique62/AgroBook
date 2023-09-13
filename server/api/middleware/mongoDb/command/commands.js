@@ -82,7 +82,7 @@ const updateData = async (dataBase, collectionName, filter, updateFilds) => {
     const configParms = new configDB(); // RECUPERA A FUNCAO QUE VEIO DO AQUIVO DE CONEXAO
     const client = await configParms.parmsConfigDB(); // RESERVA APENAS A FUNCAO DE CONEXAO
 
-    // FUNCAO PARA LER REGISTROS
+    // FUNCAO PARA ATUALIZAR REGISTROS
     async function execute(dataBase, collectionName, filter, objetctNewFilds) {
 
         await client.connect(); // AGUARDA A CONEXAO COM O CLIENT
@@ -110,7 +110,38 @@ const updateData = async (dataBase, collectionName, filter, updateFilds) => {
 
 }
 
-const deleteData = async () => {
+// D = DELETE | Função que apaga um registro no mongodb usando o filter para localizar o registro
+const deleteData = async (dataBase, collectionName, filter) => {
+
+    const configParms = new configDB(); // RECUPERA A FUNCAO QUE VEIO DO AQUIVO DE CONEXAO
+    const client = await configParms.parmsConfigDB(); // RESERVA APENAS A FUNCAO DE CONEXAO
+
+    // FUNCAO PARA APAGAR REGISTROS
+    async function execute(dataBase, collectionName, filter) {
+
+        await client.connect(); // AGUARDA A CONEXAO COM O CLIENT
+
+        const db = client.db(dataBase); // CRIA A CONECAO COM O BANCO
+        const collection = db.collection(collectionName); // AGORA A CONEXAO COM A COLLECTION
+        const deleteData = await collection.deleteOne(filter); // PARA FINALIZAR REALIZA A EXCLUSÃO USANDO UM FILTRO
+
+        console.log(deleteData);
+
+        const objArray = {}; // CRIA UM OBJETO PARA GUARDAR O OBJ PASSADO
+
+        objArray.dataBase = dataBase; // RESERVA OS DADOS DE ENTRADA [ db ]
+        objArray.collectionName = collectionName; // RESERVA OS DADOS DE ENTRADA [ collection ]
+        objArray.filter = filter; // RESERVA OS DADOS DE ENTRADA [ filter ]
+        objArray.result = deleteData; // RESERVA O RESULTADO FINAL DO COMANDO
+
+        return objArray; // RETORNA O RESULTADO DA OPERAÇÃO O ESPERADO É {"ok":1}
+
+    }
+
+    return await execute(dataBase, collectionName, filter)
+        .then((res) => { return res }) // EM CADO DE SUCESSO
+        .catch((err) => { return err }) // EM CASO DE ERRO
+        .finally(() => client.close()); // AO FINALIZAR FECHA A CONEXAO
 
 }
 
@@ -129,6 +160,11 @@ module.exports = function () {
 
     this.commandUpadateData = async (dataBase, collectionName, filter, newObj) => {
         const data = await updateData(dataBase, collectionName, filter, newObj);
+        return data;
+    }
+
+    this.commandDeleteData = async (dataBase, collectionName, filter) => {
+        const data = await deleteData(dataBase, collectionName, filter);
         return data;
     }
 
