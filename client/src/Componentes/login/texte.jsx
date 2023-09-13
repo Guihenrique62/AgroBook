@@ -12,27 +12,14 @@ export default function Teste() {
     e.preventDefault();
 
     try {
-      let data = "";
+      const resposta = await axios.post(
+        "http://20.226.73.46:57601/auth/singin/valid",
+        {
+          withCredentials: true,
+        }
+      );
 
-      let config = {
-        method: "post",
-        maxBodyLength: Infinity,
-        withCredentials: true,
-        url: "http://20.226.73.46:57601/auth/singin/valid",
-        headers: {
-          Accept: "*/*",
-        },
-        data: data,
-      };
-
-      axios
-        .request(config)
-        .then((response) => {
-          console.log(JSON.stringify(response.data));
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      console.log(resposta);
     } catch (err) {
       console.log(err);
     }
@@ -43,31 +30,27 @@ export default function Teste() {
     e.preventDefault();
 
     try {
-      let data = JSON.stringify({
+      var data = {
         email: "jeantng2016@gmail.com",
         senha: "trocar123",
-      });
-
-      let config = {
-        method: "post",
-        maxBodyLength: Infinity,
-        withCredentials: true,
-        url: "http://20.226.73.46:57601/auth/singin",
-        headers: {
-          Accept: "*/*",
-          "Content-Type": "application/json",
-        },
-        data: data,
       };
-
-      await axios
-        .request(config)
-        .then((response) => {
-          console.log(JSON.stringify(response.data));
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      let config = {
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Expose-Headers": "set-cookie",
+          "Access-Control-Allow-Credentials": true,
+        },
+      };
+      const resposta = await axios.post(
+        "http://20.226.73.46:57601/auth/singin",
+        data,
+        config,
+        {
+          withCredentials: true,
+        }
+      );
+      console.log(resposta);
     } catch (err) {
       console.log(err);
     }
