@@ -12,8 +12,14 @@ export default function Teste() {
     e.preventDefault();
 
     try {
+      let config = {
+        headers: {
+          "Access-Control-Allow-Origin": "same-origin"
+        },
+      };
       const resposta = await axios.post(
-        "http://20.226.73.46:57601/auth/singin/valid",
+        "http://localhost:57601/auth/singin/valid",
+        config,
         {
           withCredentials: true,
         }
@@ -36,14 +42,12 @@ export default function Teste() {
       };
       let config = {
         headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "*",
-          "Access-Control-Expose-Headers": "set-cookie",
-          "Access-Control-Allow-Credentials": true,
+          "Access-Control-Allow-Origin": "same-origin"
         },
+        withCredentials: true
       };
       const resposta = await axios.post(
-        "http://20.226.73.46:57601/auth/singin",
+        "http://localhost:57601/auth/singin",
         data,
         config,
         {
