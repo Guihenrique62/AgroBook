@@ -1,11 +1,11 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 var CryptoJS = require("crypto-js");
-require('dotenv').config({path: '../../.env'});
+require('dotenv').config(); // SOLICITA AS VARIAVEIS DE AMBIENTE
 
 const validarUser = async (req) => {
-    
-    const { login, password } = req.body;
+
+    const { email, senha } = req.body;
     var status = 0;
     var compareUser = null;
 
@@ -19,8 +19,8 @@ const validarUser = async (req) => {
                     status = 401;
                     return {
                         hash_mail_pass: 'false',
-                        iat: 0000000000,
-                        exp: 0000000000
+                        iat: 0,
+                        exp: 0
                     };
                 } else {
                     status = 200;
@@ -28,29 +28,29 @@ const validarUser = async (req) => {
                 }
             }
         );
-    }catch(x){
+    } catch (x) {
         return validToken = false;
     }
 
     try {
-        await bcrypt.compare(login + '+' + password, validToken["hash_mail_pass"]).then(function (result) {
+        await bcrypt.compare(email + '+' + senha, validToken["hash_mail_pass"]).then(function (result) {
             compareUser = result;
         });
     } catch (x) {
         compareUser = 'err'
     }
-    
+
     return [{
         "status_code": status,
         "compareUser": compareUser,
         "validToken": validToken,
-        "parmsLogin": login,
-        "parmsPassword": password
+        "parmsemail": email,
+        "parmssenha": senha
     }]
 }
 
-module.exports = function(){
-    
+module.exports = function () {
+
     this.check = async (req) => {
         const data = await validarUser(req);
         return data;
