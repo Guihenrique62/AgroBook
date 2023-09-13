@@ -24,10 +24,11 @@ module.exports = function () {
         //     "http://20.226.73.46:57601",
         //     "http://192.168.0.56:57601", /* filipe */
         //     "http://192.168.0.56:5173", /* filipe */
-        //     "http://localhost:5173/" /* filipe */
+        //     "http://localhost:8080/" /* filipe */
 
         // ],
         origin: "*",
+        exposedHeaders: ["set-cookie"],
         credentials: true,
         optionsSuccessStatus: 200
     }
