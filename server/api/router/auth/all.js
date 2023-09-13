@@ -9,7 +9,7 @@ var router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const md5 = require('md5');
-const check_user = require('../../middleware/jwt/jwt');
+const check_user = require('../../middleware/auth/get_jwt_mongodb'); // PUXA FUNCAO QUE VALIDA SESSAO DO USUARIO
 const command = require('../../middleware/mongoDb/command/commands'); // EXTRAR OS COMANDOS NO MONGODB
 require('dotenv').config();
 
@@ -39,8 +39,9 @@ router.get("/", async (req, res) => {
 router.all("/api*", async (req, res, next) => {
 
     const check_data = new check_user(); // CRIA O CONTRUTOR
-    const result = await check_data.check(req); // EXECUTA A FUNCAO DO CONSTRUTOR
+    const result = await check_data.initSyncSingIn(req); // EXECUTA A FUNCAO DO CONSTRUTOR
     const cookieData = result[0]['validToken']; // RECUPERA OS DADOS DA FUNÇÃO
+
     var obj = {}; // CRIA UM OBJETO VAZIO PARA SALVAR NO MONGO DB
 
     // INSERE VALORES NO OBJETO VAZIO
@@ -48,6 +49,7 @@ router.all("/api*", async (req, res, next) => {
     obj.rota = req.params;
     obj.responsavel_acao = !cookieData.id ? "" : cookieData.id;
     obj.responsavel_objeto = cookieData;
+    obj.body = req.body;
     obj.id_usuario = "";
     obj.erro = cookieData.hash_mail_pass == "false" ? true : false;
     obj.message = cookieData.hash_mail_pass == "false" ? "Usuário não está autenticado, solicitação cancelada" : "Usuário com sessão validada, solicitação liberada"

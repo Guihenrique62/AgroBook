@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 var CryptoJS = require("crypto-js");
 require('dotenv').config(); // SOLICITA AS VARIAVEIS DE AMBIENTE
 
+// VALIDA O USUARIO
 const validarUser = async (req) => {
 
     const { email, senha } = req.body;
@@ -49,6 +50,7 @@ const validarUser = async (req) => {
     }]
 }
 
+// EXPORTA A FUNÇÃO PARA USAR EM OUTRO ARQUIVO
 module.exports = function () {
 
     this.check = async (req) => {
