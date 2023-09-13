@@ -110,7 +110,7 @@ router.post("/auth/singin", async (req, res) => {
         res.status(401).json({
             "codigo": process.env.CODE_FAIL,
             "resposta": process.env.MSG_SUCCESS_FAIL,
-            "mensagem": "Esse usuario nao esta autorizado a relizar o login, contate seu administrador para liberar o acesso",
+            "mensagem": "Esse usuário não está autorizado a relizar o login, contate seu administrador para liberar o acesso",
             "data_base": ""
         });
         return true;

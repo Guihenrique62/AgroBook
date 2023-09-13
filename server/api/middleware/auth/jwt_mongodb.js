@@ -1,8 +1,8 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 var CryptoJS = require("crypto-js");
-const check_user = require('../../middleware/jwt/jwt'); // EXTRAI O VALIDADOR DO JWT
-const commands = require('../../middleware/mongoDb/command/commands'); // EXTRAI OS COMANDOS NO MONGODB
+const check_user = require('../jwt/jwt'); // EXTRAI O VALIDADOR DO JWT
+const commands = require('../mongoDb/command/commands'); // EXTRAI OS COMANDOS NO MONGODB
 require('dotenv').config(); // SOLICITA AS VARIAVEIS DE AMBIENTE
 
 // FUNÇÃO QUE VALIDA O COOKIE PUXANDO NO MONGO DB A FIM DE VALIDAR O USUARIO LOCALMENTE E NO BANCO

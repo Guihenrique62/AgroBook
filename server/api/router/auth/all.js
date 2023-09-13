@@ -9,7 +9,7 @@ var router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const md5 = require('md5');
-const check_user = require('../../middleware/auth/get_jwt_mongodb'); // PUXA FUNCAO QUE VALIDA SESSAO DO USUARIO
+const check_user = require('../../middleware/auth/jwt_mongodb'); // PUXA FUNCAO QUE VALIDA SESSAO DO USUARIO
 const command = require('../../middleware/mongoDb/command/commands'); // EXTRAR OS COMANDOS NO MONGODB
 require('dotenv').config();
 
