@@ -1,3 +1,9 @@
+/*
+CRIADO: JEAN CLEIDSON PEREIRA RODRIGUES
+MATRICULA: 202202257141
+EMAIL: jeantng2016@gmail.com  
+*/
+
 const { MongoClient } = require('mongodb'); // SOLICTA A BIBLIOTECA DO MONGO DB
 require('dotenv').config(); // SOLICITA VARIAVEIS DE AMBIENTE
 
