@@ -22,6 +22,7 @@ module.exports = function () {
     optionsSuccessStatus: 200,
   };
 
+<<<<<<< HEAD
   /* CONFIG */
   app.set("port", portApp);
   app.disable("x-powered-by");
@@ -65,6 +66,25 @@ module.exports = function () {
   // Cria a instância do server e escuta na porta 3000
   http.createServer(options, app).listen(portApp);
   https.createServer(options, app).listen(portAppHttp);
+=======
+    var app = express();
+    var portApp = 57601;
+    var portAppHttp = 57602;
+    var corsOptions = {
+        // origin: [
+
+        //     "http://localhost:57601",
+        //     "http://20.226.73.46:57601",
+        //     "http://192.168.0.56:57601", /* filipe */
+        //     "http://192.168.0.56:5173", /* filipe */
+        //     "http://localhost:5173/" /* filipe */
+
+        // ],
+        origin: "*",
+        credentials: true,
+        optionsSuccessStatus: 200
+    }
+>>>>>>> 6f8d68342953fd7d8b0a0e8e4d30566856507da6
 
   console.log(`Serve1 run in port ${portApp}`);
   console.log(`Serve2 run in port ${portAppHttp}`);
