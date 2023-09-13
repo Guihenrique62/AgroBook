@@ -14,6 +14,10 @@ const https = require('https');
 /* ROUTER AUTH - Controla todas rotas de entradas */
 var ROUTER_AUTH_ALL = require('./router/auth/all');
 app.use(ROUTER_AUTH_ALL);
+
+/* ROUTER AUTH SINGIN - Controla todas rotas de entradas de login */
+var ROUTER_AUTH_SINGIN = require('./router/auth/singin');
+app.use(ROUTER_AUTH_SINGIN);
 /************* AUTH [ END ] *************/
 
 /************* USER [ START ] *************/
@@ -33,6 +37,16 @@ app.use(ROUTER_UPDATE_USER);
 var ROUTER_DELETE_USER = require('./router/api/user/delete_user');
 app.use(ROUTER_DELETE_USER);
 /************* USER [ END ] *************/
+
+/************* BOOKS [ START ] *************/
+/* ROUTER BOOKS CREATE - Controla todas as entradas de criação de livro */
+var ROUTER_BOOKS_CREATE = require('./router/api/book/create_book');
+app.use(ROUTER_BOOKS_CREATE);
+
+/* ROUTER READ BOOK - Controla todas as entradas de listagem de livros */
+var ROUTER_READ_BOOK = require('./router/api/book/read_book');
+app.use(ROUTER_READ_BOOK);
+/************* BOOKS [ END ] *************/
 
 /************* TRELLO [ START ] *************/
 /* ROUTER TRELLO CARD UPDATE - Controla todas as entradas de alteracao no trello */

@@ -15,7 +15,7 @@
     "express-session": "^1.17.3",
     "http": "^0.0.1-security",
     "https": "^1.0.0",
-    "jest": "^29.6.4",
+    "jest": "^29.7.0",
     "jsonwebtoken": "^9.0.0",
     "md5": "^2.3.0",
     "moment": "^2.29.4",

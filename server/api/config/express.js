@@ -20,7 +20,7 @@ module.exports = function () {
     var corsOptions = {
         origin: [
 
-            "*"
+            "http://localhost:57601"
 
         ],
         credentials: true,

@@ -1,7 +1,7 @@
 /*
-CRIADO: JEAN CLEIDSON PEREIRA RODRIGUES
-MATRICULA: 202202257141
-EMAIL: jeantng2016@gmail.com  
+CRIADO: GUILHERME HENRIQUE PORTO DOS SANTOS
+MATRICULA: 202204463091
+EMAIL: guilhermeportosantos1@gmail.com  
 */
 
 const express = require("express"); // EXTRAI O MODULO DO EXPRESS
@@ -11,7 +11,7 @@ require('dotenv').config(); // SOLICITA AS VARIAVEIS DE AMBIENTE
 
 // *************** GET ***************
 // Controla todas as rotas de listagem e login de usuario
-router.get("/api/user/list_user", async (req, res) => {
+router.get("/api/book/list_book", async (req, res) => {
 
     const { filter, sort, limit } = req.body; // RECUPERA OS DADOS DO BODY
 
@@ -55,16 +55,16 @@ router.get("/api/user/list_user", async (req, res) => {
     }
 
     const shell_commands = new commands(); // CRIA UM CONSTRUTOR
-    const listUser = await shell_commands.commandReadData(`books`, `usuarios`, filter, sort, limit); // EXECULTA A FUNCAO QUE LER REGISTRO NO BANCO DE DADOS 
+    const listBook = await shell_commands.commandReadData(`books`, 'livros', filter, sort, limit); // EXECULTA A FUNCAO QUE LER REGISTRO NO BANCO DE DADOS 
 
     // VERIFICA SE RECEBEU UM VALOR VAZIO
-    if (!listUser["result"].length) {
+    if (!listBook["result"].length) {
 
         res.status(401).json({
             "codigo": process.env.CODE_FAIL,
             "resposta": process.env.MSG_SUCCESS_FAIL,
             "mensagem": "Nenhum registro localizado, tente realizar uma nova consulta mudando os paramêtros",
-            "data_base": listUser
+            "data_base": listBook
         });
         return true;
 
@@ -74,14 +74,14 @@ router.get("/api/user/list_user", async (req, res) => {
         "codigo": process.env.CODE_SUCCESS,
         "resposta": process.env.MSG_SUCCESS,
         "mensagem": "Lista de usuarios recuperada com sucesso",
-        "data_base": listUser
+        "data_base": listBook
     });
 
 });
 
 // *************** ALL ***************
 // Mensagem de erro personalizada para rotas não existemte apartir de /list_user
-router.all("/api/user/list_user*", async (req, res) => {
+router.all("/api/book/list_book*", async (req, res) => {
 
     res.status(404).json({
         "codigo": process.env.CODE_FAIL,

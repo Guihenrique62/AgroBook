@@ -66,6 +66,20 @@ router.delete("/api/user/delete_user", async (req, res) => {
     const shell_command = new commands(); // CRIA UM CONSTRUTOR
     const deleteData = await shell_command.commandDeleteData('books', 'usuarios', filter); // EXECULTA A FUNÇÃO QUE EXCLUE O REGISTRO NO MONGODB
 
+    console.log(deleteData["result"]["deletedCount"]);
+
+    // VERIFICA SE NÃO APAGOU NENHUM REGISTRO
+    if (!deleteData["result"]["deletedCount"]) {
+
+        res.status(401).json({
+            "codigo": process.env.CODE_FAIL,
+            "resposta": process.env.MSG_SUCCESS_FAIL,
+            "mensagem": `Nenhum registro apagado, revise os dados e tente novamente`,
+            "data_base": deleteData
+        });
+        return true;
+    }
+
     res.status(200).json({
         "codigo": process.env.CODE_SUCCESS,
         "resposta": process.env.MSG_SUCCESS,
