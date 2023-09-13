@@ -1,4 +1,4 @@
-S/*
+/*
 CRIADO: JEAN CLEIDSON PEREIRA RODRIGUES
 MATRICULA: 202202257141
 EMAIL: jeantng2016@gmail.com  
@@ -6,12 +6,12 @@ EMAIL: jeantng2016@gmail.com
 
 const express = require("express"); // EXTRAI O MODULO DO EXPRESS
 var router = express.Router(); // EXTRAI O MODULO DE ROTAS
-const commands = require('../../middleware/mongoDb/command/commands'); // EXTRAI OS COMANDOS NO MONGODB
+const commands = require('../../../middleware/mongoDb/command/commands'); // EXTRAI OS COMANDOS NO MONGODB
 require('dotenv').config(); // SOLICÍTA AS VARIÁVEIS DE AMBIENTE
 
 // *************** GET ***************
 // Controla todas as rotas de listagem e login de usuário
-router.get("/api/user/list_user", async (req, res) => {
+router.get("/webhook/user/list_user", async (req, res) => {
 
     // VERIFICA SE O BODY ESTÁ VAZIO
     if (Object.keys(req.body).length === 0) {
