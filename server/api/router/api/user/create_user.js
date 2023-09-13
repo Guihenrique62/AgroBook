@@ -52,6 +52,11 @@ router.post("/api/user/create_user", async (req, res) => {
 
     }
 
+    // VERIFICA SE O USUARIO NÃO É ADMIN
+    // if () {
+
+    // }
+
     // VERIFICA VALORES RECEBIDOS
     if (
         nome // VERIFICA SE O NOME NÃO ESTÁ VAZIO

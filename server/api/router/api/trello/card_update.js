@@ -11,7 +11,7 @@ require('dotenv').config(); // SOLICÍTA AS VARIÁVEIS DE AMBIENTE
 
 // *************** GET ***************
 // Controla todas as rotas de listagem e login de usuário
-router.get("/webhook/user/list_user", async (req, res) => {
+router.get("/webhook/trello/update", async (req, res) => {
 
     // VERIFICA SE O BODY ESTÁ VAZIO
     if (Object.keys(req.body).length === 0) {
@@ -40,7 +40,7 @@ router.get("/webhook/user/list_user", async (req, res) => {
 
 // *************** ALL ***************
 // Mensagem de erro personalizada para rotas não existente apartir de /list_user
-router.all("/api/user/list_user*", async (req, res) => {
+router.all("/webhook/trello/update*", async (req, res) => {
 
     res.status(404).json({
         "codigo": process.env.CODE_FAIL,
