@@ -29,6 +29,7 @@ export default function Teste() {
     } catch (err) {
       console.log(err);
     }
+    
   };
 
   // RELAIZA O LOGIN
@@ -36,24 +37,28 @@ export default function Teste() {
     e.preventDefault();
 
     try {
+
+      // BODY DA SOLICITAÇÃO
       var data = {
-        email: "jeantng2016@gmail.com",
-        senha: "trocar123",
+        email: "jeantng2016@gmail.com", // EMAIL DA SOLICITAÇÃO
+        senha: "trocar123", // SENHA
       };
+
+      // CONFIGURA A SOLICITAÇÃO
       let config = {
         headers: {
-          "Access-Control-Allow-Origin": "same-origin"
+          "Access-Control-Allow-Origin": "same-origin" // DEFINE ACESSO
         },
-        withCredentials: true
+        withCredentials: true // PASSA O COOKIE PARA O SERVIDOR
       };
+
+      // REALIZA A SOLICITAÇÃO
       const resposta = await axios.post(
         "http://localhost:57601/auth/singin",
         data,
-        config,
-        {
-          withCredentials: true,
-        }
+        config
       );
+
       console.log(resposta);
     } catch (err) {
       console.log(err);
