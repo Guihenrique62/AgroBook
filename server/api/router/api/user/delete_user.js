@@ -7,6 +7,7 @@ EMAIL: jeantng2016@gmail.com
 const express = require("express"); // EXTRAI O MODULO DO EXPRESS
 var router = express.Router(); // EXTRAR O MODULO DE ROTAS
 const commands = require('../../../middleware/mongoDb/command/commands'); // EXTRAR OS COMANDOS NO MONGODB
+const check_user = require('../../../middleware/auth/jwt_mongodb'); // PUXA FUNCAO QUE VALIDA SESSAO DO USUARIO
 require('dotenv').config(); // SOLICITA AS VARIAVEIS DE AMBIENTE
 
 // *************** DELETE ***************

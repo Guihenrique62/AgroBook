@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-const { MongoClient } = require("mongodb"); // SOLICTA A BIBLIOTECA DO MONGO DB
-const configDB = require("../database/conn"); // SOLICITA ARQUIVOS DE CONEXAO
-require("dotenv").config(); // SOLICITA VARIAVEIS DO ARQUIVO .ENV
-
-// C = CREATE | Função que cria um registro no mongoDb | Ex: [ db = 'books', collection = 'usuarios', obj = {nome: "user"} ]
-const createData = async (db, collection, obj) => {
-=======
 /*
 CRIADO: JEAN CLEIDSON PEREIRA RODRIGUES
 MATRICULA: 202202257141
@@ -19,17 +11,12 @@ require('dotenv').config(); // SOLICITA VARIAVEIS DO ARQUIVO .ENV
 // C = CREATE | Função que cria um registro no mongoDb | Ex: [ db = 'books', collection = 'usuarios', obj = {nome: "user"} ]
 const createData = async (dataBase, collectionName, obj) => {
 
->>>>>>> 2409325eb13004cdd1fcaea3a4d6b9a66b817142
     const configParms = new configDB(); // RECUPERA A FUNCAO QUE VEIO DO AQUIVO DE CONEXAO
     const client = await configParms.parmsConfigDB(); // RESERVA APENAS A FUNCAO DE CONEXAO
 
     // FUNCAO PARA CRIAR UM REGISTRO
-<<<<<<< HEAD
-    async function execute() {
-=======
     async function execute(dataBase, collectionName, obj) {
 
->>>>>>> 2409325eb13004cdd1fcaea3a4d6b9a66b817142
         await client.connect(); // AGUARDA A CONEXAO COM O CLIENT
 
         const db = client.db(dataBase); // CRIA A CONECAO COM O BANCO
@@ -44,29 +31,16 @@ const createData = async (dataBase, collectionName, obj) => {
         objArray.result = insertData; // RESERVA O RESULTADO FINAL DO COMANDO
 
         return objArray; // RETORNA O RESULTADO DA OPERAÇÃO O ESPERADO É {"ok":1}
+
     }
 
-<<<<<<< HEAD
-    execute()
-        .then((res) => {
-            return res;
-        }) // EM CASO DE SUCESSO
-        .catch((err) => {
-            return err;
-        }) // EM CASO DE ERRO
-=======
     return await execute(dataBase, collectionName, obj)
         .then((res) => { return res }) // EM CADO DE SUCESSO
         .catch((err) => { return err }) // EM CASO DE ERRO
->>>>>>> 2409325eb13004cdd1fcaea3a4d6b9a66b817142
         .finally(() => client.close()); // AO FINALIZAR FECHA A CONEXAO
-};
 
-createData();
+}
 
-<<<<<<< HEAD
-const readData = async () => {};
-=======
 // R = READ | Função que le um registro no mongoDb
 const readData = async (dataBase, collectionName, filter, sort, limit) => {
 
@@ -99,13 +73,9 @@ const readData = async (dataBase, collectionName, filter, sort, limit) => {
         .then((res) => { return res }) // EM CADO DE SUCESSO
         .catch((err) => { return err }) // EM CASO DE ERRO
         .finally(() => client.close()); // AO FINALIZAR FECHA A CONEXAO
->>>>>>> 2409325eb13004cdd1fcaea3a4d6b9a66b817142
 
-const updateData = async () => {};
+}
 
-<<<<<<< HEAD
-const deleteData = async () => {};
-=======
 // U = UPDATE | Função que atualiza um registro no mongodb usando o filter para localizar o registro e o updatefild para atualizar
 const updateData = async (dataBase, collectionName, filter, updateFilds) => {
 
@@ -113,20 +83,20 @@ const updateData = async (dataBase, collectionName, filter, updateFilds) => {
     const client = await configParms.parmsConfigDB(); // RESERVA APENAS A FUNCAO DE CONEXAO
 
     // FUNCAO PARA ATUALIZAR REGISTROS
-    async function execute(dataBase, collectionName, filter, objetctNewFilds) {
+    async function execute(dataBase, collectionName, filter, objectNewFilds) {
 
         await client.connect(); // AGUARDA A CONEXAO COM O CLIENT
 
         const db = client.db(dataBase); // CRIA A CONECAO COM O BANCO
         const collection = db.collection(collectionName); // AGORA A CONEXAO COM A COLLECTION
-        const updateData = await collection.updateOne(filter, { $set: objetctNewFilds }); // PARA FINALIZAR REALIZA A ALTERACAO USANDO UM FILTRO E UM NOVO OBJETO
+        const updateData = await collection.updateOne(filter, { $set: objectNewFilds }); // PARA FINALIZAR REALIZA A ALTERACAO USANDO UM FILTRO E UM NOVO OBJETO
 
         const objArray = {}; // CRIA UM OBJETO PARA GUARDAR O OBJ PASSADO
 
         objArray.dataBase = dataBase; // RESERVA OS DADOS DE ENTRADA [ db ]
         objArray.collectionName = collectionName; // RESERVA OS DADOS DE ENTRADA [ collection ]
         objArray.filter = filter; // PARAMETRO USANDO PARA FILTRAR QUERY
-        objArray.objetctNewFilds = objetctNewFilds; // PARAMETRO USANDO PARA INSERIR UM NOVO VALOR
+        objArray.objectNewFilds = objectNewFilds; // PARAMETRO USANDO PARA INSERIR UM NOVO VALOR
         objArray.result = updateData; // RESERVA O RESULTADO FINAL DO COMANDO
 
         return objArray; // RETORNA O RESULTADO DA OPERAÇÃO O ESPERADO É {"ok":1}
@@ -174,17 +144,13 @@ const deleteData = async (dataBase, collectionName, filter) => {
         .finally(() => client.close()); // AO FINALIZAR FECHA A CONEXAO
 
 }
->>>>>>> 2409325eb13004cdd1fcaea3a4d6b9a66b817142
 
 // EXPORTA A FUNÇÃO PARA OUTRO ARQUIVO
 module.exports = function () {
+
     this.commandCreateData = async (db, collection, obj) => {
         const data = await createData(db, collection, obj);
         return data;
-<<<<<<< HEAD
-    };
-};
-=======
     }
 
     this.commandReadData = async (dataBase, collectionName, filter, sort, limit) => {
@@ -203,4 +169,3 @@ module.exports = function () {
     }
 
 }
->>>>>>> 2409325eb13004cdd1fcaea3a4d6b9a66b817142

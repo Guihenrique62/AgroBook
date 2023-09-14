@@ -26,6 +26,8 @@ const syncSingIn = async (req) => {
     const shell_commands = new commands(); // CRIA UM CONSTRUTOR
     const listUser = await shell_commands.commandReadData(`books`, `usuarios`, filter, sort, limit); // EXECULTA A FUNCAO QUE LER REGISTRO NO BANCO DE DADOS
 
+    console.log(listUser["result"][0], cookieData);
+
     // VERIFICA SE A BUSCA NO BANCO DE DADOS RETORNOU VALOR VAZIO
     if (listUser["result"].length === 0 /* VERIFICA SE RECEBEU VALOR VAZIO */ || listUser["result"].status === 0 /* VERIFICA SE O USUÁRIO ESTÁ DESATIVADO */) {
         cookieData[0].validToken.hash_mail_pass = 'false';
@@ -39,6 +41,9 @@ const syncSingIn = async (req) => {
         cookieData[0].validToken.exp = 0;
         return cookieData;
     }
+
+    // ATUALIZA O STATUS DO RESETE DE SENHA
+    cookieData[0].validToken.resetar_senha = listUser["result"][0].resetar_senha;
 
     return cookieData; // RETORNA O VALOR PARA O CALLBACK
 
