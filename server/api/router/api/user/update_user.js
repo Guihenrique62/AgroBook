@@ -6,6 +6,7 @@ EMAIL: jeantng2016@gmail.com
 
 const express = require("express"); // EXTRAI O MODULO DO EXPRESS
 var router = express.Router(); // EXTRAR O MODULO DE ROTAS
+const md5 = require('md5'); // EXTRAI O MODULO MD5 PARA CRIPTOGRAFAR SENHA
 const commands = require('../../../middleware/mongoDb/command/commands'); // EXTRAR OS COMANDOS NO MONGODB
 require('dotenv').config(); // SOLICITA AS VARIAVEIS DE AMBIENTE
 
@@ -15,11 +16,26 @@ router.post("/api/user/update_user", async (req, res) => {
 
     const { filter, newValue } = req.body; // RESERVA VALORES DO BODY
 
+    // VERIFICA SE RECEBEU A SENHA
+    if (newValue["senha"] && (newValue["senha"] && newValue["senha"].toString().length >= BigInt(process.env.PWD_MIN))) {
+        newValue["senha"] = md5(process.env.PWD_PREFIX + newValue["senha"]);
+    } else if (newValue["senha"]) {
+        
+        res.status(401).json({
+            "codigo": process.env.CODE_FAIL,
+            "resposta": process.env.MSG_SUCCESS_FAIL,
+            "mensagem": "O campo [ senha ] não respeita uma ou mais regras de entrada, revise os dados e tente novamente",
+            "data_base": ""
+        });
+        return true;
+
+    }
+
     // VERIFICA SE A VARIAVEL FILTER ESTÁ VAZIA
     if (!filter || Object.keys(filter).length === 0 || typeof (filter) !== `object`) {
 
         res.status(401).json({
-            "codigo": process.env.CODE_SUCCESS_FAIL,
+            "codigo": process.env.CODE_FAIL,
             "resposta": process.env.MSG_SUCCESS_FAIL,
             "mensagem": "O campo [ filter ] não respeita uma ou mais regras de entrada, revise os dados e tente novamente",
             "data_base": ""
@@ -32,9 +48,48 @@ router.post("/api/user/update_user", async (req, res) => {
     if (!newValue || Object.keys(newValue).length === 0 || typeof (newValue) !== `object`) {
 
         res.status(401).json({
-            "codigo": process.env.CODE_SUCCESS_FAIL,
+            "codigo": process.env.CODE_FAIL,
             "resposta": process.env.MSG_SUCCESS_FAIL,
             "mensagem": "O campo [ newValue ] não respeita uma ou mais regras de entrada, revise os dados e tente novamente",
+            "data_base": ""
+        });
+        return true;
+
+    }
+
+    // VERIFICA SE FOI SOLICITADO A ALTERACAO DO ID
+    if (newValue["_id"] || newValue["id"]) {
+
+        res.status(401).json({
+            "codigo": process.env.CODE_FAIL,
+            "resposta": process.env.MSG_SUCCESS_FAIL,
+            "mensagem": "O campo do tipo _id ou id não pode ser alterado, revise os dados e tente novamente",
+            "data_base": ""
+        });
+        return true;
+
+    }
+
+    // VERIFICA SE FOI SOLICIATADO A ALTERACAO DO EMAIL
+    if (newValue["email"]) {
+
+        res.status(401).json({
+            "codigo": process.env.CODE_FAIL,
+            "resposta": process.env.MSG_SUCCESS_FAIL,
+            "mensagem": "O campo do tipo email não pode ser alterado, revise os dados e tente novamente",
+            "data_base": ""
+        });
+        return true;
+
+    }
+
+    // VERIFICA SE FOI SOLICITADO A ALTERACAO DO DOCUMENTO
+    if (newValue["documento"]) {
+
+        res.status(401).json({
+            "codigo": process.env.CODE_FAIL,
+            "resposta": process.env.MSG_SUCCESS_FAIL,
+            "mensagem": "O campo do tipo documento não pode ser alterado, revise os dados e tente novamente",
             "data_base": ""
         });
         return true;
@@ -44,7 +99,18 @@ router.post("/api/user/update_user", async (req, res) => {
     const shell_commands = new commands(); // CRIA O CONSTRUTOR
     const updateUser = await shell_commands.commandUpadateData('books', 'usuarios', filter, newValue); // INICIAR A FUNCAO ATUALIZAR REGISTRO NO MONGO DB
 
-    console.log();
+    // VERIFICA EXISTE VALORES DUPLICADOS
+    if (updateUser["keyValue"]) {
+
+        res.status(401).json({
+            "codigo": process.env.CODE_FAIL,
+            "resposta": process.env.MSG_SUCCESS_FAIL,
+            "mensagem": "Nenhum registro foi alterado, revise os dados e tente novamente",
+            "data_base": updateUser
+        });
+        return false;
+
+    }
 
     // VERIFICA SE NÃO FOI FEITA NENHUMA ALTERAÇÃO
     if (!updateUser["result"]["modifiedCount"]) {
