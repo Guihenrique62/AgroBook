@@ -25,14 +25,14 @@ router.post("/api/user/create_user", async (req, res) => {
 
     const validDocument = JSON.stringify(documento).length <= 11 ? cpf.isValid(JSON.stringify(documento)) : cnpj.isValid(JSON.stringify(documento)); // VERIFICA SE O VALOR NA ENTRADA [ DOCUMENTO ] É VÁLIDO
     const validEmail = validate(email); // VÁLIDA A ENTRADA DE E-MAIL USANDO BIBLIOTECA EXTERNA
-    
+
     // VERIFICA SE O DOCUMENTO E INVÁLIDO
     if (!validDocument) {
 
         res.status(401).json({
             "codigo": process.env.CODE_FAIL,
             "resposta": process.env.MSG_SUCCESS_FAIL,
-            "mensagem":"O documento informado e inválido",
+            "mensagem": "O documento informado e inválido",
             "data_base": ""
         });
         return true;
@@ -45,7 +45,7 @@ router.post("/api/user/create_user", async (req, res) => {
         res.status(401).json({
             "codigo": process.env.CODE_FAIL,
             "resposta": process.env.MSG_SUCCESS_FAIL,
-            "mensagem":"O e-mail informado e inválido",
+            "mensagem": "O e-mail informado e inválido",
             "data_base": ""
         });
         return true;
@@ -60,68 +60,51 @@ router.post("/api/user/create_user", async (req, res) => {
     // VERIFICA VALORES RECEBIDOS
     if (
         nome // VERIFICA SE O NOME NÃO ESTÁ VAZIO
-        && ( BigInt(documento) && (BigInt(documento)).toString().length >= BigInt(process.env.DOCUMENT_MIN) ) // VERIFICA SE O DOCUMENTO E INTEIRO E MAIOR QUE 10
+        && (BigInt(documento) && (BigInt(documento)).toString().length >= BigInt(process.env.DOCUMENT_MIN)) // VERIFICA SE O DOCUMENTO E INTEIRO E MAIOR QUE 10
         && email // VERIFICA SE O E-MAIL NÃO ESTÁ VAZIO
-        && ( senha && senha.toString().length >= BigInt(process.env.PWD_MIN ) ) /* VERIFICA SE A SENHA NÃO ESTÁ VAZIA E SE É MAIOR QUE 8 */ ) {
-            
-            const query = { // CRIA O OBJETO
-                "nome": nome,
-                "documento": documento,
-                "email": email,
-                "senha": md5(process.env.PWD_PREFIX + senha), // CONVERTE EM MD5 COM O PREFIXO QUE ESTA NO .ENV
-                "cargo": cargo,
-                "status": status,
-            }
-            const shell_commands = new commands(); // CRIA UM CONSTRUTOR
-            const createUser = await shell_commands.commandCreateData('books', 'usuarios', query); // INICIA A FUNÇÃO EXPORTADA
+        && (senha && senha.toString().length >= BigInt(process.env.PWD_MIN)) /* VERIFICA SE A SENHA NÃO ESTÁ VAZIA E SE É MAIOR QUE 8 */) {
 
-            // VERIFICA SE EXITE VALORES DUPLICADOS
-            if (createUser.keyValue) {
+        const query = { // CRIA O OBJETO
+            "nome": nome,
+            "documento": documento,
+            "email": email,
+            "senha": md5(process.env.PWD_PREFIX + senha), // CONVERTE EM MD5 COM O PREFIXO QUE ESTA NO .ENV
+            "cargo": cargo,
+            "status": status,
+        }
+        const shell_commands = new commands(); // CRIA UM CONSTRUTOR
+        const createUser = await shell_commands.commandCreateData('books', 'usuarios', query); // INICIA A FUNÇÃO EXPORTADA
 
-                // PASSOU NA VARREDURA MAIS ENCONTROU ERRO [ CHAVES DUPLICADAS ]
-                res.status(401).json({
-                    "codigo": process.env.CODE_FAIL,
-                    "resposta": process.env.MSG_SUCCESS_FAIL,
-                    "mensagem":"Usuário ja existe, experimente redefinir a senha ou inserir outro usuário",
-                    "data_base": createUser
-                });
-                return true;
+        // VERIFICA SE EXITE VALORES DUPLICADOS
+        if (createUser.keyValue) {
 
-            // PASSOU NA VARREDURA MAIS ENCONTROU ERRRO [ CHAVES DUPLICADAS ]
+            // PASSOU NA VARREDURA MAIS ENCONTROU ERRO [ CHAVES DUPLICADAS ]
             res.status(401).json({
                 "codigo": process.env.CODE_FAIL,
                 "resposta": process.env.MSG_SUCCESS_FAIL,
-                "mensagem": "Usuario ja existe, experimente redefinir a senha ou inserir outro usuario",
-                "data_base": createUser
-            });
-            return true;
-
-                // PASSOU NA VARREDURA
-                res.status(200).json({
-                    "codigo": process.env.CODE_SUCCESS,
-                    "resposta": process.env.MSG_SUCCESS,
-                    "mensagem":"Usuário criado com sucesso",
-                    "data_base": createUser
-                });
-                return true;
-
-            // PASSOU NA VARREDURA
-            res.status(200).json({
-                "codigo": process.env.CODE_SUCCESS,
-                "resposta": process.env.MSG_SUCCESS,
-                "mensagem": "Usuario criado com sucesso",
+                "mensagem": "Usuário ja existe, experimente redefinir a senha ou inserir outro usuário",
                 "data_base": createUser
             });
             return true;
 
         }
+
+        // PASSOU NA VARREDURA
+        res.status(200).json({
+            "codigo": process.env.CODE_SUCCESS,
+            "resposta": process.env.MSG_SUCCESS,
+            "mensagem": "Usuário criado com sucesso",
+            "data_base": createUser
+        });
+        return true;
+        
     } else {
 
         // REPROVOU NA VARREDURA
         res.status(401).json({
             "codigo": process.env.CODE_FAIL,
             "resposta": process.env.MSG_FAIL,
-            "mensagem":"Os dados informados não segue o padrão do sistema, revise-os e tente novamente",
+            "mensagem": "Os dados informados não segue o padrão do sistema, revise-os e tente novamente",
             "data_base": ""
         });
         return true;
@@ -137,7 +120,7 @@ router.all("/api/user/create_user*", async (req, res) => {
     res.status(404).json({
         "codigo": process.env.CODE_FAIL,
         "resposta": process.env.MSG_SUCCESS_FAIL,
-        "mensagem":"O link expirou ou não existe, experimente acessar a documentação da API em htpp://localhost:57603/doc/create_user",
+        "mensagem": "O link expirou ou não existe, experimente acessar a documentação da API em htpp://localhost:57603/doc/create_user",
         "data_base": ""
     });
 

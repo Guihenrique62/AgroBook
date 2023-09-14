@@ -6,6 +6,7 @@ EMAIL: jeantng2016@gmail.com
 
 const express = require("express"); // EXTRAI O MODULO DO EXPRESS
 var router = express.Router(); // EXTRAR O MODULO DE ROTAS
+const md5 = require('md5'); // EXTRAI O MODULO MD5 PARA CRIPTOGRAFAR SENHA
 const commands = require('../../../middleware/mongoDb/command/commands'); // EXTRAR OS COMANDOS NO MONGODB
 require('dotenv').config(); // SOLICITA AS VARIAVEIS DE AMBIENTE
 
@@ -14,6 +15,11 @@ require('dotenv').config(); // SOLICITA AS VARIAVEIS DE AMBIENTE
 router.post("/api/user/update_user", async (req, res) => {
 
     const { filter, newValue } = req.body; // RESERVA VALORES DO BODY
+
+    // VERIFICA SE RECEBEU A SENHA
+    if (newValue["senha"]) {
+        newValue["senha"] = md5(process.env.PWD_PREFIX + newValue["senha"]);
+    }
 
     // VERIFICA SE A VARIAVEL FILTER ESTÁ VAZIA
     if (!filter || Object.keys(filter).length === 0 || typeof (filter) !== `object`) {
@@ -83,6 +89,21 @@ router.post("/api/user/update_user", async (req, res) => {
     const shell_commands = new commands(); // CRIA O CONSTRUTOR
     const updateUser = await shell_commands.commandUpadateData('books', 'usuarios', filter, newValue); // INICIAR A FUNCAO ATUALIZAR REGISTRO NO MONGO DB
 
+    console.log(updateUser);
+
+    // VERIFICA EXISTE VALORES DUPLICADOS
+    if (updateUser["keyValue"]) {
+
+        res.status(401).json({
+            "codigo": process.env.CODE_FAIL,
+            "resposta": process.env.MSG_SUCCESS_FAIL,
+            "mensagem": "Nenhum registro foi alterado, revise os dados e tente novamente",
+            "data_base": updateUser
+        });
+        return false;
+
+    }
+    
     // VERIFICA SE NÃO FOI FEITA NENHUMA ALTERAÇÃO
     if (!updateUser["result"]["modifiedCount"]) {
 
