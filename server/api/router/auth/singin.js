@@ -13,8 +13,6 @@ const session = require('express-session'); // EXTRAI MODULO PARA CONTROLAR SESS
 const check_user = require('../../middleware/jwt/jwt'); // EXTRAIR FUNÇOES PARA MANIPULAR O JWT
 const command = require('../../middleware/mongoDb/command/commands'); // EXTRAR OS COMANDOS NO MONGODB
 const { validate } = require("email-validator"); // EXTRAI BIBLIOTECA PARA VALIDAR EMAIL
-const moment = require('moment'); // EXTRAI O MODULO QUE NORMALIZA TIMASTAMP
-moment.locale('pt-BR');
 require('dotenv').config(); // SOLICITA AS VARIAVEIS DE AMBIENTE
 
 // *************** DLC [ GERAR HASH ] ***************
@@ -79,7 +77,7 @@ router.post("/auth/singin", async (req, res) => {
         res.status(401).json({
             "codigo": process.env.CODE_FAIL,
             "resposta": process.env.MSG_SUCCESS_FAIL,
-            "mensagem": "O email recebido nao e valido, verifique os dados e tente novamente",
+            "mensagem": "O email recebido não é válido, verifique os dados e tente novamente",
             "data_base": ""
         });
         return true;
@@ -96,6 +94,15 @@ router.post("/auth/singin", async (req, res) => {
     const limit = 1; // LIMITE DE RETORNO DA BUSCA O MESMO QUE [ top 1 ou limit 1 ] NO SQL
     const shell_commands = new command(); // CRIA UM CONSTRUTOR
     const readData = await shell_commands.commandReadData(`books`, `usuarios`, filter, sort, limit);
+
+    const hash = await gerarHash(email, newPassword, readData["result"][0], req); // PASSA OS PARAMETROS PARA UMA ARROW FUCTION QUE GERAR UM HASH USANDO [ JWT + BCRYPT ]
+
+    // OCULTAR DADOS SENSIVEIS
+    try {
+        readData["result"][0]["documento"] = "restrito";
+        readData["result"][0]["senha"] = "restrito";
+        readData["result"][0]["nome"] = "restrito";
+    } catch (tryRestData) { /* FAZ NADA */ }
 
     // VERIFICA SE O EMAIL E SENHA ESTA INCORRETO
     if (readData["result"].length === 0) { // VERIFICA SE RECEBEU UM OBJETO VAZIO
@@ -125,7 +132,7 @@ router.post("/auth/singin", async (req, res) => {
 
     // VERIFICA SE O USUARIO JÁ ESTA LOGADO
     if (cookieData["hash_mail_pass"] !== "false") {
-        
+
         res.status(200).json({
             "codigo": process.env.CODE_SUCCESS,
             "resposta": process.env.MSG_SUCCESS,
@@ -136,8 +143,6 @@ router.post("/auth/singin", async (req, res) => {
         return true;
 
     }
-
-    const hash = await gerarHash(email, newPassword, readData["result"][0], req); // PASSA OS PARAMETROS PARA UMA ARROW FUCTION QUE GERAR UM HASH USANDO [ JWT + BCRYPT ]
 
     res.status(200).json({
         "codigo": process.env.CODE_SUCCESS,

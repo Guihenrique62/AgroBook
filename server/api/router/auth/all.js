@@ -41,8 +41,6 @@ router.all("/api/user*", async (req, res, next) => {
     const check_data = new check_user(); // CRIA O CONTRUTOR
     const result = await check_data.initSyncSingIn(req); // EXECUTA A FUNCAO DO CONSTRUTOR
     const cookieData = result[0]['validToken']; // RECUPERA OS DADOS DA FUNÇÃO
-    
-    console.log(req.body);
 
     // VERIFICA SE O USUARIO NÃO É ADMIN
     if (cookieData["cargo"] !== 0) {
@@ -87,10 +85,10 @@ router.all("/api*", async (req, res, next) => {
     // VERIFICA SE O USUARIO ESTA DESLOGADO
     if (cookieData["hash_mail_pass"] == "false") {
 
-        res.status(401).json({
+        res.status(403).json({
             "codigo": process.env.CODE_FAIL,
             "resposta": process.env.MSG_FAIL,
-            "mensagem": "O usuário não está autenticado, realize o login e tente novamente",
+            "mensagem": "Você não está autenticado, realize o login e tente novamente",
             "auth": cookieData,
             "data_base": ""
         });
