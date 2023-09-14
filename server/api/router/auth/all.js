@@ -34,8 +34,34 @@ router.get("/", async (req, res) => {
 
 });
 
-// *************** GET ***************
-// Controla todas as entrada de api no metodo GET
+// *************** ALL ***************
+// Controla todas as entrada de api de usuario
+router.all("/api/user*", async (req, res, next) => {
+
+    const check_data = new check_user(); // CRIA O CONTRUTOR
+    const result = await check_data.initSyncSingIn(req); // EXECUTA A FUNCAO DO CONSTRUTOR
+    const cookieData = result[0]['validToken']; // RECUPERA OS DADOS DA FUNÇÃO
+    
+    console.log(req.body);
+
+    // VERIFICA SE O USUARIO NÃO É ADMIN
+    if (cookieData["cargo"] !== 0) {
+        
+        res.status(401).json({
+            "codigo": process.env.CODE_FAIL,
+            "resposta": process.env.MSG_SUCCESS_FAIL,
+            "mensagem": "O seu login não tem permissão para realizar essa tarefa, contate o administrador para acessar esse recurso",
+            "data_base": ""
+        });
+        return true;
+
+    }
+
+    next();
+});
+
+// *************** ALL ***************
+// Controla todas as entrada de api
 router.all("/api*", async (req, res, next) => {
 
     const check_data = new check_user(); // CRIA O CONTRUTOR
