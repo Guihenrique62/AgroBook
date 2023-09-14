@@ -41,10 +41,47 @@ router.post("/api/user/update_user", async (req, res) => {
 
     }
 
+    // VERIFICA SE FOI SOLICITADO A ALTERACAO DO ID
+    if (newValue["_id"] || newValue["id"])  {
+
+        res.status(401).json({
+            "codigo": process.env.CODE_SUCCESS_FAIL,
+            "resposta": process.env.MSG_SUCCESS_FAIL,
+            "mensagem": "O campo do tipo _id ou id não pode ser alterado, revise os dados e tente novamente",
+            "data_base": ""
+        });
+        return true;
+
+    }
+
+    // VERIFICA SE FOI SOLICIATADO A ALTERACAO DO EMAIL
+    if (newValue["email"])  {
+
+        res.status(401).json({
+            "codigo": process.env.CODE_SUCCESS_FAIL,
+            "resposta": process.env.MSG_SUCCESS_FAIL,
+            "mensagem": "O campo do tipo email não pode ser alterado, revise os dados e tente novamente",
+            "data_base": ""
+        });
+        return true;
+
+    }
+
+    // VERIFICA SE FOI SOLICITADO A ALTERACAO DO DOCUMENTO
+    if (newValue["documento"])  {
+
+        res.status(401).json({
+            "codigo": process.env.CODE_SUCCESS_FAIL,
+            "resposta": process.env.MSG_SUCCESS_FAIL,
+            "mensagem": "O campo do tipo documento não pode ser alterado, revise os dados e tente novamente",
+            "data_base": ""
+        });
+        return true;
+
+    }
+
     const shell_commands = new commands(); // CRIA O CONSTRUTOR
     const updateUser = await shell_commands.commandUpadateData('books', 'usuarios', filter, newValue); // INICIAR A FUNCAO ATUALIZAR REGISTRO NO MONGO DB
-
-    console.log();
 
     // VERIFICA SE NÃO FOI FEITA NENHUMA ALTERAÇÃO
     if (!updateUser["result"]["modifiedCount"]) {
