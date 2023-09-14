@@ -17,8 +17,18 @@ router.post("/api/user/update_user", async (req, res) => {
     const { filter, newValue } = req.body; // RESERVA VALORES DO BODY
 
     // VERIFICA SE RECEBEU A SENHA
-    if (newValue["senha"]) {
+    if (newValue["senha"] && (newValue["senha"] && newValue["senha"].toString().length >= BigInt(process.env.PWD_MIN))) {
         newValue["senha"] = md5(process.env.PWD_PREFIX + newValue["senha"]);
+    } else {
+        
+        res.status(401).json({
+            "codigo": process.env.CODE_SUCCESS_FAIL,
+            "resposta": process.env.MSG_SUCCESS_FAIL,
+            "mensagem": "O campo [ senha ] não respeita uma ou mais regras de entrada, revise os dados e tente novamente",
+            "data_base": ""
+        });
+        return true;
+
     }
 
     // VERIFICA SE A VARIAVEL FILTER ESTÁ VAZIA
@@ -48,7 +58,7 @@ router.post("/api/user/update_user", async (req, res) => {
     }
 
     // VERIFICA SE FOI SOLICITADO A ALTERACAO DO ID
-    if (newValue["_id"] || newValue["id"])  {
+    if (newValue["_id"] || newValue["id"]) {
 
         res.status(401).json({
             "codigo": process.env.CODE_SUCCESS_FAIL,
@@ -61,7 +71,7 @@ router.post("/api/user/update_user", async (req, res) => {
     }
 
     // VERIFICA SE FOI SOLICIATADO A ALTERACAO DO EMAIL
-    if (newValue["email"])  {
+    if (newValue["email"]) {
 
         res.status(401).json({
             "codigo": process.env.CODE_SUCCESS_FAIL,
@@ -74,7 +84,7 @@ router.post("/api/user/update_user", async (req, res) => {
     }
 
     // VERIFICA SE FOI SOLICITADO A ALTERACAO DO DOCUMENTO
-    if (newValue["documento"])  {
+    if (newValue["documento"]) {
 
         res.status(401).json({
             "codigo": process.env.CODE_SUCCESS_FAIL,
@@ -103,7 +113,7 @@ router.post("/api/user/update_user", async (req, res) => {
         return false;
 
     }
-    
+
     // VERIFICA SE NÃO FOI FEITA NENHUMA ALTERAÇÃO
     if (!updateUser["result"]["modifiedCount"]) {
 

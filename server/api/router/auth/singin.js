@@ -22,6 +22,7 @@ require('dotenv').config(); // SOLICITA AS VARIAVEIS DE AMBIENTE
 const gerarHash = async (email, senha, user, req) => {
 
     const saltRounds = 10; // TOTAL DE NUMEROS PARA O HASH
+    const expirateSessionUserMongo = user["expiracao_sessao"] ? user["expiracao_sessao"] : false; // VERIFICA SE O USUARIO POSSUI VALIDADE DE SESSAO RECUPERADA DO MONGO DB [ expiracao_sessao ]
 
     // CRIPTOGRAFA O EMAIL E SENHA
     return bcrypt.hash(email + '+' + senha, saltRounds).then(function (hash) {
@@ -43,7 +44,7 @@ const gerarHash = async (email, senha, user, req) => {
                 },
                     process.env.SECRET_JWT, // PUXA O SECREAT DO ARQUIVO .ENV
                     {
-                        expiresIn: !JSON.parse(process.env.EXPIRATE_JWT)[0][user["cargo"]] ? "30min" : JSON.parse(process.env.EXPIRATE_JWT)[0][user["cargo"]], // DEFINE A VALIDADE DO HASH
+                        expiresIn: expirateSessionUserMongo ? expirateSessionUserMongo : !JSON.parse(process.env.EXPIRATE_JWT)[0][user["cargo"]] ? "30min" : JSON.parse(process.env.EXPIRATE_JWT)[0][user["cargo"]], // DEFINE A VALIDADE DO HASH
                     }
                 );
 
@@ -62,7 +63,12 @@ const gerarHash = async (email, senha, user, req) => {
 // Controla todas as entradas da autenticação
 router.post("/auth/singin", async (req, res) => {
 
+    const check_data = new check_user(); // CRIA UM CONSTRUTOR
+    const result = await check_data.check(req); // EXECULTA A FUNÇÃO DENTRO DO CONTRUTOR
+    var cookieData = result[0]['validToken']; // RESERVA O VALOR RECEBIDO
+
     const { email, senha } = req.body; // RECUPERA OS DADOS DO BODY
+
     const newPassword = md5(process.env.PWD_PREFIX + senha); // CONVERTE A SENHA PARA O FORMATO EM PREFIXO + MD5 
 
     const emailValidate = validate(email); // VALIDA SE O EMAIL E VALIDO OU NAO USANDO BIBLIOCA EXTERNA
@@ -117,12 +123,26 @@ router.post("/auth/singin", async (req, res) => {
 
     }
 
+    // VERIFICA SE O USUARIO JÁ ESTA LOGADO
+    if (cookieData["hash_mail_pass"] !== "false") {
+        
+        res.status(200).json({
+            "codigo": process.env.CODE_SUCCESS,
+            "resposta": process.env.MSG_SUCCESS,
+            "mensagem": "Você já está logado",
+            "data_base": readData,
+            "hash": cookieData
+        });
+        return true;
+
+    }
+
     const hash = await gerarHash(email, newPassword, readData["result"][0], req); // PASSA OS PARAMETROS PARA UMA ARROW FUCTION QUE GERAR UM HASH USANDO [ JWT + BCRYPT ]
 
     res.status(200).json({
         "codigo": process.env.CODE_SUCCESS,
         "resposta": process.env.MSG_SUCCESS,
-        "mensagem": "Dados do usuario recuperado com sucesso",
+        "mensagem": "Login realizado com sucesso",
         "data_base": readData,
         "hash": hash
     });
