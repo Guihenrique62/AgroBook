@@ -85,7 +85,7 @@ router.all("/api*", async (req, res, next) => {
     // VERIFICA SE O USUARIO ESTA DESLOGADO
     if (cookieData["hash_mail_pass"] == "false") {
 
-        res.status(403).json({
+        res.status(401).json({
             "codigo": process.env.CODE_FAIL,
             "resposta": process.env.MSG_FAIL,
             "mensagem": "Você não está autenticado, realize o login e tente novamente",
@@ -95,6 +95,22 @@ router.all("/api*", async (req, res, next) => {
         return false;
 
     }
+
+    // VERIFICA SE O USUARIO PRECISA RESETAR A SENHA
+    if (cookieData["resetar_senha"] == 1) {
+
+        res.status(403).json({
+            "codigo": process.env.CODE_FAIL,
+            "resposta": process.env.MSG_FAIL,
+            "mensagem": "Seu login está bloqueado, redefina sua senha",
+            "auth": cookieData,
+            "data_base": ""
+        });
+        return false;
+
+    }
+
+    console.log(cookieData)
 
     next();
 

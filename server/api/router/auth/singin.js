@@ -39,6 +39,7 @@ const gerarHash = async (email, senha, user, req) => {
                     "email": user["email"],
                     "cargo": user["cargo"],
                     "status": user["status"],
+                    "resetar_senha": user["resetar_senha"],
                 },
                     process.env.SECRET_JWT, // PUXA O SECREAT DO ARQUIVO .ENV
                     {
