@@ -1,6 +1,7 @@
 import { useState } from 'react'
+import Tela_de_Login from './Componentes/login/logins'
+import { Outlet } from 'react-router-dom'
 import Teste from './Componentes/login/texte'
-
 
 
 function App() {
@@ -8,7 +9,7 @@ function App() {
 
   return (
     <>
-    <Teste/>
+   <Teste/>
     </>
   )
 }

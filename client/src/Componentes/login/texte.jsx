@@ -43,6 +43,7 @@ export default function Teste() {
     e.preventDefault();
 
     try {
+<<<<<<< HEAD
       let data = {
         email: "jeantng2016@gmail.com",
         senha: "nova@trocar123",
@@ -59,6 +60,22 @@ export default function Teste() {
         withCredentials: true
       });
 
+=======
+      let data = JSON.stringify({
+        email: "fillypecunha@gmail.com",
+        senha: "12345678",
+      });
+
+      let config = {
+        method: "post",
+        maxBodyLength: Infinity,
+        url: "http://20.226.73.46:57601/auth/singin",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+
+>>>>>>> 6336dd13cee91b6c081d618af4208e11dd497fec
       // await axios
       //   .request(config)
       //   .then((response) => {
@@ -67,6 +84,12 @@ export default function Teste() {
       //   .catch((error) => {
       //     console.log(error);
       //   });
+<<<<<<< HEAD
+=======
+      axios.post("http://20.226.73.46:57601/auth/singin", data, {
+        withCredentials: true,
+      });
+>>>>>>> 6336dd13cee91b6c081d618af4208e11dd497fec
     } catch (err) {
       console.log(err);
     }
