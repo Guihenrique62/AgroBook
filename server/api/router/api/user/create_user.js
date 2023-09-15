@@ -66,6 +66,7 @@ router.post("/api/user/create_user", async (req, res) => {
             "senha": md5(process.env.PWD_PREFIX + senha), // CONVERTE EM MD5 COM O PREFIXO QUE ESTA NO .ENV
             "cargo": cargo,
             "status": status,
+            "resetar_senha": 1
         }
         const shell_commands = new commands(); // CRIA UM CONSTRUTOR
         const createUser = await shell_commands.commandCreateData('books', 'usuarios', query); // INICIA A FUNÇÃO EXPORTADA
