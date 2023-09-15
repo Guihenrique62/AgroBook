@@ -44,30 +44,30 @@ export default function Teste() {
 
     try {
       let data = JSON.stringify({
-        email: "jeantng2016@gmail.com",
-        senha: "trocar123",
+        email: "fillypecunha@gmail.com",
+        senha: "12345678",
       });
 
       let config = {
         method: "post",
         maxBodyLength: Infinity,
-        withCredentials: true,
         url: "http://20.226.73.46:57601/auth/singin",
         headers: {
-          Accept: "*/*",
           "Content-Type": "application/json",
         },
-        data: data,
       };
 
-      await axios
-        .request(config)
-        .then((response) => {
-          console.log(JSON.stringify(response.data));
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      // await axios
+      //   .request(config)
+      //   .then((response) => {
+      //     console.log(JSON.stringify(response.data));
+      //   })
+      //   .catch((error) => {
+      //     console.log(error);
+      //   });
+      axios.post("http://20.226.73.46:57601/auth/singin", data, {
+        withCredentials: true,
+      });
     } catch (err) {
       console.log(err);
     }
