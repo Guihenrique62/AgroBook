@@ -46,6 +46,11 @@ app.use(ROUTER_BOOKS_CREATE);
 /* ROUTER READ BOOK - Controla todas as entradas de listagem de livros */
 var ROUTER_READ_BOOK = require('./router/api/book/list_book');
 app.use(ROUTER_READ_BOOK);
+
+/* ROUTER UPDATE BOOK - Controla todas as entradas de atualizacao de livros */
+var ROUTER_UPDATE_BOOK = require('./router/api/book/update_book');
+app.use(ROUTER_UPDATE_BOOK);
+
 /************* BOOKS [ END ] *************/
 
 /************* TRELLO [ START ] *************/
