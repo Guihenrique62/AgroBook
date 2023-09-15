@@ -40,6 +40,9 @@ const syncSingIn = async (req) => {
         return cookieData;
     }
 
+    // ATUALIZA O STATUS DO RESETE DE SENHA
+    cookieData[0].validToken.resetar_senha = listUser["result"][0].resetar_senha;
+
     return cookieData; // RETORNA O VALOR PARA O CALLBACK
 
 };

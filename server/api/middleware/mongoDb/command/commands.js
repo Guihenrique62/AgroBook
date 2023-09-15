@@ -48,21 +48,21 @@ const readData = async (dataBase, collectionName, filter, sort, limit) => {
     const client = await configParms.parmsConfigDB(); // RESERVA APENAS A FUNCAO DE CONEXAO
 
     // FUNCAO PARA LER REGISTROS
-    async function execute(dataBase, collectionName, filter, sortfIld, limitfild) {
+    async function execute(dataBase, collectionName, filter, sortFild, limitFild) {
 
         await client.connect(); // AGUARDA A CONEXAO COM O CLIENT
 
         const db = client.db(dataBase); // CRIA A CONECAO COM O BANCO
         const collection = db.collection(collectionName); // AGORA A CONEXAO COM A COLLECTION
-        const findData = await collection.find(filter).sort(sortfIld).limit(limitfild).toArray(); // PARA FINALIZAR REALIZA A INSERÇÃO DE UM UNICO OBJETO
+        const findData = await collection.find(filter).sort(sortFild).limit(limitFild).toArray(); // PARA FINALIZAR REALIZA A INSERÇÃO DE UM UNICO OBJETO
 
         const objArray = {}; // CRIA UM OBJETO PARA GUARDAR O OBJ PASSADO
 
         objArray.dataBase = dataBase; // RESERVA OS DADOS DE ENTRADA [ db ]
         objArray.collectionName = collectionName; // RESERVA OS DADOS DE ENTRADA [ collection ]
         objArray.filter = filter; // PARAMETRO USANDO PARA FILTRAR QUERY
-        objArray.sortfIld = sortfIld; // PARAMETRO USANDO PARA ORDENAR QUERY
-        objArray.limitfild = limitfild; // PARAMETRO USANDO PARA LIMITAR NUMEROS DE REGISTRO QUERY
+        objArray.sortFild = sortFild; // PARAMETRO USANDO PARA ORDENAR QUERY
+        objArray.limitFild = limitFild; // PARAMETRO USANDO PARA LIMITAR NUMEROS DE REGISTRO QUERY
         objArray.result = findData; // RESERVA O RESULTADO FINAL DO COMANDO
 
         return objArray; // RETORNA O RESULTADO DA OPERAÇÃO O ESPERADO É {"ok":1}
@@ -83,20 +83,20 @@ const updateData = async (dataBase, collectionName, filter, updateFilds) => {
     const client = await configParms.parmsConfigDB(); // RESERVA APENAS A FUNCAO DE CONEXAO
 
     // FUNCAO PARA ATUALIZAR REGISTROS
-    async function execute(dataBase, collectionName, filter, objetctNewFilds) {
+    async function execute(dataBase, collectionName, filter, objectNewFilds) {
 
         await client.connect(); // AGUARDA A CONEXAO COM O CLIENT
 
         const db = client.db(dataBase); // CRIA A CONECAO COM O BANCO
         const collection = db.collection(collectionName); // AGORA A CONEXAO COM A COLLECTION
-        const updateData = await collection.updateOne(filter, { $set: objetctNewFilds }); // PARA FINALIZAR REALIZA A ALTERACAO USANDO UM FILTRO E UM NOVO OBJETO
+        const updateData = await collection.updateOne(filter, { $set: objectNewFilds }); // PARA FINALIZAR REALIZA A ALTERACAO USANDO UM FILTRO E UM NOVO OBJETO
 
         const objArray = {}; // CRIA UM OBJETO PARA GUARDAR O OBJ PASSADO
 
         objArray.dataBase = dataBase; // RESERVA OS DADOS DE ENTRADA [ db ]
         objArray.collectionName = collectionName; // RESERVA OS DADOS DE ENTRADA [ collection ]
         objArray.filter = filter; // PARAMETRO USANDO PARA FILTRAR QUERY
-        objArray.objetctNewFilds = objetctNewFilds; // PARAMETRO USANDO PARA INSERIR UM NOVO VALOR
+        objArray.objectNewFilds = objectNewFilds; // PARAMETRO USANDO PARA INSERIR UM NOVO VALOR
         objArray.result = updateData; // RESERVA O RESULTADO FINAL DO COMANDO
 
         return objArray; // RETORNA O RESULTADO DA OPERAÇÃO O ESPERADO É {"ok":1}

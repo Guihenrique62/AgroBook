@@ -17,7 +17,7 @@ require('dotenv').config(); // SOLICÍTA AS VARIÁVEIS DE AMBIENTE
 router.post("/api/user/create_user", async (req, res) => {
 
     var { nome, documento, email, senha, cargo, status } = req.body; // RESERVA TODAS AS VARIÁVEIS RECEBIDAS
-
+    
     // VERIFICA SE O DOCUMENTO ESTÁ VAZIO
     if (!documento) {
         documento = "00000000000";
@@ -52,11 +52,6 @@ router.post("/api/user/create_user", async (req, res) => {
 
     }
 
-    // VERIFICA SE O USUARIO NÃO É ADMIN
-    // if () {
-
-    // }
-
     // VERIFICA VALORES RECEBIDOS
     if (
         nome // VERIFICA SE O NOME NÃO ESTÁ VAZIO
@@ -71,6 +66,7 @@ router.post("/api/user/create_user", async (req, res) => {
             "senha": md5(process.env.PWD_PREFIX + senha), // CONVERTE EM MD5 COM O PREFIXO QUE ESTA NO .ENV
             "cargo": cargo,
             "status": status,
+            "resetar_senha": 1
         }
         const shell_commands = new commands(); // CRIA UM CONSTRUTOR
         const createUser = await shell_commands.commandCreateData('books', 'usuarios', query); // INICIA A FUNÇÃO EXPORTADA
@@ -82,7 +78,7 @@ router.post("/api/user/create_user", async (req, res) => {
             res.status(401).json({
                 "codigo": process.env.CODE_FAIL,
                 "resposta": process.env.MSG_SUCCESS_FAIL,
-                "mensagem": "Usuário ja existe, experimente redefinir a senha ou inserir outro usuário",
+                "mensagem": "Usuário já existe, experimente redefinir a senha ou inserir outro usuário",
                 "data_base": createUser
             });
             return true;
@@ -97,7 +93,7 @@ router.post("/api/user/create_user", async (req, res) => {
             "data_base": createUser
         });
         return true;
-        
+
     } else {
 
         // REPROVOU NA VARREDURA

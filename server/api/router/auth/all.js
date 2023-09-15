@@ -34,8 +34,32 @@ router.get("/", async (req, res) => {
 
 });
 
-// *************** GET ***************
-// Controla todas as entrada de api no metodo GET
+// *************** ALL ***************
+// Controla todas as entrada de api de usuario
+router.all("/api/user*", async (req, res, next) => {
+
+    const check_data = new check_user(); // CRIA O CONTRUTOR
+    const result = await check_data.initSyncSingIn(req); // EXECUTA A FUNCAO DO CONSTRUTOR
+    const cookieData = result[0]['validToken']; // RECUPERA OS DADOS DA FUNÇÃO
+
+    // VERIFICA SE O USUARIO NÃO É ADMIN
+    if (cookieData["cargo"] !== 0) {
+        
+        res.status(401).json({
+            "codigo": process.env.CODE_FAIL,
+            "resposta": process.env.MSG_SUCCESS_FAIL,
+            "mensagem": "O seu login não tem permissão para realizar essa tarefa, contate o administrador para acessar esse recurso",
+            "data_base": ""
+        });
+        return true;
+
+    }
+
+    next();
+});
+
+// *************** ALL ***************
+// Controla todas as entrada de api
 router.all("/api*", async (req, res, next) => {
 
     const check_data = new check_user(); // CRIA O CONTRUTOR
@@ -51,8 +75,8 @@ router.all("/api*", async (req, res, next) => {
     obj.responsavel_objeto = cookieData;
     obj.body = req.body;
     obj.id_usuario = "";
-    obj.erro = cookieData.hash_mail_pass == "false" ? true : false;
-    obj.message = cookieData.hash_mail_pass == "false" ? "Usuário não está autenticado, solicitação cancelada" : "Usuário com sessão validada, solicitação liberada"
+    obj.erro = cookieData.hash_mail_pass == "false" || cookieData.resetar_senha == 1 ? true : false;
+    obj.message = cookieData.hash_mail_pass == "false" || cookieData.resetar_senha == 1 ? "Usuário não está autenticado, solicitação cancelada" : "Usuário com sessão validada, solicitação liberada"
     obj.acao_criada_em = new Date().getTime();
     obj.acao_atualizada_em = new Date().getTime();
 
@@ -64,7 +88,21 @@ router.all("/api*", async (req, res, next) => {
         res.status(401).json({
             "codigo": process.env.CODE_FAIL,
             "resposta": process.env.MSG_FAIL,
-            "mensagem": "O usuário não está autenticado, realize o login e tente novamente",
+            "mensagem": "Você não está autenticado, realize o login e tente novamente",
+            "auth": cookieData,
+            "data_base": ""
+        });
+        return false;
+
+    }
+
+    // VERIFICA SE O USUARIO PRECISA RESETAR A SENHA
+    if (cookieData["resetar_senha"] == 1) {
+
+        res.status(403).json({
+            "codigo": process.env.CODE_FAIL,
+            "resposta": process.env.MSG_FAIL,
+            "mensagem": "Seu login está bloqueado, redefina sua senha",
             "auth": cookieData,
             "data_base": ""
         });

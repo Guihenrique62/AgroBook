@@ -13,8 +13,6 @@ const session = require('express-session'); // EXTRAI MODULO PARA CONTROLAR SESS
 const check_user = require('../../middleware/jwt/jwt'); // EXTRAIR FUNÇOES PARA MANIPULAR O JWT
 const command = require('../../middleware/mongoDb/command/commands'); // EXTRAR OS COMANDOS NO MONGODB
 const { validate } = require("email-validator"); // EXTRAI BIBLIOTECA PARA VALIDAR EMAIL
-const moment = require('moment'); // EXTRAI O MODULO QUE NORMALIZA TIMASTAMP
-moment.locale('pt-BR');
 require('dotenv').config(); // SOLICITA AS VARIAVEIS DE AMBIENTE
 
 // *************** DLC [ GERAR HASH ] ***************
@@ -22,6 +20,14 @@ require('dotenv').config(); // SOLICITA AS VARIAVEIS DE AMBIENTE
 const gerarHash = async (email, senha, user, req) => {
 
     const saltRounds = 10; // TOTAL DE NUMEROS PARA O HASH
+    var expirateSessionUserMongo;
+    
+    // TENTA DEFINIR A EXPIRACAO DA SENHA VIA MONGO DB
+    try {
+        expirateSessionUserMongo = user["expiracao_sessao"];
+    }catch (x) {
+        expirateSessionUserMongo = false
+    }
 
     // CRIPTOGRAFA O EMAIL E SENHA
     return bcrypt.hash(email + '+' + senha, saltRounds).then(function (hash) {
@@ -32,6 +38,8 @@ const gerarHash = async (email, senha, user, req) => {
             // SALVA NOS COKIES O HASH CASO SEJA VALIDO
             if (result) {
 
+                console.log(user);
+
                 var token = jwt.sign({
                     "hash_mail_pass": hash,
                     "id": user["_id"],
@@ -40,10 +48,11 @@ const gerarHash = async (email, senha, user, req) => {
                     "email": user["email"],
                     "cargo": user["cargo"],
                     "status": user["status"],
+                    "resetar_senha": user["resetar_senha"]
                 },
                     process.env.SECRET_JWT, // PUXA O SECREAT DO ARQUIVO .ENV
                     {
-                        expiresIn: !JSON.parse(process.env.EXPIRATE_JWT)[0][user["cargo"]] ? "30min" : JSON.parse(process.env.EXPIRATE_JWT)[0][user["cargo"]], // DEFINE A VALIDADE DO HASH
+                        expiresIn: expirateSessionUserMongo ? expirateSessionUserMongo : !JSON.parse(process.env.EXPIRATE_JWT)[0][user["cargo"]] ? "30min" : JSON.parse(process.env.EXPIRATE_JWT)[0][user["cargo"]], // DEFINE A VALIDADE DO HASH
                     }
                 );
 
@@ -62,7 +71,12 @@ const gerarHash = async (email, senha, user, req) => {
 // Controla todas as entradas da autenticação
 router.post("/auth/singin", async (req, res) => {
 
+    const check_data = new check_user(); // CRIA UM CONSTRUTOR
+    const result = await check_data.check(req); // EXECULTA A FUNÇÃO DENTRO DO CONTRUTOR
+    var cookieData = result[0]['validToken']; // RESERVA O VALOR RECEBIDO
+
     const { email, senha } = req.body; // RECUPERA OS DADOS DO BODY
+
     const newPassword = md5(process.env.PWD_PREFIX + senha); // CONVERTE A SENHA PARA O FORMATO EM PREFIXO + MD5 
 
     const emailValidate = validate(email); // VALIDA SE O EMAIL E VALIDO OU NAO USANDO BIBLIOCA EXTERNA
@@ -73,7 +87,7 @@ router.post("/auth/singin", async (req, res) => {
         res.status(401).json({
             "codigo": process.env.CODE_FAIL,
             "resposta": process.env.MSG_SUCCESS_FAIL,
-            "mensagem": "O email recebido nao e valido, verifique os dados e tente novamente",
+            "mensagem": "O email recebido não é válido, verifique os dados e tente novamente",
             "data_base": ""
         });
         return true;
@@ -118,11 +132,25 @@ router.post("/auth/singin", async (req, res) => {
     }
 
     const hash = await gerarHash(email, newPassword, readData["result"][0], req); // PASSA OS PARAMETROS PARA UMA ARROW FUCTION QUE GERAR UM HASH USANDO [ JWT + BCRYPT ]
+    
+    // VERIFICA SE O USUARIO JÁ ESTA LOGADO
+    if (cookieData["hash_mail_pass"] !== "false") {
+
+        res.status(200).json({
+            "codigo": process.env.CODE_SUCCESS,
+            "resposta": process.env.MSG_SUCCESS,
+            "mensagem": "Você já está logado",
+            "data_base": readData,
+            "hash": cookieData
+        });
+        return true;
+
+    }
 
     res.status(200).json({
         "codigo": process.env.CODE_SUCCESS,
         "resposta": process.env.MSG_SUCCESS,
-        "mensagem": "Dados do usuario recuperado com sucesso",
+        "mensagem": "Login realizado com sucesso",
         "data_base": readData,
         "hash": hash
     });
