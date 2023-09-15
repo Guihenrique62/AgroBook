@@ -54,6 +54,11 @@ router.get("/api/book/list_book", async (req, res) => {
 
     }
 
+    // Verifique se o filtro contém a chave 'titulo' e, se sim, adicione a regex insensível a maiúsculas/minúsculas
+    if (filter.hasOwnProperty('titulo')) {
+        filter.titulo = { $regex: new RegExp(filter.titulo, 'i') }; // 'i' torna a regex insensível a maiúsculas/minúsculas
+    }
+
     const shell_commands = new commands(); // CRIA UM CONSTRUTOR
     const listBook = await shell_commands.commandReadData(`books`, 'livros', filter, sort, limit); // EXECULTA A FUNCAO QUE LER REGISTRO NO BANCO DE DADOS 
 
@@ -73,7 +78,7 @@ router.get("/api/book/list_book", async (req, res) => {
     res.status(200).json({
         "codigo": process.env.CODE_SUCCESS,
         "resposta": process.env.MSG_SUCCESS,
-        "mensagem": "Lista de usuarios recuperada com sucesso",
+        "mensagem": "Lista de Livros recuperada com sucesso",
         "data_base": listBook
     });
 
@@ -86,7 +91,7 @@ router.all("/api/book/list_book*", async (req, res) => {
     res.status(404).json({
         "codigo": process.env.CODE_FAIL,
         "resposta": process.env.MSG_SUCCESS_FAIL,
-        "mensagem": `O linkk expirou ou não existe, experimente acessar a documentacao da API em ${process.env.HOST_API_DOC}/doc/list_user`,
+        "mensagem": `O link expirou ou não existe, experimente acessar a documentacao da API em ${process.env.HOST_API_DOC}/doc/list_user`,
         "data_base": ""
     });
 

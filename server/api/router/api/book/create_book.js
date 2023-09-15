@@ -37,12 +37,12 @@ router.post("/api/book/create_book", async (req, res) => {
             "titulo": titulo,
             "capa": capa,
             "sinopse": sinopse,
-            "paginas": paginas,
+            "paginas": parseInt(paginas),
             "categorias": categorias,
             "autor": autor,
             "idioma": idioma,
             "data_lancamento": data_lancamento,
-            "total_estoque": total_estoque,
+            "total_estoque": parseInt(total_estoque),
             "registro_criado_em": dateNow.getTime(),// DATA ATUAL DA CRIAÇÃO
             "registro_atualizado_em": dateNow.getTime() // DATA ATUAL DA CRIAÇÃO
         }
