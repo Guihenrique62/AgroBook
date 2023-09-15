@@ -45,7 +45,7 @@ router.all("/api/user*", async (req, res, next) => {
     // VERIFICA SE O USUARIO NÃO É ADMIN
     if (cookieData["cargo"] !== 0) {
         
-        res.status(401).json({
+        res.status(405).json({
             "codigo": process.env.CODE_FAIL,
             "resposta": process.env.MSG_SUCCESS_FAIL,
             "mensagem": "O seu login não tem permissão para realizar essa tarefa, contate o administrador para acessar esse recurso",

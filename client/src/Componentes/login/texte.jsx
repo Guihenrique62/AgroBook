@@ -43,31 +43,30 @@ export default function Teste() {
     e.preventDefault();
 
     try {
-      let data = JSON.stringify({
+      let data = {
         email: "jeantng2016@gmail.com",
-        senha: "trocar123",
-      });
-
-      let config = {
-        method: "post",
-        maxBodyLength: Infinity,
-        withCredentials: true,
-        url: "http://20.226.73.46:57601/auth/singin",
-        headers: {
-          Accept: "*/*",
-          "Content-Type": "application/json",
-        },
-        data: data,
+        senha: "nova@trocar123",
       };
 
-      await axios
-        .request(config)
-        .then((response) => {
-          console.log(JSON.stringify(response.data));
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      let config = {
+        headers: {
+          Accept: "*/*",
+        },
+        withCredentials: true
+      };
+
+      axios.post('http://localhost:57601/auth/singin', data, {
+        withCredentials: true
+      });
+
+      // await axios
+      //   .request(config)
+      //   .then((response) => {
+      //     console.log(JSON.stringify(response.data));
+      //   })
+      //   .catch((error) => {
+      //     console.log(error);
+      //   });
     } catch (err) {
       console.log(err);
     }

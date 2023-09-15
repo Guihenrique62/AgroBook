@@ -38,8 +38,6 @@ const gerarHash = async (email, senha, user, req) => {
             // SALVA NOS COKIES O HASH CASO SEJA VALIDO
             if (result) {
 
-                console.log(user);
-
                 var token = jwt.sign({
                     "hash_mail_pass": hash,
                     "id": user["_id"],
