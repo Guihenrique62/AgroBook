@@ -11,7 +11,7 @@ require('dotenv').config(); // SOLICÍTA AS VARIÁVEIS DE AMBIENTE
 
 // *************** GET ***************
 // Controla todas as rotas de listagem e login de usuário
-router.get("/webhook/trello/update", async (req, res) => {
+router.post("/webhook/trello/card/update", async (req, res) => {
 
     // VERIFICA SE O BODY ESTÁ VAZIO
     if (Object.keys(req.body).length === 0) {
@@ -27,25 +27,25 @@ router.get("/webhook/trello/update", async (req, res) => {
     }
 
     const shell_commands = new commands(); // CRIA UM CONSTRUTOR
-    const listUser = await shell_commands.commandReadData(`books`, `usuarios`, filter, sort, limit); // EXECULTA A FUNÇÃO QUE LER REGISTRO NO BANCO DE DADOS 
+    const insertLog = await shell_commands.commandCreateData(`books`, `log`, req.body); // EXECULTA A FUNÇÃO QUE LER REGISTRO NO BANCO DE DADOS 
 
     res.status(200).json({
         "codigo": process.env.CODE_SUCCESS,
         "resposta": process.env.MSG_SUCCESS,
-        "mensagem":"Lista de usuários recuperada com sucesso",
-        "data_base": listUser
+        "mensagem":"Registro inserido com sucesso",
+        "data_base": insertLog
     });
 
 });
 
 // *************** ALL ***************
-// Mensagem de erro personalizada para rotas não existente apartir de /list_user
-router.all("/webhook/trello/update*", async (req, res) => {
+// Mensagem de erro personalizada para rotas não existente apartir de /update
+router.all("/webhook/trello/card/update*", async (req, res) => {
 
     res.status(404).json({
         "codigo": process.env.CODE_FAIL,
         "resposta": process.env.MSG_SUCCESS_FAIL,
-        "mensagem":"O link expirou ou não existe, experimente acessar a documentação da API em htpp://localhost:57603/doc/list_user",
+        "mensagem":"O link expirou ou não existe, experimente acessar a documentação da API em htpp://localhost:57603/doc/trello",
         "data_base": ""
     });
 
