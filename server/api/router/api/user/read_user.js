@@ -11,7 +11,7 @@ require('dotenv').config(); // SOLICITA AS VARIAVEIS DE AMBIENTE
 
 // *************** GET ***************
 // Controla todas as rotas de listagem e login de usuario
-router.get("/api/user/list_user", async (req, res) => {
+router.post("/api/user/list_user", async (req, res) => {
 
     const { filter, sort, limit } = req.body; // RECUPERA OS DADOS DO BODY
 

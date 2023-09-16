@@ -11,31 +11,42 @@ export default function Teste() {
   let validLogin = async (e) => {
     e.preventDefault();
 
-    try {
-      let data = "";
+    let data = {};
 
-      let config = {
-        method: "post",
-        maxBodyLength: Infinity,
-        withCredentials: true,
-        url: "http://20.226.73.46:57601/auth/singin/valid",
-        headers: {
-          Accept: "*/*",
-        },
-        data: data,
-      };
+    await axios.post('http://localhost:57601/auth/singin/valid', data, {
+      withCredentials: true
+    }).then((res) => {
+      setMessage(`status: ${res.status} ${res.data.mensagem}`);
+    })
+      .catch((err) => {
+        setMessage(`status: ${err.response.status} ${err.response.data.mensagem}`);
+      });
 
-      axios
-        .request(config)
-        .then((response) => {
-          console.log(JSON.stringify(response.data));
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    } catch (err) {
-      console.log(err);
-    }
+  };
+
+  // LISTART USUARIOS
+  let listarUsuarios = async (e) => {
+    e.preventDefault();
+
+    let data = {
+      "filter": {
+        "nome": { "$regex": "gui", "$options": "i" }
+      },
+      "sort": {
+        "_id": -1
+      },
+      "limit": 100
+    };
+
+    await axios.post('http://localhost:57601/api/user/list_user', data, {
+      withCredentials: true
+    }).then((res) => {
+      setMessage(`status: ${res.status} ${res.data.mensagem}\n${JSON.stringify(res.data.data_base)}`);
+    })
+      .catch((err) => {
+        setMessage(`status: ${err.response.status} ${err.response.data.mensagem}`);
+      });
+
   };
 
   // RELAIZA O LOGIN
@@ -43,53 +54,22 @@ export default function Teste() {
     e.preventDefault();
 
     try {
-<<<<<<< HEAD
+
       let data = {
         email: "jeantng2016@gmail.com",
         senha: "nova@trocar123",
       };
 
-      let config = {
-        headers: {
-          Accept: "*/*",
-        },
+      await axios.post('http://localhost:57601/auth/singin', data, {
         withCredentials: true
-      };
+      }).then((res) => {
+        setMessage(`status: ${res.status} ${res.data.mensagem}`);
+      })
+        .catch((err) => {
+          setMessage(`status: ${err.response.status} ${err.response.data.mensagem}`);
+        });
 
-      axios.post('http://localhost:57601/auth/singin', data, {
-        withCredentials: true
-      });
 
-=======
-      let data = JSON.stringify({
-        email: "fillypecunha@gmail.com",
-        senha: "12345678",
-      });
-
-      let config = {
-        method: "post",
-        maxBodyLength: Infinity,
-        url: "http://20.226.73.46:57601/auth/singin",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
-
->>>>>>> 6336dd13cee91b6c081d618af4208e11dd497fec
-      // await axios
-      //   .request(config)
-      //   .then((response) => {
-      //     console.log(JSON.stringify(response.data));
-      //   })
-      //   .catch((error) => {
-      //     console.log(error);
-      //   });
-<<<<<<< HEAD
-=======
-      axios.post("http://20.226.73.46:57601/auth/singin", data, {
-        withCredentials: true,
-      });
->>>>>>> 6336dd13cee91b6c081d618af4208e11dd497fec
     } catch (err) {
       console.log(err);
     }
@@ -117,15 +97,21 @@ export default function Teste() {
           onChange={(e) => setMobileNumber(e.target.value)}
         />
 
-        <button type="submit">Create</button>
+        <button type="submit">Loga</button>
 
-        <div className="message">{message ? <p>{message}</p> : null}</div>
       </form>
+
       <form onSubmit={validLogin}>
-        <button type="submit">Create</button>
-
-        <div className="message">{message ? <p>{message}</p> : null}</div>
+        <button type="submit">Valida</button>
       </form>
+
+      <form onSubmit={listarUsuarios}>
+        <button type="submit">Listar usuários</button>
+      </form>
+
+
+      <div className="message">{message ? <p>{message}</p> : null}</div>
+
     </div>
   );
 }

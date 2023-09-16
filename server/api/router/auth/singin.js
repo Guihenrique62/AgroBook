@@ -103,6 +103,8 @@ router.post("/auth/singin", async (req, res) => {
     const shell_commands = new command(); // CRIA UM CONSTRUTOR
     const readData = await shell_commands.commandReadData(`books`, `usuarios`, filter, sort, limit);
 
+    console.log(readData,email, senha );
+
     // VERIFICA SE O EMAIL E SENHA ESTA INCORRETO
     if (readData["result"].length === 0) { // VERIFICA SE RECEBEU UM OBJETO VAZIO
 
