@@ -14,3 +14,16 @@ const check_user = require('../../middleware/jwt/jwt'); // EXTRAIR FUNÇOES PARA
 const command = require('../../middleware/mongoDb/command/commands'); // EXTRAR OS COMANDOS NO MONGODB
 const { validate } = require("email-validator"); // EXTRAI BIBLIOTECA PARA VALIDAR EMAIL
 require('dotenv').config(); // SOLICITA AS VARIAVEIS DE AMBIENTE
+
+// *************** ALL ***************
+// Mensagem de erro personalizada para rotas nao existemte apartir de /password
+router.all("/auth/resete/password*", async (req, res) => {
+
+    res.status(404).json({
+        "codigo": process.env.CODE_FAIL,
+        "resposta": process.env.MSG_SUCCESS_FAIL,
+        "mensagem": `O link expirou ou não existe, experimente acessar a documentacao da API em ${process.env.HOST_API_DOC}/doc/singin`,
+        "data_base": ""
+    });
+
+});
