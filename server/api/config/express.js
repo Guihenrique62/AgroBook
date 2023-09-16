@@ -21,16 +21,27 @@ module.exports = function () {
         origin: [
 
             "http://localhost:8080",
+            "http://localhost:5173",
             "http://localhost:57601",
             "http://localhost:57602",
-            "http://localhost:5173",
+
+            "http://10.0.0.4:8080",
+            "http://10.0.0.4:5173",
+            "http://10.0.0.4:57601",
+            "http://10.0.0.4:57602",
+            
             "http://20.226.73.46:8080",
+            "http://20.226.73.46:5173",
             "http://20.226.73.46:57601",
             "http://20.226.73.46:57602",
-            "http://20.226.73.46:5173"
+
+            "http://192.168.0.56:8080",
+            "http://192.168.0.56:5173",
+            "http://192.168.0.56:57601",
+            "http://192.168.0.56:57602"
 
         ],
-        exposedHeaders: ["set-cookie"],
+        allowedOrigins: "*",
         credentials: true,
         optionsSuccessStatus: 200
     }

@@ -45,7 +45,7 @@ router.all("/api/user*", async (req, res, next) => {
     // VERIFICA SE O USUARIO NÃO É ADMIN
     if (cookieData["cargo"] !== 0) {
         
-        res.status(401).json({
+        res.status(405).json({
             "codigo": process.env.CODE_FAIL,
             "resposta": process.env.MSG_SUCCESS_FAIL,
             "mensagem": "O seu login não tem permissão para realizar essa tarefa, contate o administrador para acessar esse recurso",
@@ -75,8 +75,8 @@ router.all("/api*", async (req, res, next) => {
     obj.responsavel_objeto = cookieData;
     obj.body = req.body;
     obj.id_usuario = "";
-    obj.erro = cookieData.hash_mail_pass == "false" ? true : false;
-    obj.message = cookieData.hash_mail_pass == "false" ? "Usuário não está autenticado, solicitação cancelada" : "Usuário com sessão validada, solicitação liberada"
+    obj.erro = cookieData.hash_mail_pass == "false" || cookieData.resetar_senha == 1 ? true : false;
+    obj.message = cookieData.hash_mail_pass == "false" || cookieData.resetar_senha == 1 ? "Usuário não está autenticado, solicitação cancelada" : "Usuário com sessão validada, solicitação liberada"
     obj.acao_criada_em = new Date().getTime();
     obj.acao_atualizada_em = new Date().getTime();
 
@@ -109,8 +109,6 @@ router.all("/api*", async (req, res, next) => {
         return false;
 
     }
-
-    console.log(cookieData)
 
     next();
 

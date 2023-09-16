@@ -20,7 +20,14 @@ require('dotenv').config(); // SOLICITA AS VARIAVEIS DE AMBIENTE
 const gerarHash = async (email, senha, user, req) => {
 
     const saltRounds = 10; // TOTAL DE NUMEROS PARA O HASH
-    const expirateSessionUserMongo = user["expiracao_sessao"] ? user["expiracao_sessao"] : false; // VERIFICA SE O USUARIO POSSUI VALIDADE DE SESSAO RECUPERADA DO MONGO DB [ expiracao_sessao ]
+    var expirateSessionUserMongo;
+    
+    // TENTA DEFINIR A EXPIRACAO DA SENHA VIA MONGO DB
+    try {
+        expirateSessionUserMongo = user["expiracao_sessao"];
+    }catch (x) {
+        expirateSessionUserMongo = false
+    }
 
     // CRIPTOGRAFA O EMAIL E SENHA
     return bcrypt.hash(email + '+' + senha, saltRounds).then(function (hash) {
@@ -39,7 +46,7 @@ const gerarHash = async (email, senha, user, req) => {
                     "email": user["email"],
                     "cargo": user["cargo"],
                     "status": user["status"],
-                    "resetar_senha": user["resetar_senha"],
+                    "resetar_senha": user["resetar_senha"]
                 },
                     process.env.SECRET_JWT, // PUXA O SECREAT DO ARQUIVO .ENV
                     {
@@ -96,15 +103,6 @@ router.post("/auth/singin", async (req, res) => {
     const shell_commands = new command(); // CRIA UM CONSTRUTOR
     const readData = await shell_commands.commandReadData(`books`, `usuarios`, filter, sort, limit);
 
-    const hash = await gerarHash(email, newPassword, readData["result"][0], req); // PASSA OS PARAMETROS PARA UMA ARROW FUCTION QUE GERAR UM HASH USANDO [ JWT + BCRYPT ]
-
-    // OCULTAR DADOS SENSIVEIS
-    try {
-        readData["result"][0]["documento"] = "restrito";
-        readData["result"][0]["senha"] = "restrito";
-        readData["result"][0]["nome"] = "restrito";
-    } catch (tryRestData) { /* FAZ NADA */ }
-
     // VERIFICA SE O EMAIL E SENHA ESTA INCORRETO
     if (readData["result"].length === 0) { // VERIFICA SE RECEBEU UM OBJETO VAZIO
 
@@ -131,6 +129,8 @@ router.post("/auth/singin", async (req, res) => {
 
     }
 
+    const hash = await gerarHash(email, newPassword, readData["result"][0], req); // PASSA OS PARAMETROS PARA UMA ARROW FUCTION QUE GERAR UM HASH USANDO [ JWT + BCRYPT ]
+    
     // VERIFICA SE O USUARIO JÁ ESTA LOGADO
     if (cookieData["hash_mail_pass"] !== "false") {
 
