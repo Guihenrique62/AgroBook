@@ -5,9 +5,9 @@ EMAIL: guilhermeportosantos1@gmail.com
 */
 
 const express = require("express"); // EXTRAI O MODULO DO EXPRESS
-var router = express.Router(); // EXTRAR O MODULO DE ROTAS
-const commands = require('../../../middleware/mongoDb/command/commands'); // EXTRAR OS COMANDOS NO MONGODB
-require('dotenv').config(); // SOLICITA AS VARIAVEIS DE AMBIENTE
+var router = express.Router(); // EXTRAI O MODULO DE ROTAS
+const commands = require('../../../middleware/mongoDb/command/commands'); // EXTRAI OS COMANDOS NO MONGO DB
+require('dotenv').config(); // SOLICITA AS VARIÁVEIS DE AMBIENTE
 
 // *************** LINK TYPE ***************
 // Verifica o tipo do link recebido pela api
