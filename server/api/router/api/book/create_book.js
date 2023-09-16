@@ -33,48 +33,69 @@ router.post("/api/book/create_book", async (req, res) => {
         && sinopse // VERIFICA SE A SINOPSE NAO ESTA VAZIO
     ) {
 
-        const query = { // CRIA O OBJETO
-            "titulo": titulo,
-            "capa": capa,
-            "sinopse": sinopse,
-            "paginas": parseInt(paginas),
-            "categorias": categorias,
-            "autor": autor,
-            "idioma": idioma,
-            "data_lancamento": data_lancamento,
-            "total_estoque": parseInt(total_estoque),
-            "registro_criado_em": dateNow.getTime(),// DATA ATUAL DA CRIAÇÃO
-            "registro_atualizado_em": dateNow.getTime() // DATA ATUAL DA CRIAÇÃO
+        // QUERY DE BUSCA, TITULO INDEPENDENTE MAIUSCULA MINUSCULA
+        const queryfind = {
+            "titulo": { "$regex": titulo, "$options": "i" }
+        };
+        const sort = {
+            "registro_criado_em": -1
+        };
+        const limit = 1;
+        const regex_command = new commands(); // CRIA UM CONSTRUTOR
+        const read_book = await regex_command.commandReadData('books', 'livros', queryfind, sort, limit);
+        
+        if(read_book.result.length < 1){
+            const query = { // CRIA O OBJETO
+                "titulo": titulo, //Regex insensivel maiusculas e minusculas
+                "capa": capa,
+                "sinopse": sinopse,
+                "paginas": parseInt(paginas),
+                "categorias": categorias,
+                "autor": autor,
+                "idioma": idioma,
+                "data_lancamento": data_lancamento,
+                "total_estoque": parseInt(total_estoque),
+                "registro_criado_em": dateNow.getTime(),// DATA ATUAL DA CRIAÇÃO
+                "registro_atualizado_em": dateNow.getTime() // DATA ATUAL DA CRIAÇÃO
+            }
+    
+            const shell_commands = new commands(); // CRIA UM CONSTRUTOR
+            const createBook = await shell_commands.commandCreateData('books', 'livros', query); // INICIAR A FUNÇÃO EXPORTADA
+    
+            // VERIFICA SE EXITES VALORES DUPLICADOS
+            if (createBook.keyValue) {
+    
+                // PASSOU NA VARREDURA MAIS ENCONTROU ERRRO [ CHAVES DUPLICADAS ]
+                res.status(401).json({
+                    "codigo": process.env.CODE_FAIL,
+                    "resposta": process.env.MSG_SUCCESS_FAIL,
+                    "mensagem": "Livro já existente no sistema",
+                    "data_base": createBook
+                });
+                return true;
+    
+            } else {
+    
+                // PASSOU NA VARREDURA
+                res.status(200).json({
+                    "codigo": process.env.CODE_SUCCESS,
+                    "resposta": process.env.MSG_SUCCESS,
+                    "mensagem": "Livro criado com sucesso",
+                    "data_base": createBook
+                });
+                return true;
+    
+            }
         }
 
-        const shell_commands = new commands(); // CRIA UM CONSTRUTOR
-        const createBook = await shell_commands.commandCreateData('books', 'livros', query); // INICIAR A FUNÇÃO EXPORTADA
-
-        // VERIFICA SE EXITES VALORES DUPLICADOS
-        if (createBook.keyValue) {
-
-            // PASSOU NA VARREDURA MAIS ENCONTROU ERRRO [ CHAVES DUPLICADAS ]
-            res.status(401).json({
-                "codigo": process.env.CODE_FAIL,
-                "resposta": process.env.MSG_SUCCESS_FAIL,
-                "mensagem": "Livro já existente no sistema",
-                "data_base": createBook
-            });
-            return true;
-
-        } else {
-
-            // PASSOU NA VARREDURA
-            res.status(200).json({
-                "codigo": process.env.CODE_SUCCESS,
-                "resposta": process.env.MSG_SUCCESS,
-                "mensagem": "Livro criado com sucesso",
-                "data_base": createBook
-            });
-            return true;
-
-        }
-
+        // REPROVOU NA VARREDURA DE VALORES JA EXISTENTES
+        res.status(401).json({
+            "codigo": process.env.CODE_FAIL,
+            "resposta": process.env.MSG_SUCCESS_FAIL,
+            "mensagem": "Livro já existente no sistema",
+            "data_base": read_book
+        });
+        return true;
     } else {
 
         // REPROVOU NA VARREDURA

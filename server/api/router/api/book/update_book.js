@@ -14,6 +14,7 @@ require('dotenv').config(); // SOLICITA AS VARIAVEIS DE AMBIENTE
 router.post("/api/book/update_book", async (req, res) => {
 
     const { filter, newValue } = req.body; // RESERVA VALORES DO BODY
+    const attrValid = ["titulo"]; // PERMITE APENAS ESSAS CHAVES COMO PARAMETROS ACEITAVES PARA ATUALIZAR LIVROS
 
     // VERIFICA SE A VARIAVEL FILTER ESTÁ VAZIA
     if (!filter || Object.keys(filter).length === 0 || typeof (filter) !== `object`) {
@@ -26,6 +27,21 @@ router.post("/api/book/update_book", async (req, res) => {
         });
         return true;
 
+    }
+
+    //VERIFICA SE O FILTER É VALIDO
+    for (key in Object.keys(filter)) {
+
+        var valor = Object.keys(filter)[key];
+        if (attrValid.indexOf(valor) == -1) { // VERIFICA SE O FILTER RECEBIDO ESTA DE ACORDO COM AS VARIAVEIS VALIDAS
+            res.status(401).json({
+                "codigo": process.env.CODE_FAIL,
+                "resposta": process.env.MSG_SUCCESS_FAIL,
+                "mensagem": "O campo [ filter ] não respeita uma ou mais regras de entrada, revise os dados e tente novamente",
+                "data_base": ""
+            });
+            return false;
+        }
     }
 
     // VERIFICA SE O NOVO VALOR ESTÁ VAZIO
@@ -53,7 +69,6 @@ router.post("/api/book/update_book", async (req, res) => {
         return true;
 
     }
-
 
     const shell_commands = new commands(); // CRIA O CONSTRUTOR
     const updateBook = await shell_commands.commandUpadateData('books', 'livros', filter, newValue); // INICIAR A FUNCAO ATUALIZAR REGISTRO NO MONGO DB
