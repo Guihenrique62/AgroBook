@@ -1,7 +1,7 @@
 {
     "expo": {
-        "name": "agrobookapp",
-        "slug": "agrobookapp",
+        "name": "agrobook-app",
+        "slug": "agrobook-app",
         "version": "1.0.0",
         "orientation": "portrait",
         "icon": "./assets/icon.png",
@@ -12,6 +12,7 @@
             "backgroundColor": "#ffffff"
         },
         "assetBundlePatterns": ["**/*"],
+        "platforms": ["ios", "android", "web"],
         "ios": {
             "supportsTablet": true
         },
