@@ -1,13 +1,45 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { Input, Button, Text } from "@rneui/themed";
 import { View, StyleSheet, Image } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Login = () => {
+    const [email, setEmail] = useState("");
+    const [senha, setSenha] = useState("");
     const navigation = useNavigation();
-    const handleNavRegister = () => {
-        navigation.navigate("Register");
+
+    useEffect(() => {
+        checkAuthentication();
+    }, []);
+
+    const checkAuthentication = async () => {
+        const token = await AsyncStorage.getItem("token");
+        if (token) {
+            navigation.navigate("Home");
+        }
     };
+
+    const handleNavRegister = async () => {
+        if (!email || !senha) {
+            console.log("Por favor, preencha todos os campos");
+            return;
+        } else {
+            if (email === "ihury" && senha === "123") {
+                console.log("Login Validado Com Sucesso.");
+
+                // Armazene as informações de autenticação
+                await AsyncStorage.setItem("token", "6506951bd5581");
+
+                navigation.navigate("Home");
+            } else {
+                console.log(
+                    "Email ou senha incorretos. Por favor, tente novamente."
+                );
+            }
+        }
+    };
+
     return (
         <View style={styles.container}>
             <Image
@@ -27,6 +59,8 @@ const Login = () => {
                 placeholder="E-MAIL"
                 placeholderStyle={{ fontWeight: "bold" }}
                 placeholderTextColor="#000"
+                value={email}
+                onChangeText={(text) => setEmail(text)}
             />
             <Input
                 containerStyle={{ width: "85%", marginTop: 40 }}
@@ -39,9 +73,11 @@ const Login = () => {
                     borderBottomColor: "#8CD23C",
                 }}
                 placeholder="SENHA"
-                secureTextEntry={true}
                 placeholderStyle={{ fontWeight: "bold" }}
                 placeholderTextColor="#000"
+                secureTextEntry
+                value={senha}
+                onChangeText={(text) => setSenha(text)}
             />
             <Button
                 containerStyle={{ width: 220, marginTop: 50, borderRadius: 14 }}
@@ -52,16 +88,8 @@ const Login = () => {
                 titleStyle={{ color: "#FFFFFF", fontSize: 20 }}
                 title="Login"
                 type="outline"
+                onPress={handleNavRegister}
             />
-            {/* <Text
-                onPress={() => {
-                    handleNavRegister();
-                }}
-                h4
-                h4Style={{ color: "#000", marginTop: 40, fontWeight: "600" }}
-            >
-                Faça Registro
-            </Text> */}
         </View>
     );
 };
@@ -80,3 +108,82 @@ const styles = StyleSheet.create({
 });
 
 export default Login;
+// import React, { useState } from "react";
+// import { useNavigation } from "@react-navigation/native";
+// import { Input, Button, Text } from "@rneui/themed";
+// import { View, StyleSheet, Image } from "react-native";
+
+// const Login = () => {
+//     const [email, setEmail] = useState("");
+//     const [senha, setSenha] = useState("");
+//     const navigation = useNavigation();
+//     const handleNavRegister = () => {
+//         if (!email || !senha) {
+//             console.log("Por favor, preencha todos os campos");
+//             return;
+//         } else {
+//             if (email === "ihury" && senha === "123") {
+//                 console.log("Login Validado Com Sucesso.");
+//                 navigation.navigate("Home");
+//             } else {
+//                 console.log(
+//                     "Email ou senha incorretos. Por favor, tente novamente."
+//                 );
+//             }
+//         }
+//     };
+//     return (
+//         <View style={styles.container}>
+//             <Image
+//                 style={styles.logo}
+//                 source={require("../../../assets/LogoApk.png")}
+//             />
+//             <Input
+//                 containerStyle={{ width: "85%", marginTop: 40 }}
+//                 style={{
+//                     color: "#000",
+//                     borderTopColor: "transparent",
+//                     borderLeftColor: "transparent",
+//                     borderRightColor: "transparent",
+//                     borderWidth: 1,
+//                     borderBottomColor: "#8CD23C",
+//                 }}
+//                 placeholder="E-MAIL"
+//                 placeholderStyle={{ fontWeight: "bold" }}
+//                 placeholderTextColor="#000"
+//                 value={email}
+//                 onChangeText={(text) => setEmail(text)}
+//             />
+//             <Input
+//                 containerStyle={{ width: "85%", marginTop: 40 }}
+//                 style={{
+//                     color: "#000",
+//                     borderTopColor: "transparent",
+//                     borderLeftColor: "transparent",
+//                     borderRightColor: "transparent",
+//                     borderWidth: 1,
+//                     borderBottomColor: "#8CD23C",
+//                 }}
+//                 placeholder="SENHA"
+//                 secureTextEntry={true}
+//                 placeholderStyle={{ fontWeight: "bold" }}
+//                 placeholderTextColor="#000"
+//                 value={senha}
+//                 onChangeText={(text) => setSenha(text)}
+//             />
+//             <Button
+//                 containerStyle={{ width: 220, marginTop: 50, borderRadius: 14 }}
+//                 buttonStyle={{
+//                     borderColor: "#A8A8A8",
+//                     backgroundColor: "#00A700",
+//                 }}
+//                 titleStyle={{ color: "#FFFFFF", fontSize: 20 }}
+//                 title="Login"
+//                 type="outline"
+//                 onPress={handleNavRegister}
+//             />
+//         </View>
+//     );
+// };
+
+// export default Login;
