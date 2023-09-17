@@ -51,6 +51,10 @@ app.use(ROUTER_READ_BOOK);
 var ROUTER_UPDATE_BOOK = require('./router/api/book/update_book');
 app.use(ROUTER_UPDATE_BOOK);
 
+/* ROUTER DELETE BOOK - Controla todas as ordem de apagar Livros */
+var ROUTER_DELETE_BOOK = require('./router/api/book/delete_book');
+app.use(ROUTER_DELETE_BOOK);
+
 /************* BOOKS [ END ] *************/
 
 /************* TRELLO [ START ] *************/

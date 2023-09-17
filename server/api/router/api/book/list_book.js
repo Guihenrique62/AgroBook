@@ -5,9 +5,9 @@ EMAIL: guilhermeportosantos1@gmail.com
 */
 
 const express = require("express"); // EXTRAI O MODULO DO EXPRESS
-var router = express.Router(); // EXTRAR O MODULO DE ROTAS
-const commands = require('../../../middleware/mongoDb/command/commands'); // EXTRAR OS COMANDOS NO MONGODB
-require('dotenv').config(); // SOLICITA AS VARIAVEIS DE AMBIENTE
+var router = express.Router(); // EXTRAI O MODULO DE ROTAS
+const commands = require('../../../middleware/mongoDb/command/commands'); // EXTRAI OS COMANDOS NO MONGO DB
+require('dotenv').config(); // SOLICITA AS VARIÁVEIS DE AMBIENTE
 
 // *************** GET ***************
 // Controla todas as rotas de listagem de livros
@@ -60,7 +60,7 @@ router.get("/api/book/list_book", async (req, res) => {
     }
 
     const shell_commands = new commands(); // CRIA UM CONSTRUTOR
-    const listBook = await shell_commands.commandReadData(`books`, 'livros', filter, sort, limit); // EXECULTA A FUNCAO QUE LER REGISTRO NO BANCO DE DADOS 
+    const listBook = await shell_commands.commandReadData(`books`, 'livros', filter, sort, limit); // EXECULTA A FUNCÃO QUE LER REGISTRO NO BANCO DE DADOS 
 
     // VERIFICA SE RECEBEU UM VALOR VAZIO
     if (!listBook["result"].length) {
