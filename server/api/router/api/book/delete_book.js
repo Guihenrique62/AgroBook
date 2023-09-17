@@ -5,13 +5,13 @@ EMAIL: guilhermeportosantos1@gmail.com
 */
 
 const express = require("express"); // EXTRAI O MODULO DO EXPRESS
-var router = express.Router(); // EXTRAR O MODULO DE ROTAS
-const commands = require('../../../middleware/mongoDb/command/commands'); // EXTRAR OS COMANDOS NO MONGODB
-const check_user = require('../../../middleware/auth/jwt_mongodb'); // PUXA FUNCAO QUE VALIDA SESSAO DO USUARIO
-require('dotenv').config(); // SOLICITA AS VARIAVEIS DE AMBIENTE
+var router = express.Router(); // EXTRAI O MODULO DE ROTAS
+const commands = require('../../../middleware/mongoDb/command/commands'); // EXTRAI OS COMANDOS NO MONGO DB
+const check_user = require('../../../middleware/auth/jwt_mongodb'); // PUXA FUNÇÃO QUE VALIDA SESSÃO DO USUÁRIO
+require('dotenv').config(); // SOLICITA AS VARIÁVEIS DE AMBIENTE
 
 // *************** DELETE ***************
-// Controla todas as entrada de apagar usuario
+// Controla todas as entrada de apagar usuário
 router.delete("/api/book/delete_book", async (req, res) => {
 
     const { filter } = req.body; // RESERVA OS VALORES RECEBIDOS VIA BODY
@@ -20,7 +20,7 @@ router.delete("/api/book/delete_book", async (req, res) => {
 
     
 
-    // VERIFICA SE A VARIAVEL [ filter ] NÃO ESTÁ VAZIA
+    // VERIFICA SE A VARIÁVEL [ filter ] NÃO ESTÁ VAZIA
     if (!filter || Object.keys(filter).length === 0 || typeof (filter) !== `object`) {
         
         res.status(401).json({
@@ -46,14 +46,14 @@ router.delete("/api/book/delete_book", async (req, res) => {
         
         }
 
-        // ANTES DE INICAR UM NOVO LOOP VERIFICA SE ACHOU UMA CORRESPONDÊNCIA VALIDA PARA PAUSAR O LOOP
+        // ANTES DE INICAR UM NOVO LOOP VERIFICA SE ACHOU UMA CORRESPONDÊNCIA VÁLIDA PARA PAUSAR O LOOP
         if (statusLoopValidFilter == 1) {
             break; // FINALIZA O FOR
         }
 
     }
 
-    // VERIFICA SE NÃO ENCONTROU UMA CORRENSPONDÊNCIA VALIDA
+    // VERIFICA SE NÃO ENCONTROU UMA CORRENSPONDÊNCIA VÁLIDA
     if (statusLoopValidFilter == 0) {
         
         res.status(401).json({
@@ -93,13 +93,13 @@ router.delete("/api/book/delete_book", async (req, res) => {
 });
 
 // *************** ALL ***************
-// Mensagem de erro personalizada para rotas não existemte apartir de /delete_user
+// Mensagem de erro personalizada para rotas não existente apartir de /delete_user
 router.all("/api/user/delete_user*", async (req, res) => {
 
     res.status(404).json({
         "codigo": process.env.CODE_FAIL,
         "resposta": process.env.MSG_SUCCESS_FAIL,
-        "mensagem": `O link expirou ou não existe, experimente acessar a documentacao da API em ${process.env.HOST_API_DOC}/doc/delete_user`,
+        "mensagem": `O link expirou ou não existe, experimente acessar a documentação da API em ${process.env.HOST_API_DOC}/doc/delete_user`,
         "data_base": ""
     });
 
