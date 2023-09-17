@@ -16,33 +16,52 @@ const Login = () => {
             />
             <Input
                 containerStyle={{ width: "85%", marginTop: 40 }}
-                style={{ color: "#FFFFFF" }}
-                placeholder="Login"
+                style={{
+                    color: "#000",
+                    borderTopColor: "transparent",
+                    borderLeftColor: "transparent",
+                    borderRightColor: "transparent",
+                    borderWidth: 1,
+                    borderBottomColor: "#8CD23C",
+                }}
+                placeholder="E-MAIL"
+                placeholderStyle={{ fontWeight: "bold" }}
+                placeholderTextColor="#000"
             />
             <Input
-                containerStyle={{ width: "85%" }}
-                style={{ color: "#FFFFFF" }}
-                placeholder="Senha"
+                containerStyle={{ width: "85%", marginTop: 40 }}
+                style={{
+                    color: "#000",
+                    borderTopColor: "transparent",
+                    borderLeftColor: "transparent",
+                    borderRightColor: "transparent",
+                    borderWidth: 1,
+                    borderBottomColor: "#8CD23C",
+                }}
+                placeholder="SENHA"
                 secureTextEntry={true}
+                placeholderStyle={{ fontWeight: "bold" }}
+                placeholderTextColor="#000"
             />
             <Button
-                containerStyle={{ width: 180, marginTop: 40 }}
+                containerStyle={{ width: 220, marginTop: 50, borderRadius: 14 }}
                 buttonStyle={{
-                    borderColor: "#FFFFFF",
+                    borderColor: "#A8A8A8",
+                    backgroundColor: "#00A700",
                 }}
                 titleStyle={{ color: "#FFFFFF", fontSize: 20 }}
-                title="LOGAR"
+                title="Login"
                 type="outline"
             />
-            <Text
+            {/* <Text
                 onPress={() => {
                     handleNavRegister();
                 }}
                 h4
-                h4Style={{ color: "#FFFFFF", marginTop: 40 }}
+                h4Style={{ color: "#000", marginTop: 40, fontWeight: "600" }}
             >
                 Faça Registro
-            </Text>
+            </Text> */}
         </View>
     );
 };
@@ -50,13 +69,13 @@ const Login = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#121212",
+        backgroundColor: "#FFFFFF",
         paddingTop: 90,
         alignItems: "center",
     },
     logo: {
-        width: 120,
-        height: 120,
+        width: 150,
+        height: 150,
     },
 });
 

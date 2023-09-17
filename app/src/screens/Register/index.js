@@ -17,28 +17,28 @@ const Register = () => {
                 />
                 <Input
                     containerStyle={{ width: "85%", marginTop: 35 }}
-                    style={{ color: "#FFFFFF" }}
+                    style={{ color: "#000000" }}
                     placeholder="NOME"
                 />
                 <Input
                     containerStyle={{ width: "85%" }}
-                    style={{ color: "#FFFFFF" }}
+                    style={{ color: "#000000" }}
                     placeholder="SOBRENOME"
                 />
                 <Input
                     containerStyle={{ width: "85%" }}
-                    style={{ color: "#FFFFFF" }}
+                    style={{ color: "#000000" }}
                     placeholder="EMAIL"
                 />
                 <Input
                     containerStyle={{ width: "85%" }}
-                    style={{ color: "#FFFFFF" }}
+                    style={{ color: "#000000" }}
                     placeholder="SENHA"
                     secureTextEntry={true}
                 />
                 <Input
                     containerStyle={{ width: "85%" }}
-                    style={{ color: "#FFFFFF" }}
+                    style={{ color: "#000000" }}
                     placeholder="CONFIRMAR SENHA"
                     secureTextEntry={true}
                 />
@@ -47,7 +47,7 @@ const Register = () => {
                     buttonStyle={{
                         borderColor: "#FFFFFF",
                     }}
-                    titleStyle={{ color: "#FFFFFF", fontSize: 20 }}
+                    titleStyle={{ color: "#000000", fontSize: 20 }}
                     title="REGISTRAR"
                     type="outline"
                 />
@@ -56,7 +56,7 @@ const Register = () => {
                         handleNavLogin();
                     }}
                     h4
-                    h4Style={{ color: "#FFFFFF", marginTop: 40 }}
+                    h4Style={{ color: "#000000", marginTop: 40 }}
                 >
                     Faça Login
                 </Text>
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     container: {
-        backgroundColor: "#121212",
+        backgroundColor: "#FFFFFF",
         paddingTop: 80,
         paddingBottom: 60,
         alignItems: "center",
