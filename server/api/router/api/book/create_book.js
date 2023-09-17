@@ -19,7 +19,7 @@ const linkType = async (url) => {
 // Controla todas as rotas de criação de livros
 router.post("/api/book/create_book", async (req, res) => {
 
-    var { titulo, capa, sinopse, paginas, categorias, autor, idioma, data_lancamento, total_estoque } = req.body; // RESERVA TODAS AS VARIAVIS RECEBIDAS
+    var { titulo, capa, sinopse, paginas, categorias, autor, idioma, data_lancamento, total_estoque } = req.body; // RESERVA TODAS AS VARIÁVEIS RECEBIDAS
 
     const dateNow = new Date();
 
@@ -29,11 +29,11 @@ router.post("/api/book/create_book", async (req, res) => {
 
     // VERIFICA VALORES RECEBIDOS
     if (
-        titulo // VERIFICA SE O TITULO NAO ESTÁ VAZIO
-        && sinopse // VERIFICA SE A SINOPSE NAO ESTA VAZIO
+        titulo // VERIFICA SE O TITULO NÃO ESTÁ VAZIO
+        && sinopse // VERIFICA SE A SINOPSE NÃO ESTA VAZIO
     ) {
 
-        // QUERY DE BUSCA, TITULO INDEPENDENTE MAIUSCULA MINUSCULA
+        // QUERY DE BUSCA, TITULO INDEPENDENTE MAIÚSCULA MINÚSCULA
         const queryfind = {
             "titulo": { "$regex": titulo, "$options": "i" }
         };
@@ -46,7 +46,7 @@ router.post("/api/book/create_book", async (req, res) => {
         
         if(read_book.result.length < 1){
             const query = { // CRIA O OBJETO
-                "titulo": titulo, //Regex insensivel maiusculas e minusculas
+                "titulo": titulo, //Regex insensível maiúsculas e minúsculas
                 "capa": capa,
                 "sinopse": sinopse,
                 "paginas": parseInt(paginas),
@@ -65,7 +65,7 @@ router.post("/api/book/create_book", async (req, res) => {
             // VERIFICA SE EXITES VALORES DUPLICADOS
             if (createBook.keyValue) {
     
-                // PASSOU NA VARREDURA MAIS ENCONTROU ERRRO [ CHAVES DUPLICADAS ]
+                // PASSOU NA VARREDURA MAS ENCONTROU ERRO [ CHAVES DUPLICADAS ]
                 res.status(401).json({
                     "codigo": process.env.CODE_FAIL,
                     "resposta": process.env.MSG_SUCCESS_FAIL,
@@ -88,7 +88,7 @@ router.post("/api/book/create_book", async (req, res) => {
             }
         }
 
-        // REPROVOU NA VARREDURA DE VALORES JA EXISTENTES
+        // REPROVOU NA VARREDURA DE VALORES JÁ EXISTENTES
         res.status(401).json({
             "codigo": process.env.CODE_FAIL,
             "resposta": process.env.MSG_SUCCESS_FAIL,
@@ -102,7 +102,7 @@ router.post("/api/book/create_book", async (req, res) => {
         res.status(401).json({
             "codigo": process.env.CODE_FAIL,
             "resposta": process.env.MSG_FAIL,
-            "mensagem": "Os dados informados nao segue o padrao do sistema, revise-os e tente novamente",
+            "mensagem": "Os dados informados não segue o padrão do sistema, revise-os e tente novamente",
             "data_base": ""
         });
         return true;
@@ -112,7 +112,7 @@ router.post("/api/book/create_book", async (req, res) => {
 });
 
 // *************** ALL ***************
-// Mensagem de erro personalizada para rotas nao existemte apartir de /create_book
+// Mensagem de erro personalizada para rotas não existemte a partir de /create_book
 router.all("/api/user/create_book*", async (req, res) => {
 
     res.status(404).json({
