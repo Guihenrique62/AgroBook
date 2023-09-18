@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
-import { Input, Button, Text, Icon } from "@rneui/themed";
+import { Icon } from "@rneui/themed";
 import { View, StyleSheet, ScrollView, TextInput } from "react-native";
 
 const Home = () => {
