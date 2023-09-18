@@ -69,8 +69,6 @@ router.delete("/api/book/delete_book", async (req, res) => {
     const shell_command = new commands(); // CRIA UM CONSTRUTOR
     const deleteData = await shell_command.commandDeleteData('books', 'livros', filter); // EXECULTA A FUNÇÃO QUE EXCLUE O REGISTRO NO MONGODB
 
-    console.log(deleteData["result"]["deletedCount"]);
-
     // VERIFICA SE NÃO APAGOU NENHUM REGISTRO
     if (!deleteData["result"]["deletedCount"]) {
 
