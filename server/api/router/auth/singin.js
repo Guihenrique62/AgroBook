@@ -5,24 +5,24 @@ EMAIL: jeantng2016@gmail.com
 */
 
 const express = require("express"); // EXTRAI O MODULO DO EXPRESS
-var router = express.Router(); // EXTRAR O MODULO DE ROTAS
-const bcrypt = require("bcryptjs"); // EXTRAR O MODULO PARA CRIPTOGRAFAR
-const jwt = require("jsonwebtoken"); // EXTRAR O MODULO JSON WEB TOKEN PARA CRIPTOGRAFAR SESSÃO
-const md5 = require('md5'); // EXTRAR O MODULO MD5 PARA CRIPTOGRAFAR SENHA
-const session = require('express-session'); // EXTRAI MODULO PARA CONTROLAR SESSOES NO EXPRESS
-const check_user = require('../../middleware/jwt/jwt'); // EXTRAIR FUNÇOES PARA MANIPULAR O JWT
-const command = require('../../middleware/mongoDb/command/commands'); // EXTRAR OS COMANDOS NO MONGODB
-const { validate } = require("email-validator"); // EXTRAI BIBLIOTECA PARA VALIDAR EMAIL
-require('dotenv').config(); // SOLICITA AS VARIAVEIS DE AMBIENTE
+var router = express.Router(); // EXTRAI O MODULO DE ROTAS
+const bcrypt = require("bcryptjs"); // EXTRAI O MODULO PARA CRIPTOGRAFAR
+const jwt = require("jsonwebtoken"); // EXTRAI O MODULO JSON WEB TOKEN PARA CRIPTOGRAFAR SESSÃO
+const md5 = require('md5'); // EXTRAI O MODULO MD5 PARA CRIPTOGRAFAR SENHA
+const session = require('express-session'); // EXTRAI MODULO PARA CONTROLAR SESSÕES NO EXPRESS
+const check_user = require('../../middleware/jwt/jwt'); // EXTRAI FUNÇÕES PARA MANIPULAR O JWT
+const command = require('../../middleware/mongoDb/command/commands'); // EXTRAI OS COMANDOS NO MONGO DB
+const { validate } = require("email-validator"); // EXTRAI BIBLIOTECA PARA VÁLIDAR EMAIL
+require('dotenv').config(); // SOLICITA AS VARIÁVEIS DE AMBIENTE
 
 // *************** DLC [ GERAR HASH ] ***************
-// Essa arrow function recebe os dados do usuario e gerar um hash usando [ JWT + BCRYPT ] com validade de acordo com o perfil do usuario
+// Essa arrow function recebe os dados do usuário e gerar um hash usando [ JWT + BCRYPT ] com validade de acordo com o perfil do usuário
 const gerarHash = async (email, senha, user, req) => {
 
     const saltRounds = 10; // TOTAL DE NUMEROS PARA O HASH
     var expirateSessionUserMongo;
     
-    // TENTA DEFINIR A EXPIRACAO DA SENHA VIA MONGO DB
+    // TENTA DEFINIR A EXPIRAÇÃO DA SENHA VIA MONGO DB
     try {
         expirateSessionUserMongo = user["expiracao_sessao"];
     }catch (x) {
@@ -32,10 +32,10 @@ const gerarHash = async (email, senha, user, req) => {
     // CRIPTOGRAFA O EMAIL E SENHA
     return bcrypt.hash(email + '+' + senha, saltRounds).then(function (hash) {
 
-        // FAZ A COMPARAÇÃO DO HASH A FIM DE VERIFICAR SE E VALIDO
+        // FAZ A COMPARAÇÃO DO HASH A FIM DE VERIFICAR SE E VÁLIDO
         return bcrypt.compare(email + '+' + senha, hash).then(function (result) {
 
-            // SALVA NOS COKIES O HASH CASO SEJA VALIDO
+            // SALVA NOS COKIES O HASH CASO SEJA VÁLIDO
             if (result) {
 
                 var token = jwt.sign({
@@ -70,16 +70,16 @@ const gerarHash = async (email, senha, user, req) => {
 router.post("/auth/singin", async (req, res) => {
 
     const check_data = new check_user(); // CRIA UM CONSTRUTOR
-    const result = await check_data.check(req); // EXECULTA A FUNÇÃO DENTRO DO CONTRUTOR
+    const result = await check_data.check(req); // EXECUTA A FUNÇÃO DENTRO DO CONTRUTOR
     var cookieData = result[0]['validToken']; // RESERVA O VALOR RECEBIDO
 
     const { email, senha } = req.body; // RECUPERA OS DADOS DO BODY
 
     const newPassword = md5(process.env.PWD_PREFIX + senha); // CONVERTE A SENHA PARA O FORMATO EM PREFIXO + MD5 
 
-    const emailValidate = validate(email); // VALIDA SE O EMAIL E VALIDO OU NAO USANDO BIBLIOCA EXTERNA
+    const emailValidate = validate(email); // VÁLIDA SE O EMAIL E VÁLIDO OU NÃO USANDO BIBLIOCA EXTERNA
 
-    // VERIFICA SE O EMAIL RECEBIDO E INVALIDO
+    // VERIFICA SE O EMAIL RECEBIDO E INVÁLIDO
     if (!emailValidate) {
 
         res.status(401).json({
@@ -116,7 +116,7 @@ router.post("/auth/singin", async (req, res) => {
 
     }
 
-    // VERIFICA SE O USUARIO ESTA COM STATUS [ 0 ]
+    // VERIFICA SE O USUÁRIO ESTA COM STATUS [ 0 ]
     if (readData["result"][0]["status"] === 0) { // VERIFICA SE RECEBEU UM ATRIBUTO [ status ] COMO [ 0 ]
 
         res.status(401).json({
@@ -131,7 +131,7 @@ router.post("/auth/singin", async (req, res) => {
 
     const hash = await gerarHash(email, newPassword, readData["result"][0], req); // PASSA OS PARAMETROS PARA UMA ARROW FUCTION QUE GERAR UM HASH USANDO [ JWT + BCRYPT ]
     
-    // VERIFICA SE O USUARIO JÁ ESTA LOGADO
+    // VERIFICA SE O USUÁRIO JÁ ESTA LOGADO
     if (cookieData["hash_mail_pass"] !== "false") {
 
         res.status(200).json({
@@ -156,14 +156,14 @@ router.post("/auth/singin", async (req, res) => {
 });
 
 // *************** POST ***************
-// Controla todas as entradas de validacao da autenticação
+// Controla todas as entradas de validação da autenticação
 router.post("/auth/singin/valid", async (req, res) => {
 
     const check_data = new check_user(); // CRIA UM CONSTRUTOR
-    const result = await check_data.check(req); // EXECULTA A FUNÇÃO DENTRO DO CONTRUTOR
+    const result = await check_data.check(req); // EXECULTA A FUNÇÃO DENTRO DO CONSTRUTOR
     var cookieData = result[0]['validToken']; // RESERVA O VALOR RECEBIDO
 
-    // VERIFICA SE O USUARIO ESTA DESLOGADO
+    // VERIFICA SE O USUÁRIO ESTA DESLOGADO
     if (cookieData["hash_mail_pass"] == "false") {
 
         res.status(401).json({
@@ -188,28 +188,28 @@ router.post("/auth/singin/valid", async (req, res) => {
 });
 
 // *************** DELETE ***************
-// Controla todas as entradas de exclusao da sessao
+// Controla todas as entradas de exclusão da sessão
 router.delete("/auth/singin/logout", async (req, res) => {
 
-    req.session = null; // LIMPA SESSAO SALVA
+    req.session = null; // LIMPA SESSÃO SALVA
 
     res.status(200).json({
         "codigo": process.env.CODE_SUCCESS,
         "resposta": process.env.MSG_SUCCESS,
-        "mensagem": "A sessao foi desconectada com sucesso",
+        "mensagem": "A sessão foi desconectada com sucesso",
         "data_base": ""
     });
 
 });
 
 // *************** ALL ***************
-// Mensagem de erro personalizada para rotas nao existemte apartir de /singin
+// Mensagem de erro personalizada para rotas não existente apartir de /singin
 router.all("/auth/singin*", async (req, res) => {
 
     res.status(404).json({
         "codigo": process.env.CODE_FAIL,
         "resposta": process.env.MSG_SUCCESS_FAIL,
-        "mensagem": `O link expirou ou não existe, experimente acessar a documentacao da API em ${process.env.HOST_API_DOC}/doc/singin`,
+        "mensagem": `O link expirou ou não existe, experimente acessar a documentação da API em ${process.env.HOST_API_DOC}/doc/singin`,
         "data_base": ""
     });
 
