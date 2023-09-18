@@ -4,7 +4,8 @@ import Routes from "./src/routes";
 export default function App() {
     return (
         <>
-            <StatusBar backgroundColor="#0e91e3" style="light" />
+            {/* <StatusBar backgroundColor="#52f6af" style="dark" /> */}
+            <StatusBar backgroundColor="#000" style="light" />
             <Routes />
         </>
     );

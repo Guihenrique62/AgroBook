@@ -9,8 +9,8 @@ var router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const md5 = require('md5');
-const check_user = require('../../middleware/auth/jwt_mongodb'); // PUXA FUNCAO QUE VALIDA SESSAO DO USUARIO
-const command = require('../../middleware/mongoDb/command/commands'); // EXTRAR OS COMANDOS NO MONGODB
+const check_user = require('../../middleware/auth/jwt_mongodb'); // PUXA FUNÇÃO QUE VÁLIDA SESSÃO DO USUÁRIO
+const command = require('../../middleware/mongoDb/command/commands'); // EXTRAI OS COMANDOS NO MONGO DB
 require('dotenv').config();
 
 // *************** SAVE LOG ***************
@@ -18,7 +18,7 @@ require('dotenv').config();
 const saveLog = async (obj) => {
 
     const shell_commands = new command(); // CRIA UM CONSTRUTOR
-    const insertData = await shell_commands.commandCreateData('books', 'log', obj); // EXECULTA COMANDO DE CRIAR REGISTRO
+    const insertData = await shell_commands.commandCreateData('books', 'log', obj); // EXECUTA COMANDO DE CRIAR REGISTRO
     return true;
 
 }
@@ -35,17 +35,17 @@ router.get("/", async (req, res) => {
 });
 
 // *************** ALL ***************
-// Controla todas as entrada de api de usuario
+// Controla todas as entrada de api de usuário
 router.all("/api/user*", async (req, res, next) => {
 
-    const check_data = new check_user(); // CRIA O CONTRUTOR
-    const result = await check_data.initSyncSingIn(req); // EXECUTA A FUNCAO DO CONSTRUTOR
+    const check_data = new check_user(); // CRIA O CONSTRUTOR
+    const result = await check_data.initSyncSingIn(req); // EXECUTA A FUNÇÃO DO CONSTRUTOR
     const cookieData = result[0]['validToken']; // RECUPERA OS DADOS DA FUNÇÃO
 
-    // VERIFICA SE O USUARIO NÃO É ADMIN
+    // VERIFICA SE O USUÁRIO NÃO É ADMIN
     if (cookieData["cargo"] !== 0) {
         
-        res.status(401).json({
+        res.status(405).json({
             "codigo": process.env.CODE_FAIL,
             "resposta": process.env.MSG_SUCCESS_FAIL,
             "mensagem": "O seu login não tem permissão para realizar essa tarefa, contate o administrador para acessar esse recurso",
@@ -62,8 +62,8 @@ router.all("/api/user*", async (req, res, next) => {
 // Controla todas as entrada de api
 router.all("/api*", async (req, res, next) => {
 
-    const check_data = new check_user(); // CRIA O CONTRUTOR
-    const result = await check_data.initSyncSingIn(req); // EXECUTA A FUNCAO DO CONSTRUTOR
+    const check_data = new check_user(); // CRIA O CONSTRUTOR
+    const result = await check_data.initSyncSingIn(req); // EXECUTA A FUNÇÃO DO CONSTRUTOR
     const cookieData = result[0]['validToken']; // RECUPERA OS DADOS DA FUNÇÃO
 
     var obj = {}; // CRIA UM OBJETO VAZIO PARA SALVAR NO MONGO DB
@@ -82,7 +82,7 @@ router.all("/api*", async (req, res, next) => {
 
     await saveLog(obj);
     
-    // VERIFICA SE O USUARIO ESTA DESLOGADO
+    // VERIFICA SE O USUÁRIO ESTA DESLOGADO
     if (cookieData["hash_mail_pass"] == "false") {
 
         res.status(401).json({
@@ -96,7 +96,7 @@ router.all("/api*", async (req, res, next) => {
 
     }
 
-    // VERIFICA SE O USUARIO PRECISA RESETAR A SENHA
+    // VERIFICA SE O USUÁRIO PRECISA RESETAR A SENHA
     if (cookieData["resetar_senha"] == 1) {
 
         res.status(403).json({

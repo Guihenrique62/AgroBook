@@ -5,13 +5,13 @@ EMAIL: jeantng2016@gmail.com
 */
 
 const express = require("express"); // EXTRAI O MODULO DO EXPRESS
-var router = express.Router(); // EXTRAR O MODULO DE ROTAS
+var router = express.Router(); // EXTRAI O MODULO DE ROTAS
 const md5 = require('md5'); // EXTRAI O MODULO MD5 PARA CRIPTOGRAFAR SENHA
-const commands = require('../../../middleware/mongoDb/command/commands'); // EXTRAR OS COMANDOS NO MONGODB
-require('dotenv').config(); // SOLICITA AS VARIAVEIS DE AMBIENTE
+const commands = require('../../../middleware/mongoDb/command/commands'); // EXTRAI OS COMANDOS NO MONGO DB
+require('dotenv').config(); // SOLICITA AS VARIÁVEIS DE AMBIENTE
 
 // *************** POST ***************
-// Controla todas as rotas de listagem e login de usuario
+// Controla todas as rotas de listagem e login de usuário
 router.post("/api/user/update_user", async (req, res) => {
 
     const { filter, newValue } = req.body; // RESERVA VALORES DO BODY
@@ -31,7 +31,7 @@ router.post("/api/user/update_user", async (req, res) => {
 
     }
 
-    // VERIFICA SE A VARIAVEL FILTER ESTÁ VAZIA
+    // VERIFICA SE A VARIÁVEL FILTER ESTÁ VAZIA
     if (!filter || Object.keys(filter).length === 0 || typeof (filter) !== `object`) {
 
         res.status(401).json({
@@ -57,7 +57,7 @@ router.post("/api/user/update_user", async (req, res) => {
 
     }
 
-    // VERIFICA SE FOI SOLICITADO A ALTERACAO DO ID
+    // VERIFICA SE FOI SOLICITADO A ALTERAÇÃO DO ID
     if (newValue["_id"] || newValue["id"]) {
 
         res.status(401).json({
@@ -70,7 +70,7 @@ router.post("/api/user/update_user", async (req, res) => {
 
     }
 
-    // VERIFICA SE FOI SOLICIATADO A ALTERACAO DO EMAIL
+    // VERIFICA SE FOI SOLICIATADO A ALTERAÇÃO DO EMAIL
     if (newValue["email"]) {
 
         res.status(401).json({
@@ -83,7 +83,7 @@ router.post("/api/user/update_user", async (req, res) => {
 
     }
 
-    // VERIFICA SE FOI SOLICITADO A ALTERACAO DO DOCUMENTO
+    // VERIFICA SE FOI SOLICITADO A ALTERAÇÃO DO DOCUMENTO
     if (newValue["documento"]) {
 
         res.status(401).json({
@@ -97,7 +97,7 @@ router.post("/api/user/update_user", async (req, res) => {
     }
 
     const shell_commands = new commands(); // CRIA O CONSTRUTOR
-    const updateUser = await shell_commands.commandUpadateData('books', 'usuarios', filter, newValue); // INICIAR A FUNCAO ATUALIZAR REGISTRO NO MONGO DB
+    const updateUser = await shell_commands.commandUpadateData('books', 'usuarios', filter, newValue); // INICIAR A FUNÇÃO ATUALIZAR REGISTRO NO MONGO DB
 
     // VERIFICA EXISTE VALORES DUPLICADOS
     if (updateUser["keyValue"]) {
@@ -135,13 +135,13 @@ router.post("/api/user/update_user", async (req, res) => {
 });
 
 // *************** ALL ***************
-// Mensagem de erro personalizada para rotas não existemte apartir de /update_user
+// Mensagem de erro personalizada para rotas não existente apartir de /update_user
 router.all("/api/user/update_user*", async (req, res) => {
 
     res.status(404).json({
         "codigo": process.env.CODE_FAIL,
         "resposta": process.env.MSG_SUCCESS_FAIL,
-        "mensagem": `O linkk expirou ou não existe, experimente acessar a documentacao da API em ${process.env.HOST_API_DOC}/doc/update_user`,
+        "mensagem": `O linkk expirou ou não existe, experimente acessar a documentação da API em ${process.env.HOST_API_DOC}/doc/update_user`,
         "data_base": ""
     });
 

@@ -21,19 +21,19 @@ app.use(ROUTER_AUTH_SINGIN);
 /************* AUTH [ END ] *************/
 
 /************* USER [ START ] *************/
-/* ROUTER CREATE USER - Controla todas as entradas de criação de usuario */
+/* ROUTER CREATE USER - Controla todas as entradas de criação de usuário */
 var ROUTER_CREATE_USER = require('./router/api/user/create_user');
 app.use(ROUTER_CREATE_USER);
 
-/* ROUTER READ USER - Controla todas as entradas de listagem de usuarios */
+/* ROUTER READ USER - Controla todas as entradas de listagem de usuários */
 var ROUTER_READ_USER = require('./router/api/user/read_user');
 app.use(ROUTER_READ_USER);
 
-/* ROUTER UPDATE USER - Controla todas as entradas de atualizacao de usuario */
+/* ROUTER UPDATE USER - Controla todas as entradas de atualizações de usuário */
 var ROUTER_UPDATE_USER = require('./router/api/user/update_user');
 app.use(ROUTER_UPDATE_USER);
 
-/* ROUTER DELETE USER - Controla todas as ordem de apagar usuario */
+/* ROUTER DELETE USER - Controla todas as ordem de apagar usuário */
 var ROUTER_DELETE_USER = require('./router/api/user/delete_user');
 app.use(ROUTER_DELETE_USER);
 /************* USER [ END ] *************/
@@ -44,12 +44,21 @@ var ROUTER_BOOKS_CREATE = require('./router/api/book/create_book');
 app.use(ROUTER_BOOKS_CREATE);
 
 /* ROUTER READ BOOK - Controla todas as entradas de listagem de livros */
-var ROUTER_READ_BOOK = require('./router/api/book/read_book');
+var ROUTER_READ_BOOK = require('./router/api/book/list_book');
 app.use(ROUTER_READ_BOOK);
+
+/* ROUTER UPDATE BOOK - Controla todas as entradas de atualizações de livros */
+var ROUTER_UPDATE_BOOK = require('./router/api/book/update_book');
+app.use(ROUTER_UPDATE_BOOK);
+
+/* ROUTER DELETE BOOK - Controla todas as ordem de apagar Livros */
+var ROUTER_DELETE_BOOK = require('./router/api/book/delete_book');
+app.use(ROUTER_DELETE_BOOK);
+
 /************* BOOKS [ END ] *************/
 
 /************* TRELLO [ START ] *************/
-/* ROUTER TRELLO CARD UPDATE - Controla todas as entradas de alteracao no trello */
+/* ROUTER TRELLO CARD UPDATE - Controla todas as entradas de alterações no trello */
 var ROUTER_TRELLO_CARD_UPDATE = require('./router/api/trello/card_update');
 app.use(ROUTER_TRELLO_CARD_UPDATE);
 /************* TRELLO [ END ] *************/

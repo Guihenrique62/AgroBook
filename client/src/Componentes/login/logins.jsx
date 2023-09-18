@@ -6,18 +6,16 @@ import { useNavigate } from "react-router-dom";
 import Menu from "./routes/menu";
 
 export default function Tela_de_Login() {
-  var [email, setEmail] = useState("");
-  var [senha, setSenha] = useState("");
-  var [add, setAdd] = useState([]);
-  var [mensagem, setMessage] = useState();
-  var [trocar, setTrocar] = useState([]);
-  
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+  const [add, setAdd] = useState([]);
+  const [mensagem, setMessage] = useState([]);
 
   // valida
   let validLogin = async (e) => {
     e.preventDefault();
-    const addEmail = email;
-    const addSenha = senha;
+    var addEmail = email;
+    var addSenha = senha;
     setAdd = [...add, { adcionarEmail: addEmail, adcionarSenha: addSenha }];
     setSenha = "";
     setEmail = "";
@@ -136,10 +134,7 @@ export default function Tela_de_Login() {
 
       {senha.length !== 8 ? <p>AH senha deve ter 8 digitos </p> : ""}
 
-      <div>{mensagem ? mensagem : "null"}</div>
-
-      <Validar ok={trocar} />
-      
+      <div>{ <Link to={"/validar"}>{mensagem ? mensagem : "null"}</Link> }</div>
     </form>
   );
 }
