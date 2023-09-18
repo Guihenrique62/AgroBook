@@ -8,6 +8,7 @@ import { createBrowserRouter,RouterProvider,Router} from 'react-router-dom'
 import Validar from './Componentes/login/routes/validar.jsx'
 import Tela_de_Login from './Componentes/login/logins.jsx'
 import Teste from './Componentes/login/texte.jsx'
+import Menu from './Componentes/login/routes/menu.jsx'
 
 const router = createBrowserRouter([
    {element: <App/>,
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
         {
            path:"/test",
            element: <Teste/>
+        },
+        {
+          path:"/menu",
+          element: <Menu/>
         }
        
 

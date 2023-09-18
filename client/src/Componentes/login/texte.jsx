@@ -43,33 +43,50 @@ export default function Teste() {
     e.preventDefault();
 
     try {
-      let data = JSON.stringify({
+      let data = {
         email: "fillypecunha@gmail.com",
         senha: "12345678",
-      });
-
-      let config = {
-        method: "post",
-        maxBodyLength: Infinity,
-        url: "http://20.226.73.46:57601/auth/singin",
-        headers: {
-          "Content-Type": "application/json",
-        },
       };
 
-      // await axios
-      //   .request(config)
-      //   .then((response) => {
-      //     console.log(JSON.stringify(response.data));
-      //   })
-      //   .catch((error) => {
-      //     console.log(error);
-      //   });
-      axios.post("http://20.226.73.46:57601/auth/singin", data, {
-        withCredentials: true,
-      });
+      const resposta = await axios.post(
+        "http://localhost:57601/auth/singin",
+        data,
+        {
+          withCredentials: true,
+        }
+      );
     } catch (err) {
       console.log(err);
+    }
+  };
+
+  // LISTAR USUARIOS
+  let listUsers = async (e) => {
+    e.preventDefault();
+
+    try {
+      let data = {
+        filter: {
+          email: { $regex: "a", $options: "i" },
+          resetar_senha: 1,
+        },
+        sort: {
+          _id: -1,
+        },
+        limit: 10,
+      };
+
+      const resposta = await axios.post(
+        "http://localhost:57601/api/user/list_user",
+        data,
+        {
+          withCredentials: true,
+        }
+      );
+
+      console.log(resposta);
+    } catch (err) {
+      console.log(err.response.status, err.response.data.mensagem);
     }
   };
 
@@ -99,11 +116,16 @@ export default function Teste() {
 
         <div className="message">{message ? <p>{message}</p> : null}</div>
       </form>
-      <form onSubmit={validLogin}>
-        <button type="submit">Create</button>
 
-        <div className="message">{message ? <p>{message}</p> : null}</div>
+      <form onSubmit={validLogin}>
+        <button type="submit">Validar</button>
       </form>
+
+      <form onSubmit={listUsers}>
+        <button type="submit">Listar usuarios</button>
+      </form>
+
+      <div className="message">{message ? <p>{message}</p> : null}</div>
     </div>
   );
 }
