@@ -16,8 +16,21 @@ const { validate } = require("email-validator"); // EXTRAI BIBLIOTECA PARA VÁLI
 require('dotenv').config(); // SOLICITA AS VARIÁVEIS DE AMBIENTE
 
 // *************** ALL ***************
+// Controla a atualização e resete de senha
+router.post("/auth/reset/password", async (req, res) => {
+
+    res.status(404).json({
+        "codigo": process.env.CODE_FAIL,
+        "resposta": process.env.MSG_SUCCESS_FAIL,
+        "mensagem": `O link expirou ou não existe, experimente acessar a documentação da API em ${process.env.HOST_API_DOC}/doc/singin`,
+        "data_base": ""
+    });
+
+});
+
+// *************** ALL ***************
 // Mensagem de erro personalizada para rotas não existente apartir de /password
-router.all("/auth/resete/password*", async (req, res) => {
+router.all("/auth/reset/password*", async (req, res) => {
 
     res.status(404).json({
         "codigo": process.env.CODE_FAIL,
