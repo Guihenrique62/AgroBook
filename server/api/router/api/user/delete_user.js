@@ -65,7 +65,7 @@ router.delete("/api/user/delete_user", async (req, res) => {
     } 
     
     const shell_command = new commands(); // CRIA UM CONSTRUTOR
-    const deleteData = await shell_command.commandDeleteData('books', 'usuarios', filter); // EXECULTA A FUNÇÃO QUE EXCLUI O REGISTRO NO MONGO DB
+    const deleteData = await shell_command.commandDeleteData('books', 'usuarios', filter); // EXECUTA A FUNÇÃO QUE EXCLUI O REGISTRO NO MONGO DB
 
     console.log(deleteData["result"]["deletedCount"]);
 
