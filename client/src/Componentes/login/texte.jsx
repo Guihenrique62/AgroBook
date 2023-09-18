@@ -54,24 +54,50 @@ export default function Teste() {
     e.preventDefault();
 
     try {
-
       let data = {
-        email: "jeantng2016@gmail.com",
-        senha: "nova@trocar123",
+        email: "fillypecunha@gmail.com",
+        senha: "12345678",
       };
 
-      await axios.post('http://localhost:57601/auth/singin', data, {
-        withCredentials: true
-      }).then((res) => {
-        setMessage(`status: ${res.status} ${res.data.mensagem}`);
-      })
-        .catch((err) => {
-          setMessage(`status: ${err.response.status} ${err.response.data.mensagem}`);
-        });
-
-
+      const resposta = await axios.post(
+        "http://localhost:57601/auth/singin",
+        data,
+        {
+          withCredentials: true,
+        }
+      );
     } catch (err) {
       console.log(err);
+    }
+  };
+
+  // LISTAR USUARIOS
+  let listUsers = async (e) => {
+    e.preventDefault();
+
+    try {
+      let data = {
+        filter: {
+          email: { $regex: "a", $options: "i" },
+          resetar_senha: 1,
+        },
+        sort: {
+          _id: -1,
+        },
+        limit: 10,
+      };
+
+      const resposta = await axios.post(
+        "http://localhost:57601/api/user/list_user",
+        data,
+        {
+          withCredentials: true,
+        }
+      );
+
+      console.log(resposta);
+    } catch (err) {
+      console.log(err.response.status, err.response.data.mensagem);
     }
   };
 
@@ -102,16 +128,14 @@ export default function Teste() {
       </form>
 
       <form onSubmit={validLogin}>
-        <button type="submit">Valida</button>
+        <button type="submit">Validar</button>
       </form>
 
-      <form onSubmit={listarUsuarios}>
-        <button type="submit">Listar usuários</button>
+      <form onSubmit={listUsers}>
+        <button type="submit">Listar usuarios</button>
       </form>
-
 
       <div className="message">{message ? <p>{message}</p> : null}</div>
-
     </div>
   );
 }

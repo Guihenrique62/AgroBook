@@ -1,15 +1,21 @@
 import { useState } from 'react'
 import Tela_de_Login from './Componentes/login/logins'
-import { Outlet } from 'react-router-dom'
-import Teste from './Componentes/login/texte'
+import { Outlet, Router } from 'react-router-dom'
+import Menu from './Componentes/login/routes/menu'
+import Validar from './Componentes/login/routes/validar'
+
+
 
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  
   return (
     <>
-   <Teste/>
+    
+    <Outlet/>
+    <Validar/>
+    
+  
     </>
   )
 }
