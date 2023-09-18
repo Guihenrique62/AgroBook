@@ -1,109 +1,42 @@
-import { useState , useEffect} from "react";
-import axios from "axios";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 import Validar from "./routes/validar";
-import { useNavigate } from "react-router-dom";
-import Menu from "./routes/menu";
+import React from "react";
+import Login from "../../controllers/Login";
+import swal from "sweetalert";
+import error from "../error/error";
 
 export default function Tela_de_Login() {
-  const [email, setEmail] = useState("");
-  const [senha, setSenha] = useState("");
-  const [add, setAdd] = useState([]);
-  const [mensagem, setMessage] = useState([]);
+  let [email, setEmail] = useState("");
+  let [senha, setSenha] = useState("");
+  let [status, setStatus] = useState(0);
+  let [mensgaemRetornada, setmensgaemRetornada] = useState();
+  let[trocar, setTrocar]=useState()
 
-  // valida
-  let validLogin = async (e) => {
+  // RELAIZA O LOGIN
+  let handleSubmit = (e) => {
     e.preventDefault();
-    var addEmail = email;
-    var addSenha = senha;
-    setAdd = [...add, { adcionarEmail: addEmail, adcionarSenha: addSenha }];
-    setSenha = "";
-    setEmail = "";
+    const res = Login(email, senha);
+    res
+      .then((res) => {
+        setmensgaemRetornada(res.data.mensagem);
+        setStatus(res.status);
+      })
+      .catch((err) => {
+        setmensgaemRetornada("err");
+        setTrocar(err.status);
+        
+        console.log(err);
 
-    try {
-      let data = "";
+      });
+  };
 
-      let config = {
-        method: "post",
-        maxBodyLength: Infinity,
-        withCredentials: true,
-        url: "http://20.226.73.46:57601/auth/singin/valid",
-        headers: {
-          Accept: "*/*",
-        },
-        data: data,
-      };
-      axios
-        .request(config)
-        .then((response) => {
-          console.log((JSON.stringify(response.data)));
-          
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    } catch (err) {
-      console.log(err);
+  const validStatus = () => {
+    if (status === 200 || 0 || "200") {
+      return mensgaemRetornada;
+    } else {
+      return swal("Oops!", "Something went wrong!", "error");
     }
   };
-
-  
-
-  //realiza login
-  let handleSubmit = async (e) => {
-    e.preventDefault();
-    // REDEFINE A MENSAGEM QUE APARECE PARA O USUARIO
-    setEmail("");
-    setSenha("");
-    setMessage("");
-    try {
-      let data = JSON.stringify({
-        email: email,
-        senha: senha,
-      });
-
-      let config = {
-        method: "post",
-        maxBodyLength: Infinity,
-        withCredentials: true,
-        url: "http://localhost:57601/auth/singin",
-        headers: {
-          Accept: "*/*",
-          "Content-Type": "application/json",
-        },
-        data: data,
-      };
-      const navegar= useNavigate()
-
-      await axios
-        .request(config)
-        .then((response) => {
-          console.log(response.data.mensagem);
-          setMessage(response.data.mensagem); 
-          //setStatus(response.data.mensagem)
-          const dados = {response:true}
-          if (dados.response) {
-            navegar("/menu")
-          }
-          
-        })
-        .catch((error) => {
-          console.log(error.response.data.mensagem);
-          setMessage(error.response.data.mensagem);
-          setTrocar(error.response.data.mensagem)
-         
-        });
-    } catch (err) {
-      console.log(err);
-    }    
-       
-    
-    validLogin;
-    
-  };
-  
-
-
 
   return (
     <form onSubmit={handleSubmit}>
@@ -114,6 +47,7 @@ export default function Tela_de_Login() {
           name="email"
           id="email"
           value={email}
+          required
           onChange={(ev) => setEmail(ev.target.value)}
         />
       </label>
@@ -127,14 +61,16 @@ export default function Tela_de_Login() {
           maxLength="100"
           // pattern="[A-Z a-z]+"
           value={senha}
+          required
           onChange={(ev) => setSenha(ev.target.value)}
         />
       </label>
       <button type="subimt">Logar</button>
 
-      {senha.length !== 8 ? <p>AH senha deve ter 8 digitos </p> : ""}
-
-      <div>{ <Link to={"/validar"}>{mensagem ? mensagem : "null"}</Link> }</div>
+      <div>
+        {status === 200 || 0 || "200" ? mensgaemRetornada : mensgaemRetornada}
+      </div>
+      <Validar ok={trocar}/>
     </form>
   );
 }
