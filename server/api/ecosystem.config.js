@@ -2,12 +2,12 @@ module.exports = {
   apps: [
     {
       name: "Server | AgroBook",
-      script: "./server/api/main.js",
+      script: "main.js",
       instances: 1,
       log_date_format: "YYYY-MM-DD HH:mm",
       out_file: "/dev/null",
       restart: true,
-      watch: true,
+      watch: false,
       namespace: "Servidor da AgroBook Dev",
     },
     {
