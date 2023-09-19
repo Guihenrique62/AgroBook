@@ -27,7 +27,7 @@ router.post("/webhook/trello/card/update", async (req, res) => {
     }
 
     const shell_commands = new commands(); // CRIA UM CONSTRUTOR
-    const insertLog = await shell_commands.commandCreateData(`books`, `log`, req.body); // EXECULTA A FUNÇÃO QUE LER REGISTRO NO BANCO DE DADOS 
+    const insertLog = await shell_commands.commandCreateData(`books`, `log`, req.body); // EXECUTA A FUNÇÃO QUE LER REGISTRO NO BANCO DE DADOS 
 
     res.status(200).json({
         "codigo": process.env.CODE_SUCCESS,
