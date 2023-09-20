@@ -1,24 +1,23 @@
 import axios from "axios";
 
-export default async function listarUsuario(e) {
-  e.preventDefault();
+export default async function listarUsuario() {
 
   let data = {
     filter: {
-      nome: { $regex: "gui", $options: "i" },
+      email: { $regex: "@", $options: "i" },
     },
     sort: {
       _id: -1,
     },
-    limit: 100,
+    limit: 9999,
   };
 
   await axios
-    .post("http://20.226.73.46:57601/api/user/read_user", data, {
+    .post("http://localhost:57601/api/user/list_user", data, {
       withCredentials: true,
     })
     .then((res) => {
-      console.log(res);
+      return res.data
     })
     .catch((err) => {
       console.log(err);
