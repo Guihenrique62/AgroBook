@@ -24,6 +24,3 @@ export default async function listarUsuario(e) {
       console.log(err);
     });
 }
-
-//depois ver com o Jean tbm :)
-//ok deixa te mostrar um bagulho

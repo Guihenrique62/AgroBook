@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Menu from "./menu";
+import updateUser from "../../../controllers/updateUser";
 
 export default function Validar({ ok }) {
   let [newSenha, setnewSenha] = useState("");
@@ -8,7 +9,6 @@ export default function Validar({ ok }) {
   let [mensageApi, setmensageApi] = useState("");
 
   let createPassowrd = async (ev) => {
-    ev.preventDefalt();
     const novasenha = newSenha;
     setsalvandoSenha = [...salvandoSenha, { adcionarnova: novasenha }];
     setnewSenha("");
@@ -18,7 +18,7 @@ export default function Validar({ ok }) {
   //lista usuarios
   let listUsers = async (e) => {
     e.preventDefault();
-
+ 
     try {
       let data = {
         filter: {
@@ -43,9 +43,11 @@ export default function Validar({ ok }) {
     } catch (err) {
       console.log(err.response.status, err.response.data.mensagem);
     }
+    const updatepass = updateUser(newSenha)
+     updatepass()
   };
 
-  if (ok === 401 ||"Email ou senha incorreto, revise os dados e tente novamente") {
+  if (ok === 401 ) {
     return (
       <div>
         <h2>REDEFINE sua senha</h2>
@@ -63,9 +65,7 @@ export default function Validar({ ok }) {
       </div>
     );
   } else {
-    {
-      <Menu />;
-    }
+    
   }
 }
 //para listar nova senha precisa so da senha nova ou vcs colocaram algo mais? 

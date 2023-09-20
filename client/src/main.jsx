@@ -27,8 +27,12 @@ const router = createBrowserRouter([
       },
       {
         path: "/menu",
-        element: <Menu oks={undefined} />,
+        element: <Menu  />,
       },
+      {
+        path:"/error",
+        element: <Error/>
+      }
     ],
   },
 ]);
