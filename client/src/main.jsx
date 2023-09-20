@@ -8,6 +8,7 @@ import Validar from "./Componentes/login/routes/validar.jsx";
 import Tela_de_Login from "./Componentes/login/logins.jsx";
 import Teste from "./Componentes/login/texte.jsx";
 import Menu from "./Componentes/login/routes/menu.jsx";
+import RegisterUser from "./Componentes/cadastro_usuarios/RegisterUser.jsx";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path:"/error",
         element: <Error/>
+      },
+      {
+        path:'/registerUser',
+        element: <RegisterUser/>
       }
     ],
   },
