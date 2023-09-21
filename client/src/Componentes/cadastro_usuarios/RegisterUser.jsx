@@ -19,7 +19,7 @@ export default function RegisterUser() {
             <input type="text" placeholder='Buscar Livros...' />
             <button><i className='bx bx-search'></i></button>
         </div>
-        <Link to='/registerUser/new'><button>Novo</button></Link>
+        <Link to='/new'><button>Novo</button></Link>
 
 
         <div className="usersContainer">
