@@ -4,11 +4,11 @@ import App from "./App.jsx";
 import { createBrowserRouter, RouterProvider, Router } from "react-router-dom";
 
 //paginas
-import Validar from "./Componentes/login/routes/validar.jsx";
+import Validar from "./Componentes/resetar_senha/validar.jsx"
 import Tela_de_Login from "./Componentes/login/logins.jsx";
 import Teste from "./Componentes/login/texte.jsx";
-import Menu from "./Componentes/login/routes/menu.jsx";
 import RegisterUser from "./Componentes/cadastro_usuarios/RegisterUser.jsx";
+import Home from "./Componentes/tela_inicial/tela_inicial.jsx";
 
 const router = createBrowserRouter([
   {
@@ -27,8 +27,8 @@ const router = createBrowserRouter([
         element: <Teste />,
       },
       {
-        path: "/menu",
-        element: <Menu  />,
+        path: "/home",
+        element: <Home/>,
       },
       {
         path:"/error",

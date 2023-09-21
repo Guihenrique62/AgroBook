@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import Menu from "./menu";
-import updateUser from "../../../controllers/updateUser";
+import updateUser from "../../controllers/updateUser";
 
 export default function Validar({ ok }) {
   let [newSenha, setnewSenha] = useState("");
@@ -58,7 +57,7 @@ export default function Validar({ ok }) {
           id="senha"
           onChange={(ev) => setnewSenha(ev.target.value)}
         />
-        <Link to={"/menu"}>
+        <Link to={"/home"}>
           {" "}
           <button onClick={createPassowrd}> trocar de senha </button>
         </Link>

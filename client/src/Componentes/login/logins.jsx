@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
-import Validar from "./routes/validar";
+
 import React from "react";
 import Login from "../../controllers/Login";
-import swal from "sweetalert";
+
 import error from "../error/error";
-import Menu from "./routes/menu";
 import { Link, Navigate, redirect } from "react-router-dom";
 import Error from "../error/error";
 import { Routes, Route } from "react-router-dom";
+import Validar from "../resetar_senha/validar";
 
 export default function Tela_de_Login() {
   let [email, setEmail] = useState("");
@@ -70,8 +70,8 @@ export default function Tela_de_Login() {
       <div>
         {status === 200 || 0 || "200" ? mensgaemRetornada : mensgaemRetornada}
       </div>
-      <Validar ok={mensgaemRetornada} />
-      {status === 200  ? <Navigate to="/menu" /> : "teste"}
+    <Validar ok={mensgaemRetornada}/>
+      {status === 200  ? <Navigate to="/home" /> : "teste"}
     </form>
   );
 }

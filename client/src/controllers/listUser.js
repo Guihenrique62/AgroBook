@@ -6,6 +6,7 @@ export default async function listarUsuario(e) {
   let data = {
     filter: {
       nome: { $regex: "gui", $options: "i" },
+      //categoria: ['romance']
     },
     sort: {
       _id: -1,
