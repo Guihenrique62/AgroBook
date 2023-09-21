@@ -2,19 +2,21 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import extractInitials from './scripts/extractInitials';
 
-export default function MenuLateral({ actualPath, user, isOpen }) {
+export default function MenuLateral({user, isOpen, setIsOpen}) {
+  
   if (isOpen) {
 
     //VALIDA SE OS PARAMETROS FORAM PASSADOS
-    if (!actualPath || !user) {
+    if (!setIsOpen || !user) {
       console.error('um ou mais parametros não atribuidos Menu Lateral')
+      return
     }
 
     const InitialsName = extractInitials(user.nome); //retorna as iniciais do Nome
     return (
       <div>
         <div>
-          <Link to={actualPath}><img src="/x-icon.png" alt="close-icon" /></Link> {/*Fechar modal redirecionando para o path atual em q se encontra */}
+          <button onClick={()=> setIsOpen(false)}><i className='bx bx-x'></i></button> {/*Fechar modal redirecionando para o path atual em q se encontra */}
           
           <div className="perfilContainer"><p>{InitialsName}</p></div>
           <p>{user.nome}</p> {/*Nome do Usuário */}
