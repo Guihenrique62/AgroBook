@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-
+import './stylizationLogin/login.css'
 import React from "react";
 import Login from "../../controllers/Login";
 
@@ -39,8 +39,8 @@ export default function Tela_de_Login() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="">
+    <form className="login-form" onSubmit={handleSubmit}>
+      <label  htmlFor="">
         <p>Email:</p>
         <input
           type="email"
