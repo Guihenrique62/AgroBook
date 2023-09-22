@@ -6,12 +6,12 @@ export default function MenuLateral({user, isOpen, setIsOpen}) {
   
   if (isOpen) {
 
+   
     //VALIDA SE OS PARAMETROS FORAM PASSADOS
     if (!setIsOpen || !user) {
       console.error('um ou mais parametros não atribuidos Menu Lateral')
       return
     }
-
     const InitialsName = extractInitials(user.nome); //retorna as iniciais do Nome
     return (
       <div>

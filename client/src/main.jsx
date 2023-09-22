@@ -4,7 +4,12 @@ import App from "./App.jsx";
 import { createBrowserRouter, RouterProvider, Router } from "react-router-dom";
 
 //paginas
-
+import RegisterUser from './Componentes/cadastro_usuarios/RegisterUser.jsx'
+import Home from './Componentes/tela_inicial/tela_inicial.jsx'
+import Texte from './Componentes/login/texte.jsx'
+import Validar from './Componentes/resetar_senha/validar.jsx'
+import Tela_de_Login from "./Componentes/login/logins.jsx";
+import createUser from "./Componentes/cadastro_usuarios/createUser.jsx";
 
 const router = createBrowserRouter([
   {
@@ -20,7 +25,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/test",
-        element: < />,
+        element: <Texte/>,
       },
       {
         path: "/home",
@@ -29,7 +34,13 @@ const router = createBrowserRouter([
       {
         path:'/registerUser',
         element: <RegisterUser/>,
-        children: 
+        children: [
+          {
+            path: 'registerUser/new',
+            element: <createUser/>
+          }
+        ]
+        
       }
     ],
   },
