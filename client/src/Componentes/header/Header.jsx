@@ -20,7 +20,7 @@ export default function Header({ user, search }) {
 
             <Link to={'/menu'}> <img src='/small-logo.png'></img> </Link>
         </div>
-        <MenuLateral user={user} isOpen={openMenu} setIsOpen={setOpenMenu}/>
+        <MenuLateral user={{nome: 'Guilherme Henrique', cargo:1}} isOpen={openMenu} setIsOpen={setOpenMenu}/>
     </>
   )
 }
