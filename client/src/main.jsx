@@ -9,7 +9,7 @@ import Home from './Componentes/tela_inicial/tela_inicial.jsx'
 import Texte from './Componentes/login/texte.jsx'
 import Validar from './Componentes/resetar_senha/validar.jsx'
 import Tela_de_Login from "./Componentes/login/logins.jsx";
-import createUser from "./Componentes/cadastro_usuarios/createUser.jsx";
+import CreateUser from "./Componentes/cadastro_usuarios/createUser.jsx";
 
 const router = createBrowserRouter([
   {
@@ -34,14 +34,11 @@ const router = createBrowserRouter([
       {
         path:'/registerUser',
         element: <RegisterUser/>,
-        children: [
-          {
-            path: 'registerUser/new',
-            element: <createUser/>
-          }
-        ]
-        
-      }
+      },
+      {
+        path:'/registerUser/new',
+        element: <CreateUser/>,
+      },
     ],
   },
 ]);
