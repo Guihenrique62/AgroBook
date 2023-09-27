@@ -40,7 +40,7 @@ export default function Tela_de_Login() {
 
   return (
     <form className="login-form" onSubmit={handleSubmit}>
-      <label  htmlFor="">
+      <label className='Email' htmlFor="">
         <p>Email:</p>
         <input
           type="email"

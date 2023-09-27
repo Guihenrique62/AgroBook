@@ -4,6 +4,7 @@ import validLogins from "../../controllers/Login";
 import Login from "../../controllers/Login";
 import validLogin from "../../controllers/validLogin";
 import listarUsuario from "../../controllers/listUser";
+import './stylizationLogin/login.css'
 
 export default function Teste() {
   const [name, setName] = useState("");
