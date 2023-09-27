@@ -47,6 +47,7 @@ return(
                   <li>
                     {times.pais}
                   </li>
+                    <Link to={`/books ${times.nome}`} >editar</Link>
                </ul>
                   
 
@@ -66,7 +67,7 @@ return(
         ))}
     
 
-
+                    <Link to={"/estoque"} >Estoque</Link>
 
     </div>
     )

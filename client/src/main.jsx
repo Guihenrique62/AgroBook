@@ -10,6 +10,8 @@ import Texte from './Componentes/login/texte.jsx'
 import Validar from './Componentes/resetar_senha/validar.jsx'
 import Tela_de_Login from "./Componentes/login/logins.jsx";
 import createUser from "./Componentes/cadastro_usuarios/createUser.jsx";
+import Book from "./Componentes/tela_inicial/bookTest.jsx";
+import Estoque from "./Componentes/estoque/estoque.jsx";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +34,10 @@ const router = createBrowserRouter([
         element: <Home/>,
       },
       {
+          path:"/book",
+          element:<Book/>
+      },
+      {
         path:'/registerUser',
         element: <RegisterUser/>,
         children: [
@@ -41,7 +47,12 @@ const router = createBrowserRouter([
           }
         ]
         
+      },{
+         path:'/estoque',
+         element:<Estoque/>
       }
+     
+      
     ],
   },
 ]);
