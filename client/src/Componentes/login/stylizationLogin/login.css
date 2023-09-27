@@ -1,4 +1,12 @@
 .login-form{
-    background-color: red;
+    background-color: #FFFFFF;
+    display: inline;
+    justify-content: center;
 
+}
+.Email input{
+    height: 0;
+}
+.teste{
+    background-color: red;
 }

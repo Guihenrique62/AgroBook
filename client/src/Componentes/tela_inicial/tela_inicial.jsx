@@ -25,7 +25,7 @@ export default function Home(){
     }
 const arr=timesDeFutebol
 return(
-    <div>
+    <div className='teste'>
          <h2>SEJA BEM VINDO</h2>
          <Header search={pesquisar}/>
          <p>

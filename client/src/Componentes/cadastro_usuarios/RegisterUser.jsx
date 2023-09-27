@@ -1,12 +1,13 @@
 import React from 'react'
-import Header from '../header/Header'
-import listarUsuario from '../../controllers/listUser'
+import Header from '../header/Header.jsx'
+import listarUsuario from '../../controllers/listUser.js'
+import { Link, Outlet } from 'react-router-dom'
 
 // const result = listarUsuario()
 // const users = result.data.result
 // console.log(users)
 
-const users = [{nome: 'Guilherme Henrique', cargo: 0, id: 1},{nome: 'Pedro Henrique', cargo: 0, id: 2},{nome: 'Johnata Henrique', cargo: 0, id: 3}]
+const users = [{nome: 'Guilherme Henrique', cargo: 0, id: 1, email: '@email.com'},{nome: 'Pedro Henrique', cargo: 0, id: 2, email: '@email.com'},{nome: 'Johnata Henrique', cargo: 0, id: 3, email: '@email.com'}]
 
 export default function RegisterUser() {
 
@@ -47,6 +48,7 @@ export default function RegisterUser() {
 
         </div>
       </div>
+      <Outlet/>
     </div>
   )
 }

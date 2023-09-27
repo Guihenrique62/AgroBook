@@ -9,9 +9,13 @@ import Home from './Componentes/tela_inicial/tela_inicial.jsx'
 import Texte from './Componentes/login/texte.jsx'
 import Validar from './Componentes/resetar_senha/validar.jsx'
 import Tela_de_Login from "./Componentes/login/logins.jsx";
+<<<<<<< HEAD
 import createUser from "./Componentes/cadastro_usuarios/createUser.jsx";
 import Book from "./Componentes/tela_inicial/bookTest.jsx";
 import Estoque from "./Componentes/estoque/estoque.jsx";
+=======
+import CreateUser from "./Componentes/cadastro_usuarios/createUser.jsx";
+>>>>>>> 942305ce85fa577ef7fb64c2aea418c00178dd7d
 
 const router = createBrowserRouter([
   {
@@ -40,6 +44,7 @@ const router = createBrowserRouter([
       {
         path:'/registerUser',
         element: <RegisterUser/>,
+<<<<<<< HEAD
         children: [
           {
             path: 'registerUser/new',
@@ -53,6 +58,13 @@ const router = createBrowserRouter([
       }
      
       
+=======
+      },
+      {
+        path:'/registerUser/new',
+        element: <CreateUser/>,
+      },
+>>>>>>> 942305ce85fa577ef7fb64c2aea418c00178dd7d
     ],
   },
 ]);

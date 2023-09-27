@@ -12,7 +12,7 @@ function Estoque() {
       <h1>BIBLIOTECA DE JOGOS</h1>
       <Formulario addBook={addBook}
       />
-     <div className='book'>
+     <div>
       {book.map((books)=>{
         return(
           <Estoque_Book key={books.id}

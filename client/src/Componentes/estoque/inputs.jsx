@@ -1,6 +1,6 @@
 import { useState } from "react"
 import Proptypes, { func } from 'prop-types'
-import Inputs from "./newbook"
+import Inputs from "./titleBook"
 import Sinps from "./sinopse"
 
     Formulario.prototype ={
