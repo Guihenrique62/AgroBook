@@ -1,19 +1,10 @@
-import { useState } from 'react'
-import Tela_de_Login from './Componentes/login/logins'
-import { Outlet, Router } from 'react-router-dom'
-import { Routes, Route } from 'react-router-dom'
-import Login from './controllers/Login'
 
+import React from 'react'
+import { RouterProvider } from 'react-router-dom'
+import router from './router'
+import './app.css'
 
-
-function App() {
+export default function App() {
   
-  return (
-    <>
-     <Outlet/>
-  
-    </>
-  )
+  return <RouterProvider router={router} />
 }
-
-export default App

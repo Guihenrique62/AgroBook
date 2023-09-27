@@ -1,0 +1,24 @@
+.HeaderContainer{
+    background-color: #52F6AF;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.HeaderContainer button{
+    background-color: transparent;
+    border: none;
+
+}
+
+.img-logo-header{
+    width: 185px;
+}
+
+.bx-menu{
+    font-size: 2.5rem;
+}
+
+.bx-menu:hover{
+    cursor: pointer;
+}

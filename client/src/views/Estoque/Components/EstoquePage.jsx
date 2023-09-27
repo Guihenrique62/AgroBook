@@ -1,10 +1,11 @@
 
-import Estoque_Book from './bookEstoque'
-import Formulario from './inputs'
-import addandRemove from './functions'
+import Estoque_Book from './BookEstoque'
+import Formulario from './Inputs'
+import addandRemove from '../scripts/functions'
+import React from 'react'
 
 
-function Estoque() {
+function EstoquePage() {
   const{ book, addBook,removeBook}= addandRemove()
   return (
     <>
@@ -30,4 +31,4 @@ function Estoque() {
   )
 }
 
-export default Estoque
+export default EstoquePage

@@ -1,26 +1,29 @@
-import React from 'react'
-import Header from '../header/Header.jsx'
-import listarUsuario from '../../controllers/listUser.js'
-import { Link, Outlet } from 'react-router-dom'
+/*
+  CRIADO POR: GUILHERME HENRIQUE PORTO DOS SANTOS
+  EMAIL: guilhermeportosantos1@gmail.com
+*/
 
-// const result = listarUsuario()
-// const users = result.data.result
-// console.log(users)
+////////////////////////////////////////////////////
+// ROTA PARA A PAGINA MAIN DO CADASTRO DE USUARIO //
+////////////////////////////////////////////////////
+
+
+import React from 'react'
+import { Link, Outlet } from 'react-router-dom'
 
 const users = [{nome: 'Guilherme Henrique', cargo: 0, id: 1, email: '@email.com'},{nome: 'Pedro Henrique', cargo: 0, id: 2, email: '@email.com'},{nome: 'Johnata Henrique', cargo: 0, id: 3, email: '@email.com'}]
 
-export default function RegisterUser() {
+export default function UsersPage() {
 
   
   return (
     <div>
       <div>
-        <Header user={undefined} search={null}/>
         <div>
             <input type="text" placeholder='Buscar Livros...' />
             <button><i className='bx bx-search'></i></button>
         </div>
-        <Link to='/registerUser/new'><button>Novo</button></Link>
+        <Link to='newUser'><button>Novo</button></Link>
 
 
         <div className="usersContainer">
@@ -38,9 +41,9 @@ export default function RegisterUser() {
                   <p>{user.nome}</p>
                   <p>{user.email}</p>
                   <p>{user.cargo == 0 ? 'Admin': 'Colaborador'}</p>
-                  <button >
+                  <Link to={`editUser/${user.id}`}>
                     <img src="edit-user-icon.png" alt="edit-user-icon" />
-                  </button>
+                  </Link>
               </div>
               ))}
 
@@ -48,7 +51,6 @@ export default function RegisterUser() {
 
         </div>
       </div>
-      <Outlet/>
     </div>
   )
 }

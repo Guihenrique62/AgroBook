@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import MenuLateral from '../menu_lateral/MenuLateral'
+import './HeaderStyle.css'
 
 export default function Header({ user, search }) {
     const [openMenu, setOpenMenu] = useState(false)
 
   return (
-    <>
+    <div className='HeaderContainer'>
         <div>
             <button onClick={()=> setOpenMenu(true)}><i className='bx bx-menu'></i></button>
             
@@ -18,9 +19,9 @@ export default function Header({ user, search }) {
               : null
             }
 
-            <Link to={'/menu'}> <img src='/small-logo.png'></img> </Link>
+            <Link to={'/home'}> <img className='img-logo-header'src='/small-logo.png'></img> </Link>
         </div>
         <MenuLateral user={{nome: 'Guilherme Henrique', cargo:1}} isOpen={openMenu} setIsOpen={setOpenMenu}/>
-    </>
+    </div>
   )
 }

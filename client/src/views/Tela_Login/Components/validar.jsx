@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import updateUser from "../../controllers/updateUser";
+import updateUser from "../../../controllers/updateUser";
+import React from "react";
 
 export default function Validar({ ok }) {
   let [newSenha, setnewSenha] = useState("");
