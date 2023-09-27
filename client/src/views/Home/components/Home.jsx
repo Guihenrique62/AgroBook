@@ -151,8 +151,8 @@ export default function Home() {
             <div className="booksContainer">
               {books.map((book) =>
 
-                  <Link to={`book/${book.titulo}`}>
-                    <div key={book.titulo} >
+                  <Link to={`book/${book.titulo}`} key={book.titulo} >
+                    <div>
                           
                           <div>
                               <img src={book.capa} alt="" />
