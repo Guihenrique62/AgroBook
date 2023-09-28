@@ -1,10 +1,13 @@
+/*
+  CRIADO POR: GUILHERME HENRIQUE PORTO DOS SANTOS
+  EMAIL: guilhermeportosantos1@gmail.com
+*/
+
+
 import { createBrowserRouter } from "react-router-dom";
 import React from "react";
 
-
 //paginas
-
-
 import UsersLayout from "./views/Cadastro_Usuarios/UsersLayout";
 import UsersPage from "./views/Cadastro_Usuarios/Components/UsersPage";
 import LoginLayout from "./views/Tela_Login/LoginLayout";
@@ -17,6 +20,8 @@ import EditUser from "./views/Cadastro_Usuarios/Components/EditUser";
 import HomeLayout from "./views/Home/HomeLayout";
 import EstoqueLayout from "./views/Estoque/EstoqueLayout";
 import EstoquePage from "./views/Estoque/Components/EstoquePage";
+import PedidosLayout from "./views/Pedidos/PedidosLayout";
+import PagePedido from "./views/Pedidos/components/PagePedido";
 
 
 const router = createBrowserRouter([
@@ -51,6 +56,13 @@ const router = createBrowserRouter([
         element: <EstoqueLayout/>,
         children: [
             {index: true, element:<EstoquePage/>}
+        ]
+    },
+    {
+        path: "/orders",
+        element: <PedidosLayout/>,
+        children: [
+            {index:true, element: <PagePedido/>}
         ]
     }
 ])

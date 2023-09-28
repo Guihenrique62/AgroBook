@@ -1,23 +1,15 @@
-/*
-  CRIADO POR: 
-  EMAIL: 
-*/
-
-/////////////////////////////////
-// ROTA PARA A PAGINA DE LOGIN //
-/////////////////////////////////
-
-
 import { useState, useEffect } from "react";
-
+import './stylizationLogin/login.css'
 import React from "react";
-import Login from "../../../controllers/Login";
+import Login from "../../controllers/Login";
+
+import error from "../../commun_Components/error/error";
 import { Link, Navigate, redirect } from "react-router-dom";
-import Validar from "./validar";
+import Error from "../../commun_Components/error/error";
+import { Routes, Route } from "react-router-dom";
+import Validar from "../resetar_senha/validar";
 
-
-export default function Tela_Login(){
-
+export default function Tela_de_Login() {
   let [email, setEmail] = useState("");
   let [senha, setSenha] = useState("");
   let [status, setStatus] = useState();
