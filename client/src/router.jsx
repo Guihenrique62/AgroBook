@@ -17,6 +17,7 @@ import EditUser from "./views/Cadastro_Usuarios/Components/EditUser";
 import HomeLayout from "./views/Home/HomeLayout";
 import EstoqueLayout from "./views/Estoque/EstoqueLayout";
 import EstoquePage from "./views/Estoque/Components/EstoquePage";
+import Formulario from "./views/Estoque/Components/Formulario";
 
 
 const router = createBrowserRouter([
@@ -50,7 +51,8 @@ const router = createBrowserRouter([
         path: "/storage",
         element: <EstoqueLayout/>,
         children: [
-            {index: true, element:<EstoquePage/>}
+            {index: true, element:<EstoquePage/>},// Rota para ver estoque
+            {path:"formEstoque",element:<Formulario/>}// rota para adcionar no estoque
         ]
     }
 ])
