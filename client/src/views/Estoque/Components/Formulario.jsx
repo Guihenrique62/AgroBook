@@ -11,10 +11,10 @@ export default function Formulario({addBook}){
     const [conver, setConver] = useState("")
     const [titulo, setTitulo]= useState("")
     const [author, setAuthor]= useState("")
-    const[ portugues,setPortugues]=useState("portugues")
-    const[ingles,setIngles]=useState("ingles")
+    const[ idioma,setidioma]=useState([""])
     const[pag, setPag]=useState("")
     const[quantidade,setQuantidade]=useState("")
+    const[genero, SetGenero]=useState("")
     function stopsubmit(ev) {
         ev.preventDefault()
         addBook({titulo,conver,sinopse})
@@ -51,9 +51,9 @@ export default function Formulario({addBook}){
         />
        </label>
        <label htmlFor="idioma"><p>Idioma</p>
-        <select name="idioma" id="idioma">
-            <option value={portugues} onClick={(e)=>setPortugues(e.target.value)}>Portugues</option>
-            <option value={ingles} onClick={(e)=> setIngles(e.target.value)} >Ingles</option>
+        <select name="idioma" id="idioma" onChange={(e)=>setidioma(e.target.value)}>
+            <option value={idioma}>Portugues</option>
+            <option value={idioma}>Ingles</option>
         </select>
        </label>
 
@@ -83,11 +83,18 @@ export default function Formulario({addBook}){
         onChange={(e)=> setSinopse(e.target.value)}
         />
         </label>
-        <input type="text" placeholder="açao"/>
+       <select name="" id="" 
+       style={{ width: '100%', padding: '10px', fontSize: '16px' }}
+       onChange={(e)=>SetGenero(e.target.va)}
+       >
+       <option value={genero}>Açao</option>
+        <option value={genero}>Romance</option>
+        <option value={genero}>comedia</option>
+        <option value={genero}>ficçao</option>
 
-
+       </select>
        
-     <button type='submit'>Adicionar á Biblioteca</button>
+     <button type='submit'>Salvar</button>
      </form>
     )
 }
