@@ -21,7 +21,7 @@ export default function Header({ user, search }) {
 
             <Link to={'/home'}> <img className='img-logo-header'src='/small-logo.png'></img> </Link>
         </div>
-        <MenuLateral user={{nome: 'Guilherme Henrique', cargo:1}} isOpen={openMenu} setIsOpen={setOpenMenu}/>
+        <MenuLateral user={{nome: 'Guilherme Henrique', cargo:0}} isOpen={openMenu} setIsOpen={setOpenMenu}/>
     </div>
   )
 }

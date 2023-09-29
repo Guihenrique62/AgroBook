@@ -22,7 +22,7 @@ export default function MenuLateral({user, isOpen, setIsOpen}) {
           <p>{user.nome}</p> {/*Nome do Usuário */}
 
           {/*LINK PARA A TELA INICIAL*/}
-          <Link to={'/menu'}>
+          <Link to={'/home'}>
             <img src='/home-icon.png' alt='home-icon' />
             <p>Tela Inicial</p>
           </Link>
@@ -30,7 +30,7 @@ export default function MenuLateral({user, isOpen, setIsOpen}) {
           {/*LINK PARA A TELA DE CADASTRO*/}
           {
             user.cargo == 0 ? //verifica se o user é qualificado
-              <Link to={'/registerUser'}>
+              <Link to={'/user'}>
                 <img src='/cadastro-icon.png' alt='cadastro-icon' />
                 <p>Cadastro</p>
               </Link>
@@ -40,7 +40,7 @@ export default function MenuLateral({user, isOpen, setIsOpen}) {
           {/*LINK PARA A TELA ESTOQUE*/}
           {
             user.cargo == 0 ? //verifica se o user é qualificado
-              <Link to={'/'}>
+              <Link to={'/storage'}>
                 <img src='/livros-icon.png' alt='livros-icon' />
                 <p>Estoque</p>
               </Link>
@@ -54,7 +54,7 @@ export default function MenuLateral({user, isOpen, setIsOpen}) {
           </Link>
 
           {/*LINK PARA A TELA PEDIDOS*/}
-          <Link to={'/'}>
+          <Link to={'/orders'}>
             <img src='/pedidos-icon.png' alt='pedidos-icon' />
             <p>Pedidos</p>
           </Link>
