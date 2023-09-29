@@ -7,7 +7,7 @@ Sinps.prototype ={
     label: Proptypes.string
 }
 
-export default function Sinps({label, sinop , setSinop}){
+export default function Sinps(){
     return(
         <label htmlFor={label}>
         <p>sinopse</p>

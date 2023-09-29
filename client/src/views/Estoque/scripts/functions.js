@@ -7,7 +7,7 @@ export  default function addandRemove(){
          return  JSON.parse(storageBook) 
      }
      )
-   
+   // funçao que adciona o livro dentro de array 
    const addBook =({titulo , conver,sinopse}) =>{
    const id = Math.floor(Math.random()* 100000000 )
    const book ={ id,titulo, conver, sinopse}
@@ -17,6 +17,7 @@ export  default function addandRemove(){
    return newstate
    }
    )}
+   // funçao que remove os livros do array 
    const removeBook=(id)=>{
      setBook(state => {const newremove = state.filter(books => books.id !==id )
      localStorage.setItem("biblioteca", JSON.stringify(newremove))
