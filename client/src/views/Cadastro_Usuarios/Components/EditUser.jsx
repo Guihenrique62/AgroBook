@@ -18,17 +18,13 @@ export default function EditUser() {
   const { userID } = useParams()
 
   const user = {
-    "_id": {
-      "$oid": "650353c79ba693038e773576"
-    },
-    "email": "jeantng2016@gmail.com",
-    "senha": "0f3f2c85a67b613214b4c95066f622b9",
+    "_id": "65047a74babdd7046c86e390",
+    "nome": "FELIPE",
+    "documento": 70657247197,
+    "email": "fillypecunha@gmail.com",
+    "senha": "9794d28317313a72eb0fd5e91bc63092",
     "cargo": 0,
     "status": 1,
-    "documento": {
-      "$numberLong": "70460827154"
-    },
-    "nome": "JEAN",
     "resetar_senha": 0
   }
 
@@ -45,7 +41,7 @@ export default function EditUser() {
         <form className="editUserMain">
           <div>
             <label htmlFor="cpf">Cpf: <b>*</b></label>
-            <input type="text" name='cpf' id='cpf' required value={+user.documento}/>
+            <input type="number" name='cpf' id='cpf' required value={user.documento}/>
           </div>
           
           <div>
@@ -55,7 +51,7 @@ export default function EditUser() {
 
           <div>
             <label htmlFor="email">E-mail: <b>*</b></label>
-            <input type="text" name='email' id='email' required value={user.email} />
+            <input type="email" name='email' id='email' required value={user.email} />
           </div>
 
           <div>

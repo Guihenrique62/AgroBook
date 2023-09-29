@@ -13,7 +13,7 @@ function EstoquePage() {
       
      <div>
       <div>
-       <Link to={"formEstoque"} ><button>novo</button></Link> 
+       <Link to="formEstoque" ><button>novo</button></Link> 
       </div>
       {book.map((books)=>{
         return(

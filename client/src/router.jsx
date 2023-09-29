@@ -19,6 +19,7 @@ import CreateUser from "./views/Cadastro_Usuarios/Components/CreateUser";
 import EditUser from "./views/Cadastro_Usuarios/Components/EditUser";
 import HomeLayout from "./views/Home/HomeLayout";
 import EstoqueLayout from "./views/Estoque/EstoqueLayout";
+import Formulario from "./views/Estoque/Components/Formulario";
 import EstoquePage from "./views/Estoque/Components/EstoquePage";
 import PedidosLayout from "./views/Pedidos/PedidosLayout";
 import PagePedido from "./views/Pedidos/components/PagePedido";
