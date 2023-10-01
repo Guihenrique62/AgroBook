@@ -9,9 +9,14 @@
 
 import React from 'react'
 import { Outlet } from 'react-router-dom'
+import './LoginLayout.css'
 
 export default function LoginLayout() {
   return (
-    <Outlet/>
+
+  <div className="login">
+      <Outlet/>
+  </div>
+
   )
 }

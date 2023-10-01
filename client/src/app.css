@@ -1,14 +1,8 @@
 *{
     padding: 0;
     margin: 0;
+    position: relative;
+
 }
-.login-form{
-    width: 385px;
-    height: 441px;
-    background-color: #FFFFFF;
-    display: flex;
-    flex-direction: row;
-    background: url()no-repeat;
-    background-position: center;
-    background-size: cover;
+.app{
 }
