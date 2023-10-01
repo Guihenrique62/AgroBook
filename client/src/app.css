@@ -1,24 +1,13 @@
 *{
     padding: 0;
     margin: 0;
-
 }
-
-body{
-    width: 100vw;
-    height: 100vh;
-    background-color: #fff;
-    overflow-x: hidden;
-    overflow-y: hidden;
-}
-
-
 .login-form{
     width: 385px;
     height: 441px;
     background-color: #FFFFFF;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     background: url()no-repeat;
     background-position: center;
     background-size: cover;
