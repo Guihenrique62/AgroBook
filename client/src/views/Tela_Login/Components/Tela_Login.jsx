@@ -47,7 +47,8 @@ export default function Tela_Login(){
   };
 
   return (
-    <form className="login-form" onSubmit={handleSubmit}>
+
+    <form onSubmit={handleSubmit}>
       <label className='Email' htmlFor="">
         <p>Email:</p>
         <input
@@ -82,4 +83,5 @@ export default function Tela_Login(){
       {status === 200  ? <Navigate to="/home" />: null}
     </form>
   );
+  
 }
