@@ -10,6 +10,7 @@
 
 import React from 'react'
 import { Link, Outlet } from 'react-router-dom'
+import '../styles/usersPage.css'
 
 const users = [ // array simulando resposta API
   {
@@ -58,17 +59,18 @@ export default function UsersPage() {
 
   
   return (
-    <div>
-      <div>
-        <div>
-            <input type="text" placeholder='Buscar Livros...' />
-            <button><i className='bx bx-search'></i></button>
+      <div className='containerUsersMain'>
+        <div className='inputsUsersContainer'>
+          <div className='SearchUserContainer'>
+              <input type="text" placeholder='Buscar Usuários...' className='inputSearchUser'/>
+              <button className='buttonSearchUser'><i className='bx bx-search'></i></button>
+          </div>
+          <Link to='newUser' className='LinkCreateUser'><button>Novo</button></Link>
         </div>
-        <Link to='newUser'><button>Novo</button></Link>
 
 
         <div className="usersContainer">
-          <div className="headTable">
+          <div className="headTableUsers">
             <span>Nome:</span>
             <span>E-mail:</span>
             <span>Cargo:</span>
@@ -92,6 +94,5 @@ export default function UsersPage() {
 
         </div>
       </div>
-    </div>
   )
 }

@@ -1,3 +1,9 @@
+/*
+  CRIADO POR: GUILHERME HENRIQUE PORTO DOS SANTOS
+  EMAIL: guilhermeportosantos1@gmail.com
+*/
+
+
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import MenuLateral from '../menu_lateral/MenuLateral'

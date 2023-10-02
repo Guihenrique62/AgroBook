@@ -10,6 +10,7 @@
 import React from 'react'
 import Header from '../../commun_Components/header/Header'
 import { Outlet } from 'react-router-dom'
+import './userLayout.css'
 
 export default function UsersLayout() {
   return (
