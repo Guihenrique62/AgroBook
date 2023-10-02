@@ -1,5 +1,6 @@
 import { useState } from "react"
 import Proptypes, { func } from 'prop-types'
+import Estoque_Book from "./BookEstoque"
 
 
     Formulario.prototype ={
@@ -12,15 +13,33 @@ export default function Formulario({addBook}){
     const [titulo, setTitulo]= useState("")
     const [author, setAuthor]= useState("")
     const[ idioma,setidioma]=useState([""])
-    const[pag, setPag]=useState("")
-    const[quantidade,setQuantidade]=useState("")
-    const[genero, SetGenero]=useState("")
+    const[pag, setPag]=useState()
+    const[quantidade,setQuantidade]=useState()
+    const[genero, SetGenero]=useState([""])
     function stopsubmit(ev) {
         ev.preventDefault()
-        addBook({titulo,conver,sinopse})
+        addBook({titulo,conver,sinopse,pag,quantidade,idioma,genero,author})
         setConver("")
         setTitulo("")
         setSinopse("")
+        setAuthor("")
+        setPag("")
+        setidioma("")
+        setQuantidade("")
+        SetGenero("")
+
+      }
+      // funçao para pegar os valores do genero 
+      const handleSelectChange = (event) => {
+        const options = event.target.options;
+        const selectedValues = [];
+        
+        for (let i = 0; i < options.length; i++) {
+          if (options[i].selected) {
+            selectedValues.push(options[i].value);
+          }
+        }
+        SetGenero(selectedValues)
       }
     return(
         <form onSubmit={stopsubmit}>
@@ -83,18 +102,30 @@ export default function Formulario({addBook}){
         onChange={(e)=> setSinopse(e.target.value)}
         />
         </label>
-       <select name="" id="" 
+       <select name="" id="" multiple="multiple" 
        style={{ width: '100%', padding: '10px', fontSize: '16px' }}
-       onChange={(e)=>SetGenero(e.target.va)}
+       value={genero}
+       onChange={handleSelectChange}
        >
-       <option value={genero}>Açao</option>
-        <option value={genero}>Romance</option>
-        <option value={genero}>comedia</option>
-        <option value={genero}>ficçao</option>
-
+       <option value={"acao"}>Açao</option>
+        <option value={"romance"}>Romance</option>
+        <option value={"comedia"}>comedia</option>
+        <option value={"fiçao"}>ficçao</option>
        </select>
        
      <button type='submit'>Salvar</button>
+     <div>
+      <h2>
+        {sinopse}
+        {genero.join("/")}
+        {quantidade}
+        {pag}
+      </h2>
+     </div>
      </form>
+    
+    
     )
+
+    
 }
