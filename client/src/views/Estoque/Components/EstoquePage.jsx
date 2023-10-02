@@ -20,14 +20,14 @@ function EstoquePage() {
           <Estoque_Book key={books.id}
                 titulo={books.titulo}
                 conver={books.conver}
-                sinopse= {books.sinopse}
                 onremove= {()=> removeBook(books.id)}
-          
           />
+          
         )
       })}
+          
      </div>
-
+     
     </>
   )
 }

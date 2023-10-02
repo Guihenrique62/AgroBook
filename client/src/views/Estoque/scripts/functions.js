@@ -1,5 +1,5 @@
 import { useState } from 'react'
-
+// Funçao que guarda dentro do localStorange
 export  default function addandRemove(){
     const [ book, setBook]= useState(()=> {
         const storageBook = localStorage.getItem("biblioteca")
@@ -8,9 +8,9 @@ export  default function addandRemove(){
      }
      )
    // funçao que adciona o livro dentro de array 
-   const addBook =({titulo , conver,sinopse}) =>{
+   const addBook =({titulo , conver,sinopse,pag,quantidade,idioma,genero,author}) =>{
    const id = Math.floor(Math.random()* 100000000 )
-   const book ={ id,titulo, conver, sinopse}
+   const book ={ id,titulo, conver, sinopse,pag,quantidade,idioma,genero,author}
    setBook( state => {
      const newstate = [...state, book]
    localStorage.setItem("biblioteca", JSON.stringify(newstate))

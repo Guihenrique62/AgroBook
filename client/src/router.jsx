@@ -23,7 +23,7 @@ import Formulario from "./views/Estoque/Components/Formulario";
 import EstoquePage from "./views/Estoque/Components/EstoquePage";
 import PedidosLayout from "./views/Pedidos/PedidosLayout";
 import PagePedido from "./views/Pedidos/components/PagePedido";
-
+import EstoqueEdit from "./views/Estoque/Components/EditEstoque";
 const router = createBrowserRouter([
     {
         path: "/",
@@ -56,7 +56,8 @@ const router = createBrowserRouter([
         element: <EstoqueLayout/>,
         children: [
             {index: true, element:<EstoquePage/>},// Rota para ver estoque
-            {path:"formEstoque",element:<Formulario/>}// rota para adcionar no estoque
+            {path:"formEstoque",element:<Formulario/>},// rota para adcionar no estoque
+            {path:"estoque/:bookID",element:<EstoqueEdit/>}
         ]
     },
     {
