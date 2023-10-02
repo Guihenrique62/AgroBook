@@ -23,7 +23,6 @@ import Formulario from "./views/Estoque/Components/Formulario";
 import EstoquePage from "./views/Estoque/Components/EstoquePage";
 import PedidosLayout from "./views/Pedidos/PedidosLayout";
 import PagePedido from "./views/Pedidos/components/PagePedido";
-import Formulario from "./views/Estoque/Components/Formulario";
 
 const router = createBrowserRouter([
     {
