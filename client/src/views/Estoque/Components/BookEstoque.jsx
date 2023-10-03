@@ -1,3 +1,8 @@
+/*
+  CRIADO POR: Fillype da Silva Macedo Cunha
+  EMAIL: fillypecunha@gmail.com
+*/
+
 import Proptypes from 'prop-types'
 import { Link } from 'react-router-dom'
 

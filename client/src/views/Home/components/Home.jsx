@@ -1,6 +1,6 @@
 /*
-  CRIADO POR: 
-  EMAIL: 
+  CRIADO POR: Fillype da Silva Macedo Cunha
+  EMAIL: fillypecunha@gmail.com
 */
 
 /////////////////////
@@ -17,7 +17,7 @@ const books = [{
     "_id": {
       "$oid": "64fbe4bc1a2ce80351f72b3b"
     },
-    "titulo": "Ola mundo2",
+    "titulo": "teste fillype",
     "capa": "https://upload.wikimedia.org/wikipedia/pt/thumb/8/87/Ringstrilogyposter.jpg/250px-Ringstrilogyposter.jpg",
     "sinopse": "O Senhor dos Anéis (no original em inglês, The Lord of the Rings) é uma trilogia cinematográfica dirigida por Peter Jackson com base na obra-prima homónima de J. R. R. Tolkien. Os três filmes foram rodados em simultâneo na Nova Zelândia,[1] faturaram cerca de 3 bilhões (US$ 2.925.155.189) de dólares de receitas conjuntas de bilheteira[2] e foram galardoados com 17 Oscars, entre os 30 para os quais foram nomeados.[3] e é a franquia cinematográfica mais premiada da história",
     "paginas": 145,
@@ -94,7 +94,6 @@ const books = [{
     "sinopse": "O senhor dos aneis....",
     "paginas": 120,
     "categorias": [
-      "ação",
       "comedia",
       "drama"
     ],
@@ -120,7 +119,7 @@ const books = [{
     "sinopse": "O senhor dos aneis....",
     "paginas": 120,
     "categorias": [
-      "ação",
+      "Romance",
       "comedia",
       "drama"
     ],
@@ -138,6 +137,10 @@ const books = [{
     }
   }]
 
+  const bookAcao= books.filter((book)=>book.categorias[0]==="ação")
+  const bookComedia= books.filter((book)=>book.categorias[0]==="comedia")
+  const bookRomance= books.filter((book)=>book.categorias[0]==="Romance")
+
 export default function Home() {
 
 
@@ -147,29 +150,44 @@ export default function Home() {
             <p>
                 <input type="text" />
             </p>
-            
+            <p>AÇÃO</p>
             <div className="booksContainer">
-              {books.map((book) =>
+              {bookAcao.map((book)=>(
                   
-                  <Link to={`book/${book.titulo}`} key={book.titulo} >
-                    
-                    <div>
-                          
-                          <div>
-                              <img src={book.capa} alt="" />
-                          </div>
-                          <h4>{book.titulo}</h4>
-                          
-                    </div>
-                    <div>
-                    <div>
-                              <img src={book.capa} alt="" />
-                          </div>
-                          <h4>{book.titulo}</h4>
-                          
-                    </div>
-                  </Link>
-                    
+
+                  <div key={book._id}> 
+                  <h2>{book.titulo}</h2> 
+                <Link to={`book/${book._id}`}>
+                <img src={book.capa} alt="" /> 
+                </Link>
+                </div>
+               
+                )
+                )}
+                <p>Comedia</p>
+                {bookComedia.map((book)=>(
+                 
+
+                  <div key={book._id}> 
+                  <h2>{book.titulo}</h2> 
+                <Link to={`book/${book._id}`}> 
+               <img src={book.capa} alt="" />
+                </Link>
+                </div>
+             
+                )
+                )}
+                <p>Romance</p>
+                {bookRomance.map((book)=>(
+                  
+                  <div key={book._id}> 
+                  <h2>{book.titulo}</h2>
+                  <Link to={`book/${book._id}`}>
+                <img src={book.capa} alt="" />
+                </Link>
+                </div>
+                
+                )
                 )}
 
             </div>
