@@ -1,0 +1,14 @@
+.loginContainer{
+    background-color: #fff;
+    width: 249px;
+    height: 285.22px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.212);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px ;
+    overflow: hidden;
+}
