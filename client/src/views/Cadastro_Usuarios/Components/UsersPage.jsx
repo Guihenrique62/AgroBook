@@ -52,6 +52,86 @@ const users = [ // array simulando resposta API
     "documento": 70460827154,
     "nome": "JEAN",
     "resetar_senha": 0
+  },
+  {
+    "_id": "650353c79ba693038e773576",
+    "email": "jeantng2016@gmail.com",
+    "senha": "0f3f2c85a67b613214b4c95066f622b9",
+    "cargo": 1,
+    "status": 1,
+    "documento": 70460827154,
+    "nome": "JEAN",
+    "resetar_senha": 0
+  },
+  {
+    "_id": "650353c79ba693038e773576",
+    "email": "jeantng2016@gmail.com",
+    "senha": "0f3f2c85a67b613214b4c95066f622b9",
+    "cargo": 1,
+    "status": 1,
+    "documento": 70460827154,
+    "nome": "JEAN",
+    "resetar_senha": 0
+  },
+  {
+    "_id": "650353c79ba693038e773576",
+    "email": "jeantng2016@gmail.com",
+    "senha": "0f3f2c85a67b613214b4c95066f622b9",
+    "cargo": 1,
+    "status": 1,
+    "documento": 70460827154,
+    "nome": "JEAN",
+    "resetar_senha": 0
+  },
+  {
+    "_id": "650353c79ba693038e773576",
+    "email": "jeantng2016@gmail.com",
+    "senha": "0f3f2c85a67b613214b4c95066f622b9",
+    "cargo": 1,
+    "status": 1,
+    "documento": 70460827154,
+    "nome": "JEAN",
+    "resetar_senha": 0
+  },
+  {
+    "_id": "650353c79ba693038e773576",
+    "email": "jeantng2016@gmail.com",
+    "senha": "0f3f2c85a67b613214b4c95066f622b9",
+    "cargo": 1,
+    "status": 1,
+    "documento": 70460827154,
+    "nome": "JEAN",
+    "resetar_senha": 0
+  },
+  {
+    "_id": "650353c79ba693038e773576",
+    "email": "jeantng2016@gmail.com",
+    "senha": "0f3f2c85a67b613214b4c95066f622b9",
+    "cargo": 1,
+    "status": 1,
+    "documento": 70460827154,
+    "nome": "JEAN",
+    "resetar_senha": 0
+  },
+  {
+    "_id": "650353c79ba693038e773576",
+    "email": "jeantng2016@gmail.com",
+    "senha": "0f3f2c85a67b613214b4c95066f622b9",
+    "cargo": 1,
+    "status": 1,
+    "documento": 70460827154,
+    "nome": "JEAN",
+    "resetar_senha": 0
+  },
+  {
+    "_id": "650353c79ba693038e773576",
+    "email": "jeantng2016@gmail.com",
+    "senha": "0f3f2c85a67b613214b4c95066f622b9",
+    "cargo": 1,
+    "status": 1,
+    "documento": 70460827154,
+    "nome": "JEAN",
+    "resetar_senha": 0
   }
 ]
 
@@ -74,7 +154,7 @@ export default function UsersPage() {
             <span>Nome:</span>
             <span>E-mail:</span>
             <span>Cargo:</span>
-            <span>Editar:</span>
+            <span className='editarSpan'>Editar:</span>
           </div>
         
           <div className='userTable'> 
@@ -84,7 +164,7 @@ export default function UsersPage() {
                   <p>{user.nome}</p>
                   <p>{user.email}</p>
                   <p>{user.cargo == 0 ? 'Admin': 'Colaborador'}</p>
-                  <Link to={`editUser/${user._id}`}>
+                  <Link to={`editUser/${user._id}`} className='editUserLink'>
                     <img src="edit-user-icon.png" alt="edit-user-icon" />
                   </Link>
               </div>
