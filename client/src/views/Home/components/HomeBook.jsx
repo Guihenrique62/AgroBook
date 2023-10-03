@@ -1,3 +1,9 @@
+/*
+  CRIADO POR: Fillype da Silva Macedo Cunha
+  EMAIL: fillypecunha@gmail.com
+*/
+
+
 import React from "react";
 import { useParams } from "react-router-dom";
 
@@ -40,6 +46,7 @@ export default function HomeBook(){
                 </div>
                 <div>
                     <img src={book.capa} alt="erro" srcset="" />
+                    <button>Fazer pedido</button>
                     
                 </div>
                 <div>

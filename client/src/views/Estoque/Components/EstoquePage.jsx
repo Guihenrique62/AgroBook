@@ -1,4 +1,7 @@
-
+/*
+  CRIADO POR: Fillype da Silva Macedo Cunha
+  EMAIL: fillypecunha@gmail.com
+*/
 import Estoque_Book from './BookEstoque'
 import addandRemove from '../scripts/functions'
 import React from 'react'
@@ -146,7 +149,7 @@ function EstoquePage() {
               <img src={book.capa} alt="err" srcset=""/>
               <p>{book.sinopse}</p>
               <Link to={`estoque/${book._id}`} ><button>editar</button></Link>
-              
+
           </div>
        
           
