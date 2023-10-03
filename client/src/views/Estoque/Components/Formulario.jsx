@@ -16,6 +16,7 @@ export default function Formulario({addBook}){
     const[pag, setPag]=useState()
     const[quantidade,setQuantidade]=useState()
     const[genero, SetGenero]=useState([""])
+    const[data_lancamento, setData_lancamento]=useState()
     function stopsubmit(ev) {
         ev.preventDefault()
         addBook({titulo,conver,sinopse,pag,quantidade,idioma,genero,author})
@@ -93,6 +94,13 @@ export default function Formulario({addBook}){
         />
 
        </label>
+       <label htmlFor="lançamento">
+        <p>data de lançamento</p>
+        <input type="date" name="lançamento" id="" 
+        value={data_lancamento}
+        onChange={(e)=> setData_lancamento(e.target.value)}
+        />
+       </label>
        <label>
         <p>sinopse</p>
         <input type="text" 
@@ -113,6 +121,7 @@ export default function Formulario({addBook}){
         <option value={"fiçao"}>ficçao</option>
        </select>
        
+       
      <button type='submit'>Salvar</button>
      <div>
       <h2>
@@ -120,6 +129,7 @@ export default function Formulario({addBook}){
         {genero.join("/")}
         {quantidade}
         {pag}
+        {data_lancamento}
       </h2>
      </div>
      </form>
