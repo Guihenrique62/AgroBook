@@ -1,3 +1,7 @@
+/*
+  CRIADO POR: 
+  EMAIL: 
+*/
 .loginContainer{
     background-color: #fff;
     width: 249px;
@@ -11,4 +15,11 @@
     align-items: center;
     gap: 20px ;
     overflow: hidden;
+}
+.logo{
+    background-color: red;
+    height: 30px;
+}
+.div{
+    background-color: blue;
 }

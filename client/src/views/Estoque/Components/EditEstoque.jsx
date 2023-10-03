@@ -7,6 +7,8 @@ import { useParams } from "react-router-dom"
 import React from "react"
 import { useState } from "react"
 
+import styles from "../../../styles global components/styles.module.css"
+
 export default function EstoqueEdit(){ 
     const { bookID } = useParams()
     const [ sinopse, setSinopse]= useState("")
@@ -110,9 +112,9 @@ export default function EstoqueEdit(){
        </select>
        
        
-     <button type='submit'>Salvar</button>
+     <button type='submit' className={styles.button}>Salvar</button>
      <button>Excluir</button>
-     <div>
+     <div className={styles.div}>
       <h2>
         {sinopse}
         {genero.join("/")}
