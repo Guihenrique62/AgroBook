@@ -1,3 +1,8 @@
+/*
+  CRIADO POR: Fillype da Silva Macedo Cunha
+  EMAIL: fillypecunha@gmail.com
+*/
+
 import { useState } from "react"
 import Proptypes, { func } from 'prop-types'
 import Estoque_Book from "./BookEstoque"

@@ -1,4 +1,8 @@
 .login{
     display: grid;
     place-items: center;
+    background-color: #ffffff;
+    height: 100vh;
+    
+
 }

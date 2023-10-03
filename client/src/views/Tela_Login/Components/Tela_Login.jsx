@@ -9,12 +9,12 @@
 
 
 import { useState, useEffect } from "react";
-
+import style from '../styles/telaLogin.module.css';
 import React from "react";
 import Login from "../../../controllers/Login";
 import { Link, Navigate, redirect } from "react-router-dom";
 import Validar from "./validar";
-
+import loginLogo from "../../../assets/logo.png"
 
 export default function Tela_Login(){
 
@@ -48,7 +48,8 @@ export default function Tela_Login(){
 
   return (
 
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className={style.loginContainer}>
+      <img className={style.logo} src={loginLogo} alt="" />
       <label className='Email' htmlFor="">
         <p>Email:</p>
         <input

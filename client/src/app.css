@@ -2,9 +2,7 @@
     padding: 0;
     margin: 0;
     position: relative;
-
+    overflow: hidden;
 }
 
-
-.app{
-}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400&display=swap');
