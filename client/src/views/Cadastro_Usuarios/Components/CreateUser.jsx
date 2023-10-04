@@ -19,58 +19,59 @@ import ErrorModal from '../../../commun_Components/error/ErrorModal'
 
 
 
-export default function CreateUser(){
-  const [cargoSelect,setCargoSelect] = useState()
-  const [openModal, setOpenModal] = useState(false)
-  const handleChange = (e) => {
-    setCargoSelect(e.target.value)
-  }
+export default function CreateUser() {
+  const [cargoSelect, setCargoSelect] = useState() //Manipula cargo selecionado
+  const [openModalSucess, setOpenModalSucess] = useState(false) // Manipula abertura modal de sucesso
+  const [openModalError, setOpenModalError] = useState(false) // Manipula abertura modal de error
+
 
 
   return (
     <div className='createUserMasterComponent'>
-    <div className='createUserComponent'>
-      {/* Parte de cima do componente */}
-      <div className="createUserHeader">
-        <h2>Criar Usuário</h2>
-        <Link to={'/user'}><i className='bx bx-x'></i></Link>
+      <div className='createUserComponent'>
+        {/* Parte de cima do componente */}
+        <div className="createUserHeader">
+          <h2>Criar Usuário</h2>
+          <Link to={'/user'}><i className='bx bx-x'></i></Link>
+        </div>
+
+        <form className="createUserMain">
+          <div className='firstcontainerinput'>
+            <div className='inputName createFormInputs'>
+              <label htmlFor="nome">Nome: <b>*</b></label>
+              <input type="text" name='nome' id='nome' required />
+            </div>
+            <div className='inputCpf createFormInputs'>
+              <label htmlFor="cpf">Cpf: <b>*</b></label>
+              <input type="text" name='cpf' id='cpf' required />
+            </div>
+
+          </div>
+
+          <div className='secondcontainerinput'>
+            <div className='inputEmail createFormInputs'>
+              <label htmlFor="email">E-mail: <b>*</b></label>
+              <input type="email" name='email' id='email' required />
+            </div>
+            <div className='inputPassword createFormInputs'>
+              <label htmlFor="senha">Senha: <b>*</b></label>
+              <input type="password" name='senha' id='senha' required />
+            </div>
+            <div className='containerCargo '>
+              <label htmlFor="cargo">Cargo: <b>*</b></label>
+              <select value={cargoSelect} onChange={(e) => setCargoSelect(e.target.value)}>
+                <option value={0}>ADMINISTRADOR</option>
+                <option value={1}>COLABORADOR</option>
+              </select>
+            </div>
+          </div>
+          <div className='thirdcontainerinput'><button className='saveButton'>Salvar</button></div>
+        </form>
       </div>
-  
-      <form className="createUserMain">
-        <div className='firstcontainerinput'>
-        <div className='inputName createFormInputs'>
-            <label htmlFor="nome">Nome: <b>*</b></label>
-            <input type="text" name='nome' id='nome' required />
-          </div>
-          <div className='inputCpf createFormInputs'>
-            <label htmlFor="cpf">Cpf: <b>*</b></label>
-            <input type="text" name='cpf' id='cpf' required/>
-          </div>
-          
-        </div>
-  
-        <div className='secondcontainerinput'>
-          <div className='inputEmail createFormInputs'>
-            <label htmlFor="email">E-mail: <b>*</b></label>
-            <input type="email" name='email' id='email' required />
-          </div>
-          <div className='inputPassword createFormInputs'>
-            <label htmlFor="senha">Senha: <b>*</b></label>
-            <input type="password" name='senha' id='senha' required />
-          </div>
-          <div className='containerCargo '>
-            <label htmlFor="cargo">Cargo: <b>*</b></label>
-            <select value={cargoSelect} onChange={handleChange}>
-              <option value={0}>ADMINISTRADOR</option>
-              <option value={1}>COLABORADOR</option>
-            </select>
-          </div>
-        </div>
-        <div className='thirdcontainerinput'><button className='saveButton'>Salvar</button></div>
-      </form>
+
+
+      <CorrectModal isOpen={openModalSucess} page={'/user'} message={'ola'}></CorrectModal>
+      <ErrorModal isOpen={openModalError} setIsOpen={setOpenModalError} message={'ola'}></ErrorModal>
     </div>
-    <CorrectModal isOpen={openModal} page={'/user'} message={'ola'}></CorrectModal>
-    <ErrorModal isOpen={false} page={'/user'} message={'ola'}></ErrorModal>
-  </div>
   )
 }

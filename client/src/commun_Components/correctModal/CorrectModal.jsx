@@ -1,3 +1,7 @@
+/*
+  CRIADO POR: GUILHERME HENRIQUE PORTO DOS SANTOS
+  EMAIL: guilhermeportosantos1@gmail.com
+*/
 import React from 'react'
 import { Link } from 'react-router-dom'
 import './correctModal.css'
