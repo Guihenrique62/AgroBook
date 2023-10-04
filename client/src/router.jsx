@@ -3,6 +3,12 @@
   EMAIL: guilhermeportosantos1@gmail.com
 */
 
+/*
+  EDITADO: JEAN CLEIDSON PEREIRA RODRIGUES
+  MATRICULA: 202202257141
+  EMAIL: jeantng2016@gmail.com  
+*/
+
 import { createBrowserRouter } from "react-router-dom";
 import React from "react";
 
@@ -23,6 +29,8 @@ import EstoquePage from "./views/Estoque/Components/EstoquePage";
 import PedidosLayout from "./views/Pedidos/PedidosLayout";
 import PagePedido from "./views/Pedidos/components/PagePedido";
 import EstoqueEdit from "./views/Estoque/Components/EditEstoque";
+
+// ROTAS DA PAGINA WEB
 const router = createBrowserRouter([
     {
         path: "/",
@@ -66,6 +74,6 @@ const router = createBrowserRouter([
             { index: true, element: <PagePedido /> }
         ]
     }
-])
+]);
 
 export default router
