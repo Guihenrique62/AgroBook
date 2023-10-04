@@ -1,6 +1,6 @@
 /*
-  CRIADO POR: 
-  EMAIL: 
+  CRIADO POR: Fillype da Silva Macedo Cunha
+  EMAIL: fillypecunha@gmail.com
 */
 
 /////////////////////////////////
@@ -16,13 +16,14 @@ import { Link, Navigate, redirect } from "react-router-dom";
 import Validar from "./validar";
 import loginLogo from "../../../assets/logo.png"
 
+
 export default function Tela_Login(){
 
   let [email, setEmail] = useState("");
   let [senha, setSenha] = useState("");
   let [status, setStatus] = useState();
   let [mensgaemRetornada, setmensgaemRetornada] = useState();
-  let [trocar, setTrocar] = useState();
+  let [trocar, setTrocar] = useState(true);
 
  
 

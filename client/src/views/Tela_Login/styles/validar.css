@@ -39,7 +39,7 @@
   }
   
   /* Estilos para o input de senha */
-input[type="password"] {
+.newsenha{
   position: fixed;
     top: 65%;
   width: 40%;
@@ -52,18 +52,18 @@ input[type="password"] {
 }
 
 /* Estilizando o input de senha quando ele está em foco (focused) */
-input[type="password"]:focus {
+.newsenha:focus {
   border-color: #007bff;
   outline: none; /* Remove a borda de foco padrão */
 }
 
 /*input de senha quando o valor é inválido  */
-input[type="password"]:invalid {
+.newsenha:invalid {
   border-color: red;
 }
 
 /* input de senha quando o valor é válido*/
-input[type="password"]:valid {
+.newsenha:valid {
   border-color: green;
 }
 

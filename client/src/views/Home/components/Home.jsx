@@ -170,7 +170,7 @@ export default function Home() {
 
                   <div key={book._id}> 
                   <h2>{book.titulo}</h2> 
-                <Link to={`book/${book._id}`}> 
+                <Link to={`book/${book.titulo}`}> 
                <img src={book.capa} alt="" />
                 </Link>
                 </div>
@@ -182,7 +182,7 @@ export default function Home() {
                   
                   <div key={book._id}> 
                   <h2>{book.titulo}</h2>
-                  <Link to={`book/${book._id}`}>
+                  <Link to={`book/${book.titulo}`}>
                 <img src={book.capa} alt="" />
                 </Link>
                 </div>

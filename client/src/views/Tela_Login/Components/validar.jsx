@@ -50,7 +50,7 @@ export default function Validar({ ok, fechar }) {
      updatepass()
   };
 
-  if (ok === 401 ) {
+  if (ok === "401" ) {
     return (
       <div className="modal">
         <div className="modal_fundo" >
@@ -62,11 +62,13 @@ export default function Validar({ ok, fechar }) {
           type="password"
           name="senha"
           id="senha"
+          className="newsenha"
           onChange={(ev) => setnewSenha(ev.target.value)}
         />
         <Link to={"/home"}>
           {" "}
           <p><button onClick={createPassowrd} className="button"> trocar de senha </button></p>
+       
         </Link>
       </div>
       </div>
