@@ -19,7 +19,7 @@
     display: flex;
     justify-content: space-between;
     width: 80%;
-    padding: 1rem 0;
+    padding: 0 0  1rem 0;
 }
 /* Estilização do input de busca */
 
@@ -60,6 +60,11 @@
     border-radius: 10px;
     width: 7rem;
     height: 2rem;
+    cursor: pointer;
+}
+
+.LinkCreateUser > button:hover{
+    background-color: #329b50;
 }
 
 
@@ -67,21 +72,39 @@
 .usersContainer{
     width: 80%;
     height: 100%;
-    max-height: 450px;
+    max-height: 500px;
     border-radius: 10px;
-    border: 1px solid #909090;
+    border: 1px solid #ccc;
     background: #FFF;
     box-shadow: 10px 10px 30px 0px rgba(0, 0, 0, 0.25);
     overflow: auto;
 
 }
 
+/* Estilização da scroll bar */
+.usersContainer::-webkit-scrollbar {
+    width: .5rem;
+    padding: 1rem;
+  }
+  
+  .usersContainer::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 6px;
+  }
+  
+  .usersContainer::-webkit-scrollbar-track {
+    background-color: #f0f0f0;
+  }
+  
+  
+
 .headTableUsers{
     display: grid;
     grid-template-columns: 4fr 4fr 1fr 1fr;
     grid-template-rows: 1fr;
     padding: 1rem 1rem 0 3rem;
-    font-size: 1.1rem;
+    font-size: 1rem;
+    font-weight: 700;
     height: 2rem;
     width: 90%;
 }
@@ -96,6 +119,7 @@
     align-items: center;
     justify-content: center;
     gap: 1rem;
+    padding: 1rem 0 1.5rem 0;
 }
 
 .user{
@@ -110,12 +134,15 @@
     justify-items: start;
     align-items:center;
     font-size: .9rem;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
 }
 
 .editUserLink{
     height: 25px;
     justify-self: center;
 }
+
+
 
 .editarSpan{
     justify-self: center;
