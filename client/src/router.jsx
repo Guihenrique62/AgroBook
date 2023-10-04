@@ -3,7 +3,6 @@
   EMAIL: guilhermeportosantos1@gmail.com
 */
 
-
 import { createBrowserRouter } from "react-router-dom";
 import React from "react";
 
@@ -27,44 +26,44 @@ import EstoqueEdit from "./views/Estoque/Components/EditEstoque";
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <LoginLayout/>,
+        element: <LoginLayout />,
         children: [
-            {index:true, element: <Login/>},
-            {path: "validar", element: <Validar ok={undefined}/> }
+            { index: true, element: <Login /> },
+            { path: "validar", element: <Validar ok={undefined} /> }
         ]
     },
     {
         path: "/home",
-        element: <HomeLayout/>,
+        element: <HomeLayout />,
         children: [
-            {index: true, element: <Home/>},
-            {path: "book/:bookID", element: <HomeBook/>},
-            
+            { index: true, element: <Home /> },
+            { path: "book/:bookID", element: <HomeBook /> },
+
         ]
     },
     {
         path: "/user",
-        element: <UsersLayout/>, //Layout Pagina Users
+        element: <UsersLayout />, //Layout Pagina Users
         children: [
-            {index: true, element: <UsersPage/>},//Rota main de Users
-            {path: "newUser", element: <CreateUser/>}, // Rota create User
-            {path: "editUser/:userID", element: <EditUser/>} // Rota Edit User
-        ] 
+            { index: true, element: <UsersPage /> },//Rota main de Users
+            { path: "newUser", element: <CreateUser /> }, // Rota create User
+            { path: "editUser/:userID", element: <EditUser /> } // Rota Edit User
+        ]
     },
     {
         path: "/storage",
-        element: <EstoqueLayout/>,
+        element: <EstoqueLayout />,
         children: [
-            {index: true, element:<EstoquePage/>},// Rota para ver estoque
-            {path:"formEstoque",element:<Formulario/>},// rota para adcionar no estoque
-            {path:"estoque/:bookID",element:<EstoqueEdit/>}
+            { index: true, element: <EstoquePage /> },// Rota para ver estoque
+            { path: "formEstoque", element: <Formulario /> },// rota para adcionar no estoque
+            { path: "estoque/:bookID", element: <EstoqueEdit /> }
         ]
     },
     {
         path: "/orders",
-        element: <PedidosLayout/>,
+        element: <PedidosLayout />,
         children: [
-            {index:true, element: <PagePedido/>}
+            { index: true, element: <PagePedido /> }
         ]
     }
 ])
