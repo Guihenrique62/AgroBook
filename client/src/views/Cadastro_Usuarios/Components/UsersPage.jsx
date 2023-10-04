@@ -12,7 +12,7 @@ import React from 'react'
 import { Link, Outlet } from 'react-router-dom'
 import '../styles/usersPage.css'
 
-const users = [ // array simulando resposta API
+const users = [ // array que recebe resposta API
   {
     "_id": "65047a74babdd7046c86e390",
     "nome": "FELIPE",
@@ -52,86 +52,6 @@ const users = [ // array simulando resposta API
     "documento": 70460827154,
     "nome": "JEAN",
     "resetar_senha": 0
-  },
-  {
-    "_id": "650353c79ba693038e773576",
-    "email": "jeantng2016@gmail.com",
-    "senha": "0f3f2c85a67b613214b4c95066f622b9",
-    "cargo": 1,
-    "status": 1,
-    "documento": 70460827154,
-    "nome": "JEAN",
-    "resetar_senha": 0
-  },
-  {
-    "_id": "650353c79ba693038e773576",
-    "email": "jeantng2016@gmail.com",
-    "senha": "0f3f2c85a67b613214b4c95066f622b9",
-    "cargo": 1,
-    "status": 1,
-    "documento": 70460827154,
-    "nome": "JEAN",
-    "resetar_senha": 0
-  },
-  {
-    "_id": "650353c79ba693038e773576",
-    "email": "jeantng2016@gmail.com",
-    "senha": "0f3f2c85a67b613214b4c95066f622b9",
-    "cargo": 1,
-    "status": 1,
-    "documento": 70460827154,
-    "nome": "JEAN",
-    "resetar_senha": 0
-  },
-  {
-    "_id": "650353c79ba693038e773576",
-    "email": "jeantng2016@gmail.com",
-    "senha": "0f3f2c85a67b613214b4c95066f622b9",
-    "cargo": 1,
-    "status": 1,
-    "documento": 70460827154,
-    "nome": "JEAN",
-    "resetar_senha": 0
-  },
-  {
-    "_id": "650353c79ba693038e773576",
-    "email": "jeantng2016@gmail.com",
-    "senha": "0f3f2c85a67b613214b4c95066f622b9",
-    "cargo": 1,
-    "status": 1,
-    "documento": 70460827154,
-    "nome": "JEAN",
-    "resetar_senha": 0
-  },
-  {
-    "_id": "650353c79ba693038e773576",
-    "email": "jeantng2016@gmail.com",
-    "senha": "0f3f2c85a67b613214b4c95066f622b9",
-    "cargo": 1,
-    "status": 1,
-    "documento": 70460827154,
-    "nome": "JEAN",
-    "resetar_senha": 0
-  },
-  {
-    "_id": "650353c79ba693038e773576",
-    "email": "jeantng2016@gmail.com",
-    "senha": "0f3f2c85a67b613214b4c95066f622b9",
-    "cargo": 1,
-    "status": 1,
-    "documento": 70460827154,
-    "nome": "JEAN",
-    "resetar_senha": 0
-  },
-  {
-    "_id": "650353c79ba693038e773576",
-    "email": "jeantng2016@gmail.com",
-    "senha": "0f3f2c85a67b613214b4c95066f622b9",
-    "cargo": 1,
-    "status": 1,
-    "documento": 70460827154,
-    "nome": "JEAN",
-    "resetar_senha": 0
   }
 ]
 
@@ -159,7 +79,7 @@ export default function UsersPage() {
         
           <div className='userTable'> 
 
-              {users.map((user)=> ( //Cria cada div de acordo com o arrya recebido
+              {users.length > 0 ? users.map((user)=> ( //Cria cada div de acordo com o arrya recebido
                 <div className="user" key={user._id}>
                   <p>{user.nome}</p>
                   <p>{user.email}</p>
@@ -168,7 +88,9 @@ export default function UsersPage() {
                     <img src="edit-user-icon.png" alt="edit-user-icon" />
                   </Link>
               </div>
-              ))}
+              )) : <div>Nenhum Usuário Cadastrado...</div>
+
+              }
 
           </div>
 
