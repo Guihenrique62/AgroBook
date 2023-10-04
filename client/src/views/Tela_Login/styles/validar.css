@@ -1,0 +1,100 @@
+/* Estilos para o modal */
+.modal {
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    bottom: 0%;
+    right: 0;
+    background-color: #fff;
+    z-index: 1000;
+    
+  }
+  
+  /* Estilos para a camada de fundo do modal */
+  .modal_fundo {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    right: 0%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+  padding: 150px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  width: 150px;
+  }
+  .titulo{
+    position: fixed;
+    top: 35%;
+    left: 30%;
+    
+  }
+  
+  .subtitulo{
+    position: fixed;
+    top: 55%;
+    font-style: italic;
+  
+  }
+  
+  /* Estilos para o input de senha */
+input[type="password"] {
+  position: fixed;
+    top: 65%;
+  width: 40%;
+  left: 30%;
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 12px;
+}
+
+/* Estilizando o input de senha quando ele está em foco (focused) */
+input[type="password"]:focus {
+  border-color: #007bff;
+  outline: none; /* Remove a borda de foco padrão */
+}
+
+/*input de senha quando o valor é inválido  */
+input[type="password"]:invalid {
+  border-color: red;
+}
+
+/* input de senha quando o valor é válido*/
+input[type="password"]:valid {
+  border-color: green;
+}
+
+
+  .button{
+    position: fixed;
+    top: 88%;
+    right: 0%;
+    background-color: #04ff00; 
+    color: #fff; 
+    padding: 10px 20px; /* Espaçamento interno do botão (topo/baixo e esquerda/direita) */
+    border: none; /* Remove a borda do botão */
+    border-radius: 5px; /* Borda arredondada do botão */
+    font-size: 12px; /* Tamanho da fonte */
+    cursor: pointer;
+  }
+  .button:hover{
+    background-color: blue;
+  }
+  .logo{
+    position: fixed;
+    top: 0%;
+    width: 110px;
+  }
+  .fechar{
+    position: fixed;
+    top: 2%;
+    right: 0;
+    font-size: 20px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+  }
+  

@@ -2,8 +2,11 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import updateUser from "../../../controllers/updateUser";
 import React from "react";
+import "../styles/validar.css"
+import logo from "../../../assets/logo.png"
 
-export default function Validar({ ok }) {
+
+export default function Validar({ ok, fechar }) {
   let [newSenha, setnewSenha] = useState("");
   let [salvandoSenha, setsalvandoSenha] = useState([]);
   let [mensageApi, setmensageApi] = useState("");
@@ -49,9 +52,12 @@ export default function Validar({ ok }) {
 
   if (ok === 401 ) {
     return (
-      <div>
-        <h2>REDEFINE sua senha</h2>
-        <p>insfira sua nova senha</p>
+      <div className="modal">
+        <div className="modal_fundo" >
+          <button className="fechar"><box-icon  name='left-arrow-alt' ></box-icon></button>
+          <img className="logo" src={logo} alt="" />
+        <h2 className="titulo" >Redefine sua senha</h2>
+        <p className="subtitulo">Insira sua nova senha</p>
         <input
           type="password"
           name="senha"
@@ -60,9 +66,11 @@ export default function Validar({ ok }) {
         />
         <Link to={"/home"}>
           {" "}
-          <button onClick={createPassowrd}> trocar de senha </button>
+          <p><button onClick={createPassowrd} className="button"> trocar de senha </button></p>
         </Link>
       </div>
+      </div>
+      
     );
   } else {
     
