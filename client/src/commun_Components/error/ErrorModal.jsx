@@ -1,17 +1,28 @@
+/*
+  CRIADO POR: GUILHERME HENRIQUE PORTO DOS SANTOS
+  EMAIL: guilhermeportosantos1@gmail.com
+*/
+
 import React from 'react'
-import { Link } from 'react-router-dom'
 import './errorModal.css'
 
-export default function ErrorModal({isOpen, message,page}) {
+export default function ErrorModal({isOpen,setIsOpen, message}) {
 
 
     if(isOpen){
+
+        //VALIDA SE OS PARAMETROS FORAM PASSADOS
+        if (!setIsOpen || !message) {
+            console.error('um ou mais parametros não atribuidos Menu Lateral')
+            return
+        }
+
         return (
             <div className='backgroundModalError'>
                 <div className="errorModal">
                     <img src="/error-image.png" alt="errorImage" />
                     <p>{message}</p>
-                    <Link to={page} className='LinktoPageModal'>OK</Link>
+                    <button className='closeModalErrorButton' onClick={()=> setIsOpen(false)}>OK</button>
                 </div>
             </div>
         )

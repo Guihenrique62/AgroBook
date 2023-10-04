@@ -1,3 +1,7 @@
+/*
+  CRIADO POR: GUILHERME HENRIQUE PORTO DOS SANTOS
+  EMAIL: guilhermeportosantos1@gmail.com
+*/
 .backgroundModalError{
     background-color: rgba(0, 0, 0, 0.159);
     position: absolute;
@@ -26,4 +30,17 @@
 
 .errorModal img{
     width: 20%;
+}
+
+.closeModalErrorButton{
+    width: 30%;
+    height: 2rem;
+    border-radius: 5px;
+    background-color: #325EA1;
+    text-align: center;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
 }
