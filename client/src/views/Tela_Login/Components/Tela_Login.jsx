@@ -76,7 +76,7 @@ export default function Tela_Login() {
 
         {status === 200 ? <Navigate to="/home" /> : null}
       </form>
-      <Validar ok={false} />
+      <Validar ok={true} />
     </div>
   );
 }

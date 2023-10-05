@@ -29,26 +29,28 @@
     top: 35%;
     left: 30%;
     
+    
+    
   }
   
   .subtitulo{
     position: fixed;
     top: 55%;
-    font-style: italic;
+    font-size: 18px;
   
   }
   
   /* Estilos para o input de senha */
 .newsenha{
-  position: fixed;
-    top: 65%;
-  width: 40%;
-  left: 30%;
+position: fixed;
+  top: 65%;
+  left: 15%;
+  width: 10rem;
   padding: 10px;
   margin: 5px 0;
   border: 1px solid #ccc;
   border-radius: 5px;
-  font-size: 12px;
+  font-size: 15px;
 }
 
 /* Estilizando o input de senha quando ele está em foco (focused) */
@@ -97,4 +99,7 @@
     background-color: transparent;
     cursor: pointer;
   }
+  
+    
+  
   

@@ -54,20 +54,25 @@ export default function Validar({ ok, fechar }) {
     return (
       <div className="modal">
         <div className="modal_fundo" >
-          <button className="fechar"><box-icon  name='left-arrow-alt' ></box-icon></button>
+         <Link to={"/"}> <button className="fechar"><box-icon  name='left-arrow-alt' ></box-icon></button></Link>
           <img className="logo" src={logo} alt="" />
         <h2 className="titulo" >Redefine sua senha</h2>
         <p className="subtitulo">Insira sua nova senha</p>
-        <input
+        
+          <input
           type="password"
           name="senha"
           id="senha"
           className="newsenha"
+          maxLength="8"
           onChange={(ev) => setnewSenha(ev.target.value)}
+       
         />
+        
+        
         <Link to={"/home"}>
           {" "}
-          <p><button onClick={createPassowrd} className="button"> trocar de senha </button></p>
+          <button onClick={createPassowrd} className="button"> trocar de senha </button>
        
         </Link>
       </div>

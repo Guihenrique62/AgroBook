@@ -11,6 +11,13 @@
 
 import { Link } from "react-router-dom";
 import React from "react";
+import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
+import Image from 'react-bootstrap/Image';
+import Row from 'react-bootstrap/Row';
+import ListGroup from 'react-bootstrap/ListGroup';
+
+
 
 
 const books = [{
@@ -145,50 +152,73 @@ export default function Home() {
 
 
     return (
-        <div className='teste'>
+      <div className='teste'>
             <h2>SEJA BEM VINDO</h2>
             <p>
                 <input type="text" />
             </p>
             <p>AÇÃO</p>
             <div className="booksContainer">
-              {bookAcao.map((book)=>(
+             
                   
-
-                  <div key={book._id}> 
-                  <h2>{book.titulo}</h2> 
-                <Link to={`book/${book._id}`}>
-                <img src={book.capa} alt="" /> 
-                </Link>
-                </div>
-               
-                )
-                )}
-                <p>Comedia</p>
-                {bookComedia.map((book)=>(
+                  <Container fluid>
                  
-
-                  <div key={book._id}> 
+                       
+                  <Row >   
+                    {bookAcao.map((book)=>(
+                    <Col  xs={4} >
+                    <h2>{book.titulo}</h2> 
+                <Link to={`book/${book._id}`}>
+                  <Image src={book.capa}thumbnail width={300}  />
+            
+                  </Link> 
+                    </Col>
+              
+                ) 
+               
+                )}   
+                </Row>
+                </Container>
+                <p>Comedia</p>
+                <Container fluid>
+                  <Row>
+                  {bookComedia.map((book)=>(
+                 
+                    <Col xs={4}>
+                     <div key={book._id}> 
                   <h2>{book.titulo}</h2> 
                 <Link to={`book/${book.titulo}`}> 
-               <img src={book.capa} alt="" />
+                <Image src={book.capa} thumbnail width={300} />
                 </Link>
                 </div>
-             
+                    </Col>
                 )
                 )}
+                  </Row>
+                </Container> 
                 <p>Romance</p>
-                {bookRomance.map((book)=>(
-                  
+               <Container fluid>
+                    <Row>
+
+              {bookRomance.map((book)=>(
+                  <Col xs={4}>
                   <div key={book._id}> 
                   <h2>{book.titulo}</h2>
                   <Link to={`book/${book.titulo}`}>
-                <img src={book.capa} alt="" />
+
+                <Image src={book.capa} thumbnail width={300} />
                 </Link>
                 </div>
-                
+                  </Col>
                 )
                 )}
+        
+                    </Row>
+
+               </Container>
+               
+                
+      
 
             </div>
             
