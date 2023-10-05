@@ -48,10 +48,9 @@ export default function EditUser() {
 
         <EditUserForm status={user.status} user={user}></EditUserForm>
       </div>
-      <button onClick={()=>setOpenModalAlert(!openModalAlert)}>openmodal</button>
       <AlertModal isOpen={openModalAlert} setIsOpen={setOpenModalAlert} LinkToSucess={'/user'} message={messageAlert} buttonMessageSucess={'Desabilitar'}></AlertModal>
-      <ErrorModal/>
-      <CorrectModal/>
+      <CorrectModal isOpen={openModalSucess} page={'/user'} message={'ola'}></CorrectModal>
+      <ErrorModal isOpen={openModalError} setIsOpen={setOpenModalError} message={'ola'}></ErrorModal>
     </div>
   );
 }
