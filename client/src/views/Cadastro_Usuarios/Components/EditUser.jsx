@@ -7,14 +7,22 @@
 // ROTA PARA A PAGINA DE EDIÇÃO DE USUARIO //
 /////////////////////////////////////////////
 
-import React from "react";
+import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import "../styles/editUser.css";
 import EditUserForm from "./EditUserForm";
+import AlertModal from "../../../commun_Components/alertModal/AlertModal";
+import ErrorModal from "../../../commun_Components/error/ErrorModal";
+import CorrectModal from "../../../commun_Components/correctModal/CorrectModal";
 
 export default function EditUser() {
-  const { userID } = useParams();
+  const { userID } = useParams(); //Id do user para realizar requisição
+  const [openModalAlert, setOpenModalAlert] = useState(false)
+  const [openModalError, setOpenModalError] = useState(false)
+  const [openModalSucess, setOpenModalSucess] = useState(false)
+  const messageAlert = 'Deseja Mesmo Desabilitar este Usuário? Todos os livros vinculados a ele voltará a constar como disponível!'
+
 
   const user = {
     _id: "65047a74babdd7046c86e390",
@@ -40,6 +48,10 @@ export default function EditUser() {
 
         <EditUserForm status={user.status} user={user}></EditUserForm>
       </div>
+      <button onClick={()=>setOpenModalAlert(!openModalAlert)}>openmodal</button>
+      <AlertModal isOpen={openModalAlert} setIsOpen={setOpenModalAlert} LinkToSucess={'/user'} message={messageAlert} buttonMessageSucess={'Desabilitar'}></AlertModal>
+      <ErrorModal/>
+      <CorrectModal/>
     </div>
   );
 }

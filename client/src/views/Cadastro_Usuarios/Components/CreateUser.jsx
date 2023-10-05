@@ -69,7 +69,6 @@ export default function CreateUser() {
         </form>
       </div>
 
-
       <CorrectModal isOpen={openModalSucess} page={'/user'} message={'ola'}></CorrectModal>
       <ErrorModal isOpen={openModalError} setIsOpen={setOpenModalError} message={'ola'}></ErrorModal>
     </div>

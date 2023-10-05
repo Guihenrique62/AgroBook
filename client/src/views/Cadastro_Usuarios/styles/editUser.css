@@ -1,3 +1,8 @@
+/*
+  CRIADO POR: GUILHERME HENRIQUE PORTO DOS SANTOS
+  EMAIL: guilhermeportosantos1@gmail.com
+*/
+
 .editUserMasterComponent {
   width: 100vw;
   height: 100vh;
@@ -12,7 +17,7 @@
   display: flex;
   flex-direction: column;
   width: 80%;
-  height: 80%;
+  height: 85%;
   padding: 0 0 1rem 0;
   font-family: "Inter", sans-serif;
   border-radius: 10px;
@@ -106,4 +111,5 @@
   display: flex;
   justify-content: end;
   gap: 3rem;
+  
 }

@@ -1,3 +1,8 @@
+/*
+  CRIADO POR: GUILHERME HENRIQUE PORTO DOS SANTOS
+  EMAIL: guilhermeportosantos1@gmail.com
+*/
+
 import React from "react";
 
 export default function EditUserForm({ status, user }) {
@@ -55,7 +60,8 @@ export default function EditUserForm({ status, user }) {
             </label>
             <input type="password" name="senha" id="senha" required />
           </div>
-          <div className="containerCargo ">
+          <div className="containerCargo">
+          <label htmlFor="cargo">Cargo: <b>*</b></label>
             <select>
               <option value={0}>ADMINISTRADOR</option>
               <option value={1}>COLABORADOR</option>
@@ -125,7 +131,8 @@ export default function EditUserForm({ status, user }) {
             </label>
             <input type="password" name="senha" id="senha" disabled />
           </div>
-          <div className="containerCargo ">
+          <div className="containerCargo">
+          <label htmlFor="cargo">Cargo: <b>*</b></label>
             <select disabled>
               <option value={0}>ADMINISTRADOR</option>
               <option value={1}>COLABORADOR</option>
