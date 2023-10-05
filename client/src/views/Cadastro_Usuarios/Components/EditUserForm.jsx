@@ -3,9 +3,21 @@
   EMAIL: guilhermeportosantos1@gmail.com
 */
 
-import React from "react";
+import React, { useState } from "react";
+import InputMask from 'react-input-mask';
+
 
 export default function EditUserForm({ status, user }) {
+  //Inputs do form
+  const [nome, setNome] = useState(user.nome)//Manipula o valor do input NOme
+  const [cpf, setCpf] = useState(user.documento) // Manipula o valor do input CPF
+  const [email,setEmail] = useState(user.email)//Manipula o valor do input Email
+  const [senha, setSenha] = useState(user.senha) // Manipula o valor do input Senha
+  const [cargoSelect, setCargoSelect] = useState(user.cargo) //Manipula cargo selecionado
+
+
+
+
   if (status == 1) {
     //valida se o usuário foi passado na prop
     if (!user) {
@@ -18,26 +30,23 @@ export default function EditUserForm({ status, user }) {
             <label htmlFor="nome">
               Nome: <b>*</b>
             </label>
-            <input
-              type="text"
-              name="nome"
-              id="nome"
-              required
-              value={user.nome}
-            />
+            <input type="text" name='nome' id='nome' required value={nome} onChange={(e)=> setNome(e.target.value)}/>
           </div>
           <div className="inputCpf createFormInputs">
             <label htmlFor="cpf">
               Cpf: <b>*</b>
             </label>
-            <input
-              type="number"
-              name="cpf"
-              id="cpf"
-              required
-              value={user.documento}
-              disabled
-            />
+            <InputMask
+                mask="999.999.999-99"
+                maskChar={null}
+                type="text"
+                name='cpf'
+                id='cpf'
+                value={cpf}
+                onChange={(e)=>setCpf(e.target.value)}
+                minLength={12}
+                disabled
+              />
           </div>
         </div>
 
@@ -46,23 +55,17 @@ export default function EditUserForm({ status, user }) {
             <label htmlFor="email">
               E-mail: <b>*</b>
             </label>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              required
-              value={user.email}
-            />
+            <input type="email" name='email' id='email' required value={email} onChange={(e)=> setEmail(e.target.value)} />
           </div>
           <div className="inputPassword createFormInputs">
             <label htmlFor="senha">
               Senha: <b>*</b>
             </label>
-            <input type="password" name="senha" id="senha" required />
+            <input type="password" name='senha' id='senha' required value={senha} onChange={(e) => setSenha(e.target.value)} minLength={8}/>
           </div>
           <div className="containerCargo">
           <label htmlFor="cargo">Cargo: <b>*</b></label>
-            <select>
+          <select value={cargoSelect} onChange={(e) => setCargoSelect(e.target.value)}>
               <option value={0}>ADMINISTRADOR</option>
               <option value={1}>COLABORADOR</option>
             </select>
@@ -90,25 +93,23 @@ export default function EditUserForm({ status, user }) {
             <label htmlFor="nome">
               Nome: <b>*</b>
             </label>
-            <input
-              type="text"
-              name="nome"
-              id="nome"
-              disabled
-              value={user.nome}
-            />
+            <input type="text" name='nome' id='nome' disabled value={nome} onChange={(e)=> setNome(e.target.value)}/>
           </div>
           <div className="inputCpf createFormInputs">
             <label htmlFor="cpf">
               Cpf: <b>*</b>
             </label>
-            <input
-              type="number"
-              name="cpf"
-              id="cpf"
-              disabled
-              value={user.documento}
-            />
+            <InputMask
+                mask="999.999.999-99"
+                maskChar={null}
+                type="text"
+                name='cpf'
+                id='cpf'
+                value={cpf}
+                onChange={(e)=>setCpf(e.target.value)}
+                minLength={12}
+                disabled
+              />
           </div>
         </div>
 
@@ -117,23 +118,17 @@ export default function EditUserForm({ status, user }) {
             <label htmlFor="email">
               E-mail: <b>*</b>
             </label>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              disabled
-              value={user.email}
-            />
+            <input type="email" name='email' id='email' disabled value={email} onChange={(e)=> setEmail(e.target.value)} />
           </div>
           <div className="inputPassword createFormInputs">
             <label htmlFor="senha">
               Senha: <b>*</b>
             </label>
-            <input type="password" name="senha" id="senha" disabled />
+            <input type="password" name='senha' id='senha' disabled value={senha} onChange={(e) => setSenha(e.target.value)} minLength={8}/>
           </div>
           <div className="containerCargo">
           <label htmlFor="cargo">Cargo: <b>*</b></label>
-            <select disabled>
+          <select value={cargoSelect} onChange={(e) => setCargoSelect(e.target.value)} disabled>
               <option value={0}>ADMINISTRADOR</option>
               <option value={1}>COLABORADOR</option>
             </select>
@@ -151,6 +146,7 @@ export default function EditUserForm({ status, user }) {
           <span className="habiliteUserButton">Habilitar</span>
         </div>
       </form>
+      
     );
   }
 }
