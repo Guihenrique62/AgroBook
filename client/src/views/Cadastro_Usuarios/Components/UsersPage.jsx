@@ -25,7 +25,7 @@ const users = [ // array que recebe resposta API
   },
   {
     "_id": "65045929ac12560039fd4ec0",
-    "nome": "GUILHERME HENRIQUE PORTO DOS SANTOS",
+    "nome": "GUILHERME henrique PORTO DOS SANTOS",
     "documento": 71089729138,
     "email": "guilhermeportosantos1@gmail.com",
     "senha": "58e31ef634a56bfaea1525841d455e90",

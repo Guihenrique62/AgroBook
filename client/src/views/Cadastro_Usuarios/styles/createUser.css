@@ -134,3 +134,16 @@
     border-color: #666666;
     outline: none;
 }
+
+/* 
+Retira setinha de incremento do navegador */
+
+.inputCpf input[type="number"] {
+    -moz-appearance: textfield; 
+  }
+  
+  .inputCpf input[type="number"]::-webkit-inner-spin-button,
+  .inputCpf input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none; 
+    margin: 0;
+  }
