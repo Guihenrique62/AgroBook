@@ -40,6 +40,7 @@ export default function Tela_Login() {
   };
 
   return (
+    <>
     <div>
       <form onSubmit={handleSubmit} className={style.loginContainer}>
         <img className={style.logo} src={loginLogo} alt="" />
@@ -80,7 +81,8 @@ export default function Tela_Login() {
 
         {status === 200 ? <Navigate to="/home" /> : null}
       </form>
-      <Validar ok={true} />
     </div>
+    <Validar ok={true} />
+    </>
   );
 }
