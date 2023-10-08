@@ -13,7 +13,7 @@ proporção da tela
 .loginContainer{
     background-color: #fff;
     width: 270px;
-    height: 320px;
+    height: 100%;
     box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.212);
     padding: 1rem;
     display: flex;
@@ -24,9 +24,9 @@ proporção da tela
     border-radius: 20px;
     
 }
-.logo{
-    height: 60px;
-    width: 60px;
+.loginlogo{
+    height: 8em;
+    width: 8em;
 }
 .inputbox{
     margin: 10px 0;
@@ -41,6 +41,7 @@ proporção da tela
     width: 200px;
     height: 30px;
     border: none;
+    border-bottom: solid 2px #02c00270;
     outline: none;
     font-size: 1em;
     padding: 0 35px 0 5px;

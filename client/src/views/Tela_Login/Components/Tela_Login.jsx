@@ -43,7 +43,7 @@ export default function Tela_Login() {
     <>
     <div>
       <form onSubmit={handleSubmit} className={style.loginContainer}>
-        <img className={style.logo} src={loginLogo} alt="" />
+        <img className={style.loginlogo} src={loginLogo} alt="" />
         <div className={style.inputbox}>
           <label className="Email" htmlFor="" className={style.label}>
             <p>Email:</p>
