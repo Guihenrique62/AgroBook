@@ -1,0 +1,21 @@
+
+.booksContainer{
+    
+   text-align: center;
+    overflow: hidden;
+   
+    
+}
+
+.slider-home{
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+    background-color: bisque;
+}
+.book-slider {
+    overflow: hidden;
+    display: flex;
+}
+.image-home{
+    padding: 2px;
+}

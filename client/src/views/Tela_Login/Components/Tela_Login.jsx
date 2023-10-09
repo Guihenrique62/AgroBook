@@ -14,6 +14,7 @@ import Login from "../../../controllers/Login";
 import { Link, Navigate, redirect } from "react-router-dom";
 import Validar from "./validar";
 import loginLogo from "../../../assets/logo.png";
+import Home from "../../Home/components/Home";
 
 export default function Tela_Login() {
   let [email, setEmail] = useState("");
@@ -45,7 +46,7 @@ export default function Tela_Login() {
       <form onSubmit={handleSubmit} className={style.loginContainer}>
         <img className={style.loginlogo} src={loginLogo} alt="" />
         <div className={style.inputbox}>
-          <label className="Email" htmlFor="" className={style.label}>
+          <label  htmlFor="" className={style.label}>
             <input
             placeholder="E-mail"
               type="email"
@@ -74,6 +75,8 @@ export default function Tela_Login() {
             />
           </label>
         </div>
+
+        <Link to={"/home"} ><p>clica</p></Link>
         <div className="logBtPlace"><button type="subimt" className={style.logbutton}>Login</button>
         </div>
 
