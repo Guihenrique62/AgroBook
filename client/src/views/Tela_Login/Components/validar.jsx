@@ -50,7 +50,7 @@ export default function Validar({ ok, fechar }) {
      updatepass()
   };
 
-  if (ok === true ) {
+  if (ok=== false) {
     return (
       <div className="modal">
         <div className="modal_fundo" >

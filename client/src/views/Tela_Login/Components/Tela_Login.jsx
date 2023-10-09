@@ -40,35 +40,42 @@ export default function Tela_Login() {
   };
 
   return (
+    <>
     <div>
       <form onSubmit={handleSubmit} className={style.loginContainer}>
-        <img className={style.logo} src={loginLogo} alt="" />
-        <label className="Email" htmlFor="">
-          <p>Email:</p>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            value={email}
-            required
-            onChange={(ev) => setEmail(ev.target.value)}
-          />
-        </label>
-        <label htmlFor="senha">
-          <p>Senha:</p>
-          <input
-            type="password"
-            name="senha"
-            id="senha"
-            minLength="8"
-            maxLength="100"
-            // pattern="[A-Z a-z]+"
-            value={senha}
-            required
-            onChange={(ev) => setSenha(ev.target.value)}
-          />
-        </label>
-        <button type="subimt">Logar</button>
+        <img className={style.loginlogo} src={loginLogo} alt="" />
+        <div className={style.inputbox}>
+          <label className="Email" htmlFor="" className={style.label}>
+            <input
+            placeholder="E-mail"
+              type="email"
+              name="email"
+              id="email"
+              value={email}
+              required
+              onChange={(ev) => setEmail(ev.target.value)}
+            />
+          </label>
+        </div>
+        <div className={style.inputbox}>
+          <label htmlFor="senha" className={style.label}>
+            <input
+            className="logSenha"
+            placeholder="Senha"
+              type="password"
+              name="senha"
+              id="senha"
+              minLength="8"
+              maxLength="100"
+              // pattern="[A-Z a-z]+"
+              value={senha}
+              required
+              onChange={(ev) => setSenha(ev.target.value)}
+            />
+          </label>
+        </div>
+        <div className="logBtPlace"><button type="subimt" className={style.logbutton}>Login</button>
+        </div>
 
         <div>
           {status === 200 || 0 || "200" ? mensgaemRetornada : mensgaemRetornada}
@@ -76,7 +83,8 @@ export default function Tela_Login() {
 
         {status === 200 ? <Navigate to="/home" /> : null}
       </form>
-      <Validar ok={true} />
     </div>
+    <Validar ok={true} />
+    </>
   );
 }

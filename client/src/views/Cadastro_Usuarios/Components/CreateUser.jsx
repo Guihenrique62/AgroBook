@@ -83,7 +83,7 @@ export default function CreateUser() {
             </div>
             <div className='inputPassword createFormInputs'>
               <label htmlFor="senha">Senha: <b>*</b></label>
-              <input type="password" name='senha' id='senha' required value={senha} onChange={(e) => setSenha(e.target.value)} minLength={8}/>
+              <input type="password" name='senha' id='createsenha' required value={senha} onChange={(e) => setSenha(e.target.value)} minLength={8}/>
             </div>
             <div className='containerCargo'>
               <label htmlFor="cargo">Cargo: <b>*</b></label>
