@@ -9,8 +9,9 @@
   EMAIL: jeantng2016@gmail.com  
 */
 
-import { createBrowserRouter } from "react-router-dom";
-import React from "react";
+import { createBrowserRouter, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { isAuthenticated } from "./controllers/isAuthenticated";
 
 //paginas
 import UsersLayout from "./views/Cadastro_Usuarios/UsersLayout";
@@ -30,6 +31,29 @@ import PedidosLayout from "./views/Pedidos/PedidosLayout";
 import PagePedido from "./views/Pedidos/components/PagePedido";
 import EstoqueEdit from "./views/Estoque/Components/EditEstoque";
 
+
+const PrivateRoute = ({ element, children }) => {
+  const navigate = useNavigate();
+  const [authenticated, setAuthenticated] = useState(false);
+
+  useEffect(() => {
+    const checkAuthentication = async () => {
+      const isAuthenticatedUser = await isAuthenticated(); // Função que verifica a autenticação
+      setAuthenticated(isAuthenticatedUser);
+
+      if (!isAuthenticatedUser) {
+        // Redireciona para a tela de login se não estiver autenticado
+        navigate("/");
+      }
+    };
+
+    checkAuthentication();
+  }, [navigate]);
+
+  return authenticated ? (element || children) : null;
+};
+
+
 // ROTAS DA PAGINA WEB
 const router = createBrowserRouter([
     {
@@ -42,7 +66,7 @@ const router = createBrowserRouter([
     },
     {
         path: "/home",
-        element: <HomeLayout />,
+        element: <PrivateRoute> <HomeLayout /> </PrivateRoute> ,
         children: [
             { index: true, element: <Home /> },
             { path: "book/:bookID", element: <HomeBook /> },
@@ -51,7 +75,7 @@ const router = createBrowserRouter([
     },
     {
         path: "/user",
-        element: <UsersLayout />, //Layout Pagina Users
+        element: <PrivateRoute><UsersLayout /></PrivateRoute>, //Layout Pagina Users
         children: [
             { index: true, element: <UsersPage /> },//Rota main de Users
             { path: "newUser", element: <CreateUser /> }, // Rota create User
@@ -60,7 +84,7 @@ const router = createBrowserRouter([
     },
     {
         path: "/storage",
-        element: <EstoqueLayout />,
+        element: <PrivateRoute><EstoqueLayout /></PrivateRoute>,
         children: [
             { index: true, element: <EstoquePage /> },// Rota para ver estoque
             { path: "formEstoque", element: <Formulario /> },// rota para adcionar no estoque
@@ -69,7 +93,7 @@ const router = createBrowserRouter([
     },
     {
         path: "/orders",
-        element: <PedidosLayout />,
+        element: <PrivateRoute><PedidosLayout /></PrivateRoute>,
         children: [
             { index: true, element: <PagePedido /> }
         ]
