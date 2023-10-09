@@ -7,7 +7,7 @@ import React, { useState } from "react";
 import InputMask from 'react-input-mask';
 
 
-export default function EditUserForm({ status, user }) {
+export default function EditUserForm({ status, user, setModalError, setModalAlert, setModalSucess, setMessage}) {
   //Inputs do form
   const [nome, setNome] = useState(user.nome)//Manipula o valor do input NOme
   const [cpf, setCpf] = useState(user.documento) // Manipula o valor do input CPF
@@ -16,7 +16,12 @@ export default function EditUserForm({ status, user }) {
   const [cargoSelect, setCargoSelect] = useState(user.cargo) //Manipula cargo selecionado
 
 
+  const handlerEditSave = (e)=>{
+    e.preventDefault()
 
+    setMessage('Usuário Criado com sucesso!')
+    setModalSucess(true)
+  }
 
   if (status == 1) {
     //valida se o usuário foi passado na prop
@@ -80,8 +85,8 @@ export default function EditUserForm({ status, user }) {
         </div>
 
         <div className="thirdcontainerinputedit">
-          <span className="desabilitUserButton">Desabilitar</span>
-          <button className="saveButton">Salvar</button>
+          <span className="desabilitUserButton" >Desabilitar</span>
+          <button className="saveButton" onClick={handlerEditSave}>Salvar</button>
         </div>
       </form>
     );
@@ -143,7 +148,7 @@ export default function EditUserForm({ status, user }) {
         </div>
 
         <div className="thirdcontainerinputedit">
-          <span className="habiliteUserButton">Habilitar</span>
+          <span className="habiliteUserButton" onClick={()=> setModalAlert(true)}>Habilitar</span>
         </div>
       </form>
       

@@ -21,8 +21,7 @@ export default function EditUser() {
   const [openModalAlert, setOpenModalAlert] = useState(false)
   const [openModalError, setOpenModalError] = useState(false)
   const [openModalSucess, setOpenModalSucess] = useState(false)
-  const messageAlert = 'Deseja Mesmo Desabilitar este Usuário? Todos os livros vinculados a ele voltará a constar como disponível!'
-
+  const [messageModalSucess,setMessageModalSucess] = useState('')
 
   const user = {
     _id: "65047a74babdd7046c86e390",
@@ -30,8 +29,8 @@ export default function EditUser() {
     documento: 70657247197,
     email: "fillypecunha@gmail.com",
     senha: "9794d28317313a72eb0fd5e91bc63092",
-    cargo: 0,
-    status: 0,
+    cargo: 1,
+    status: 1,
     resetar_senha: 0,
   };
 
@@ -46,10 +45,10 @@ export default function EditUser() {
           </Link>
         </div>
 
-        <EditUserForm status={user.status} user={user}></EditUserForm>
+        <EditUserForm status={user.status} user={user} setModalAlert={setOpenModalAlert} setModalSucess={setOpenModalSucess} setModalError={setOpenModalError} setMessage={setMessageModalSucess}></EditUserForm>
       </div>
-      <AlertModal isOpen={openModalAlert} setIsOpen={setOpenModalAlert} LinkToSucess={'/user'} message={messageAlert} buttonMessageSucess={'Desabilitar'}></AlertModal>
-      <CorrectModal isOpen={openModalSucess} page={'/user'} message={'ola'}></CorrectModal>
+      <AlertModal isOpen={openModalAlert} setIsOpen={setOpenModalAlert} LinkToSucess={'/user'} ></AlertModal>
+      <CorrectModal isOpen={openModalSucess} page={'/user'} message={messageModalSucess}></CorrectModal>
       <ErrorModal isOpen={openModalError} setIsOpen={setOpenModalError} message={'ola'}></ErrorModal>
     </div>
   );

@@ -32,7 +32,7 @@ export default function CreateUser() {
 
   
   const handleSave = (e)=> {
-    
+    e.preventDefault()
     const data = {
       nome: nome,
       cpf: cpf,
@@ -41,6 +41,7 @@ export default function CreateUser() {
       cargoSelect: cargoSelect
     }
     console.log(data)
+    setOpenModalSucess(true)
   }
 
   return (

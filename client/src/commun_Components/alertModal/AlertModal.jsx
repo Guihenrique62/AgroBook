@@ -7,12 +7,12 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import './alertModal.css'
 
-export default function AlertModal({isOpen,setIsOpen, LinkToSucess, message, buttonMessageSucess}) {
+export default function AlertModal({isOpen,setIsOpen, LinkToSucess }) {
     if(isOpen){
 
         //VALIDA SE OS PARAMETROS FORAM PASSADOS
-        if (!setIsOpen || !LinkToSucess || !message || !buttonMessageSucess) {
-            console.error('um ou mais parametros não atribuidos Menu Lateral')
+        if (!setIsOpen || !LinkToSucess) {
+            console.error('um ou mais parametros não atribuidos alertmodal')
             return
         }
 
@@ -20,10 +20,10 @@ export default function AlertModal({isOpen,setIsOpen, LinkToSucess, message, but
             <div className='backgroundModalAlert'>
                 <div className="alertModal">
                     <img src="/alert-modal-icon.png" alt="errorImage" />
-                    <p>{message}</p>
+                    <p>Deseja Mesmo Desabilitar este Usuário? Todos os livros vinculados a ele voltará a constar como disponível!</p>
                     
                     <div className='conteinerBtnModalAlert'>
-                        <Link to={LinkToSucess} className='continuosModalAlertButton' >{buttonMessageSucess}</Link>
+                        <Link to={'/user'} className='continuosModalAlertButton'>Desabilitar</Link>
                         <button className='cancelModalAlertButton' onClick={()=> setIsOpen(false)}>Cancelar</button>
                     </div>
                 </div>
