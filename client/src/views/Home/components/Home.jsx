@@ -150,74 +150,74 @@ export default function Home() {
     return (
 
       /* div booksContainer pai que contem todos elementos */
-            <div className="body">
+           
               <div className="booksContainer">
               
                 {/* div que controla formato movimento de cada card */}
               
-                <div className="slider-home">
-                    <p>AÇÃO</p>
-                    {/* div book-slider que controla proporçao de cada card dos livros */}
-                        <div className="book-slider">
-                        {bookAcao.map((book)=>(
-                        <div>
-                            <h2>{book.titulo}</h2>
-                            {/* div image home vai ser que controla o tamanho da imagem  */}
-                          <div className="image-home">
-                        <Link to={`book/${book._id}`}>
-                      <img src={book.capa} alt="" />
               
-                      </Link>
+                    <div className="slider-home">
+                      <p>AÇÃO</p>
+                      {/* div book-slider que controla proporçao de cada card dos livros */}
+                          <div className="book-slider">
+                          {bookAcao.map((book)=>(
+                          <div>
+                              <h2>{book.titulo}</h2>
+                              {/* div image home vai ser que controla o tamanho da imagem  */}
+                            <div className="image-home">
+                          <Link to={`book/${book._id}`}>
+                        <img src={book.capa} alt="" />
+                        </Link>
+                            </div>
                           </div>
-              
+                      
+                      )
+                      
+                      )}
+                    </div>
+                    <div className="slider-home">
+                      <p>Comedia</p>
+                        {bookComedia.map((book)=>(
+                           <div key={book._id}>
+                        <h2>{book.titulo}</h2>
+                        <div className="image-home">
+                        <Link to={`book/${book.titulo}`}>
+                      <img src={book.capa} alt="erro" />
+                      </Link>
                         </div>
-              
-                    )
-              
-                    )}
-                    <p>Comedia</p>
-              
-                      {bookComedia.map((book)=>(
-              
-                         <div key={book._id}>
-                      <h2>{book.titulo}</h2>
-                      <div className="image-home">
+                      </div>
+                      )
+                      )}
+                    </div>
+              <div className="slider-home">
+                
+                      <p>Romance</p>
+                
+                    {bookRomance.map((book)=>(
+                
+                        <div key={book._id}>
+                        <h2>{book.titulo}</h2>
+                        <div className="image-home" >
                       <Link to={`book/${book.titulo}`}>
-                    <img src={book.capa} alt="erro" />
-                    </Link>
+                        <img src={book.capa} alt="" />
+                
+                      </Link>
+                        </div>
+                
                       </div>
-              
-                    </div>
-              
-                    )
-                    )}
-              
-                    <p>Romance</p>
-              
-                  {bookRomance.map((book)=>(
-              
-                      <div key={book._id}>
-                      <h2>{book.titulo}</h2>
-                      <div className="image-home" >
-                    <Link to={`book/${book.titulo}`}>
-                      <img src={book.capa} alt="" />
-              
-                    </Link>
-                      </div>
-              
-                    </div>
-              
-                    )
-                    )}
+                
+                      )
+                      )}
+              </div>
               
                 </div>
               
               
-                          </div>
+                          
               
               
                       </div> 
-                      </div>
+                      
                   )
            
 
