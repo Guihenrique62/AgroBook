@@ -46,8 +46,8 @@ export default function Tela_Login() {
         <img className={style.loginlogo} src={loginLogo} alt="" />
         <div className={style.inputbox}>
           <label className="Email" htmlFor="" className={style.label}>
-            <p>Email:</p>
             <input
+            placeholder="E-mail"
               type="email"
               name="email"
               id="email"
@@ -59,8 +59,9 @@ export default function Tela_Login() {
         </div>
         <div className={style.inputbox}>
           <label htmlFor="senha" className={style.label}>
-            <p>Senha:</p>
             <input
+            className="logSenha"
+            placeholder="Senha"
               type="password"
               name="senha"
               id="senha"
@@ -73,7 +74,8 @@ export default function Tela_Login() {
             />
           </label>
         </div>
-        <button type="subimt" className={style.logbutton}>Logar</button>
+        <div className="logBtPlace"><button type="subimt" className={style.logbutton}>Login</button>
+        </div>
 
         <div>
           {status === 200 || 0 || "200" ? mensgaemRetornada : mensgaemRetornada}
