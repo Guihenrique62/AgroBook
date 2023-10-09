@@ -1,0 +1,25 @@
+.body{
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    width: 25rem;
+    height: 200px;
+    background-color: black;
+}
+
+
+.booksContainer{
+    display: flex;
+   text-align: center;
+    overflow: hidden;
+    
+}
+
+.slider-home{
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+}
+.book-slider {
+    overflow: hidden;
+}

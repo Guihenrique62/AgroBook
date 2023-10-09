@@ -11,11 +11,7 @@
 
 import { Link } from "react-router-dom";
 import React from "react";
-import Col from 'react-bootstrap/Col';
-import Container from 'react-bootstrap/Container';
-import Image from 'react-bootstrap/Image';
-import Row from 'react-bootstrap/Row';
-import ListGroup from 'react-bootstrap/ListGroup';
+import "../style/home.css";
 
 
 
@@ -152,81 +148,78 @@ export default function Home() {
 
 
     return (
-      <div className='teste'>
-            <h2>SEJA BEM VINDO</h2>
-            <p>
-                <input type="text" />
-            </p>
-            <p>AÇÃO</p>
-            <div className="booksContainer">
-             
-                  
-                  <Container fluid>
-                 
-                       
-                  <Row >   
-                    {bookAcao.map((book)=>(
-                    <Col  xs={4} >
-                    <h2>{book.titulo}</h2> 
-                <Link to={`book/${book._id}`}>
-                  <Image src={book.capa}thumbnail width={300}  />
-            
-                  </Link> 
-                    </Col>
+
+      /* div booksContainer pai que contem todos elementos */
+            <div className="body">
+              <div className="booksContainer">
               
-                ) 
-               
-                )}   
-                </Row>
-                </Container>
-                <p>Comedia</p>
-                <Container fluid>
-                  <Row>
-                  {bookComedia.map((book)=>(
-                 
-                    <Col xs={4}>
-                     <div key={book._id}> 
-                  <h2>{book.titulo}</h2> 
-                <Link to={`book/${book.titulo}`}> 
-                <Image src={book.capa} thumbnail width={300} />
-                </Link>
+                {/* div que controla formato movimento de cada card */}
+              
+                <div className="slider-home">
+                    <p>AÇÃO</p>
+                    {/* div book-slider que controla proporçao de cada card dos livros */}
+                        <div className="book-slider">
+                        {bookAcao.map((book)=>(
+                        <div>
+                            <h2>{book.titulo}</h2>
+                            {/* div image home vai ser que controla o tamanho da imagem  */}
+                          <div className="image-home">
+                        <Link to={`book/${book._id}`}>
+                      <img src={book.capa} alt="" />
+              
+                      </Link>
+                          </div>
+              
+                        </div>
+              
+                    )
+              
+                    )}
+                    <p>Comedia</p>
+              
+                      {bookComedia.map((book)=>(
+              
+                         <div key={book._id}>
+                      <h2>{book.titulo}</h2>
+                      <div className="image-home">
+                      <Link to={`book/${book.titulo}`}>
+                    <img src={book.capa} alt="erro" />
+                    </Link>
+                      </div>
+              
+                    </div>
+              
+                    )
+                    )}
+              
+                    <p>Romance</p>
+              
+                  {bookRomance.map((book)=>(
+              
+                      <div key={book._id}>
+                      <h2>{book.titulo}</h2>
+                      <div className="image-home" >
+                    <Link to={`book/${book.titulo}`}>
+                      <img src={book.capa} alt="" />
+              
+                    </Link>
+                      </div>
+              
+                    </div>
+              
+                    )
+                    )}
+              
                 </div>
-                    </Col>
-                )
-                )}
-                  </Row>
-                </Container> 
-                <p>Romance</p>
-               <Container fluid>
-                    <Row>
-
-              {bookRomance.map((book)=>(
-                  <Col xs={4}>
-                  <div key={book._id}> 
-                  <h2>{book.titulo}</h2>
-                  <Link to={`book/${book.titulo}`}>
-
-                <Image src={book.capa} thumbnail width={300} />
-                </Link>
-                </div>
-                  </Col>
-                )
-                )}
-        
-                    </Row>
-
-               </Container>
-               
-                
-      
-
-            </div>
-            
-
-
-
-        </div>
-    )
+              
+              
+                          </div>
+              
+              
+                      </div> 
+                      </div>
+                  )
+           
 
 
 }

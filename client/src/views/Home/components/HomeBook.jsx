@@ -6,8 +6,8 @@
 
 import React from "react";
 import { useParams } from "react-router-dom";
-import Carousel from 'react-bootstrap/Carousel'
-import Button from 'react-bootstrap/Button';
+
+
 export default function HomeBook(){
 
     const { bookID } = useParams() //Pega o ID passado na URL
@@ -35,8 +35,9 @@ export default function HomeBook(){
 
     return(
         <div>
-            {books.map((book)=>(
-
+        
+                 {books.map((book)=>(
+              
                 <div>
                     <div key={book._id}>
                      <h2>{book.titulo}</h2>
@@ -63,7 +64,9 @@ export default function HomeBook(){
                 
                
                
-            ))}
+            ))  
+           
+            }
             
         </div>
        
