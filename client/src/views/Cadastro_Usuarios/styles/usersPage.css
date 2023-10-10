@@ -178,7 +178,7 @@
         height: 20px;
     }
 
-    .cargoSpan, .userCargo{
+    .cargoSpan, .userCargo, .emailSpan, .userEmail {
         display: none;
     }
 

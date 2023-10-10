@@ -84,7 +84,7 @@ export default function UsersPage() {
       <div className="usersContainer">
         <div className="headTableUsers">
           <span>Nome:</span>
-          <span>E-mail:</span>
+          <span className='emailSpan'>E-mail:</span>
           <span className='cargoSpan'>Cargo:</span>
           <span className='editarSpan'>Editar:</span>
         </div>
@@ -93,7 +93,7 @@ export default function UsersPage() {
           {filteredUsers.length > 0 ? filteredUsers.map(user => (
             <div className="user" key={user._id}>
               <p>{user.nome}</p>
-              <p>{user.email}</p>
+              <p className='userEmail'>{user.email}</p>
               <p className='userCargo'>{user.cargo === 0 ? 'Admin' : 'Colaborador'}</p>
               <Link to={`editUser/${user._id}`} className='editUserLink'>
                 <img src="edit-user-icon.png" alt="edit-user-icon" />

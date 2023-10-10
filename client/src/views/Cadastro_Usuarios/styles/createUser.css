@@ -4,8 +4,9 @@
 */
 .createUserMasterComponent{
     width: 100vw;
-    height: 100vh;
+    height: auto;
     display: flex;
+    padding: 3rem 0;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -146,4 +147,69 @@ Retira setinha de incremento do navegador */
   .inputCpf input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none; 
     margin: 0;
+  }
+
+
+  @media (max-width: 980px){
+    .secondcontainerinput{
+        gap: 2rem;
+    }
+  }
+
+  @media (max-width: 750px){
+    
+.firstcontainerinput{
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.secondcontainerinput{
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    
+    gap: 1rem;
+}
+
+.thirdcontainerinput{
+    display: flex;
+    justify-content: end;
+
+}
+    
+    .secondcontainerinput{
+
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+
+    .createUserMain{
+        justify-content: center;
+        height: auto;
+    }
+
+    .createUserComponent{
+        height: auto;
+        margin: auto;
+    }
+  }
+
+  @media (max-width: 550px){
+    .createUserMain{
+        padding: 1rem 2rem;
+    }
+
+
+    .createUserComponent{
+        width: 100%;
+        height: 100%;
+        border: none;
+        border-radius: none;
+    }
+
+    .createUserMasterComponent{
+        padding: 0;
+    }
   }
