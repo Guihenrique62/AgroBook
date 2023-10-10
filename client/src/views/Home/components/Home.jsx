@@ -10,7 +10,7 @@
 
 
 import { Link } from "react-router-dom";
-import React from "react";
+import React, { useRef, useState } from "react";
 import "../style/home.css";
 
 
@@ -66,7 +66,7 @@ const books = [{
     "_id": {
       "$oid": "6500bb6cabe3c415baf05d9d"
     },
-    "titulo": "O senhor dos Aneis",
+    "titulo": "as aventuras do peter pan o misterio do meu no seu cu ",
     "capa": "https://www.ira-sme.net/wp-content/themes/consultix/images/no-image-found-360x260.png",
     "sinopse": "O senhor dos aneis....",
     "paginas": 120,
@@ -143,6 +143,9 @@ const books = [{
   const bookAcao= books.filter((book)=>book.categorias[0]==="ação")
   const bookComedia= books.filter((book)=>book.categorias[0]==="comedia")
   const bookRomance= books.filter((book)=>book.categorias[0]==="Romance")
+  
+
+ 
 
 export default function Home() {
 
@@ -156,67 +159,105 @@ export default function Home() {
                 {/* div que controla formato movimento de cada card */}
               
               
-                    <div className="slider-home">
-                      <p>AÇÃO</p>
+                    <div className="slider-home" >
+                      <h2 className="title-genero">AÇÃO</h2>
                       {/* div book-slider que controla proporçao de cada card dos livros */}
-                          <div className="book-slider">
-                          {bookAcao.map((book)=>(
-                          <div>
-                              <h2>{book.titulo}</h2>
-                              {/* div image home vai ser que controla o tamanho da imagem  */}
-                            <div className="image-home">
-                          <Link to={`book/${book._id}`}>
-                        <img src={book.capa} alt="" />
+                        
+                      <div className="teste">
+                        <div className="button-teste" >
+                            <button className="icon-left"><box-icon  name='left-arrow-alt' ></box-icon></button>
+                          
+                        </div>  
+                            <div className="book-slider">
+                            {bookAcao.map((book)=>(
+                        
+                                <div key={book._id} className="card-home" >
+                        
+                                {/* div card-home vai ser que controla o tamanho da imagem  */}
+                        
+                            <Link to={`book/${book._id}`}>
+                          <img className="home-imagem" src={book.capa} alt=""  />
+                          <div className="div-title">
+                            <p className="titulo-book">{book.titulo}</p>
+                          </div>
+                        
+                          </Link>
+                        
+                              </div>
+                       
+                         
+                      )
+
+          
+                      )} 
+                      
+                      
+                      </div>
+                      <div className="button-frente">
+                        <button className="icon-right" ><box-icon  name='right-arrow-alt' ></box-icon></button> 
+                      </div>
+
+                    </div> 
+                    <h2 className="title-genero">Comedia</h2>
+
+                        <div className="teste">
+                        <div className="button-teste" >
+                            <button className="icon-left"><box-icon  name='left-arrow-alt' ></box-icon></button>
+                          
+                        </div> 
+                      <div className="book-slider">
+                      
+                          {bookComedia.map((book)=>(
+                          <div key={book._id} className="card-home">
+                      
+                      
+                          <Link to={`book/${book.titulo}`}>
+                        <img className="home-imagem" src={book.capa} alt="erro" />
+                            <p className="titulo-book">{book.titulo}</p>
                         </Link>
-                            </div>
                           </div>
                       
-                      )
+                        )
                       
-                      )}
-                    </div>
-                    <div className="slider-home">
-                      <p>Comedia</p>
-                        {bookComedia.map((book)=>(
-                           <div key={book._id}>
-                        <h2>{book.titulo}</h2>
-                        <div className="image-home">
-                        <Link to={`book/${book.titulo}`}>
-                      <img src={book.capa} alt="erro" />
-                      </Link>
+                        )}
                         </div>
+                        <div className="button-frente">
+                        <button className="icon-right"><box-icon  name='right-arrow-alt' ></box-icon></button> 
                       </div>
-                      )
-                      )}
                     </div>
-              <div className="slider-home">
-                
-                      <p>Romance</p>
-                
-                    {bookRomance.map((book)=>(
-                
-                        <div key={book._id}>
-                        <h2>{book.titulo}</h2>
-                        <div className="image-home" >
-                      <Link to={`book/${book.titulo}`}>
-                        <img src={book.capa} alt="" />
-                
-                      </Link>
-                        </div>
-                
-                      </div>
-                
-                      )
-                      )}
-              </div>
-              
-                </div>
-              
-              
+                    
+
+                    <h2 className="title-genero">Romance</h2>
+
+                      <div className="teste">
+                      <div className="button-teste" >
+                            <button className="icon-left"><box-icon  name='left-arrow-alt' ></box-icon></button>
                           
-              
-              
-                      </div> 
+                        </div> 
+
+                 
+                  <div className="book-slider">
+                  
+                        {bookRomance.map((book)=>(
+                            <div key={book._id} className="card-home" >
+                          <Link to={`book/${book.titulo}`}>
+                            <img className="home-imagem" src={book.capa} alt="" />
+                              <p className="titulo-book">{book.titulo}</p>
+                          </Link>
+                            </div>
+                  
+                          )
+                          )}
+                  </div>
+                  <div className="button-frente">
+                          <button className="icon-right" ><box-icon  name='right-arrow-alt' ></box-icon></button>
+                        </div>
+                    </div>
+                          
+                                </div>
+                </div>
+            
+                      
                       
                   )
            
