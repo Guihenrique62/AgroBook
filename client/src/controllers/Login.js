@@ -1,31 +1,62 @@
-import axios from "axios";
+// IMPORTA MODULO DO AXIOS
+import axios from 'axios';
+
+// DEFINE AS VARIAVIES DE AMBIENTE
+var portApi = 57601;
+
+// DEFINE A URL DA API BASEANDO NA URL ATUAL EX: [ localhost || 10.0.0.0 ]
+axios.defaults.baseURL = `${window.location.protocol}//${window.location.hostname}:${portApi}`
 
 export default async function Login(email, senha) {
-  try {
-    let data = {
-      email: email,
-      senha: senha,
-    };
-    //esse Data tem que vir la dos input, vou deixar assim por enquanto
 
-    const resposta = await axios
-      .post(
-        "http://20.226.73.46:57601/auth/singin", // aqui eu to fazendo requisição direto pro servidor, depois voce coloca para o seu localhost, pq tudo q vc fizer alteração vc testa no local, no server é so depois do Jean da um git pull lá
-        data,
-        {
-          withCredentials: true,
-        }
-      )
-      .then((res) => {
-        return res.status;
-      })
-      .catch((err) => {
-         return err = 401;
-      });
+  // CRIA OS DADOS DO BODY
+  let body = {
+    email: email,
+    senha: senha,
+  };
 
-    console.log(resposta);
-    return resposta;
-  } catch (err) {
-    return [{}];
-  }
+  // CRIA OS PARAMETROS DA REQUISIÇÃO
+  let config = {
+    method: 'POST',
+    withCredentials: true, // ENVIA OS COOKIES
+    url: '/auth/singin',
+    headers: {
+      'Accept': '*/*'
+    },
+    data: body
+  };
+
+  // INICIALIA O AXIOS
+  axios.request(config)
+
+  // TRATATIVA DE SUCESSO
+  .then((response) => {
+    
+    // RESERVA TODAS AS INFORMAÇÃO DE ERRO RECEBIDA DO SERVIDOR
+    let status = response.status;
+    let dataSuccess = response.data;
+    let codigo = response.data.codigo;
+    let resposta = response.data.resposta;
+    let mensagem = response.data.mensagem;
+
+    console.log(status, codigo, resposta, mensagem);
+  })
+
+  // TRATIVA DE ERRO
+  .catch((error) => {
+
+    // RESERVA TODAS AS INFORMAÇÃO DE ERRO RECEBIDA DO SERVIDOR
+    let status = error.response.status;
+    let dataErr = error.response.data;
+    let codigo = dataErr.codigo;
+    let resposta = dataErr.resposta;
+    let mensagem = dataErr.mensagem;
+
+    // VERIFICA SE RETORNOU O CÓDIGO [ 401 ]
+    if (status == '401') {
+      //return false;
+    }
+
+  });
+
 }
