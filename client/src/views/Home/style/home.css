@@ -3,6 +3,7 @@
     display: flex;
    text-align: center;
     overflow: hidden;
+    
   
     
 }
@@ -11,15 +12,20 @@
     transition: transform 0.3s ease-in-out;
     background-color: #fff;
      width: 100%;
+     
     
 }
 .book-slider {
     overflow: hidden;
     display: flex;
     width: 80%;
-   
+  overflow-x: scroll;
     
    
+}
+
+.book-slider::-webkit-scrollbar{
+    display: none;
 }
 .card-home{
     padding: 10px;
@@ -30,7 +36,9 @@
     background-color: aliceblue;
     box-shadow: 1px 1px 20px rgba(9, 9, 9, 0.288);
     border-radius: 5px;
-
+    flex: none;
+  scroll-behavior: smooth;
+  
 }
 .home-imagem{
     width: 80%;

@@ -25,7 +25,7 @@ const books = [{
     "sinopse": "O Senhor dos Anéis (no original em inglês, The Lord of the Rings) é uma trilogia cinematográfica dirigida por Peter Jackson com base na obra-prima homónima de J. R. R. Tolkien. Os três filmes foram rodados em simultâneo na Nova Zelândia,[1] faturaram cerca de 3 bilhões (US$ 2.925.155.189) de dólares de receitas conjuntas de bilheteira[2] e foram galardoados com 17 Oscars, entre os 30 para os quais foram nomeados.[3] e é a franquia cinematográfica mais premiada da história",
     "paginas": 145,
     "categorias": [
-      "nerd",
+      "ação",
       "fatansia",
       "magia"
     ],
@@ -97,7 +97,7 @@ const books = [{
     "sinopse": "O senhor dos aneis....",
     "paginas": 120,
     "categorias": [
-      "comedia",
+      "ação",
       "drama"
     ],
     "autor": "Guilherme",
@@ -122,7 +122,7 @@ const books = [{
     "sinopse": "O senhor dos aneis....",
     "paginas": 120,
     "categorias": [
-      "Romance",
+      "ação",
       "comedia",
       "drama"
     ],
@@ -137,17 +137,54 @@ const books = [{
     },
     "registro_atualizado_em": {
       "$numberLong": "1694546912951"
-    }
+    },
+  },{
+    "_id": {
+      "$oid": "6500bbe0abe3c415baf05d9f"
+    },
+    "titulo": "testee",
+    "capa": "https://www.ira-sme.net/wp-content/themes/consultix/images/no-image-found-360x260.png",
+    "sinopse": "O senhor dos aneis....",
+    "paginas": 120,
+    "categorias": [
+      "ação",
+      "comedia",
+      "drama"
+    ],
+    "autor": "Guilherme",
+    "idioma": "Portugues",
+    "data_lancamento": {
+      "$numberLong": "1694540743262"
+    },
+    "total_estoque": 1,
+    "registro_criado_em": {
+      "$numberLong": "1694546912951"
+    },
+    "registro_atualizado_em": {
+      "$numberLong": "1694546912951"
+    },
   }]
 
   const bookAcao= books.filter((book)=>book.categorias[0]==="ação")
   const bookComedia= books.filter((book)=>book.categorias[0]==="comedia")
   const bookRomance= books.filter((book)=>book.categorias[0]==="Romance")
-  
+ 
 
  
 
 export default function Home() {
+  const slider= useRef(null)
+
+  const goleft= (e)=>{
+    e.preventDefault()
+    console.log(slider.current.offsetWidth)
+    slider.current.scrollLeft-=slider.current.offsetWidth
+   }
+   const goRight= (e)=>{
+    e.preventDefault()
+    console.log(slider.current.offsetWidth)
+    slider.current.scrollLeft+=slider.current.offsetWidth
+   }
 
 
     return (
@@ -165,10 +202,10 @@ export default function Home() {
                         
                       <div className="teste">
                         <div className="button-teste" >
-                            <button className="icon-left"><box-icon  name='left-arrow-alt' ></box-icon></button>
+                            <button onClick={goleft} className="icon-left"><box-icon  name='left-arrow-alt' ></box-icon></button>
                           
                         </div>  
-                            <div className="book-slider">
+                            <div className="book-slider" ref={slider}>
                             {bookAcao.map((book)=>(
                         
                                 <div key={book._id} className="card-home" >
@@ -194,7 +231,7 @@ export default function Home() {
                       
                       </div>
                       <div className="button-frente">
-                        <button className="icon-right" ><box-icon  name='right-arrow-alt' ></box-icon></button> 
+                        <button onClick={goRight} className="icon-right" ><box-icon  name='right-arrow-alt' ></box-icon></button> 
                       </div>
 
                     </div> 
