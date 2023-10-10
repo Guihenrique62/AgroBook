@@ -135,6 +135,7 @@
     align-items:center;
     font-size: .9rem;
     box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.25);
+    gap: 1rem;
 }
 
 .editUserLink{
@@ -150,4 +151,76 @@
 
 .editUserLink > img {
     height: 100%;
+}
+
+
+@media (max-width: 900px) {
+    .user{
+        font-size: .8rem;
+    }
+
+}
+
+@media (max-width: 650px) {
+    .user{
+        font-size: .7rem;
+        grid-template-columns: 4fr 4fr 1fr;
+        
+    }
+
+    .headTableUsers{
+        grid-template-columns: 4fr 4fr 1fr 1fr;
+        font-size: .8rem;
+        
+    }
+
+    .editUserLink{
+        height: 20px;
+    }
+
+    .cargoSpan, .userCargo{
+        display: none;
+    }
+
+    .inputSearchUser{
+        width: 240px;
+        padding-left: 1rem;
+    }
+    
+    
+    .LinkCreateUser > button{
+        width: 5rem;
+        font-size: .8rem;
+        height: 2rem;
+    }
+}
+
+@media (max-width: 460px){
+
+    .usersContainer{
+        width: 100%;
+    }
+
+    .inputSearchUser{
+        width: 200px;
+    }
+    
+    .inputsUsersContainer{
+        width: 95%;
+    }
+}
+
+@media (max-width: 375px){
+    .inputSearchUser{
+        width: 150px;
+    }
+
+    .user{
+        font-size: .6rem;
+        gap: 1rem;
+    }
+
+    .headTableUsers{
+        display: none;
+    }
 }
