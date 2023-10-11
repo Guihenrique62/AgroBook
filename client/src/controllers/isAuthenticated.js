@@ -1,3 +1,9 @@
+/*
+CRIADO: JEAN CLEIDSON PEREIRA RODRIGUES
+MATRICULA: 202202257141
+EMAIL: jeantng2016@gmail.com  
+*/
+
 // IMPORTA MODULO DO AXIOS
 import axios from 'axios';
 

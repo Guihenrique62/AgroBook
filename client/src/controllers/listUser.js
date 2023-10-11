@@ -1,3 +1,9 @@
+/*
+CRIADO: JEAN CLEIDSON PEREIRA RODRIGUES
+MATRICULA: 202202257141
+EMAIL: jeantng2016@gmail.com  
+*/
+
 import axios from "axios";
 
 export default async function listarUsuario() {
