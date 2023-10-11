@@ -27,36 +27,35 @@ export default async function Login(email, senha) {
   };
 
   // INICIALIA O AXIOS
-  axios.request(config)
+  const singIn = await axios.request(config)
 
-  // TRATATIVA DE SUCESSO
-  .then((response) => {
-    
-    // RESERVA TODAS AS INFORMAÇÃO DE ERRO RECEBIDA DO SERVIDOR
-    let status = response.status;
-    let dataSuccess = response.data;
-    let codigo = response.data.codigo;
-    let resposta = response.data.resposta;
-    let mensagem = response.data.mensagem;
+    // TRATATIVA DE SUCESSO
+    .then((response) => {
 
-    console.log(status, codigo, resposta, mensagem);
-  })
+      // RESERVA TODAS AS INFORMAÇÃO DE ERRO RECEBIDA DO SERVIDOR
+      let status = response.status;
+      let dataSuccess = response.data;
+      let codigo = response.data.codigo;
+      let resposta = response.data.resposta;
+      let mensagem = response.data.mensagem;
 
-  // TRATIVA DE ERRO
-  .catch((error) => {
+    })
 
-    // RESERVA TODAS AS INFORMAÇÃO DE ERRO RECEBIDA DO SERVIDOR
-    let status = error.response.status;
-    let dataErr = error.response.data;
-    let codigo = dataErr.codigo;
-    let resposta = dataErr.resposta;
-    let mensagem = dataErr.mensagem;
+    // TRATIVA DE ERRO
+    .catch((error) => {
 
-    // VERIFICA SE RETORNOU O CÓDIGO [ 401 ]
-    if (status == '401') {
-      //return false;
-    }
+      // RESERVA TODAS AS INFORMAÇÃO DE ERRO RECEBIDA DO SERVIDOR
+      let status = error.response.status;
+      let dataErr = error.response.data;
+      let codigo = dataErr.codigo;
+      let resposta = dataErr.resposta;
+      let mensagem = dataErr.mensagem;
 
-  });
+      // VERIFICA SE RETORNOU O CÓDIGO [ 401 ]
+      if (status == '401') {
+        //return false;
+      }
+
+    });
 
 }

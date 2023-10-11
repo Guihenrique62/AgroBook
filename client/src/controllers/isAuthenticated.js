@@ -5,7 +5,7 @@ import axios from 'axios';
 var portApi = 57601;
 
 // DEFINE A URL DA API BASEANDO NA URL ATUAL EX: [ localhost || 10.0.0.0 ]
-axios.defaults.baseURL = `${window.location.protocol}//${window.location.hostname}:${portApi}`
+axios.defaults.baseURL = `${window.location.protocol}//${window.location.hostname}:${portApi}`;
 
 export const isAuthenticated = async () => {
 
@@ -31,8 +31,6 @@ export const isAuthenticated = async () => {
         let codigo = response.data.codigo;
         let resposta = response.data.resposta;
         let mensagem = response.data.mensagem;
-
-        console.log(status);
 
         return true;
     })
