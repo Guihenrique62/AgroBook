@@ -39,6 +39,15 @@ export default async function Login(email, senha) {
       let resposta = response.data.resposta;
       let mensagem = response.data.mensagem;
 
+      // VERIFICA SE DESEJA SEGUIR A DIANTE
+      var ASK = window.confirm(mensagem);
+      if (ASK) {
+        window.location.href = '/home'; // DIRECIONA PARA A TELA DE HOME
+      }
+      else {
+        window.location.reload(); // ATUALIZA A PAGINA
+      }
+
     })
 
     // TRATIVA DE ERRO
@@ -51,9 +60,13 @@ export default async function Login(email, senha) {
       let resposta = dataErr.resposta;
       let mensagem = dataErr.mensagem;
 
-      // VERIFICA SE RETORNOU O CÓDIGO [ 401 ]
-      if (status == '401') {
-        //return false;
+      // APRESENTA MENSAGEM DE ERRO
+      var ASK = window.confirm(mensagem);
+      if (ASK) {
+        // FAZ NADA
+      }
+      else {
+        window.location.reload(); // ATUALIZA A PAGINA
       }
 
     });
