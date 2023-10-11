@@ -77,6 +77,6 @@ export default async function listarUsuario() {
 
     });
 
-  console.log(getListUser);
+  return getListUser;
 
 }
