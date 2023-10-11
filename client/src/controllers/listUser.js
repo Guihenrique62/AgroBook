@@ -59,7 +59,7 @@ export default async function listarUsuario() {
       let resposta = response.data.resposta;
       let mensagem = response.data.mensagem;
 
-      return true;
+      return dataSuccess;
 
     })
 
@@ -73,15 +73,10 @@ export default async function listarUsuario() {
       let resposta = dataErr.resposta;
       let mensagem = dataErr.mensagem;
 
-      return false;
+      return dataErr;
 
     });
 
-  // RERIFICA A RESPOSTA DA VALIDAÇÃO DA SESSÃO
-  if (getListUser) {
-    return true; // LOGIN AUTENTICO
-  } else {
-    return false; // LOGIN NÃO-AUTENTICO
-  }
+  console.log(getListUser);
 
 }
