@@ -60,6 +60,7 @@ export default async function listarUsuario() {
       // RESERVA TODAS AS INFORMAÇÃO DE ERRO RECEBIDA DO SERVIDOR
       let status = error.response.status;
       let dataErr = error.response.data;
+      dataErr.data_base.result = [];
       let codigo = dataErr.codigo;
       let resposta = dataErr.resposta;
       let mensagem = dataErr.mensagem;
