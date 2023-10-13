@@ -15,8 +15,6 @@ import '../styles/usersPage.css'
 
 var users = [ /* array que recebe resposta API */ ];
 
-
-
 export default function UsersPage() {
 
   const [searchTerm, setSearchTerm] = useState('');
