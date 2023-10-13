@@ -25,6 +25,7 @@ export default function UsersPage() {
         const res = await listarUsuario();
         setUsers(res.data_base.result); // DEFINE O VALOR RECEBIDO NA LISTA DE USER
       } catch (error) {
+        
         setUsers([]); // DEFINE UM ARRAY VAZIO PARA EVITAR ERRO
         console.error('Error fetching users:', error);
       } finally {
