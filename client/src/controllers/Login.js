@@ -41,6 +41,8 @@ export default async function Login(email, senha) {
       let resposta = response.data.resposta;
       let mensagem = response.data.mensagem;
 
+      sessionStorage.setItem('dataUser', JSON.stringify(response.data.hash)); // SALVA OS DADOS DO LOGIN NA SESSAO DO NAVEGADOR
+
       window.location.href = '/home'; // DIRECIONA PARA A TELA DE HOME
      
     })
