@@ -43,7 +43,6 @@ export default async function Login(email, senha) {
 
       window.location.href = '/home'; // DIRECIONA PARA A TELA DE HOME
      
-
     })
 
     // TRATIVA DE ERRO
