@@ -17,11 +17,13 @@ import ErrorModal from "../../../commun_Components/error/ErrorModal";
 import CorrectModal from "../../../commun_Components/correctModal/CorrectModal";
 
 export default function EditUser() {
+  
   const { userID } = useParams(); //Id do user para realizar requisição
   const [openModalAlert, setOpenModalAlert] = useState(false)
   const [openModalError, setOpenModalError] = useState(false)
   const [openModalSucess, setOpenModalSucess] = useState(false)
-  const [messageModalSucess,setMessageModalSucess] = useState('')
+  const [messageModalSucess, setMessageModalSucess] = useState('')
+
 
   const user = {
     _id: "65047a74babdd7046c86e390",
