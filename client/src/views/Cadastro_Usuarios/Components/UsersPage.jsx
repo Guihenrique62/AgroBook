@@ -27,8 +27,10 @@ export default function UsersPage() {
     const fetchData = async () => {
       try {
         const res = await listarUsuario();
-        setUsers(res.data_base.result);
+        setUsers(res.data_base.result); // DEFINE O VALOR RECEBIDO NA LISTA DE USER
       } catch (error) {
+        
+        setUsers([]); // DEFINE UM ARRAY VAZIO PARA EVITAR ERRO
         console.error('Error fetching users:', error);
         setErrorMessage(error.mensagem)
       } finally {
@@ -37,12 +39,11 @@ export default function UsersPage() {
     };
 
     fetchData();
-  }, []); 
+  }, []);
 
-  const filteredUsers = users.filter((user) =>
-    user.nome.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    (user.cargo === 0 ? 'Admin' : 'Colaborador').toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredUsers = users.filter((user) => user.nome.toLowerCase().includes(searchTerm.toLowerCase()) || user.email.toLowerCase().includes(searchTerm.toLowerCase()) || (user.cargo === 0 ? 'Admin' : 'Colaborador').toLowerCase().includes(
+    searchTerm.toLowerCase())
+
   );
 
   return (
@@ -74,10 +75,10 @@ export default function UsersPage() {
         </div>
 
         {loading ? (
-          <Loader/> // exibe o loader enquanto requisita a API
+          <Loader /> // exibe o loader enquanto requisita a API
         ) : (
           <div className="userTable">
-            {filteredUsers.length > 0 ? (
+            {filteredUsers.length >= 0 ? (
               filteredUsers.map((user) => (
                 <div className="user" key={user._id}>
                   <p>{user.nome}</p>

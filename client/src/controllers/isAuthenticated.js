@@ -56,6 +56,8 @@ export const isAuthenticated = async () => {
 
     });
 
+    console.log(ResAuth);
+
     // RERIFICA A RESPOSTA DA VALIDAÇÃO DA SESSÃO
     if (ResAuth) {
         return true; // LOGIN AUTENTICO
