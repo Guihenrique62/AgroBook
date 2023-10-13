@@ -13,11 +13,15 @@ import { Link } from 'react-router-dom';
 import listarUsuario from '../../../controllers/listUser';
 import '../styles/usersPage.css';
 import Loader from '../../../commun_Components/Loader/Loader';
+import ErrorModal from '../../../commun_Components/error/ErrorModal';
 
 export default function UsersPage() {
   const [users, setUsers] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(true);
+  const [openModalError, setOpenModalError] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,6 +30,7 @@ export default function UsersPage() {
         setUsers(res.data_base.result);
       } catch (error) {
         console.error('Error fetching users:', error);
+        setErrorMessage(error.mensagem)
       } finally {
         setLoading(false);
       }
@@ -89,6 +94,8 @@ export default function UsersPage() {
           </div>
         )}
       </div>
+      
+      <ErrorModal isOpen={openModalError} setIsOpen={setOpenModalError} message={errorMessage}></ErrorModal>
     </div>
   );
 }
