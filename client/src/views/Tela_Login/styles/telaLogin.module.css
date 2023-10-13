@@ -61,3 +61,7 @@ proporção da tela
     font-size: 1em;
     margin-top: 20px;
 }
+
+.logbutton:hover{
+    background: #037b03;
+}

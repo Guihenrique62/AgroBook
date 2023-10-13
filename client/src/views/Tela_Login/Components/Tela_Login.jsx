@@ -75,8 +75,6 @@ export default function Tela_Login() {
             />
           </label>
         </div>
-
-        <Link to={"/home"} ><p>clica</p></Link>
         <div className="logBtPlace"><button type="subimt" className={style.logbutton}>Login</button>
         </div>
 
