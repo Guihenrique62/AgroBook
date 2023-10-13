@@ -1,3 +1,9 @@
+/*
+CRIADO: JEAN CLEIDSON PEREIRA RODRIGUES
+MATRICULA: 202202257141
+EMAIL: jeantng2016@gmail.com  
+*/
+
 // IMPORTA MODULO DO AXIOS
 import axios from 'axios';
 
@@ -33,6 +39,7 @@ export const isAuthenticated = async () => {
         let mensagem = response.data.mensagem;
 
         return true;
+        
     })
 
     // TRATIVA DE ERRO
@@ -45,10 +52,7 @@ export const isAuthenticated = async () => {
         let resposta = dataErr.resposta;
         let mensagem = dataErr.mensagem;
 
-        // VERIFICA SE RETORNOU O CÓDIGO [ 401 ]
-        if (status == '401') {
-            return false;
-        }
+        return false;
 
     });
 
