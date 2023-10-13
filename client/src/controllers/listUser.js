@@ -14,28 +14,18 @@ var portApi = 57601;
 axios.defaults.baseURL = `${window.location.protocol}//${window.location.hostname}:${portApi}`;
 
 export default async function listarUsuario() {
-
-  // let data = {
-  //   filter: {
-  //     nome: { $regex: "gui", $options: "i" }
-  //   },
-  //   sort: {
-  //     _id: -1,
-  //   },
-  //   limit: 9999,
-  // };
-
-  // await axios
-  //   .post("http://localhost:57601/api/user/list_user", data, {
-  //     withCredentials: true,
-  //   })
-  //   .then((res) => {
-  //     return res.data
-  //   })
-  //   .catch((err) => {
-  //     console.log(err);
-  //   });
   
+  // CRIA O BODY
+  var body = ({
+    "filter": {
+      "email": { "$regex": "@", "$options": "i" }
+    },
+    "sort": {
+      "_id": -1
+    },
+    "limit": 100
+  });
+
   // CRIA OS PARAMETROS DA REQUISIÇÃO
   let config = {
     method: 'POST',
@@ -43,7 +33,8 @@ export default async function listarUsuario() {
     url: '/api/user/list_user',
     headers: {
       'Accept': '*/*'
-    }
+    },
+    data: body
   };
 
   // INICIALIA O AXIOS
@@ -69,6 +60,8 @@ export default async function listarUsuario() {
       // RESERVA TODAS AS INFORMAÇÃO DE ERRO RECEBIDA DO SERVIDOR
       let status = error.response.status;
       let dataErr = error.response.data;
+      dataErr.data_base = [];
+      dataErr.data_base.result = [];
       let codigo = dataErr.codigo;
       let resposta = dataErr.resposta;
       let mensagem = dataErr.mensagem;

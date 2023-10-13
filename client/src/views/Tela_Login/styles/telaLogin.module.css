@@ -1,15 +1,8 @@
 /*
   CRIADO POR: VICTOR RAFAEL GONÇALVES SILVA
   EMAIL: victorrafaelgs13@gmail.com
-  MATRICULA: 202203004581
 */
 
-
-/*
-proporção da tela
-    width: 250px;
-    height: 320px;
-*/
 .loginContainer{
     background-color: #fff;
     width: 250px;
@@ -60,4 +53,8 @@ proporção da tela
     cursor: pointer;
     font-size: 1em;
     margin-top: 20px;
+}
+.logbutton:hover{
+    background-color: #007000;
+    transition: 1s;
 }

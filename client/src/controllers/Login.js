@@ -1,5 +1,6 @@
 // IMPORTA MODULO DO AXIOS
 import axios from 'axios';
+import ErrorModal from '../commun_Components/error/ErrorModal';
 
 // DEFINE AS VARIAVIES DE AMBIENTE
 var portApi = 57601;
@@ -61,14 +62,8 @@ export default async function Login(email, senha) {
       let mensagem = dataErr.mensagem;
 
       // APRESENTA MENSAGEM DE ERRO
-      var ASK = window.confirm(mensagem);
-      if (ASK) {
-        // FAZ NADA
-      }
-      else {
-        window.location.reload(); // ATUALIZA A PAGINA
-      }
-
+      
+      
     });
 
 }
