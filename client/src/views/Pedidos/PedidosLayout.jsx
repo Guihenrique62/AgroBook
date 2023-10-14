@@ -10,7 +10,7 @@ import { Outlet } from 'react-router-dom'
 export default function PedidosLayout() {
   return (
     <>
-      <Header user={undefined} search={undefined}/>
+      <Header search={undefined}/>
       <Outlet/>
     </>
     

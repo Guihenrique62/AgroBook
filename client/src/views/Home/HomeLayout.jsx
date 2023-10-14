@@ -14,7 +14,7 @@ import { Outlet } from 'react-router-dom'
 export default function HomeLayout() {
   return (
     <>
-        <Header user={undefined} search={()=>{console.log(3)}}/>
+        <Header search={()=>{console.log(3)}}/>
         <Outlet/>
     </>
   )
