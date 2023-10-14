@@ -1,17 +1,14 @@
-import { useState } from 'react'
-import Tela_de_Login from './Componentes/login/logins'
-import { Outlet } from 'react-router-dom'
-import Teste from './Componentes/login/texte'
+/*
+  CRIADO POR: GUILHERME HENRIQUE PORTO DOS SANTOS
+  EMAIL: guilhermeportosantos1@gmail.com
+*/
 
+import React from 'react'
+import { RouterProvider } from 'react-router-dom'
+import router from './router'
+import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-   <Teste/>
-    </>
-  )
+export default function App() {
+  
+  return  <RouterProvider router={router} />
 }
-
-export default App

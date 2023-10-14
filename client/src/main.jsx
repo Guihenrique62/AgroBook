@@ -1,41 +1,16 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import { createBrowserRouter,RouterProvider,Router} from 'react-router-dom'
+/*
+  CRIADO POR: GUILHERME HENRIQUE PORTO DOS SANTOS
+  EMAIL: guilhermeportosantos1@gmail.com
+*/
+
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App.jsx";
+import './App.css'
 
 
-//paginas 
-import Validar from './Componentes/login/routes/validar.jsx'
-import Tela_de_Login from './Componentes/login/logins.jsx'
-import Teste from './Componentes/login/texte.jsx'
+ReactDOM.createRoot(document.getElementById("root")).render(
 
-const router = createBrowserRouter([
-   {element: <App/>,
-      children:[
-        {
-          path:"/",
-          element: <Tela_de_Login/>
-        },{
-          path:"/validar",
-          element: <Validar/>
-        },
-        {
-           path:"/test",
-           element: <Teste/>
-        }
-       
+    <App/>
 
-      ]
-  
-  }
-])
- 
-
-
-
-
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-< RouterProvider  router= {router}/>
-  </React.StrictMode>,
-)
+);

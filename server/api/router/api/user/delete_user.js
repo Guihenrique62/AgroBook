@@ -5,13 +5,13 @@ EMAIL: jeantng2016@gmail.com
 */
 
 const express = require("express"); // EXTRAI O MODULO DO EXPRESS
-var router = express.Router(); // EXTRAR O MODULO DE ROTAS
-const commands = require('../../../middleware/mongoDb/command/commands'); // EXTRAR OS COMANDOS NO MONGODB
-const check_user = require('../../../middleware/auth/jwt_mongodb'); // PUXA FUNCAO QUE VALIDA SESSAO DO USUARIO
-require('dotenv').config(); // SOLICITA AS VARIAVEIS DE AMBIENTE
+var router = express.Router(); // EXTRAI O MODULO DE ROTAS
+const commands = require('../../../middleware/mongoDb/command/commands'); // EXTRAI OS COMANDOS NO MONGO DB
+const check_user = require('../../../middleware/auth/jwt_mongodb'); // PUXA FUNÇÃO QUE VÁLIDA SESSÃO DO USUÁRIO
+require('dotenv').config(); // SOLICITA AS VARIÁVEIS DE AMBIENTE
 
 // *************** DELETE ***************
-// Controla todas as entrada de apagar usuario
+// Controla todas as entrada de apagar usuário
 router.delete("/api/user/delete_user", async (req, res) => {
 
     const { filter } = req.body; // RESERVA OS VALORES RECEBIDOS VIA BODY
@@ -19,7 +19,7 @@ router.delete("/api/user/delete_user", async (req, res) => {
     const keysValid = [ '_id', 'documento', 'email', 'senha', 'cargo', 'status' ]; // CRIA UMA LISTA DE KEYS VÁLIDAS
     let statusLoopValidFilter = 0;
 
-    // VERIFICA SE A VARIAVEL [ filter ] NÃO ESTÁ VAZIA
+    // VERIFICA SE A VARIÁVEL [ filter ] NÃO ESTÁ VAZIA
     if (!filter || Object.keys(filter).length === 0 || typeof (filter) !== `object`) {
         
         res.status(401).json({
@@ -44,14 +44,14 @@ router.delete("/api/user/delete_user", async (req, res) => {
         
         }
 
-        // ANTES DE INICAR UM NOVO LOOP VERIFICA SE ACHOU UMA CORRESPONDÊNCIA VALIDA PARA PAUSAR O LOOP
+        // ANTES DE INICAR UM NOVO LOOP VERIFICA SE ACHOU UMA CORRESPONDÊNCIA VÁLIDA PARA PAUSAR O LOOP
         if (statusLoopValidFilter == 1) {
             break; // FINALIZA O FOR
         }
 
     }
 
-    // VERIFICA SE NÃO ENCONTROU UMA CORRENSPONDÊNCIA VALIDA
+    // VERIFICA SE NÃO ENCONTROU UMA CORRENSPONDÊNCIA VÁLIDA
     if (statusLoopValidFilter == 0) {
         
         res.status(401).json({
@@ -65,7 +65,7 @@ router.delete("/api/user/delete_user", async (req, res) => {
     } 
     
     const shell_command = new commands(); // CRIA UM CONSTRUTOR
-    const deleteData = await shell_command.commandDeleteData('books', 'usuarios', filter); // EXECULTA A FUNÇÃO QUE EXCLUE O REGISTRO NO MONGODB
+    const deleteData = await shell_command.commandDeleteData('books', 'usuarios', filter); // EXECUTA A FUNÇÃO QUE EXCLUI O REGISTRO NO MONGO DB
 
     console.log(deleteData["result"]["deletedCount"]);
 
@@ -91,7 +91,7 @@ router.delete("/api/user/delete_user", async (req, res) => {
 });
 
 // *************** ALL ***************
-// Mensagem de erro personalizada para rotas não existemte apartir de /delete_user
+// Mensagem de erro personalizada para rotas não existente apartir de /delete_user
 router.all("/api/user/delete_user*", async (req, res) => {
 
     res.status(404).json({
