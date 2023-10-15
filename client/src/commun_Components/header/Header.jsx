@@ -29,7 +29,10 @@ export default function Header({ user, search }) {
             
             {search ?     //RENDERIZA O BOTÃO CASO ELE TENHA FUNCIONALIDADE
               <div>
+                <Link to={"filter"}>
                 <input type="text" placeholder='Buscar Livros...' className='input-header'/>
+                </Link>
+                 
                 <button onClick={() => search()} className='button-search'><i className='bx bx-search'></i></button>
               </div>
               : null

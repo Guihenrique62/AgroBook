@@ -30,6 +30,7 @@ import EstoquePage from "./views/Estoque/Components/EstoquePage";
 import PedidosLayout from "./views/Pedidos/PedidosLayout";
 import PagePedido from "./views/Pedidos/components/PagePedido";
 import EstoqueEdit from "./views/Estoque/Components/EditEstoque";
+import FilterBooK from "./views/Home/components/filterBook";
 
 
 const PrivateRoute = ({ element, children }) => {
@@ -70,6 +71,7 @@ const router = createBrowserRouter([
         children: [
             { index: true, element: <Home /> },
             { path: "book/:bookID", element: <HomeBook /> },
+            {path:"filter",element:<FilterBooK/>}
 
         ]
     },
