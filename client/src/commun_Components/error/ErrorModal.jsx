@@ -13,7 +13,7 @@ export default function ErrorModal({isOpen,setIsOpen, message}) {
 
         //VALIDA SE OS PARAMETROS FORAM PASSADOS
         if (!setIsOpen || !message) {
-            console.error('um ou mais parametros não atribuidos Menu Lateral')
+            console.error('um ou mais parametros não atribuidos modal erro',isOpen,message)
             return
         }
 

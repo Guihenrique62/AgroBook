@@ -12,7 +12,7 @@ export default function EditUserForm({ status, user, setModalError, setModalAler
   const [nome, setNome] = useState(user.nome)//Manipula o valor do input NOme
   const [cpf, setCpf] = useState(user.documento) // Manipula o valor do input CPF
   const [email,setEmail] = useState(user.email)//Manipula o valor do input Email
-  const [senha, setSenha] = useState(user.senha) // Manipula o valor do input Senha
+  const [senha, setSenha] = useState('') // Manipula o valor do input Senha
   const [cargoSelect, setCargoSelect] = useState(user.cargo) //Manipula cargo selecionado
 
 

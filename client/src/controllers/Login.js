@@ -1,6 +1,7 @@
 // IMPORTA MODULO DO AXIOS
 import axios from 'axios';
 import ErrorModal from '../commun_Components/error/ErrorModal';
+import swal from 'sweetalert';
 
 // DEFINE AS VARIAVIES DE AMBIENTE
 var portApi = 57601;
@@ -40,15 +41,10 @@ export default async function Login(email, senha) {
       let resposta = response.data.resposta;
       let mensagem = response.data.mensagem;
 
-      // VERIFICA SE DESEJA SEGUIR A DIANTE
-      var ASK = window.confirm(mensagem);
-      if (ASK) {
-        window.location.href = '/home'; // DIRECIONA PARA A TELA DE HOME
-      }
-      else {
-        window.location.reload(); // ATUALIZA A PAGINA
-      }
+      sessionStorage.setItem('dataUser', JSON.stringify(response.data.hash)); // SALVA OS DADOS DO LOGIN NA SESSAO DO NAVEGADOR
 
+      window.location.href = '/home'; // DIRECIONA PARA A TELA DE HOME
+     
     })
 
     // TRATIVA DE ERRO
@@ -62,8 +58,7 @@ export default async function Login(email, senha) {
       let mensagem = dataErr.mensagem;
 
       // APRESENTA MENSAGEM DE ERRO
-      
-      
+      swal("Erro", mensagem, "error")
     });
 
 }

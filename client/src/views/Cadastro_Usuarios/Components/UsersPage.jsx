@@ -13,11 +13,13 @@ import { Link } from 'react-router-dom';
 import listarUsuario from '../../../controllers/listUser';
 import '../styles/usersPage.css';
 import Loader from '../../../commun_Components/Loader/Loader';
+import swal from 'sweetalert'
 
 export default function UsersPage() {
   const [users, setUsers] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(true);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,6 +30,7 @@ export default function UsersPage() {
         
         setUsers([]); // DEFINE UM ARRAY VAZIO PARA EVITAR ERRO
         console.error('Error fetching users:', error);
+        swal("Erro", error.mensagem, "error"); // IMPRIME O ERRO NA TELA
       } finally {
         setLoading(false);
       }

@@ -1,25 +1,24 @@
 import React from "react";
-import { useNavigation } from "@react-navigation/native";
-import { Input, Button, Text, Icon } from "@rneui/themed";
+import { useNavigation, DrawerActions } from "@react-navigation/native";
 import { View, StyleSheet, ScrollView, TextInput } from "react-native";
+import { Icon } from "@rneui/themed";
 
-const Home = () => {
+const Home = ({ openDrawer }) => {
     const navigation = useNavigation();
-    const handleNavLogin = () => {
-        navigation.navigate("Login");
+
+    const handleOpenDrawer = () => {
+        openDrawer();
     };
 
     return (
         <ScrollView style={styles.scrollView}>
             <View style={styles.container}>
-                <View style={styles.header}>
+                <View style={styles.navBar}>
                     <Icon
                         name="menu"
                         type="material"
                         color="#000000"
-                        onPress={() => {
-                            // Lógica para abrir o menu
-                        }}
+                        onPress={handleOpenDrawer}
                     />
                     <View style={styles.inputContainer}>
                         <TextInput
@@ -50,7 +49,7 @@ const styles = StyleSheet.create({
         paddingBottom: 0,
         alignItems: "center",
     },
-    header: {
+    navBar: {
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
@@ -58,6 +57,38 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         width: "100%",
         marginBottom: 10,
+    },
+    menu: {
+        flex: 1,
+        flexDirection: "column-reverse",
+        justifyContent: "space-between",
+        alignItems: "center",
+        position: "relative",
+    },
+    navigationContainer: {
+        backgroundColor: "#ecf0f1",
+    },
+    perfilImg: {
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 30,
+    },
+    buttonFlutuant: {
+        backgroundColor: "transparent",
+        padding: 10,
+        borderRadius: 5,
+        flexDirection: "row",
+        alignItems: "center",
+        position: "absolute",
+        top: 0,
+        right: 0,
+        zIndex: 999,
+    },
+    buttonTextClose: {
+        marginVertical: 10,
+        color: "red",
+        fontSize: 32,
     },
     menuItem: {
         marginBottom: 0,
