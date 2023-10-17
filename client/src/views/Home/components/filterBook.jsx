@@ -152,7 +152,9 @@ export default function FilterBooK(){
       }]
       const[bookTitle, setbookTitle]= useState("")
 
-    const filterBooks = books.filter((livro) => livro.titulo.toLowerCase().includes(bookTitle.toLowerCase()) );
+    let filterBooks = ()=>{
+      books.filter((livro) => livro.titulo.toLowerCase().includes(bookTitle.toLowerCase()) );
+    } 
     return(
         
         <div>

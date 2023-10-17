@@ -8,6 +8,7 @@ import React, { useState, useEffect  } from 'react'
 import { Link } from 'react-router-dom'
 import MenuLateral from '../menu_lateral/MenuLateral'
 import './HeaderStyle.css'
+import FilterBooK from '../../views/Home/components/filterBook'
 
 export default function Header({ search }) {
     const [openMenu, setOpenMenu] = useState(false)
@@ -25,6 +26,8 @@ export default function Header({ search }) {
       }
     }, []); // O array vazio faz com que esse efeito colateral seja executado apenas uma vez, ao montar o componente
   
+    FilterBooK()
+
 
   return (
     <div className='HeaderContainer'>
@@ -34,7 +37,7 @@ export default function Header({ search }) {
             {search ?     //RENDERIZA O BOTÃO CASO ELE TENHA FUNCIONALIDADE
               <div>
                 <Link to={"filter"}>
-                <input type="text" placeholder='Buscar Livros...' className='input-header'/>
+                <input onClick={FilterBooK} type="text" placeholder='Buscar Livros...' className='input-header'/>
                 </Link>
                  
                 <button onClick={() => search()} className='button-search'><i className='bx bx-search'></i></button>
