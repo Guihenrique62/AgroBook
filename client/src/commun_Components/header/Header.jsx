@@ -5,14 +5,22 @@
 
 
 import React, { useState, useEffect  } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import MenuLateral from '../menu_lateral/MenuLateral'
 import './HeaderStyle.css'
-import FilterBooK from '../../views/Home/components/filterBook'
 
+import books from '../../views/Home/components/script/bd'
+import FilterBook from '../../views/Home/components/filterBook'
+
+
+ 
 export default function Header({ search }) {
     const [openMenu, setOpenMenu] = useState(false)
     const [user, setUser] = useState({})
+    const[bookTitle, setbookTitle]= useState("")
+    const [ filterBook, setfilterBook]= useState("")
+    const[status, setStatus]=useState(false)
+
 
     useEffect(() => {
       // Recuperar dados da sessionStorage ao carregar o componente
@@ -25,9 +33,16 @@ export default function Header({ search }) {
         window.location.href = '/'
       }
     }, []); // O array vazio faz com que esse efeito colateral seja executado apenas uma vez, ao montar o componente
-  
-    FilterBooK()
 
+
+  let handlefilter=({})=>{
+    books
+  setfilterBook = books.filter((livro) => livro.titulo.toLowerCase().includes(bookTitle.toLowerCase()) );
+  
+
+   }
+  
+    
 
   return (
     <div className='HeaderContainer'>
@@ -36,14 +51,13 @@ export default function Header({ search }) {
             
             {search ?     //RENDERIZA O BOTÃO CASO ELE TENHA FUNCIONALIDADE
               <div>
-                <Link to={"filter"}>
-                <input onClick={FilterBooK} type="text" placeholder='Buscar Livros...' className='input-header'/>
-                </Link>
-                 
-                <button onClick={() => search()} className='button-search'><i className='bx bx-search'></i></button>
+               
+               <input  onChange={(ev)=>setbookTitle(ev.target.value) }  type="text" placeholder='Buscar Livros...' className='input-header'  />
+               <button  onClick={() => search()} className='button-search'><i className='bx bx-search'></i></button>
               </div> 
               : null
             }
+            {status === true ? <Navigate to={"filter"} /> : null}
 
             <Link to={'/home'} className='Link-img-logo-header'> <img className='img-logo-header'src='/small-logo.png'></img> </Link>
         <MenuLateral user={user} isOpen={openMenu} setIsOpen={setOpenMenu}/>
