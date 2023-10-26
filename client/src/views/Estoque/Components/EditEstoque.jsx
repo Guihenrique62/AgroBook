@@ -47,8 +47,10 @@ export default function EstoqueEdit(){
               </h2>
               <Link to={'/storage'}><i className='bx bx-x'></i></Link>
             </div>
+              
+              {/* first_inputs_estoque : titulo e Capa */}
                   {/* titulo */}
-                  {/* first_inputs_estoque : titulo e Capa */}
+                
             <div className="div_form">
               <div className="first_inputs_estoque">
                 <label htmlFor="name">
