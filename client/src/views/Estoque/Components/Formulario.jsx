@@ -6,7 +6,7 @@
 import { useState } from "react"
 import Proptypes, { func } from 'prop-types'
 import Estoque_Book from "./BookEstoque"
-
+import "../style/editEstoque.css"
 
     Formulario.prototype ={
         addBook: Proptypes.func
