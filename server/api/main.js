@@ -57,6 +57,12 @@ app.use(ROUTER_DELETE_BOOK);
 
 /************* BOOKS [ END ] *************/
 
+/************* ORDERS [ START ] *************/
+/* ROUTER ORDERS CREATE - Controla todas as entradas de criação de PEDIDO */
+var ROUTER_ORDER_CREATE = require('./router/api/order/create_order');
+app.use(ROUTER_ORDER_CREATE);
+/************* ORDERS [ END ] *************/
+
 /************* TRELLO [ START ] *************/
 /* ROUTER TRELLO CARD UPDATE - Controla todas as entradas de alterações no trello */
 var ROUTER_TRELLO_CARD_UPDATE = require('./router/api/trello/card_update');
