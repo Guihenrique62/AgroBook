@@ -17,7 +17,7 @@ import {
 } from "react-native";
 
 // O componente Home exibe gêneros de filmes com imagens usando a API do The Movie Database.
-const Home = ({ openDrawer }) => {
+const Home = () => {
     // Define estados para gêneros e imagens de gênero.
     const [genres, setGenres] = useState([]);
     const [genreImages, setGenreImages] = useState({});
@@ -88,7 +88,7 @@ const Home = ({ openDrawer }) => {
 
     // Função para lidar com o pressionamento da imagem do filme.
     const handleImagePress = (item) => {
-        navigation.navigate("DetalhesFilme", { item });
+        navigation.navigate("FazerPedido", { item });
     };
 
     // Função para renderizar os gêneros com imagens.

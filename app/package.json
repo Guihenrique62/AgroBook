@@ -1,28 +1,31 @@
 {
-    "name": "agrobook",
-    "version": "1.0.2",
-    "main": "node_modules/expo/AppEntry.js",
-    "description": "",
-    "author": "Ihury Ferreira de França",
-    "license": "ISC",
-    "scripts": {
-        "start": "expo start",
-        "android": "expo start --android",
-        "ios": "expo start --ios",
-        "web": "expo start --web"
-    },
-    "dependencies": {
-        "@react-navigation/bottom-tabs": "^6.5.11",
-        "@react-navigation/native": "^6.1.9",
-        "@react-navigation/stack": "^6.3.20",
-        "@rneui/themed": "^4.0.0-rc.8",
-        "axios": "^1.6.0",
-        "expo": "^49.0.16",
-        "react": "^18.2.0",
-        "react-native": "^0.72.6"
-    },
-    "devDependencies": {
-        "@babel/core": "^7.23.2"
-    },
-    "private": true
+  "name": "agrobook",
+  "version": "1.0.2",
+  "main": "node_modules/expo/AppEntry.js",
+  "description": "",
+  "author": "Ihury Ferreira de França",
+  "license": "ISC",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web"
+  },
+  "dependencies": {
+    "@react-navigation/bottom-tabs": "^6.5.11",
+    "@react-navigation/native": "^6.1.9",
+    "@react-navigation/stack": "^6.3.20",
+    "@rneui/themed": "^4.0.0-rc.8",
+    "axios": "^1.6.0",
+    "expo": "^49.0.16",
+    "react": "^18.2.0",
+    "react-native": "^0.72.6",
+    "expo-system-ui": "~2.4.0",
+    "expo-navigation-bar": "~2.3.0",
+    "expo-splash-screen": "~0.20.5"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.23.2"
+  },
+  "private": true
 }

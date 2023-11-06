@@ -1,6 +1,8 @@
 // Importa o React e outros componentes necessários para o funcionamento do código.
 import * as React from "react";
+
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+
 import { Icon } from "@rneui/themed";
 import {
     DrawerLayoutAndroid,
@@ -13,17 +15,20 @@ import {
 
 // Importa as telas Home e DetalhesFilme.
 import Home from "../../pages/Home";
-import DetalhesFilme from "../../pages/DetalhesFilme";
+import FazerPedido from "../../pages/FazerPedido";
 
 // Importa os componentes Header e HeaderItem.
 import Header from "../../components/Header";
 import HeaderItem from "../../components/HeaderItem";
+import Biblioteca from "../../pages/Biblioteca";
+import Pedidos from "../../pages/Pedidos";
+// import ListaPedido from "../../pages/ListaPedido";
 
 // Cria um navegador de tabulação inferior.
 const Tab = createBottomTabNavigator();
 
 // Componente TabBar que renderiza a barra de navegação inferior com um menu lateral.
-const TabBar = () => {
+const TabBar = ({ navigation }) => {
     const drawer = React.createRef();
     const drawerState = { isOpen: false };
 
@@ -82,6 +87,57 @@ const TabBar = () => {
                     >
                         Ihury Ferreira de França
                     </Text>
+                    <TouchableOpacity
+                        style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            gap: 10,
+                            alignItems: "center",
+                            position: "absolute",
+                            top: 230,
+                            left: -40,
+                        }}
+                    >
+                        <Image
+                            style={{ width: 35, height: 35 }}
+                            source={require("../../../assets/Home.png")}
+                        />
+                        <Text style={{ fontSize: 20 }}>Tela Inicial</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            gap: 10,
+                            alignItems: "center",
+                            position: "absolute",
+                            top: 280,
+                            left: -40,
+                        }}
+                    >
+                        <Image
+                            style={{ width: 35, height: 35 }}
+                            source={require("../../../assets/biblioteca.png")}
+                        />
+                        <Text style={{ fontSize: 20 }}>Minha Biblioteca</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            gap: 10,
+                            alignItems: "center",
+                            position: "absolute",
+                            top: 328,
+                            left: -35,
+                        }}
+                    >
+                        <Image
+                            style={{ width: 35, height: 35 }}
+                            source={require("../../../assets/Pedido.png")}
+                        />
+                        <Text style={{ fontSize: 20 }}>Pedidos</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         );
@@ -97,6 +153,7 @@ const TabBar = () => {
         >
             {/* Renderiza um TabNavigator com opções de configuração */}
             <Tab.Navigator
+                initialRouteName="Index"
                 screenOptions={({ route }) => ({
                     tabBarIcon: ({ color, size }) => {
                         // Lógica para definir o ícone e a função onPress com base no nome da rota
@@ -107,12 +164,14 @@ const TabBar = () => {
 
                         if (route.name === "Index") {
                             iconName = "home";
-                            onPress = () => console.log("Teste 1"); // Definir a função correta para onPress
-                        } else if (route.name === "DetalhesFilme") {
+                            onPress = () => navigation.navigate("Index"); // Definir a função correta para onPress
+                        } else if (route.name === "Biblioteca") {
                             iconName = "book";
-                            onPress = () => console.log("Teste 2"); // Definir a função correta para onPress
+                            onPress = () => navigation.navigate("Biblioteca"); // Definir a função correta para onPress
+                        } else if (route.name === "Pedidos") {
+                            iconName = "list";
+                            onPress = () => navigation.navigate("Pedidos"); // Definir a função correta para onPress
                         }
-                        // Retorna o ícone com o onPress correto
                         return (
                             <View style={styles.centeredIcon}>
                                 <Icon
@@ -127,7 +186,7 @@ const TabBar = () => {
                     },
                     tabBarLabel: () => null, // Oculta os rótulos da barra de navegação
                     tabBarActiveTintColor: "#000", // Cor do ícone ativo
-                    tabBarInactiveTintColor: "#000", // Cor do ícone inativo
+                    tabBarInactiveTintColor: "#ffff", // Cor do ícone inativo
                     tabBarStyle: {
                         backgroundColor: "#52f6af", // Cor de fundo da barra de navegação
                         display: "flex", // Define a exibição da barra de navegação como flexível
@@ -137,6 +196,23 @@ const TabBar = () => {
             >
                 {/* Define as telas do TabNavigator */}
                 <Tab.Screen
+                    name="FazerPedido"
+                    component={FazerPedido}
+                    options={{
+                        header: () => <HeaderItem openDrawer={toggleDrawer} />, // Adicione o segundo cabeçalho personalizado no DetalhesFilme
+                        tabBarIcon: null, // Remover o ícone "Pedido" do TabBar
+                        tabBarVisible: false, // Ocultar o ícone "Pedido" do TabBar
+                        tabBarButton: () => null, // Remover o botão "Pedido" do TabBar
+                    }}
+                />
+                <Tab.Screen
+                    name="Pedidos"
+                    component={Pedidos}
+                    options={{
+                        header: () => <Header openDrawer={toggleDrawer} />, // Adicione o cabeçalho personalizado no Home
+                    }}
+                />
+                <Tab.Screen
                     name="Index"
                     component={Home}
                     options={{
@@ -144,10 +220,10 @@ const TabBar = () => {
                     }}
                 />
                 <Tab.Screen
-                    name="DetalhesFilme"
-                    component={DetalhesFilme}
+                    name="Biblioteca"
+                    component={Biblioteca}
                     options={{
-                        header: () => <HeaderItem openDrawer={toggleDrawer} />, // Adicione o segundo cabeçalho personalizado no DetalhesFilme
+                        header: () => <Header openDrawer={toggleDrawer} />,
                     }}
                 />
             </Tab.Navigator>
@@ -188,6 +264,7 @@ const styles = StyleSheet.create({
     profileImg: {
         marginTop: 40,
         alignItems: "center",
+        position: "relative",
     },
     circle: {
         width: 120,
