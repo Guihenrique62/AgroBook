@@ -7,7 +7,6 @@ EMAIL: jeantng2016@gmail.com
 const mainAppUse = require('./config/express');
 const app = new mainAppUse;
 const https = require('https');
-
 /************* AGROBOOK [ START ] *************/
 
 /************* AUTH [ START ] *************/
