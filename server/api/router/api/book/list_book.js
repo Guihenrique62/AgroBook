@@ -84,6 +84,24 @@ router.get("/api/book/list_book", async (req, res) => {
 
 });
 
+router.get("/api/book/list_book/by_id", async (req, res) => {
+
+    const { objId, sort, limit } = req.body; // RECUPERA OS DADOS DO BODY
+
+    const shell_commands = new commands(); // CRIA UM CONSTRUTOR
+    const listBook = await shell_commands.commandReadDataById(`books`, 'livros', objId, sort, limit); // EXECULTA A FUNCÃO QUE LER REGISTRO NO BANCO DE DADOS 
+
+    console.log(listBook)
+
+    res.status(200).json({
+        "codigo": process.env.CODE_SUCCESS,
+        "resposta": process.env.MSG_SUCCESS,
+        "mensagem": "Lista de Livros recuperada com sucesso",
+        "data_base": listBook
+    });
+
+});
+
 // *************** ALL ***************
 // Mensagem de erro personalizada para rotas não existemte apartir de /list_user
 router.all("/api/book/list_book*", async (req, res) => {
