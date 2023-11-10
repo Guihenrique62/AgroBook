@@ -33,12 +33,13 @@ const validarUser = async (req) => {
         return validToken = false;
     }
 
+    // COMPARA OS DADOS RECEBIDOS A FIM DE VALIDAR SE É VALIDOS
     try {
         await bcrypt.compare(email + '+' + senha, validToken["hash_mail_pass"]).then(function (result) {
             compareUser = result;
         });
     } catch (x) {
-        compareUser = 'err'
+        compareUser = 'err' 
     }
 
     return [{
