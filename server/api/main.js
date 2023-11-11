@@ -43,7 +43,7 @@ var ROUTER_BOOKS_CREATE = require('./router/api/book/create_book');
 app.use(ROUTER_BOOKS_CREATE);
 
 /* ROUTER READ BOOK - Controla todas as entradas de listagem de livros */
-var ROUTER_READ_BOOK = require('./router/api/book/list_book');
+var ROUTER_READ_BOOK = require('./router/api/book/read_book');
 app.use(ROUTER_READ_BOOK);
 
 /* ROUTER UPDATE BOOK - Controla todas as entradas de atualizações de livros */
