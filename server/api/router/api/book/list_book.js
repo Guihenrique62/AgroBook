@@ -84,19 +84,32 @@ router.get("/api/book/list_book", async (req, res) => {
 
 });
 
+// *************** GET ***************
+// Controla todas as rotas de listagem de livros usando o parametro de _ID
 router.get("/api/book/list_book/by_id", async (req, res) => {
 
-    const { objId, sort, limit } = req.body; // RECUPERA OS DADOS DO BODY
+    const { o_id } = req.body; // RECUPERA OS DADOS DO BODY
+
+    // VERIFICA SE O [ o_id ] ESTÁ VAZIO E SE RESPEITA TODAS AS REGRAS DE ENTRADA
+    if (!o_id) {
+
+        res.status(401).json({
+            "codigo": process.env.CODE_FAIL,
+            "resposta": process.env.MSG_SUCCESS_FAIL,
+            "mensagem": "O campo [ o_id ] não respeita uma ou mais regras de entrada, revise os dados e tente novamente",
+            "data_base": ""
+        });
+        return true;
+
+    }
 
     const shell_commands = new commands(); // CRIA UM CONSTRUTOR
-    const listBook = await shell_commands.commandReadDataById(`books`, 'livros', objId, sort, limit); // EXECULTA A FUNCÃO QUE LER REGISTRO NO BANCO DE DADOS 
-
-    console.log(listBook)
+    const listBook = await shell_commands.commandReadDataById(`books`, 'livros', o_id); // EXECULTA A FUNCÃO QUE LER REGISTRO NO BANCO DE DADOS 
 
     res.status(200).json({
         "codigo": process.env.CODE_SUCCESS,
         "resposta": process.env.MSG_SUCCESS,
-        "mensagem": "Lista de Livros recuperada com sucesso",
+        "mensagem": "Lista de Livros recuperada com sucesso usando o ID",
         "data_base": listBook
     });
 

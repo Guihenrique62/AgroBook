@@ -77,25 +77,71 @@ const readData = async (dataBase, collectionName, filter, sort, limit) => {
 }
 
 // R.I = READ BY ID | Função que busca registro usando o ID
-const readDataById = async (dataBase, collectionName, o_id, sort, limit) => {
+const readDataById = async (dataBase, collectionName, o_id) => {
 
     const configParms = new configDB(); // RECUPERA A FUNCAO QUE VEIO DO AQUIVO DE CONEXAO
     const client = await configParms.parmsConfigDB(); // RESERVA APENAS A FUNCAO DE CONEXAO
 
     // FUNCAO PARA LER REGISTROS
-    async function execute(dataBase, collectionName, o_id, sortFild, limitFild) {
+    async function execute(dataBase, collectionName, o_id) {
 
         await client.connect(); // AGUARDA A CONEXAO COM O CLIENT
 
         const db = client.db(dataBase); // CRIA A CONECAO COM O BANCO
         const collection = db.collection(collectionName); // AGORA A CONEXAO COM A COLLECTION
-        const findData = await collection.findOne({"_id": new ObjectId(o_id)}); // PARA FINALIZAR REALIZA A INSERÇÃO DE UM UNICO OBJETO
+        const findData = await collection.findOne({ "_id": new ObjectId(o_id) }); // PARA FINALIZAR REALIZA A INSERÇÃO DE UM UNICO OBJETO
 
         const objArray = {}; // CRIA UM OBJETO PARA GUARDAR O OBJ PASSADO
 
         objArray.dataBase = dataBase; // RESERVA OS DADOS DE ENTRADA [ db ]
         objArray.collectionName = collectionName; // RESERVA OS DADOS DE ENTRADA [ collection ]
         objArray.filter = o_id; // PARAMETRO USANDO PARA FILTRAR QUERY
+        objArray.sortFild = null; // PARAMETRO USANDO PARA ORDENAR QUERY
+        objArray.limitFild = null; // PARAMETRO USANDO PARA LIMITAR NUMEROS DE REGISTRO QUERY
+        objArray.result = findData; // RESERVA O RESULTADO FINAL DO COMANDO
+
+        return objArray; // RETORNA O RESULTADO DA OPERAÇÃO O ESPERADO É {"ok":1}
+
+    }
+
+    return await execute(dataBase, collectionName, o_id)
+        .then((res) => { return res }) // EM CADO DE SUCESSO
+        .catch((err) => { return err }) // EM CASO DE ERRO
+        .finally(() => client.close()); // AO FINALIZAR FECHA A CONEXAO
+
+}
+
+// R.I.A = READ BY ID USING AGREGATION | Função que agrega dados de uma ou mais collection
+const readDataByIdAgregation = async (dataBase, collections, filter, sortFild, limitFild) => {
+
+    const configParms = new configDB(); // RECUPERA A FUNCAO QUE VEIO DO AQUIVO DE CONEXAO
+    const client = await configParms.parmsConfigDB(); // RESERVA APENAS A FUNCAO DE CONEXAO
+
+    // FUNCAO PARA LER REGISTROS
+    async function execute(dataBase, collections, filter, sortFild, limitFild) {
+
+        await client.connect(); // AGUARDA A CONEXAO COM O CLIENTE
+        
+        let aggregateQuery = [] // VARIAVEL PARA MONTAR UMA QUERY DINAMICA EX: 1 OU MAIS JOIN PARA DIFERENTES REQUISIÇÃO
+
+        for (listLookup in collections) { // REALIZA UMA VARREDURA NA LISTA DE COLLECTION RECEBIDA PARA REALIZAR O JOIN EM 1 OU MAIS RELACIONAMENTOS
+            print(collections[listLookup])
+        }
+        // [
+        //     {'$match':{'usuario': new ObjectId('652df7076638ebf86ae252c3')}},
+        //     {'$lookup': {'from':'usuarios','localField':'usuario','foreignField':'_id','as':'user'}},
+        //     {'$lookup': {'from':'livros','localField':'livro','foreignField':'_id','as':'book'}}
+        // ]
+
+        const db = client.db(dataBase); // CRIA A CONECAO COM O BANCO
+        const collection = db.collection(collections[0]); // PEGA O PRIMEIRO INDICE DO ARRAY, VALOR ESPERADO => [ 'collection1', 'collection2' ..., 'collection10' ]
+        const findData = await collection.aggregate(aggregateQuery).toArray(); // REALIZA A AGREGAÇÃO USANDO O COMANDO LOOKUP COMO PREDOMINANTE
+
+        const objArray = {}; // CRIA UM OBJETO PARA GUARDAR O OBJ PASSADO
+
+        objArray.dataBase = dataBase; // RESERVA OS DADOS DE ENTRADA [ db ]
+        objArray.collectionName = collections; // RESERVA OS DADOS DE ENTRADA [ collection ]
+        objArray.filter = filter; // PARAMETRO USANDO PARA FILTRAR QUERY
         objArray.sortFild = sortFild; // PARAMETRO USANDO PARA ORDENAR QUERY
         objArray.limitFild = limitFild; // PARAMETRO USANDO PARA LIMITAR NUMEROS DE REGISTRO QUERY
         objArray.result = findData; // RESERVA O RESULTADO FINAL DO COMANDO
@@ -104,7 +150,7 @@ const readDataById = async (dataBase, collectionName, o_id, sort, limit) => {
 
     }
 
-    return await execute(dataBase, collectionName, o_id, sort, limit)
+    return await execute(dataBase, collections, filter, sortFild, limitFild)
         .then((res) => { return res }) // EM CADO DE SUCESSO
         .catch((err) => { return err }) // EM CASO DE ERRO
         .finally(() => client.close()); // AO FINALIZAR FECHA A CONEXAO
@@ -196,8 +242,8 @@ module.exports = function () {
     }
 
     // R.I - READ BY ID
-    this.commandReadDataById = async (dataBase, collectionName, objId, sort, limit) => {
-        const data = await readDataById(dataBase, collectionName, objId, sort, limit);
+    this.commandReadDataById = async (dataBase, collectionName, objId) => {
+        const data = await readDataById(dataBase, collectionName, objId);
         return data;
     }
 
