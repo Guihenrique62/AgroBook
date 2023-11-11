@@ -25,7 +25,7 @@ var ROUTER_CREATE_USER = require('./router/api/user/create_user');
 app.use(ROUTER_CREATE_USER);
 
 /* ROUTER READ USER - Controla todas as entradas de listagem de usuários */
-var ROUTER_READ_USER = require('./router/api/user/read_user');
+var ROUTER_READ_USER = require('./router/api/user/list_user');
 app.use(ROUTER_READ_USER);
 
 /* ROUTER UPDATE USER - Controla todas as entradas de atualizações de usuário */
@@ -43,7 +43,7 @@ var ROUTER_BOOKS_CREATE = require('./router/api/book/create_book');
 app.use(ROUTER_BOOKS_CREATE);
 
 /* ROUTER READ BOOK - Controla todas as entradas de listagem de livros */
-var ROUTER_READ_BOOK = require('./router/api/book/read_book');
+var ROUTER_READ_BOOK = require('./router/api/book/list_book');
 app.use(ROUTER_READ_BOOK);
 
 /* ROUTER UPDATE BOOK - Controla todas as entradas de atualizações de livros */
