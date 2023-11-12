@@ -30,7 +30,7 @@ router.post("/api/order/create_order", async (req, res) => {
         const shell_commands = new commands(); // CRIA UM CONSTRUTOR
         const createorder = await shell_commands.commandCreateData('books', 'pedidos', query); // INICIA A FUNÇÃO EXPORTADA
 
-        // VERIFICA SE EXITE VALORES DUPLICADOS
+        // VERIFICA SE EXISTE VALORES DUPLICADOS
         if (createorder.keyValue) {
 
             // PASSOU NA VARREDURA MAIS ENCONTROU ERRO [ CHAVES DUPLICADAS ]
