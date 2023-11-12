@@ -120,7 +120,7 @@ router.get("/api/book/list_book/by_id", async (req, res) => {
 });
 
 // *************** ALL ***************
-// Mensagem de erro personalizada para rotas não existemte apartir de /list_user
+// Mensagem de erro personalizada para rotas não existente apartir de /list_user
 router.all("/api/book/list_book*", async (req, res) => {
 
     res.status(404).json({
