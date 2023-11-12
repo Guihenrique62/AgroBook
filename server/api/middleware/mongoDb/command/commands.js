@@ -6,6 +6,7 @@ EMAIL: jeantng2016@gmail.com
 
 const { MongoClient, ObjectId } = require('mongodb'); // SOLICTA A BIBLIOTECA DO MONGO DB
 const configDB = require('../database/conn'); // SOLICITA ARQUIVOS DE CONEXÃO
+const { EJSON } = require('bson'); // FORMATA JSON PARA SER INTERPLETADO PELO MONGODB
 require('dotenv').config(); // SOLICITA VARIÁVEIS DO ARQUIVO .ENV
 
 // C = CREATE | Função que cria um registro no mongoDb | Ex: [ db = 'books', collection = 'usuarios', obj = {nome: "user"} ]
@@ -124,7 +125,21 @@ const readDataByIdAgregation = async (dataBase, collections, filter, sortFild, l
 
         const db = client.db(dataBase); // CRIA A CONECAO COM O BANCO
         const collection = db.collection(collections[0]["collection"]); // PEGA O PRIMEIRO INDICE DO ARRAY, VALOR ESPERADO => [ { "collection": "pedido" } ]
-        const findData = await collection.aggregate(filter).limit(limitFild).toArray(); // REALIZA A AGREGAÇÃO USANDO O COMANDO LOOKUP COMO PREDOMINANTE
+        let findData; // RESERVA A RESPOSTA DA QUERY
+
+        // TENTA CONVERTER O JSON PARA O FORMATO ACEITO PELO MONGODB
+        try {
+            filter = EJSON.parse(JSON.stringify(filter), { relaxed: true });
+        } catch (errFormatedFilter) {
+            // FAZ NADA
+        }
+
+        try {
+            findData = await collection.aggregate(filter).toArray(); // REALIZA A AGREGAÇÃO USANDO O COMANDO LOOKUP COMO PREDOMINANTE
+        } catch (x) {
+            findData = false
+            console.log(x)
+        }
 
         const objArray = {}; // CRIA UM OBJETO PARA GUARDAR O OBJ PASSADO
 

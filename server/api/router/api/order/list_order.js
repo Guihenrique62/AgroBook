@@ -20,20 +20,30 @@ router.post("/api/order/list_order", async (req, res) => {
 
         let listLookup = []; // RESERVA LISTA DE JOIN RECEBIDA DA API VIA [ collections ]
 
-        // const shell_commands = new commands(); // CRIA UM CONSTRUTOR
-        // const listOrderAgregate = await shell_commands.commandreadDataByIdAgregation('books', collections, filter, sort, limit); // EXCULTA FUNÇÃO EXPORTADA QUE AGREGA REGISTROS DO DB
-
-        // console.log(collections, filter, sort, limit)
-        for (row in collections) {
-            console.log(collections[row])
+        // TENTA FORMATAR O JSON RECEBIDO PARA SER LIDO PELO MONGODB [ match ]
+        try {
+            // ADICIONA O MATCH NO FILTER
+            listLookup.push({ "$match": filter });
+        } catch (errMatch) {
+            
         }
+
+        // LOOP PARA CRIAR OS JOIN
+        for (row in collections) {
+            if (row > 0) {
+                listLookup.push({ "$lookup": collections[row] }); // ADICIONA O ELEMENTO DO LOOKUP NO NOVO OBJETO FILTERR
+            }
+        }
+
+        const shell_commands = new commands(); // CRIA UM CONSTRUTOR
+        const listOrderAgregate = await shell_commands.commandreadDataByIdAgregation('books', collections, listLookup, sort, limit); // EXCULTA FUNÇÃO EXPORTADA QUE AGREGA REGISTROS DO DB
 
         // PASSOU NA VARREDURA
         res.status(200).json({
             "codigo": process.env.CODE_SUCCESS,
             "resposta": process.env.MSG_SUCCESS,
             "mensagem": "Lista de registros recuperada com sucesso",
-            "data_base": "listOrderAgregate"
+            "data_base": listOrderAgregate
         });
         return true;
 
