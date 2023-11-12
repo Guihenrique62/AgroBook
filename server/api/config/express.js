@@ -4,11 +4,8 @@ const https = require("https");
 const http = require("http");
 const fs = require("fs");
 const bodyParser = require("body-parser");
-const session = require("express-session");
 const cookieParser = require("cookie-parser");
 const cookieSession = require("cookie-session");
-const md5 = require("md5");
-const multer = require("multer");
 const cors = require("cors");
 const Server = require("socket.io");
 
@@ -66,13 +63,13 @@ module.exports = function () {
   );
   app.use(cors(corsOptions));
 
-  // Carrega o certificado e a key necessários para a configuração.
+  // Carrega o certificado e a key necessários para a configuração do HTTPS.
   const options = {
     key: fs.readFileSync("https/certificate.key"),
     cert: fs.readFileSync("https/certificate.crt"),
   };
 
-  // Cria a instância do server e escuta na porta 3000
+  // Cria a instância do server e escuta na porta ???
   http.createServer(options, app).listen(portApp);
   https.createServer(options, app).listen(portAppHttp);
 

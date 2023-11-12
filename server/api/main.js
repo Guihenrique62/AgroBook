@@ -7,6 +7,7 @@ EMAIL: jeantng2016@gmail.com
 const mainAppUse = require('./config/express');
 const app = new mainAppUse;
 const https = require('https');
+
 /************* AGROBOOK [ START ] *************/
 
 /************* AUTH [ START ] *************/
@@ -53,13 +54,16 @@ app.use(ROUTER_UPDATE_BOOK);
 /* ROUTER DELETE BOOK - Controla todas as ordem de apagar Livros */
 var ROUTER_DELETE_BOOK = require('./router/api/book/delete_book');
 app.use(ROUTER_DELETE_BOOK);
-
 /************* BOOKS [ END ] *************/
 
 /************* ORDERS [ START ] *************/
 /* ROUTER ORDERS CREATE - Controla todas as entradas de criação de PEDIDO */
 var ROUTER_ORDER_CREATE = require('./router/api/order/create_order');
 app.use(ROUTER_ORDER_CREATE);
+
+/* ROUTER ORDERS READ - Controla todas as listagem de PEDIDOS */
+var ROUTER_ORDER_READ = require('./router/api/order/list_order');
+app.use(ROUTER_ORDER_READ);
 /************* ORDERS [ END ] *************/
 
 /************* TRELLO [ START ] *************/

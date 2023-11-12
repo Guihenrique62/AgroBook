@@ -10,46 +10,30 @@ const commands = require('../../../middleware/mongoDb/command/commands'); // EXT
 require('dotenv').config(); // SOLICÍTA AS VARIÁVEIS DE AMBIENTE
 
 // *************** POST ***************
-// Controla todas as rotas de criação de usuário
-router.post("/api/order/create_order", async (req, res) => {
+// Controla todas as rotas de listar pedidos
+router.post("/api/order/list_order", async (req, res) => {
 
-    var {livro,usuario,data_vencimento} = req.body; // RESERVA TODAS AS VARIÁVEIS RECEBIDAS
-    const dateNow = new Date();
+    var { collections, filter, sort, limit } = req.body; // RESERVA TODAS AS VARIÁVEIS RECEBIDAS
+
     // VERIFICA VALORES RECEBIDOS
-    if ( livro && usuario) {
+    if (collections && filter && sort && limit) {
 
-        const query = { // CRIA O OBJETO
-            "livro": livro,
-            "usuario": usuario,
-            "status": 1,
-            "data_aluguel": dateNow,
-            "data_vencimento": data_vencimento,
-            "entregou": 0,
-            "recebeu": 0,
-        }
-        const shell_commands = new commands(); // CRIA UM CONSTRUTOR
-        const createorder = await shell_commands.commandCreateData('books', 'pedidos', query); // INICIA A FUNÇÃO EXPORTADA
+        let listLookup = []; // RESERVA LISTA DE JOIN RECEBIDA DA API VIA [ collections ]
 
-        // VERIFICA SE EXITE VALORES DUPLICADOS
-        if (createorder.keyValue) {
+        // const shell_commands = new commands(); // CRIA UM CONSTRUTOR
+        // const listOrderAgregate = await shell_commands.commandreadDataByIdAgregation('books', collections, filter, sort, limit); // EXCULTA FUNÇÃO EXPORTADA QUE AGREGA REGISTROS DO DB
 
-            // PASSOU NA VARREDURA MAIS ENCONTROU ERRO [ CHAVES DUPLICADAS ]
-            res.status(401).json({
-                "codigo": process.env.CODE_FAIL,
-                "resposta": process.env.MSG_SUCCESS_FAIL,
-                "mensagem": "Pedido já existe, experimente redefinir a senha ou inserir outro usuário",
-                "data_base": createorder
-            });
-            return true;
-
+        // console.log(collections, filter, sort, limit)
+        for (row in collections) {
+            console.log(collections[row])
         }
 
         // PASSOU NA VARREDURA
         res.status(200).json({
             "codigo": process.env.CODE_SUCCESS,
             "resposta": process.env.MSG_SUCCESS,
-            "mensagem": "Pedido criado com sucesso",
-            "data_base": createorder
+            "mensagem": "Lista de registros recuperada com sucesso",
+            "data_base": "listOrderAgregate"
         });
         return true;
 
@@ -70,7 +54,7 @@ router.post("/api/order/create_order", async (req, res) => {
 
 // *************** ALL ***************
 // Mensagem de erro personalizada para rotas não existente apartir de /create_user
-router.all("/api/user/create_user*", async (req, res) => {
+router.all("/api/user/list_user*", async (req, res) => {
 
     res.status(404).json({
         "codigo": process.env.CODE_FAIL,
