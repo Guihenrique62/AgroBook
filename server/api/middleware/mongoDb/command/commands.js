@@ -5,22 +5,22 @@ EMAIL: jeantng2016@gmail.com
 */
 
 const { MongoClient, ObjectId } = require('mongodb'); // SOLICTA A BIBLIOTECA DO MONGO DB
-const configDB = require('../database/conn'); // SOLICITA ARQUIVOS DE CONEXAO
-require('dotenv').config(); // SOLICITA VARIAVEIS DO ARQUIVO .ENV
+const configDB = require('../database/conn'); // SOLICITA ARQUIVOS DE CONEXÃO
+require('dotenv').config(); // SOLICITA VARIÁVEIS DO ARQUIVO .ENV
 
 // C = CREATE | Função que cria um registro no mongoDb | Ex: [ db = 'books', collection = 'usuarios', obj = {nome: "user"} ]
 const createData = async (dataBase, collectionName, obj) => {
 
-    const configParms = new configDB(); // RECUPERA A FUNCAO QUE VEIO DO AQUIVO DE CONEXAO
-    const client = await configParms.parmsConfigDB(); // RESERVA APENAS A FUNCAO DE CONEXAO
+    const configParms = new configDB(); // RECUPERA A FUNÇÃO QUE VEIO DO AQUIVO DE CONEXÃO
+    const client = await configParms.parmsConfigDB(); // RESERVA APENAS A FUNÇÃO DE CONEXÃO
 
-    // FUNCAO PARA CRIAR UM REGISTRO
+    // FUNÇÃO PARA CRIAR UM REGISTRO
     async function execute(dataBase, collectionName, obj) {
 
-        await client.connect(); // AGUARDA A CONEXAO COM O CLIENT
+        await client.connect(); // AGUARDA A CONEXÃO COM O CLIENTE
 
-        const db = client.db(dataBase); // CRIA A CONECAO COM O BANCO
-        const collection = db.collection(collectionName); // AGORA A CONEXAO COM A COLLECTION
+        const db = client.db(dataBase); // CRIA A CONEXÃO COM O BANCO
+        const collection = db.collection(collectionName); // AGORA A CONEXÃO COM A COLLECTION
         const insertData = await collection.insertOne(obj); // PARA FINALIZAR REALIZA A INSERÇÃO DE UM UNICO OBJETO
 
         const objArray = {}; // CRIA UM OBJETO PARA GUARDAR O OBJ PASSADO
@@ -37,23 +37,23 @@ const createData = async (dataBase, collectionName, obj) => {
     return await execute(dataBase, collectionName, obj)
         .then((res) => { return res }) // EM CADO DE SUCESSO
         .catch((err) => { return err }) // EM CASO DE ERRO
-        .finally(() => client.close()); // AO FINALIZAR FECHA A CONEXAO
+        .finally(() => client.close()); // AO FINALIZAR FECHA A CONEXÃO
 
 }
 
-// R = READ | Função que le um registro no mongoDb
+// R = READ | Função que le um registro no mongo Db
 const readData = async (dataBase, collectionName, filter, sort, limit) => {
 
-    const configParms = new configDB(); // RECUPERA A FUNCAO QUE VEIO DO AQUIVO DE CONEXAO
-    const client = await configParms.parmsConfigDB(); // RESERVA APENAS A FUNCAO DE CONEXAO
+    const configParms = new configDB(); // RECUPERA A FUNÇÃO QUE VEIO DO AQUIVO DE CONEXÃO
+    const client = await configParms.parmsConfigDB(); // RESERVA APENAS A FUNÇÃO DE CONEXÃO
 
-    // FUNCAO PARA LER REGISTROS
+    // FUNÇÃO PARA LER REGISTROS
     async function execute(dataBase, collectionName, filter, sortFild, limitFild) {
 
-        await client.connect(); // AGUARDA A CONEXAO COM O CLIENT
+        await client.connect(); // AGUARDA A CONEXÃO COM O CLIENTE
 
-        const db = client.db(dataBase); // CRIA A CONECAO COM O BANCO
-        const collection = db.collection(collectionName); // AGORA A CONEXAO COM A COLLECTION
+        const db = client.db(dataBase); // CRIA A CONEXÃO COM O BANCO
+        const collection = db.collection(collectionName); // AGORA A CONEXÃO COM A COLLECTION
         const findData = await collection.find(filter).sort(sortFild).limit(limitFild).toArray(); // PARA FINALIZAR REALIZA A INSERÇÃO DE UM UNICO OBJETO
 
         const objArray = {}; // CRIA UM OBJETO PARA GUARDAR O OBJ PASSADO
@@ -72,23 +72,23 @@ const readData = async (dataBase, collectionName, filter, sort, limit) => {
     return await execute(dataBase, collectionName, filter, sort, limit)
         .then((res) => { return res }) // EM CADO DE SUCESSO
         .catch((err) => { return err }) // EM CASO DE ERRO
-        .finally(() => client.close()); // AO FINALIZAR FECHA A CONEXAO
+        .finally(() => client.close()); // AO FINALIZAR FECHA A CONEXÃO
 
 }
 
 // R.I = READ BY ID | Função que busca registro usando o ID
 const readDataById = async (dataBase, collectionName, o_id) => {
 
-    const configParms = new configDB(); // RECUPERA A FUNCAO QUE VEIO DO AQUIVO DE CONEXAO
-    const client = await configParms.parmsConfigDB(); // RESERVA APENAS A FUNCAO DE CONEXAO
+    const configParms = new configDB(); // RECUPERA A FUNÇÃO QUE VEIO DO AQUIVO DE CONEXÃO
+    const client = await configParms.parmsConfigDB(); // RESERVA APENAS A FUNÇÃO DE CONEXÃO
 
-    // FUNCAO PARA LER REGISTROS
+    // FUNÇÃO PARA LER REGISTROS
     async function execute(dataBase, collectionName, o_id) {
 
-        await client.connect(); // AGUARDA A CONEXAO COM O CLIENT
+        await client.connect(); // AGUARDA A CONEXÃO COM O CLIENTE
 
-        const db = client.db(dataBase); // CRIA A CONECAO COM O BANCO
-        const collection = db.collection(collectionName); // AGORA A CONEXAO COM A COLLECTION
+        const db = client.db(dataBase); // CRIA A CONEXÃO COM O BANCO
+        const collection = db.collection(collectionName); // AGORA A CONEXÃO COM A COLLECTION
         const findData = await collection.findOne({ "_id": new ObjectId(o_id) }); // PARA FINALIZAR REALIZA A INSERÇÃO DE UM UNICO OBJETO
 
         const objArray = {}; // CRIA UM OBJETO PARA GUARDAR O OBJ PASSADO
@@ -107,17 +107,17 @@ const readDataById = async (dataBase, collectionName, o_id) => {
     return await execute(dataBase, collectionName, o_id)
         .then((res) => { return res }) // EM CADO DE SUCESSO
         .catch((err) => { return err }) // EM CASO DE ERRO
-        .finally(() => client.close()); // AO FINALIZAR FECHA A CONEXAO
+        .finally(() => client.close()); // AO FINALIZAR FECHA A CONEXÃO
 
 }
 
 // R.I.A = READ BY ID USING AGREGATION | Função que agrega dados de uma ou mais collection
 const readDataByIdAgregation = async (dataBase, collections, filter, sortFild, limitFild) => {
 
-    const configParms = new configDB(); // RECUPERA A FUNCAO QUE VEIO DO AQUIVO DE CONEXAO
-    const client = await configParms.parmsConfigDB(); // RESERVA APENAS A FUNCAO DE CONEXAO
+    const configParms = new configDB(); // RECUPERA A FUNCAO QUE VEIO DO AQUIVO DE CONEXÃO
+    const client = await configParms.parmsConfigDB(); // RESERVA APENAS A FUNÇÃO DE CONEXÃO
 
-    // FUNCAO PARA LER REGISTROS
+    // FUNÇÃO PARA LER REGISTROS
     async function execute(dataBase, collections, filter, sortFild, limitFild) {
 
         await client.connect(); // AGUARDA A CONEXAO COM O CLIENTE
@@ -142,24 +142,24 @@ const readDataByIdAgregation = async (dataBase, collections, filter, sortFild, l
     return await execute(dataBase, collections, filter, sortFild, limitFild)
         .then((res) => { return res }) // EM CADO DE SUCESSO
         .catch((err) => { return err }) // EM CASO DE ERRO
-        .finally(() => client.close()); // AO FINALIZAR FECHA A CONEXAO
+        .finally(() => client.close()); // AO FINALIZAR FECHA A CONEXÃO
 
 }
 
 // U = UPDATE | Função que atualiza um registro no mongodb usando o filter para localizar o registro e o updatefild para atualizar
 const updateData = async (dataBase, collectionName, filter, updateFilds) => {
 
-    const configParms = new configDB(); // RECUPERA A FUNCAO QUE VEIO DO AQUIVO DE CONEXAO
-    const client = await configParms.parmsConfigDB(); // RESERVA APENAS A FUNCAO DE CONEXAO
+    const configParms = new configDB(); // RECUPERA A FUNÇÃO QUE VEIO DO AQUIVO DE CONEXÃO
+    const client = await configParms.parmsConfigDB(); // RESERVA APENAS A FUNÇÃO DE CONEXÃO
 
-    // FUNCAO PARA ATUALIZAR REGISTROS
+    // FUNÇÃO PARA ATUALIZAR REGISTROS
     async function execute(dataBase, collectionName, filter, objectNewFilds) {
 
-        await client.connect(); // AGUARDA A CONEXAO COM O CLIENT
+        await client.connect(); // AGUARDA A CONEXÃO COM O CLIENTE
 
-        const db = client.db(dataBase); // CRIA A CONECAO COM O BANCO
-        const collection = db.collection(collectionName); // AGORA A CONEXAO COM A COLLECTION
-        const updateData = await collection.updateOne(filter, { $set: objectNewFilds }); // PARA FINALIZAR REALIZA A ALTERACAO USANDO UM FILTRO E UM NOVO OBJETO
+        const db = client.db(dataBase); // CRIA A CONEXÃO COM O BANCO
+        const collection = db.collection(collectionName); // AGORA A CONEXÃO COM A COLLECTION
+        const updateData = await collection.updateOne(filter, { $set: objectNewFilds }); // PARA FINALIZAR REALIZA A ALTERAÇÃO USANDO UM FILTRO E UM NOVO OBJETO
 
         const objArray = {}; // CRIA UM OBJETO PARA GUARDAR O OBJ PASSADO
 
@@ -176,23 +176,23 @@ const updateData = async (dataBase, collectionName, filter, updateFilds) => {
     return await execute(dataBase, collectionName, filter, updateFilds)
         .then((res) => { return res }) // EM CADO DE SUCESSO
         .catch((err) => { return err }) // EM CASO DE ERRO
-        .finally(() => client.close()); // AO FINALIZAR FECHA A CONEXAO
+        .finally(() => client.close()); // AO FINALIZAR FECHA A CONEXÃO
 
 }
 
 // D = DELETE | Função que apaga um registro no mongodb usando o filter para localizar o registro
 const deleteData = async (dataBase, collectionName, filter) => {
 
-    const configParms = new configDB(); // RECUPERA A FUNCAO QUE VEIO DO AQUIVO DE CONEXAO
-    const client = await configParms.parmsConfigDB(); // RESERVA APENAS A FUNCAO DE CONEXAO
+    const configParms = new configDB(); // RECUPERA A FUNÇÃO QUE VEIO DO AQUIVO DE CONEXÃO
+    const client = await configParms.parmsConfigDB(); // RESERVA APENAS A FUNÇÃO DE CONEXÃO
 
-    // FUNCAO PARA APAGAR REGISTROS
+    // FUNÇÃO PARA APAGAR REGISTROS
     async function execute(dataBase, collectionName, filter) {
 
-        await client.connect(); // AGUARDA A CONEXAO COM O CLIENT
+        await client.connect(); // AGUARDA A CONEXÃO COM O CLIENTE
 
-        const db = client.db(dataBase); // CRIA A CONECAO COM O BANCO
-        const collection = db.collection(collectionName); // AGORA A CONEXAO COM A COLLECTION
+        const db = client.db(dataBase); // CRIA A CONEXÃO COM O BANCO
+        const collection = db.collection(collectionName); // AGORA A CONEXÃO COM A COLLECTION
         const deleteData = await collection.deleteOne(filter); // PARA FINALIZAR REALIZA A EXCLUSÃO USANDO UM FILTRO
 
         console.log(deleteData);
@@ -211,7 +211,7 @@ const deleteData = async (dataBase, collectionName, filter) => {
     return await execute(dataBase, collectionName, filter)
         .then((res) => { return res }) // EM CADO DE SUCESSO
         .catch((err) => { return err }) // EM CASO DE ERRO
-        .finally(() => client.close()); // AO FINALIZAR FECHA A CONEXAO
+        .finally(() => client.close()); // AO FINALIZAR FECHA A CONEXÃO
 
 }
 

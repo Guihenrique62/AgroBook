@@ -5,16 +5,16 @@ EMAIL: jeantng2016@gmail.com
 */
 
 const { MongoClient } = require('mongodb'); // SOLICTA A BIBLIOTECA DO MONGO DB
-require('dotenv').config(); // SOLICITA VARIAVEIS DE AMBIENTE
+require('dotenv').config(); // SOLICITA VARIÁVEIS DE AMBIENTE
 
 // CONFIGURAÇÃO DA CONEXÃO
 const createConnMongo = async (db) => {
 
-    const url = process.env.DB_CONECTION; // DEFINE A URL DA CONEXAO QUE ESTA NO AQUIVO .ENV
+    const url = process.env.DB_CONECTION; // DEFINE A URL DA CONEXÃO QUE ESTA NO AQUIVO .ENV
 
-    const client = new MongoClient(url); // CRIA UMA NOVA CONEXAO USANDO A URL
+    const client = new MongoClient(url); // CRIA UMA NOVA CONEXÃO USANDO A URL
 
-    return client; // RETORNA A CONEXAO PARA EXPORTAR
+    return client; // RETORNA A CONEXÃO PARA EXPORTAR
 
 }
 
