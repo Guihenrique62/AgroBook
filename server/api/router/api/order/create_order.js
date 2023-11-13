@@ -18,19 +18,15 @@ router.post("/api/order/create_order", async (req, res) => {
     const dateNow = new Date().getTime();
     // VERIFICA VALORES RECEBIDOS
     if ( livro && usuario) {
-
-        livroID = { "$oid": livro }
-        usuarioID = { "$oid": usuario }
-        
         
         const query = { // CRIA O OBJETO
-            "livro": livroID,
-            "usuario": usuarioID,
+            "livro": { "$oid": livro},
+            "usuario": { "$oid": usuario },
             "status": 1,
             "data_aluguel": dateNow,
             "data_vencimento": data_vencimento,
             "entregou": 0,
-            "recebeu": 0,
+            "recebeu": 0
         }
         const shell_commands = new commands(); // CRIA UM CONSTRUTOR
         const createorder = await shell_commands.commandCreateData('books', 'pedidos', query); // INICIA A FUNÇÃO EXPORTADA
