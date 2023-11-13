@@ -9,18 +9,23 @@ var router = express.Router(); // EXTRAI O MODULO DE ROTAS
 const commands = require('../../../middleware/mongoDb/command/commands'); // EXTRAI OS COMANDOS NO MONGODB
 require('dotenv').config(); // SOLICÍTA AS VARIÁVEIS DE AMBIENTE
 
+
 // *************** POST ***************
 // Controla todas as rotas de criação de usuário
 router.post("/api/order/create_order", async (req, res) => {
 
     var {livro,usuario,data_vencimento} = req.body; // RESERVA TODAS AS VARIÁVEIS RECEBIDAS
-    const dateNow = new Date();
+    const dateNow = new Date().getTime();
     // VERIFICA VALORES RECEBIDOS
     if ( livro && usuario) {
 
+        livroID = { "$oid": livro }
+        usuarioID = { "$oid": usuario }
+        
+        
         const query = { // CRIA O OBJETO
-            "livro": livro,
-            "usuario": usuario,
+            "livro": livroID,
+            "usuario": usuarioID,
             "status": 1,
             "data_aluguel": dateNow,
             "data_vencimento": data_vencimento,
