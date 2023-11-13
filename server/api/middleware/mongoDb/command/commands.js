@@ -135,7 +135,7 @@ const readDataByIdAgregation = async (dataBase, collections, filter, sortFild, l
         }
 
         try {
-            findData = await collection.aggregate(filter).toArray(); // REALIZA A AGREGAÇÃO USANDO O COMANDO LOOKUP COMO PREDOMINANTE
+            findData = await collection.aggregate(filter).limit(limitFild).toArray(); // REALIZA A AGREGAÇÃO USANDO O COMANDO LOOKUP COMO PREDOMINANTE
         } catch (x) {
             findData = false
             console.log(x)
