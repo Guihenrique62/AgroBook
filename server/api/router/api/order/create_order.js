@@ -18,7 +18,8 @@ router.post("/api/order/create_order", async (req, res) => {
     const dateNow = new Date();
     // VERIFICA VALORES RECEBIDOS
     if ( livro && usuario) {
-        
+
+                
         const query = { // CRIA O OBJETO
             "livro": { "$oid": livro},
             "usuario": { "$oid": usuario },
