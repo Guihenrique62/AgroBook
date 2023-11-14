@@ -55,8 +55,8 @@ router.post("/api/book/create_book", async (req, res) => {
                 "idioma": idioma,
                 "data_lancamento": data_lancamento,
                 "total_estoque": parseInt(total_estoque),
-                "registro_criado_em": dateNow.getTime(),// DATA ATUAL DA CRIAÇÃO
-                "registro_atualizado_em": dateNow.getTime() // DATA ATUAL DA CRIAÇÃO
+                "registro_criado_em": dateNow,// DATA ATUAL DA CRIAÇÃO
+                "registro_atualizado_em": dateNow // DATA ATUAL DA CRIAÇÃO
             }
     
             const shell_commands = new commands(); // CRIA UM CONSTRUTOR
