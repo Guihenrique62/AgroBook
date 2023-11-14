@@ -24,7 +24,6 @@ const createData = async (dataBase, collectionName, obj) => {
         try {
             obj = EJSON.parse(JSON.stringify(obj), { relaxed: true });
         } catch (errFormatedFilter) {
-            // FAZ NADA
         }
 
         const db = client.db(dataBase); // CRIA A CONEXÃO COM O BANCO

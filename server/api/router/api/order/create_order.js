@@ -15,7 +15,7 @@ require('dotenv').config(); // SOLICÍTA AS VARIÁVEIS DE AMBIENTE
 router.post("/api/order/create_order", async (req, res) => {
 
     var {livro,usuario,data_vencimento} = req.body; // RESERVA TODAS AS VARIÁVEIS RECEBIDAS
-    const dateNow = new Date().getTime();
+    const dateNow = new Date();
     // VERIFICA VALORES RECEBIDOS
     if ( livro && usuario) {
         
