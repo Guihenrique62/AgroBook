@@ -1,7 +1,7 @@
 /*
 CRIADO: JEAN CLEIDSON PEREIRA RODRIGUES
 MATRICULA: 202202257141
-EMAIL: jeantng2016@gmail.com  
+EMAIL: jeantng2016@gmail.com
 */
 
 const mainAppUse = require('./config/express');

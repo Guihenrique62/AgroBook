@@ -1,7 +1,7 @@
 /*
 CRIADO: JEAN CLEIDSON PEREIRA RODRIGUES
 MATRICULA: 202202257141
-EMAIL: jeantng2016@gmail.com  
+EMAIL: jeantng2016@gmail.com
 */
 
 const express = require("express"); // EXTRAI O MODULO DO EXPRESS
@@ -14,9 +14,53 @@ require('dotenv').config(); // SOLICÍTA AS VARIÁVEIS DE AMBIENTE
 router.post("/api/order/list_order", async (req, res) => {
 
     var { collections, filter, sort, limit } = req.body; // RESERVA TODAS AS VARIÁVEIS RECEBIDAS
-
+    
     // VERIFICA VALORES RECEBIDOS
     if (collections && filter && sort && limit) {
+
+        // VERIFICA SE O OBJETO [ collection ] E UM OBJETO
+        if (typeof (collections) != 'object') {
+            res.status(401).json({
+                "codigo": process.env.CODE_FAIL,
+                "resposta": process.env.MSG_SUCCESS_FAIL,
+                "mensagem": "O objeto [ collections ] informado não segue o padrão esperado",
+                "data_base": ""
+            });
+            return true;
+        }
+
+        // VERIFICA SE O OBJETO [ filter ] E UM OBJETO
+        if (typeof (filter) != 'object') {
+            res.status(401).json({
+                "codigo": process.env.CODE_FAIL,
+                "resposta": process.env.MSG_SUCCESS_FAIL,
+                "mensagem": "O objeto [ filter ] informado não segue o padrão esperado",
+                "data_base": ""
+            });
+            return true;
+        }
+
+        // VERIFICA SE O OBJETO [ sort ] E UM OBJETO
+        if (typeof (sort) != 'object') {
+            res.status(401).json({
+                "codigo": process.env.CODE_FAIL,
+                "resposta": process.env.MSG_SUCCESS_FAIL,
+                "mensagem": "O objeto [ sort ] informado não segue o padrão esperado",
+                "data_base": ""
+            });
+            return true;
+        }
+
+        // VERIFICA SE O OBJETO [ limit ] E UM NUMERO
+        if (typeof (limit) != 'number') {
+            res.status(401).json({
+                "codigo": process.env.CODE_FAIL,
+                "resposta": process.env.MSG_SUCCESS_FAIL,
+                "mensagem": "O objeto [ limit ] informado não segue o padrão esperado",
+                "data_base": ""
+            });
+            return true;
+        }
 
         let listLookup = []; // RESERVA LISTA DE JOIN RECEBIDA DA API VIA [ collections ]
 
@@ -25,7 +69,7 @@ router.post("/api/order/list_order", async (req, res) => {
             // ADICIONA O MATCH NO FILTER
             listLookup.push({ "$match": filter });
         } catch (errMatch) {
-            
+
         }
 
         // LOOP PARA CRIAR OS JOIN
@@ -69,7 +113,7 @@ router.all("/api/user/list_user*", async (req, res) => {
     res.status(404).json({
         "codigo": process.env.CODE_FAIL,
         "resposta": process.env.MSG_SUCCESS_FAIL,
-        "mensagem": "O link expirou ou não existe, experimente acessar a documentação da API em htpp://localhost:57603/doc/create_user",
+        "mensagem": "O link expirou ou não existe, experimente acessar a documentação da API em htpp://localhost:57603/doc/list_order",
         "data_base": ""
     });
 
