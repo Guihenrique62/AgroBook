@@ -17,7 +17,8 @@ const syncSingIn = async (req) => {
         "documento": cookieData[0]["validToken"]["documento"],
         "email": cookieData[0]["validToken"]["email"],
         "cargo": cookieData[0]["validToken"]["cargo"],
-        "status": cookieData[0]["validToken"]["status"]
+        "status": cookieData[0]["validToken"]["status"],
+        "resetar_senha": cookieData[0]["validToken"]["resetar_senha"]
     };
     const sort = { // CRIA UM OBJETO PARA SERVIR COMO SORT BY
         "_id": -1
@@ -35,6 +36,7 @@ const syncSingIn = async (req) => {
         cookieData[0].validToken.email = '';
         cookieData[0].validToken.cargo = 0;
         cookieData[0].validToken.status = 0;
+        cookieData[0].validToken.resetar_senha = 0;
         cookieData[0].validToken.iat = 0;
         cookieData[0].validToken.exp = 0;
         return cookieData;
