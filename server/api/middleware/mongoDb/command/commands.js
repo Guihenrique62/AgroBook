@@ -20,6 +20,13 @@ const createData = async (dataBase, collectionName, obj) => {
 
         await client.connect(); // AGUARDA A CONEXÃO COM O CLIENTE
 
+        // TENTA CONVERTER O JSON PARA O FORMATO ACEITO PELO MONGODB
+        try {
+            obj = EJSON.parse(JSON.stringify(obj), { relaxed: true });
+        } catch (errFormatedFilter) {
+            // FAZ NADA
+        }
+
         const db = client.db(dataBase); // CRIA A CONEXÃO COM O BANCO
         const collection = db.collection(collectionName); // AGORA A CONEXÃO COM A COLLECTION
         const insertData = await collection.insertOne(obj); // PARA FINALIZAR REALIZA A INSERÇÃO DE UM UNICO OBJETO
