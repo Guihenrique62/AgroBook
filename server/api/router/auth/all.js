@@ -11,12 +11,20 @@ const jwt = require("jsonwebtoken");
 const md5 = require('md5');
 const check_user = require('../../middleware/auth/jwt_mongodb'); // PUXA FUNÇÃO QUE VÁLIDA SESSÃO DO USUÁRIO
 const command = require('../../middleware/mongoDb/command/commands'); // EXTRAI OS COMANDOS NO MONGO DB
+const { EJSON } = require('bson'); // FORMATA JSON PARA SER INTERPLETADO PELO MONGODB
 require('dotenv').config();
 
 // *************** SAVE LOG ***************
 // Registra todas as rotas de entrada
 const saveLog = async (obj) => {
 
+    // TENTA CONVERTER O JSON PARA O FORMATO ACEITO PELO MONGODB
+    try {
+        obj = EJSON.parse(JSON.stringify(obj), { relaxed: true });
+    } catch (errFormatedObj) {
+        throw new Error(errFormatedObj)
+    }
+        
     const shell_commands = new command(); // CRIA UM CONSTRUTOR
     const insertData = await shell_commands.commandCreateData('books', 'log', obj); // EXECUTA COMANDO DE CRIAR REGISTRO
     return true;
@@ -71,10 +79,9 @@ router.all("/api*", async (req, res, next) => {
     // INSERE VALORES NO OBJETO VAZIO
     obj.acao = "acessar_api";
     obj.rota = req.params;
-    obj.responsavel_acao = !cookieData.id ? "" : cookieData.id;
+    obj.responsavel_acao = !cookieData.id ? "" : {"$oid": cookieData.id};
     obj.responsavel_objeto = cookieData;
     obj.body = req.body;
-    obj.id_usuario = "";
     obj.erro = cookieData.hash_mail_pass == "false" || cookieData.resetar_senha == 1 ? true : false;
     obj.message = cookieData.hash_mail_pass == "false" || cookieData.resetar_senha == 1 ? "Usuário não está autenticado, solicitação cancelada" : "Usuário com sessão validada, solicitação liberada"
     obj.acao_criada_em = new Date().getTime();
