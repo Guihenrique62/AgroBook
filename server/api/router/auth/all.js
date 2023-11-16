@@ -17,13 +17,6 @@ require('dotenv').config();
 // *************** SAVE LOG ***************
 // Registra todas as rotas de entrada
 const saveLog = async (obj) => {
-
-    // TENTA CONVERTER O JSON PARA O FORMATO ACEITO PELO MONGODB
-    try {
-        obj = EJSON.parse(JSON.stringify(obj), { relaxed: true });
-    } catch (errFormatedObj) {
-        throw new Error(errFormatedObj)
-    }
         
     const shell_commands = new command(); // CRIA UM CONSTRUTOR
     const insertData = await shell_commands.commandCreateData('books', 'log', obj); // EXECUTA COMANDO DE CRIAR REGISTRO
