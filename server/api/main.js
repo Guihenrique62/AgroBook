@@ -64,6 +64,10 @@ app.use(ROUTER_ORDER_CREATE);
 /* ROUTER ORDERS READ - Controla todas as listagem de PEDIDOS */
 var ROUTER_ORDER_READ = require('./router/api/order/list_order');
 app.use(ROUTER_ORDER_READ);
+
+/* ROUTER ORDERS UPDATE - Controla todas as atualização de PEDIDOS */
+var ROUTER_ORDER_UPDATE = require('./router/api/order/update_order');
+app.use(ROUTER_ORDER_UPDATE);
 /************* ORDERS [ END ] *************/
 
 /************* TRELLO [ START ] *************/

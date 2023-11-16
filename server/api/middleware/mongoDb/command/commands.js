@@ -179,6 +179,20 @@ const updateData = async (dataBase, collectionName, filter, updateFilds) => {
 
         await client.connect(); // AGUARDA A CONEXÃO COM O CLIENTE
 
+        // TENTA CONVERTER O JSON PARA O FORMATO ACEITO PELO MONGODB
+        try {
+            filter = EJSON.parse(JSON.stringify(filter), { relaxed: true });
+        } catch (errFormatedFilter) {
+            throw new Error(errFormatedFilter)
+        }
+
+        // TENTA CONVERTER O JSON COM O NOVO VALOR PARA O FORMATO ACEITO PELO MONGODB
+        try {
+            objectNewFilds = EJSON.parse(JSON.stringify(objectNewFilds), { relaxed: true });
+        } catch (errFormatedNewValue) {
+            throw new Error(errFormatedNewValue)
+        }
+
         const db = client.db(dataBase); // CRIA A CONEXÃO COM O BANCO
         const collection = db.collection(collectionName); // AGORA A CONEXÃO COM A COLLECTION
         const updateData = await collection.updateOne(filter, { $set: objectNewFilds }); // PARA FINALIZAR REALIZA A ALTERAÇÃO USANDO UM FILTRO E UM NOVO OBJETO

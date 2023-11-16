@@ -14,7 +14,8 @@ require('dotenv').config(); // SOLICITA AS VARIÁVEIS DE AMBIENTE
 router.post("/api/book/update_order", async (req, res) => {
 
     const { filter, newValue } = req.body; // RESERVA VALORES DO BODY
-    const attrValid = ["titulo"]; // PERMITE APENAS ESSAS CHAVES COMO PARÂMETROS ACEITAVEIS PARA ATUALIZAR LIVROS
+    const attrValid = ["_id", "livro", "usuario", "status", "data_aluguel", "data_vencimento", "entregou", "recebeu"]; // PERMITE APENAS ESSAS CHAVES COMO PARÂMETROS ACEITAVEIS PARA ATUALIZAR LIVROS
+    const newAttrValid = ["livro", "usuario", "status", "data_aluguel", "data_vencimento", "entregou", "recebeu"]; // PERMITE APENAS ESSAS CHAVES COMO PARÂMETROS ACEITAVEIS PARA ATUALIZAR LIVROS
 
     // VERIFICA SE A VARIÁVEL FILTER ESTÁ VAZIA
     if (!filter || Object.keys(filter).length === 0 || typeof (filter) !== `object`) {
@@ -44,8 +45,23 @@ router.post("/api/book/update_order", async (req, res) => {
         }
     }
 
+    //VERIFICA SE O NEWVALUE É VÁLIDO
+    for (key in Object.keys(newValue)) {
+
+        var valor = Object.keys(newValue)[key];
+        if (newAttrValid.indexOf(valor) == -1) { // VERIFICA SE OS NOVOS VALORES RECEBIDO ESTÁ DE ACORDO COM AS VARIÁVEIS VÁLIDAS
+            res.status(401).json({
+                "codigo": process.env.CODE_FAIL,
+                "resposta": process.env.MSG_SUCCESS_FAIL,
+                "mensagem": "O campo [ newValue ] não respeita uma ou mais regras de entrada, revise os dados e tente novamente",
+                "data_base": ""
+            });
+            return false;
+        }
+    }
+
     // VERIFICA SE O NOVO VALOR ESTÁ VAZIO
-    if (!newValue || Object.keys(newValue).length === 0 || typeof (newValue) !== `object`) {
+    if (!newValue || Object.keys(newValue).length === 0 || typeof (newValue) !== 'object') {
 
         res.status(401).json({
             "codigo": process.env.CODE_FAIL,
@@ -71,7 +87,7 @@ router.post("/api/book/update_order", async (req, res) => {
     }
 
     const shell_commands = new commands(); // CRIA O CONSTRUTOR
-    const updateBook = await shell_commands.commandUpadateData('books', 'livros', filter, newValue); // INICIAR A FUNÇÃO ATUALIZA REGISTRO NO MONGO DB
+    const updateBook = await shell_commands.commandUpadateData('books', 'pedidos', filter, newValue); // INICIAR A FUNÇÃO ATUALIZA REGISTRO NO MONGO DB
 
     // VERIFICA SE EXISTE VALORES DUPLICADOS
     if (updateBook["keyValue"]) {
@@ -109,13 +125,13 @@ router.post("/api/book/update_order", async (req, res) => {
 });
 
 // *************** ALL ***************
-// Mensagem de erro personalizada para rotas não existemte apartir de /update_user
-router.all("/api/user/update_book*", async (req, res) => {
+// Mensagem de erro personalizada para rotas não existemte apartir de /update_book
+router.all("/api/user/update_order*", async (req, res) => {
 
     res.status(404).json({
         "codigo": process.env.CODE_FAIL,
         "resposta": process.env.MSG_SUCCESS_FAIL,
-        "mensagem": `O linkk expirou ou não existe, experimente acessar a documentação da API em ${process.env.HOST_API_DOC}/doc/update_user`,
+        "mensagem": `O linkk expirou ou não existe, experimente acessar a documentação da API em ${process.env.HOST_API_DOC}/doc/update_book`,
         "data_base": ""
     });
 
