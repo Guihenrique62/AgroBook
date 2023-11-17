@@ -43,6 +43,7 @@ router.all("/api/user*", async (req, res, next) => {
     const result = await check_data.initSyncSingIn(req); // EXECUTA A FUNÇÃO DO CONSTRUTOR
     const cookieData = result[0]['validToken']; // RECUPERA OS DADOS DA FUNÇÃO
 
+    
     // VERIFICA SE O USUÁRIO NÃO É ADMIN
     if (cookieData["cargo"] !== 0) {
         
