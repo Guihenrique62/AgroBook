@@ -15,7 +15,7 @@ require('dotenv').config(); // SOLICITA AS VARIÁVEIS DE AMBIENTE
 
 // *************** GET ***************
 // Controla todas as rotas de listagem de livros
-router.get("/api/book/list_book", async (req, res) => {
+router.post("/api/book/list_book", async (req, res) => {
 
     const { filter, sort, limit } = req.body; // RECUPERA OS DADOS DO BODY
 
