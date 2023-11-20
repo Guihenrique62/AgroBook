@@ -180,6 +180,7 @@ export default function Formulario({addBook}){
                     {quantidade}
                     {pag}
                     {data_lancamento}
+              
                   </h2>
                  </div>
                  </form>
