@@ -31,6 +31,7 @@ import PedidosLayout from "./views/Pedidos/PedidosLayout";
 import PagePedido from "./views/Pedidos/components/PagePedido";
 import EstoqueEdit from "./views/Estoque/Components/EditEstoque";
 import FilterBooK from "./views/Home/components/filterBook";
+import PedidoID from "./views/Pedidos/components/PedidosID";
 
 
 const PrivateRoute = ({ element, children }) => {
@@ -97,7 +98,8 @@ const router = createBrowserRouter([
         path: "/orders",
         element: <PrivateRoute><PedidosLayout /></PrivateRoute>,
         children: [
-            { index: true, element: <PagePedido /> }
+            { index: true, element: <PagePedido /> },
+            {path:"pedido/:pedidoID",element: <PedidoID/>}
         ]
     }
 ]);

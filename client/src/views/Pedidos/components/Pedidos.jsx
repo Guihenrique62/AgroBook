@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react"
-
+import { Link } from "react-router-dom";
 
  
  
@@ -222,12 +222,16 @@ import { createContext, useContext, useState } from "react"
      
      return (
           <div>
+               
                <h2>Nome: </h2>
-               {pedidos_.map((nome)=>{
+                    <Link to={"pedido/:pedidoID"}>
+                     {pedidos_.map((nome)=>{
                     return nome.data_base.result.map((nome_user)=>(
                          <p>{nome_user.user[0].nome}</p>
                     ))
                })}
+                    </Link>
+              
                <h2>Titulo:</h2>
                {pedidos_.map((titulo)=>{
                     return titulo.data_base.result.map((titulo_user)=>(
@@ -254,7 +258,6 @@ import { createContext, useContext, useState } from "react"
                })}
 
 
-                  
                 </div>
             
           
