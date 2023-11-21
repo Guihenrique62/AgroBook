@@ -18,6 +18,10 @@ app.use(ROUTER_AUTH_ALL);
 /* ROUTER AUTH SINGIN - Controla todas rotas de entradas de login */
 var ROUTER_AUTH_SINGIN = require('./router/auth/singin');
 app.use(ROUTER_AUTH_SINGIN);
+
+/* ROUTER AUTH RESET PWD - Controla todas rotas de resete de senha */
+var ROUTER_AUTH_RESET_PWD = require('./router/auth/reset');
+app.use(ROUTER_AUTH_RESET_PWD);
 /************* AUTH [ END ] *************/
 
 /************* USER [ START ] *************/

@@ -91,13 +91,13 @@ router.delete("/api/book/delete_book", async (req, res) => {
 });
 
 // *************** ALL ***************
-// Mensagem de erro personalizada para rotas não existente apartir de /delete_user
-router.all("/api/user/delete_user*", async (req, res) => {
+// Mensagem de erro personalizada para rotas não existente apartir de /delete_book
+router.all("/api/user/delete_book*", async (req, res) => {
 
     res.status(404).json({
         "codigo": process.env.CODE_FAIL,
         "resposta": process.env.MSG_SUCCESS_FAIL,
-        "mensagem": `O link expirou ou não existe, experimente acessar a documentação da API em ${process.env.HOST_API_DOC}/doc/delete_user`,
+        "mensagem": `O link expirou ou não existe, experimente acessar a documentação da API em ${process.env.HOST_API_DOC}/doc/delete_book`,
         "data_base": ""
     });
 

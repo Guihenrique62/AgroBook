@@ -120,13 +120,13 @@ router.get("/api/book/list_book/by_id", async (req, res) => {
 });
 
 // *************** ALL ***************
-// Mensagem de erro personalizada para rotas não existente apartir de /list_user
+// Mensagem de erro personalizada para rotas não existente apartir de /list_book
 router.all("/api/book/list_book*", async (req, res) => {
 
     res.status(404).json({
         "codigo": process.env.CODE_FAIL,
         "resposta": process.env.MSG_SUCCESS_FAIL,
-        "mensagem": `O link expirou ou não existe, experimente acessar a documentacao da API em ${process.env.HOST_API_DOC}/doc/list_user`,
+        "mensagem": `O link expirou ou não existe, experimente acessar a documentacao da API em ${process.env.HOST_API_DOC}/doc/list_book`,
         "data_base": ""
     });
 

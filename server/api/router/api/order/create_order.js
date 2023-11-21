@@ -18,8 +18,7 @@ router.post("/api/order/create_order", async (req, res) => {
     const dateNow = new Date();
     // VERIFICA VALORES RECEBIDOS
     if ( livro && usuario) {
-
-                
+        
         const query = { // CRIA O OBJETO
             "livro": { "$oid": livro},
             "usuario": { "$oid": usuario },
@@ -39,7 +38,7 @@ router.post("/api/order/create_order", async (req, res) => {
             res.status(401).json({
                 "codigo": process.env.CODE_FAIL,
                 "resposta": process.env.MSG_SUCCESS_FAIL,
-                "mensagem": "Pedido já existe, experimente redefinir a senha ou inserir outro usuário",
+                "mensagem": "Pedido já existe, verifique os parametros e tente novamente",
                 "data_base": createorder
             });
             return true;
@@ -71,13 +70,13 @@ router.post("/api/order/create_order", async (req, res) => {
 });
 
 // *************** ALL ***************
-// Mensagem de erro personalizada para rotas não existente apartir de /create_user
-router.all("/api/user/create_user*", async (req, res) => {
+// Mensagem de erro personalizada para rotas não existente apartir de /create_order
+router.all("/api/user/create_order*", async (req, res) => {
 
     res.status(404).json({
         "codigo": process.env.CODE_FAIL,
         "resposta": process.env.MSG_SUCCESS_FAIL,
-        "mensagem": "O link expirou ou não existe, experimente acessar a documentação da API em htpp://localhost:57603/doc/create_user",
+        "mensagem": "O link expirou ou não existe, experimente acessar a documentação da API em htpp://localhost:57603/doc/create_order",
         "data_base": ""
     });
 
