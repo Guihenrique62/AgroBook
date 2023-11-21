@@ -9,7 +9,6 @@ var router = express.Router(); // EXTRAI O MODULO DE ROTAS
 const bcrypt = require("bcryptjs"); // EXTRAI O MODULO PARA CRIPTOGRAFAR
 const jwt = require("jsonwebtoken"); // EXTRAI O MODULO JSON WEB TOKEN PARA CRIPTOGRAFAR SESSÃO
 const md5 = require('md5'); // EXTRAI O MODULO MD5 PARA CRIPTOGRAFAR SENHA
-const session = require('express-session'); // EXTRAI MODULO PARA CONTROLAR SESSÕES NO EXPRESS
 const check_user = require('../../middleware/jwt/jwt'); // EXTRAI FUNÇÕES PARA MANIPULAR O JWT
 const command = require('../../middleware/mongoDb/command/commands'); // EXTRAI OS COMANDOS NO MONGO DB
 const { validate } = require("email-validator"); // EXTRAI BIBLIOTECA PARA VÁLIDAR EMAIL
