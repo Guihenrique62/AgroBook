@@ -101,7 +101,7 @@ router.post("/auth/reset/password", async (req, res) => {
         return true;
 
     } else { // USUARIO NÃO ESTÁ AUTENTICADO
-        res.status(404).json({
+        res.status(401).json({
             "codigo": process.env.CODE_FAIL,
             "resposta": process.env.MSG_SUCCESS_FAIL,
             "mensagem": "Realize o login antes de solicitar a mudança de senha",
