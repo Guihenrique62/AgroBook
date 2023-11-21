@@ -72,6 +72,10 @@ app.use(ROUTER_ORDER_READ);
 /* ROUTER ORDERS UPDATE - Controla todas as atualização de PEDIDOS */
 var ROUTER_ORDER_UPDATE = require('./router/api/order/update_order');
 app.use(ROUTER_ORDER_UPDATE);
+
+/* ROUTER DELETE ORDER - Controla todas as ordem de apagar pedidos */
+var ROUTER_DELETE_ORDER = require('./router/api/order/delete_order');
+app.use(ROUTER_DELETE_ORDER);
 /************* ORDERS [ END ] *************/
 
 /************* TRELLO [ START ] *************/
