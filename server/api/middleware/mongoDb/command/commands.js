@@ -227,6 +227,15 @@ const deleteData = async (dataBase, collectionName, filter) => {
 
         await client.connect(); // AGUARDA A CONEXÃO COM O CLIENTE
 
+         // TENTA CONVERTER O JSON PARA O FORMATO ACEITO PELO MONGODB
+         try {
+            filter = EJSON.parse(JSON.stringify(filter), { relaxed: true });
+        } catch (errFormatedFilter) {
+            throw new Error(errFormatedFilter)
+        }
+
+
+
         const db = client.db(dataBase); // CRIA A CONEXÃO COM O BANCO
         const collection = db.collection(collectionName); // AGORA A CONEXÃO COM A COLLECTION
         const deleteData = await collection.deleteOne(filter); // PARA FINALIZAR REALIZA A EXCLUSÃO USANDO UM FILTRO
