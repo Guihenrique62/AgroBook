@@ -21,7 +21,7 @@
     "jsonwebtoken": "^9.0.0",
     "md5": "^2.3.0",
     "moment": "^2.29.4",
-    "mongodb": "^4.17.1",
+    "mongodb": "^6.3.0",
     "mongodb-schema": "^11.1.0",
     "mongoose": "^8.0.0",
     "mssql": "^9.1.1",
