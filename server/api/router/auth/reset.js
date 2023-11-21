@@ -22,8 +22,6 @@ router.post("/auth/reset/password", async (req, res) => {
     const { antigaSenha, novaSenha } = req.body; // PUXA OS VALORES DO OBJETO QUE VEIO PELO BODY
     const md5AntigaSenha = md5(process.env.PWD_PREFIX + antigaSenha); // CONVERTE EM MD5 COM O PREFIXO QUE ESTA NO .ENV
     const md5NovaSenha = md5(process.env.PWD_PREFIX + novaSenha); // CONVERTE EM MD5 COM O PREFIXO QUE ESTA NO .ENV
-    
-    console.log(cookieData)
 
     // VERIFICA SE O USUARIO ESTÁ LOGADO
     if (cookieData["hash_mail_pass"] != "false") {
