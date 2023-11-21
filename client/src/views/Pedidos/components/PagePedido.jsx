@@ -5,8 +5,36 @@
 
 import React from 'react'
 
-export default function PagePedido() {
-  return (
-    <div>PagePedido</div>
-  )
-}
+
+
+import {  useState } from "react"
+import Pedidos from './Pedidos'
+import Devolvidos from './Devolvidos'
+
+
+ 
+ 
+ 
+ export default function PagePedido(){
+   const[open,setOpen]= useState(true)
+
+   const alterar=()=>{
+   
+   }
+    
+     
+     return(
+          
+          <div>
+          
+           <p onClick={()=> setOpen(current=> !current)}>Pedidos</p>
+
+           { open === true ?  <Pedidos/> : null}
+           <p onClick={()=> setOpen(current => !current )}  >Devolvidos</p>
+          {open === false ? <Devolvidos/> : null}
+          </div>
+          
+          
+
+     )
+ }
