@@ -107,13 +107,13 @@ router.post("/api/order/list_order", async (req, res) => {
 });
 
 // *************** ALL ***************
-// Mensagem de erro personalizada para rotas não existente apartir de /create_user
+// Mensagem de erro personalizada para rotas não existente apartir de /list_user
 router.all("/api/user/list_user*", async (req, res) => {
 
     res.status(404).json({
         "codigo": process.env.CODE_FAIL,
         "resposta": process.env.MSG_SUCCESS_FAIL,
-        "mensagem": "O link expirou ou não existe, experimente acessar a documentação da API em htpp://localhost:57603/doc/list_order",
+        "mensagem": "O link expirou ou não existe, experimente acessar a documentação da API em htpp://localhost:57603/doc/list_user",
         "data_base": ""
     });
 

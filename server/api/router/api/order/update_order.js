@@ -125,13 +125,13 @@ router.post("/api/book/update_order", async (req, res) => {
 });
 
 // *************** ALL ***************
-// Mensagem de erro personalizada para rotas não existemte apartir de /update_book
+// Mensagem de erro personalizada para rotas não existemte apartir de /update_order
 router.all("/api/user/update_order*", async (req, res) => {
 
     res.status(404).json({
         "codigo": process.env.CODE_FAIL,
         "resposta": process.env.MSG_SUCCESS_FAIL,
-        "mensagem": `O linkk expirou ou não existe, experimente acessar a documentação da API em ${process.env.HOST_API_DOC}/doc/update_book`,
+        "mensagem": `O linkk expirou ou não existe, experimente acessar a documentação da API em ${process.env.HOST_API_DOC}/doc/update_order`,
         "data_base": ""
     });
 
