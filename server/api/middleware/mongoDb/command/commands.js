@@ -60,6 +60,12 @@ const readData = async (dataBase, collectionName, filter, sort, limit) => {
 
         await client.connect(); // AGUARDA A CONEXÃO COM O CLIENTE
 
+        // TENTA CONVERTER O JSON PARA O FORMATO ACEITO PELO MONGODB
+        try {
+            filter = EJSON.parse(JSON.stringify(filter), { relaxed: true });
+        } catch (errFormatedFilter) {
+        }
+
         const db = client.db(dataBase); // CRIA A CONEXÃO COM O BANCO
         const collection = db.collection(collectionName); // AGORA A CONEXÃO COM A COLLECTION
         const findData = await collection.find(filter).sort(sortFild).limit(limitFild).toArray(); // PARA FINALIZAR REALIZA A INSERÇÃO DE UM UNICO OBJETO

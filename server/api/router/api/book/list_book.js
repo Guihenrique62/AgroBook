@@ -65,9 +65,9 @@ router.post("/api/book/list_book", async (req, res) => {
 
     const shell_commands = new commands(); // CRIA UM CONSTRUTOR
     const listBook = await shell_commands.commandReadData(`books`, 'livros', filter, sort, limit); // EXECULTA A FUNCÃO QUE LER REGISTRO NO BANCO DE DADOS 
-
+    
     // VERIFICA SE RECEBEU UM VALOR VAZIO
-    if (!listBook["result"].length) {
+    if (!listBook["result"]) {
 
         res.status(401).json({
             "codigo": process.env.CODE_FAIL,

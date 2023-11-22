@@ -114,7 +114,7 @@ export default function Home() {
       // BODY DA REQUISIÇÃO
       let data = {
         "filter": {
-          "titulo": { "$regex": "a", "$options": "i" }
+          "titulo": "a"
         },
         "sort": {
           "_id": -1

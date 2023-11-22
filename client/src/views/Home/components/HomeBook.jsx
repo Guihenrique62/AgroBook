@@ -46,7 +46,7 @@ export default function HomeBook() {
         "sort": {
           "_id": -1
         },
-        "limit": 99
+        "limit": 1
       };
 
       // FUNÇÃO QUE PUXA DADOS DA API
