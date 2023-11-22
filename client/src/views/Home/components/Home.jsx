@@ -10,7 +10,7 @@
 
 import { Link } from "react-router-dom";
 import React, { useRef, useState, useEffect } from "react";
-import axios from 'axios'
+import axios from 'axios';
 import "../style/home.css";
 
 export default function Home() {
@@ -159,17 +159,18 @@ export default function Home() {
     })
   }, []);
 
+  // MOVE PARA A ESQUERDA
   const goleft = (e) => {
     e.preventDefault()
-    console.log(slider.current.offsetWidth)
     slider.current.scrollLeft -= slider.current.offsetWidth
   }
+  // MOVE PARA A DIREITA
   const goRight = (e) => {
     e.preventDefault()
-    console.log(slider.current.offsetWidth)
     slider.current.scrollLeft += slider.current.offsetWidth
   }
 
+  // CODIGO
   return (
     /* div booksContainer pai que contem todos elementos */
 
