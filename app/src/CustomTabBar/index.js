@@ -74,6 +74,7 @@ export default function CustomTabBar({ state, descriptors, navigation }) {
     );
 }
 
+
 const styles = StyleSheet.create({
     container: {
         flexDirection: "row",
