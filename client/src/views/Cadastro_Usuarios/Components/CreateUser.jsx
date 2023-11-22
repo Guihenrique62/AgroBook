@@ -15,7 +15,7 @@ import { Link } from 'react-router-dom'
 import InputMask from 'react-input-mask';
 import '../styles/createUser.css'
 import CorrectModal from '../../../commun_Components/correctModal/CorrectModal'
-import ErrorModal from '../../../commun_Components/error/ErrorModal'
+import ErrorModal from '../../../commun_Components/er0 ror/ErrorModal'
 
 
 

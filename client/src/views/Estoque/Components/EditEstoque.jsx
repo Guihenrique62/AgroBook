@@ -4,23 +4,23 @@
   EMAIL: fillypecunha@gmail.com
 */
 import { useParams } from "react-router-dom"
-import React from "react"
-import { useState } from "react"
+import React, { useRef, useState, useEffect } from "react"
 import "../style/editEstoque.css"
+import axios from 'axios';
 import { Link } from "react-router-dom"
 
 
 export default function EstoqueEdit() {
-  
+
   const { bookID } = useParams()
   const [sinopse, setSinopse] = useState("")
   const [conver, setConver] = useState("")
   const [titulo, setTitulo] = useState("")
   const [author, setAuthor] = useState("")
-  const [idioma, setidioma] = useState([""])
+  const [idioma, setIdioma] = useState([""])
   const [pag, setPag] = useState()
   const [quantidade, setQuantidade] = useState()
-  const [genero, SetGenero] = useState([""])
+  const [genero, setGenero] = useState([""])
   const [data_lancamento, setData_lancamento] = useState()
 
   // CRIA TAG COM GENEROS DE LIVROS
@@ -33,8 +33,58 @@ export default function EstoqueEdit() {
         selectedValues.push(options[i].value);
       }
     }
-    SetGenero(selectedValues)
+    setGenero(selectedValues)
   }
+
+  // PUXA DADOS DA API
+  const listaLivros = async (e) => {
+    try {
+      // BODY DA REQUISIÇÃO
+      let data = {
+        "filter": {
+          "_id": { "$oid": bookID }
+        },
+        "sort": {
+          "_id": -1
+        },
+        "limit": 1
+      };
+
+      // FUNÇÃO QUE PUXA DADOS DA API
+      const resposta = await axios.post(
+        "http://localhost:57601/api/book/list_book",
+        data,
+        {
+          withCredentials: true,
+        }
+      );
+
+      // DEFINE OS LIVROS
+      let livro = resposta.data.data_base.result[0]
+      setTitulo(livro["titulo"]);
+      setConver(livro["capa"]);
+      setIdioma(livro["idioma"]);
+      setPag(livro["paginas"]);
+      setQuantidade(livro["total_estoque"]);
+      setGenero(livro["categorias"]);
+      setSinopse(livro["sinopse"]);
+      setAuthor(livro["autor"]);
+      setData_lancamento(livro["data_lancamento"]);
+      
+      setAuthor(livro["autor"]);
+      setAuthor(livro["autor"]);
+      console.log(resposta.data.data_base.result);
+      return resposta.data.data_base.result
+
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  // EXECULTA APENAS UMA VEZ A SOLICITAÇÃO A API
+  useEffect(() => {
+    listaLivros().then((listLivros) => { })
+  }, []);
 
   // CODIGO
   return (
@@ -96,7 +146,7 @@ export default function EstoqueEdit() {
 
               <label htmlFor="idioma"><p>Idioma</p>
                 <select name="idioma" id="idioma"
-                  onChange={(e) => setidioma(e.target.value)}
+                  onChange={(e) => setIdioma(e.target.value)}
                   className="input_idioma_edit"
                 >
                   <option value={idioma}>Portugues</option>
