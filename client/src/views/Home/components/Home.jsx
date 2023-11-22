@@ -107,6 +107,42 @@ export default function Home() {
     "registro_criado_em": 1700614011,
     "registro_atualizado_em": 1700614011
   }]);
+  let [bookFilosofia, setBookFilosofia] = useState([{
+    "_id": "001",
+    "titulo": "Carrengando...",
+    "capa": "https://th.bing.com/th/id/R.78364883c679d5596be1627890ae2abe?rik=HrDn9sFy7iYKTQ&pid=ImgRaw&r=0",
+    "sinopse": "Carregando...",
+    "paginas": 0,
+    "categorias": [
+      "ação",
+      "comedia",
+      "drama"
+    ],
+    "autor": "Carregando...",
+    "idioma": "Aguarde...",
+    "data_lancamento": 1700614011,
+    "total_estoque": 0,
+    "registro_criado_em": 1700614011,
+    "registro_atualizado_em": 1700614011
+  }]);
+  let [bookEconomia, setBookEconomia] = useState([{
+    "_id": "001",
+    "titulo": "Carrengando...",
+    "capa": "https://th.bing.com/th/id/R.78364883c679d5596be1627890ae2abe?rik=HrDn9sFy7iYKTQ&pid=ImgRaw&r=0",
+    "sinopse": "Carregando...",
+    "paginas": 0,
+    "categorias": [
+      "ação",
+      "comedia",
+      "drama"
+    ],
+    "autor": "Carregando...",
+    "idioma": "Aguarde...",
+    "data_lancamento": 1700614011,
+    "total_estoque": 0,
+    "registro_criado_em": 1700614011,
+    "registro_atualizado_em": 1700614011
+  }]);
 
   // PUXA DADOS DA API
   const listaLivros = async (e) => {
@@ -114,12 +150,12 @@ export default function Home() {
       // BODY DA REQUISIÇÃO
       let data = {
         "filter": {
-          "titulo": "a"
+          "titulo": { "$regex": "a", "$options": "i" }
         },
         "sort": {
           "_id": -1
         },
-        "limit": 99
+        "limit": 100
       };
 
       // FUNÇÃO QUE PUXA DADOS DA API
@@ -146,10 +182,14 @@ export default function Home() {
     let listComedia = books.filter((book) => book.categorias.indexOf("comedia") > -1)
     let listRomance = books.filter((book) => book.categorias.indexOf("romance") > -1)
     let listDrama = books.filter((book) => book.categorias.indexOf("drama") > -1)
+    let listFilosofia = books.filter((book) => book.categorias.indexOf("filosofia") > -1)
+    let listEconomia = books.filter((book) => book.categorias.indexOf("economia") > -1)
     setBookAcao(listAcao)
     setBookComedia(listComedia)
     setBookRomance(listRomance)
     setBookDrama(listDrama)
+    setBookFilosofia(listFilosofia)
+    setBookEconomia(listEconomia)
   }
 
   // EXECULTA APENAS UMA VEZ A SOLICITAÇÃO A API
@@ -393,6 +433,116 @@ export default function Home() {
           <div className="button-frente">
             {
               bookRomance.length > 0 ?
+                <button onClick={goRight} className="icon-right" ><box-icon name='right-arrow-alt' ></box-icon></button> :
+                ""
+            }
+          </div>
+
+        </div>
+
+        <h2 className="title-genero">Filosofia</h2>
+        <div className="teste">
+
+          {/* BOTAO DA ESQUERDA */}
+          <div className="button-teste" >
+            {
+              bookFilosofia.length > 0 ?
+                <button onClick={goleft} className="icon-left"><box-icon name='left-arrow-alt' ></box-icon></button> :
+                ""
+            }
+          </div>
+
+          {/* LISTA DE LIVROS SE EXISTIR */}
+          <div className="book-slider" ref={slider}>
+
+            {
+              bookFilosofia.length > 0 ?
+                bookFilosofia.map((book) => (
+                  <div key={book._id} className="card-home" >
+
+                    {/* div card-home vai ser que controla o tamanho da imagem  */}
+
+                    <Link to={`book/${book._id}`}>
+                      <img className="home-imagem" src={book.capa} alt="" />
+                      <div className="div-title">
+                        <p className="titulo-book">{book.titulo}</p>
+                      </div>
+
+                    </Link>
+
+                  </div>
+                )) :
+                <div key="" className="card-home" >
+                  <div>
+                    <img className="home-imagem" src="https://static.vecteezy.com/system/resources/previews/018/733/803/large_2x/add-simple-flat-icon-illustration-free-vector.jpg" alt="Nenhum registro" />
+                    <div className="div-title">
+                      <p className="titulo-book">Nenhum registro</p>
+                    </div>
+                  </div>
+                </div>
+            }
+
+          </div>
+
+          {/* BOTAO DA DIREITA */}
+          <div className="button-frente">
+            {
+              bookFilosofia.length > 0 ?
+                <button onClick={goRight} className="icon-right" ><box-icon name='right-arrow-alt' ></box-icon></button> :
+                ""
+            }
+          </div>
+
+        </div>
+
+        <h2 className="title-genero">Economia</h2>
+        <div className="teste">
+
+          {/* BOTAO DA ESQUERDA */}
+          <div className="button-teste" >
+            {
+              bookEconomia.length > 0 ?
+                <button onClick={goleft} className="icon-left"><box-icon name='left-arrow-alt' ></box-icon></button> :
+                ""
+            }
+          </div>
+
+          {/* LISTA DE LIVROS SE EXISTIR */}
+          <div className="book-slider" ref={slider}>
+
+            {
+              bookEconomia.length > 0 ?
+              bookEconomia.map((book) => (
+                  <div key={book._id} className="card-home" >
+
+                    {/* div card-home vai ser que controla o tamanho da imagem  */}
+
+                    <Link to={`book/${book._id}`}>
+                      <img className="home-imagem" src={book.capa} alt="" />
+                      <div className="div-title">
+                        <p className="titulo-book">{book.titulo}</p>
+                      </div>
+
+                    </Link>
+
+                  </div>
+                )) :
+                <div key="" className="card-home" >
+                  <div>
+                    <img className="home-imagem" src="https://static.vecteezy.com/system/resources/previews/018/733/803/large_2x/add-simple-flat-icon-illustration-free-vector.jpg" alt="Nenhum registro" />
+                    <div className="div-title">
+                      <p className="titulo-book">Nenhum registro</p>
+                    </div>
+                  </div>
+                </div>
+            }
+
+          </div>
+
+          {/* BOTAO DA DIREITA */}
+          <div className="button-frente">
+            {
+              bookEconomia.length > 0 ?
                 <button onClick={goRight} className="icon-right" ><box-icon name='right-arrow-alt' ></box-icon></button> :
                 ""
             }

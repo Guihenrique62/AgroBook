@@ -4,136 +4,72 @@
 */
 import Estoque_Book from './BookEstoque'
 import addandRemove from '../scripts/functions'
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useRef, useState, useEffect } from 'react'
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 import "../style/Estoque.css"
 
 function EstoquePage() {
   const { book, removeBook } = addandRemove()
-  const books = [{
-    "_id": {
-      "$oid": "64fbe4bc1a2ce80351f72b3b"
-    },
-    "titulo": "Ola mundo2",
-    "capa": "https://upload.wikimedia.org/wikipedia/pt/thumb/8/87/Ringstrilogyposter.jpg/250px-Ringstrilogyposter.jpg",
-    "sinopse": "O Senhor dos Anéis (no original em inglês, The Lord of the Rings) é uma trilogia cinematográfica dirigida por Peter Jackson com base na obra-prima homónima de J. R. R. Tolkien. Os três filmes foram rodados em simultâneo na Nova Zelândia,[1] faturaram cerca de 3 bilhões (US$ 2.925.155.189) de dólares de receitas conjuntas de bilheteira[2] e foram galardoados com 17 Oscars, entre os 30 para os quais foram nomeados.[3] e é a franquia cinematográfica mais premiada da história",
-    "paginas": 145,
-    "categorias": [
-      "nerd",
-      "fatansia",
-      "magia"
-    ],
-    "autor": "O Senhor dos Anéis",
-    "idioma": "inglês",
-    "data_lancamento": 1008720000,
-    "total_estoque": 0,
-    "registro_criado_em": 1694229643,
-    "registro_atualizado_em": 1694229643
-  },
-  {
-    "_id": {
-      "$oid": "6500b5f8ea6fcca875e7d7bd"
-    },
-    "titulo": "O senhor dos Aneiss",
-    "capa": "https://www.ira-sme.net/wp-content/themes/consultix/images/no-image-found-360x260.png",
-    "sinopse": "O senhor dos aneis....",
-    "paginas": 120,
-    "categorias": [
-      "ação",
-      "comedia",
-      "drama"
-    ],
-    "autor": "Guilherme",
-    "idioma": "Portugues",
-    "data_lancamento": {
-      "$numberLong": "1694540743262"
-    },
-    "total_estoque": 1,
-    "registro_criado_em": {
-      "$numberLong": "1694545399974"
-    },
-    "registro_atualizado_em": {
-      "$numberLong": "1694545399974"
+  const [books, setBooks] = useState([
+    {
+      "_id": "001",
+      "titulo": "Carrengando...",
+      "capa": "https://th.bing.com/th/id/R.78364883c679d5596be1627890ae2abe?rik=HrDn9sFy7iYKTQ&pid=ImgRaw&r=0",
+      "sinopse": "Carregando...",
+      "paginas": 0,
+      "categorias": [
+        "ação",
+        "comedia",
+        "drama"
+      ],
+      "autor": "Carregando...",
+      "idioma": "Aguarde...",
+      "data_lancamento": 1700614011,
+      "total_estoque": 0,
+      "registro_criado_em": 1700614011,
+      "registro_atualizado_em": 1700614011
     }
-  },
-  {
-    "_id": {
-      "$oid": "6500bb6cabe3c415baf05d9d"
-    },
-    "titulo": "O senhor dos Aneis",
-    "capa": "https://www.ira-sme.net/wp-content/themes/consultix/images/no-image-found-360x260.png",
-    "sinopse": "O senhor dos aneis....",
-    "paginas": 120,
-    "categorias": [
-      "ação",
-      "comedia",
-      "drama"
-    ],
-    "autor": "Guilherme",
-    "idioma": "Portugues",
-    "data_lancamento": {
-      "$numberLong": "1694540743262"
-    },
-    "total_estoque": 1,
-    "registro_criado_em": {
-      "$numberLong": "1694546796984"
-    },
-    "registro_atualizado_em": {
-      "$numberLong": "1694546796984"
+  ]);
+
+  // PUXA DADOS DA API
+  const listaLivros = async (e) => {
+    try {
+      // BODY DA REQUISIÇÃO
+      let data = {
+        "filter": {
+          "titulo": { "$regex": "a", "$options": "i" }
+        },
+        "sort": {
+          "_id": -1
+        },
+        "limit": 100
+      };
+
+      // FUNÇÃO QUE PUXA DADOS DA API
+      const resposta = await axios.post(
+        "http://localhost:57601/api/book/list_book",
+        data,
+        {
+          withCredentials: true,
+        }
+      );
+
+      // DEFINE OS LIVROS
+      setBooks(resposta.data.data_base.result);
+      return resposta.data.data_base.result
+
+    } catch (err) {
+      console.log(err);
     }
-  },
-  {
-    "_id": {
-      "$oid": "6500bb91abe3c415baf05d9e"
-    },
-    "titulo": "O senhor dos Anei",
-    "capa": "https://www.ira-sme.net/wp-content/themes/consultix/images/no-image-found-360x260.png",
-    "sinopse": "O senhor dos aneis....",
-    "paginas": 120,
-    "categorias": [
-      "ação",
-      "comedia",
-      "drama"
-    ],
-    "autor": "Guilherme",
-    "idioma": "Portugues",
-    "data_lancamento": {
-      "$numberLong": "1694540743262"
-    },
-    "total_estoque": 1,
-    "registro_criado_em": {
-      "$numberLong": "1694546833688"
-    },
-    "registro_atualizado_em": {
-      "$numberLong": "1694546833688"
-    }
-  },
-  {
-    "_id": {
-      "$oid": "6500bbe0abe3c415baf05d9f"
-    },
-    "titulo": "Jean",
-    "capa": "https://www.ira-sme.net/wp-content/themes/consultix/images/no-image-found-360x260.png",
-    "sinopse": "O senhor dos aneis....",
-    "paginas": 120,
-    "categorias": [
-      "ação",
-      "comedia",
-      "drama"
-    ],
-    "autor": "Guilherme",
-    "idioma": "Portugues",
-    "data_lancamento": {
-      "$numberLong": "1694540743262"
-    },
-    "total_estoque": 1,
-    "registro_criado_em": {
-      "$numberLong": "1694546912951"
-    },
-    "registro_atualizado_em": {
-      "$numberLong": "1694546912951"
-    }
-  }]
+  }
+
+  // EXECULTA APENAS UMA VEZ A SOLICITAÇÃO A API
+  useEffect(() => {
+    listaLivros().then((listLivros) => {})
+  }, []);
+
+  // CODIGO
   return (
     <>
       <div className='div_search'>
