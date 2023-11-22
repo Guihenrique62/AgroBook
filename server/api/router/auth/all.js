@@ -6,12 +6,8 @@ EMAIL: jeantng2016@gmail.com
 
 const express = require("express");
 var router = express.Router();
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const md5 = require('md5');
 const check_user = require('../../middleware/auth/jwt_mongodb'); // PUXA FUNÇÃO QUE VÁLIDA SESSÃO DO USUÁRIO
 const command = require('../../middleware/mongoDb/command/commands'); // EXTRAI OS COMANDOS NO MONGO DB
-const { EJSON } = require('bson'); // FORMATA JSON PARA SER INTERPLETADO PELO MONGODB
 require('dotenv').config();
 
 // *************** SAVE LOG ***************

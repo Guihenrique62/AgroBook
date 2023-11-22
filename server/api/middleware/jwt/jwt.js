@@ -1,6 +1,5 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-var CryptoJS = require("crypto-js");
 require('dotenv').config(); // SOLICITA AS VARIAVEIS DE AMBIENTE
 
 // VALIDA O USUARIO
