@@ -1,26 +1,26 @@
 import { useState } from "react";
 import books from "./script/bd";
 
+const FilterBook = ({ filterbooks }) => {
+
+    books
+
+    return (
 
 
-const FilterBook=({filterbooks})=>{
+        <div>
+            <h2>seja bem vindo</h2>
+            {
+                books.map((titleBook) => (
+                    <img src={titleBook.capa} />,
+                    <p>{titleBook.titulo} </p>
+                ))
+            }
 
-books
-  
-     return(
 
-        
-         <div>
-          <h2>seja bem vindo</h2>
-          {books.map((titleBook)=>(
-           <img src={titleBook.capa}  />,
-           <p>{titleBook.titulo} </p>
-          ))}
-          
-          
-          
-       </div>
+
+        </div>
     )
-}  
+}
 export default FilterBook
- 
+

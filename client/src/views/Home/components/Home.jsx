@@ -8,172 +8,156 @@
 /////////////////////
 
 
-
 import { Link } from "react-router-dom";
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
+import axios from 'axios'
 import "../style/home.css";
-
-
-
-
-const books = [{
-  "_id": {
-    "$oid": "64fbe4bc1a2ce80351f72b3b"
-  },
-  "titulo": "teste fillype",
-  "capa": "https://upload.wikimedia.org/wikipedia/pt/thumb/8/87/Ringstrilogyposter.jpg/250px-Ringstrilogyposter.jpg",
-  "sinopse": "O Senhor dos Anéis (no original em inglês, The Lord of the Rings) é uma trilogia cinematográfica dirigida por Peter Jackson com base na obra-prima homónima de J. R. R. Tolkien. Os três filmes foram rodados em simultâneo na Nova Zelândia,[1] faturaram cerca de 3 bilhões (US$ 2.925.155.189) de dólares de receitas conjuntas de bilheteira[2] e foram galardoados com 17 Oscars, entre os 30 para os quais foram nomeados.[3] e é a franquia cinematográfica mais premiada da história",
-  "paginas": 145,
-  "categorias": [
-    "ação",
-    "fatansia",
-    "magia"
-  ],
-  "autor": "O Senhor dos Anéis",
-  "idioma": "inglês",
-  "data_lancamento": 1008720000,
-  "total_estoque": 0,
-  "registro_criado_em": 1694229643,
-  "registro_atualizado_em": 1694229643
-},
-{
-  "_id": {
-    "$oid": "6500b5f8ea6fcca875e7d7bd"
-  },
-  "titulo": "O senhor dos Aneiss",
-  "capa": "https://www.ira-sme.net/wp-content/themes/consultix/images/no-image-found-360x260.png",
-  "sinopse": "O senhor dos aneis....",
-  "paginas": 120,
-  "categorias": [
-    "ação",
-    "comedia",
-    "drama"
-  ],
-  "autor": "Guilherme",
-  "idioma": "Portugues",
-  "data_lancamento": {
-    "$numberLong": "1694540743262"
-  },
-  "total_estoque": 1,
-  "registro_criado_em": {
-    "$numberLong": "1694545399974"
-  },
-  "registro_atualizado_em": {
-    "$numberLong": "1694545399974"
-  }
-},
-{
-  "_id": {
-    "$oid": "6500bb6cabe3c415baf05d9d"
-  },
-  "titulo": "as aventuras do peter pan o misterio do meu no seu cu ",
-  "capa": "https://www.ira-sme.net/wp-content/themes/consultix/images/no-image-found-360x260.png",
-  "sinopse": "O senhor dos aneis....",
-  "paginas": 120,
-  "categorias": [
-    "ação",
-    "comedia",
-    "drama"
-  ],
-  "autor": "Guilherme",
-  "idioma": "Portugues",
-  "data_lancamento": {
-    "$numberLong": "1694540743262"
-  },
-  "total_estoque": 1,
-  "registro_criado_em": {
-    "$numberLong": "1694546796984"
-  },
-  "registro_atualizado_em": {
-    "$numberLong": "1694546796984"
-  }
-},
-{
-  "_id": {
-    "$oid": "6500bb91abe3c415baf05d9e"
-  },
-  "titulo": "O senhor dos Anei",
-  "capa": "https://www.ira-sme.net/wp-content/themes/consultix/images/no-image-found-360x260.png",
-  "sinopse": "O senhor dos aneis....",
-  "paginas": 120,
-  "categorias": [
-    "ação",
-    "drama"
-  ],
-  "autor": "Guilherme",
-  "idioma": "Portugues",
-  "data_lancamento": {
-    "$numberLong": "1694540743262"
-  },
-  "total_estoque": 1,
-  "registro_criado_em": {
-    "$numberLong": "1694546833688"
-  },
-  "registro_atualizado_em": {
-    "$numberLong": "1694546833688"
-  }
-},
-{
-  "_id": {
-    "$oid": "6500bbe0abe3c415baf05d9f"
-  },
-  "titulo": "Jean",
-  "capa": "https://www.ira-sme.net/wp-content/themes/consultix/images/no-image-found-360x260.png",
-  "sinopse": "O senhor dos aneis....",
-  "paginas": 120,
-  "categorias": [
-    "ação",
-    "comedia",
-    "drama"
-  ],
-  "autor": "Guilherme",
-  "idioma": "Portugues",
-  "data_lancamento": {
-    "$numberLong": "1694540743262"
-  },
-  "total_estoque": 1,
-  "registro_criado_em": {
-    "$numberLong": "1694546912951"
-  },
-  "registro_atualizado_em": {
-    "$numberLong": "1694546912951"
-  },
-}, {
-  "_id": {
-    "$oid": "6500bbe0abe3c415baf05d9f"
-  },
-  "titulo": "testee",
-  "capa": "https://www.ira-sme.net/wp-content/themes/consultix/images/no-image-found-360x260.png",
-  "sinopse": "O senhor dos aneis....",
-  "paginas": 120,
-  "categorias": [
-    "ação",
-    "comedia",
-    "drama"
-  ],
-  "autor": "Guilherme",
-  "idioma": "Portugues",
-  "data_lancamento": {
-    "$numberLong": "1694540743262"
-  },
-  "total_estoque": 1,
-  "registro_criado_em": {
-    "$numberLong": "1694546912951"
-  },
-  "registro_atualizado_em": {
-    "$numberLong": "1694546912951"
-  },
-}]
-
-const bookAcao = books.filter((book) => book.categorias[0] === "ação")
-const bookComedia = books.filter((book) => book.categorias[0] === "comedia")
-const bookRomance = books.filter((book) => book.categorias[0] === "Romance")
-
-
-
 
 export default function Home() {
   const slider = useRef(null)
+  const [books, setBooks] = useState([
+    {
+      "_id": "001",
+      "titulo": "Carrengando...",
+      "capa": "https://th.bing.com/th/id/R.78364883c679d5596be1627890ae2abe?rik=HrDn9sFy7iYKTQ&pid=ImgRaw&r=0",
+      "sinopse": "Carregando...",
+      "paginas": 0,
+      "categorias": [
+        "ação",
+        "comedia",
+        "drama"
+      ],
+      "autor": "Carregando...",
+      "idioma": "Aguarde...",
+      "data_lancamento": 1700614011,
+      "total_estoque": 0,
+      "registro_criado_em": 1700614011,
+      "registro_atualizado_em": 1700614011
+    }
+  ]);
+  let [bookAcao, setBookAcao] = useState([{
+    "_id": "001",
+    "titulo": "Carrengando...",
+    "capa": "https://th.bing.com/th/id/R.78364883c679d5596be1627890ae2abe?rik=HrDn9sFy7iYKTQ&pid=ImgRaw&r=0",
+    "sinopse": "Carregando...",
+    "paginas": 0,
+    "categorias": [
+      "ação",
+      "comedia",
+      "drama"
+    ],
+    "autor": "Carregando...",
+    "idioma": "Aguarde...",
+    "data_lancamento": 1700614011,
+    "total_estoque": 0,
+    "registro_criado_em": 1700614011,
+    "registro_atualizado_em": 1700614011
+  }]);
+  let [bookComedia, setBookComedia] = useState([{
+    "_id": "001",
+    "titulo": "Carrengando...",
+    "capa": "https://th.bing.com/th/id/R.78364883c679d5596be1627890ae2abe?rik=HrDn9sFy7iYKTQ&pid=ImgRaw&r=0",
+    "sinopse": "Carregando...",
+    "paginas": 0,
+    "categorias": [
+      "ação",
+      "comedia",
+      "drama"
+    ],
+    "autor": "Carregando...",
+    "idioma": "Aguarde...",
+    "data_lancamento": 1700614011,
+    "total_estoque": 0,
+    "registro_criado_em": 1700614011,
+    "registro_atualizado_em": 1700614011
+  }]);
+  let [bookRomance, setBookRomance] = useState([{
+    "_id": "001",
+    "titulo": "Carrengando...",
+    "capa": "https://th.bing.com/th/id/R.78364883c679d5596be1627890ae2abe?rik=HrDn9sFy7iYKTQ&pid=ImgRaw&r=0",
+    "sinopse": "Carregando...",
+    "paginas": 0,
+    "categorias": [
+      "ação",
+      "comedia",
+      "drama"
+    ],
+    "autor": "Carregando...",
+    "idioma": "Aguarde...",
+    "data_lancamento": 1700614011,
+    "total_estoque": 0,
+    "registro_criado_em": 1700614011,
+    "registro_atualizado_em": 1700614011
+  }]);
+  let [bookDrama, setBookDrama] = useState([{
+    "_id": "001",
+    "titulo": "Carrengando...",
+    "capa": "https://th.bing.com/th/id/R.78364883c679d5596be1627890ae2abe?rik=HrDn9sFy7iYKTQ&pid=ImgRaw&r=0",
+    "sinopse": "Carregando...",
+    "paginas": 0,
+    "categorias": [
+      "ação",
+      "comedia",
+      "drama"
+    ],
+    "autor": "Carregando...",
+    "idioma": "Aguarde...",
+    "data_lancamento": 1700614011,
+    "total_estoque": 0,
+    "registro_criado_em": 1700614011,
+    "registro_atualizado_em": 1700614011
+  }]);
+
+  // PUXA DADOS DA API
+  const listaLivros = async (e) => {
+    try {
+      // BODY DA REQUISIÇÃO
+      let data = {
+        "filter": {
+          "titulo": { "$regex": "a", "$options": "i" }
+        },
+        "sort": {
+          "_id": -1
+        },
+        "limit": 99
+      };
+
+      // FUNÇÃO QUE PUXA DADOS DA API
+      const resposta = await axios.post(
+        "http://localhost:57601/api/book/list_book",
+        data,
+        {
+          withCredentials: true,
+        }
+      );
+
+      // DEFINE OS LIVROS
+      setBooks(resposta.data.data_base.result);
+      return resposta.data.data_base.result
+
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  // REALIZA O FILTRO DOS LIVROS USANDO UM OBJETO [ categorias ]
+  const filtroLivros = async (books) => {
+    let listAcao = books.filter((book) => book.categorias.indexOf("ação") > -1)
+    let listComedia = books.filter((book) => book.categorias.indexOf("comedia") > -1)
+    let listRomance = books.filter((book) => book.categorias.indexOf("romance") > -1)
+    let listDrama = books.filter((book) => book.categorias.indexOf("drama") > -1)
+    setBookAcao(listAcao)
+    setBookComedia(listComedia)
+    setBookRomance(listRomance)
+    setBookDrama(listDrama)
+  }
+
+  // EXECULTA APENAS UMA VEZ A SOLICITAÇÃO A API
+  useEffect(() => {
+    listaLivros().then((listLivros) => {
+      filtroLivros(listLivros)
+    })
+  }, []);
 
   const goleft = (e) => {
     e.preventDefault()
@@ -186,118 +170,239 @@ export default function Home() {
     slider.current.scrollLeft += slider.current.offsetWidth
   }
 
-
   return (
-
     /* div booksContainer pai que contem todos elementos */
 
     <div className="booksContainer">
 
       {/* div que controla formato movimento de cada card */}
 
-
       <div className="slider-home" >
-        <h2 className="title-genero">AÇÃO</h2>
-        {/* div book-slider que controla proporçao de cada card dos livros */}
 
+        <h2 className="title-genero">Ação</h2>
         <div className="teste">
-          <div className="button-teste" >
-            <button onClick={goleft} className="icon-left"><box-icon name='left-arrow-alt' ></box-icon></button>
 
+          {/* BOTAO DA ESQUERDA */}
+          <div className="button-teste" >
+            {
+              bookAcao.length > 0 ?
+                <button onClick={goleft} className="icon-left"><box-icon name='left-arrow-alt' ></box-icon></button> :
+                ""
+            }
           </div>
+
+          {/* LISTA DE LIVROS SE EXISTIR */}
           <div className="book-slider" ref={slider}>
-            {bookAcao.map((book) => (
 
-              <div key={book._id} className="card-home" >
+            {
+              bookAcao.length > 0 ?
+                bookAcao.map((book) => (
+                  <div key={book._id} className="card-home" >
 
-                {/* div card-home vai ser que controla o tamanho da imagem  */}
+                    {/* div card-home vai ser que controla o tamanho da imagem  */}
 
-                <Link to={`book/${book._id}`}>
-                  <img className="home-imagem" src={book.capa} alt="" />
-                  <div className="div-title">
-                    <p className="titulo-book">{book.titulo}</p>
+                    <Link to={`book/${book._id}`}>
+                      <img className="home-imagem" src={book.capa} alt="" />
+                      <div className="div-title">
+                        <p className="titulo-book">{book.titulo}</p>
+                      </div>
+
+                    </Link>
+
                   </div>
-
-                </Link>
-
-              </div>
-
-
-            )
-
-
-            )}
-
+                )) :
+                <div key="" className="card-home" >
+                  <div>
+                    <img className="home-imagem" src="https://static.vecteezy.com/system/resources/previews/018/733/803/large_2x/add-simple-flat-icon-illustration-free-vector.jpg" alt="Nenhum registro" />
+                    <div className="div-title">
+                      <p className="titulo-book">Nenhum registro</p>
+                    </div>
+                  </div>
+                </div>
+            }
 
           </div>
+
+          {/* BOTAO DA DIREITA */}
           <div className="button-frente">
-            <button onClick={goRight} className="icon-right" ><box-icon name='right-arrow-alt' ></box-icon></button>
+            {
+              bookAcao.length > 0 ?
+                <button onClick={goRight} className="icon-right" ><box-icon name='right-arrow-alt' ></box-icon></button> :
+                ""
+            }
           </div>
 
         </div>
+
         <h2 className="title-genero">Comedia</h2>
-
         <div className="teste">
+
+          {/* BOTAO DA ESQUERDA */}
           <div className="button-teste" >
-            <button className="icon-left"><box-icon name='left-arrow-alt' ></box-icon></button>
+            {
+              bookComedia.length > 0 ?
+                <button onClick={goleft} className="icon-left"><box-icon name='left-arrow-alt' ></box-icon></button> :
+                ""
+            }
+          </div>
+
+          {/* LISTA DE LIVROS SE EXISTIR */}
+          <div className="book-slider" ref={slider}>
+
+            {
+              bookComedia.length > 0 ?
+                bookComedia.map((book) => (
+                  <div key={book._id} className="card-home" >
+
+                    {/* div card-home vai ser que controla o tamanho da imagem  */}
+
+                    <Link to={`book/${book._id}`}>
+                      <img className="home-imagem" src={book.capa} alt="" />
+                      <div className="div-title">
+                        <p className="titulo-book">{book.titulo}</p>
+                      </div>
+
+                    </Link>
+
+                  </div>
+                )) :
+                <div key="" className="card-home" >
+                  <div>
+                    <img className="home-imagem" src="https://static.vecteezy.com/system/resources/previews/018/733/803/large_2x/add-simple-flat-icon-illustration-free-vector.jpg" alt="Nenhum registro" />
+                    <div className="div-title">
+                      <p className="titulo-book">Nenhum registro</p>
+                    </div>
+                  </div>
+                </div>
+            }
 
           </div>
-          <div className="book-slider">
 
-            {bookComedia.map((book) => (
-              <div key={book._id} className="card-home">
-
-
-                <Link to={`book/${book.titulo}`}>
-                  <img className="home-imagem" src={book.capa} alt="erro" />
-                  <p className="titulo-book">{book.titulo}</p>
-                </Link>
-              </div>
-
-            )
-
-            )}
-          </div>
+          {/* BOTAO DA DIREITA */}
           <div className="button-frente">
-            <button className="icon-right"><box-icon name='right-arrow-alt' ></box-icon></button>
+            {
+              bookComedia.length > 0 ?
+                <button onClick={goRight} className="icon-right" ><box-icon name='right-arrow-alt' ></box-icon></button> :
+                ""
+            }
           </div>
+
         </div>
 
+        <h2 className="title-genero">Drama</h2>
+        <div className="teste">
+
+          {/* BOTAO DA ESQUERDA */}
+          <div className="button-teste" >
+            {
+              bookDrama.length > 0 ?
+                <button onClick={goleft} className="icon-left"><box-icon name='left-arrow-alt' ></box-icon></button> :
+                ""
+            }
+          </div>
+
+          {/* LISTA DE LIVROS SE EXISTIR */}
+          <div className="book-slider" ref={slider}>
+
+            {
+              bookDrama.length > 0 ?
+                bookDrama.map((book) => (
+                  <div key={book._id} className="card-home" >
+
+                    {/* div card-home vai ser que controla o tamanho da imagem  */}
+
+                    <Link to={`book/${book._id}`}>
+                      <img className="home-imagem" src={book.capa} alt="" />
+                      <div className="div-title">
+                        <p className="titulo-book">{book.titulo}</p>
+                      </div>
+
+                    </Link>
+
+                  </div>
+                )) :
+                <div key="" className="card-home" >
+                  <div>
+                    <img className="home-imagem" src="https://static.vecteezy.com/system/resources/previews/018/733/803/large_2x/add-simple-flat-icon-illustration-free-vector.jpg" alt="Nenhum registro" />
+                    <div className="div-title">
+                      <p className="titulo-book">Nenhum registro</p>
+                    </div>
+                  </div>
+                </div>
+            }
+
+          </div>
+
+          {/* BOTAO DA DIREITA */}
+          <div className="button-frente">
+            {
+              bookDrama.length > 0 ?
+                <button onClick={goRight} className="icon-right" ><box-icon name='right-arrow-alt' ></box-icon></button> :
+                ""
+            }
+          </div>
+
+        </div>
 
         <h2 className="title-genero">Romance</h2>
-
         <div className="teste">
+
+          {/* BOTAO DA ESQUERDA */}
           <div className="button-teste" >
-            <button className="icon-left"><box-icon name='left-arrow-alt' ></box-icon></button>
+            {
+              bookRomance.length > 0 ?
+                <button onClick={goleft} className="icon-left"><box-icon name='left-arrow-alt' ></box-icon></button> :
+                ""
+            }
+          </div>
+
+          {/* LISTA DE LIVROS SE EXISTIR */}
+          <div className="book-slider" ref={slider}>
+
+            {
+              bookRomance.length > 0 ?
+                bookRomance.map((book) => (
+                  <div key={book._id} className="card-home" >
+
+                    {/* div card-home vai ser que controla o tamanho da imagem  */}
+
+                    <Link to={`book/${book._id}`}>
+                      <img className="home-imagem" src={book.capa} alt="" />
+                      <div className="div-title">
+                        <p className="titulo-book">{book.titulo}</p>
+                      </div>
+
+                    </Link>
+
+                  </div>
+                )) :
+                <div key="" className="card-home" >
+                  <div>
+                    <img className="home-imagem" src="https://static.vecteezy.com/system/resources/previews/018/733/803/large_2x/add-simple-flat-icon-illustration-free-vector.jpg" alt="Nenhum registro" />
+                    <div className="div-title">
+                      <p className="titulo-book">Nenhum registro</p>
+                    </div>
+                  </div>
+                </div>
+            }
 
           </div>
 
-
-          <div className="book-slider">
-
-            {bookRomance.map((book) => (
-              <div key={book._id} className="card-home" >
-                <Link to={`book/${book.titulo}`}>
-                  <img className="home-imagem" src={book.capa} alt="" />
-                  <p className="titulo-book">{book.titulo}</p>
-                </Link>
-              </div>
-
-            )
-            )}
-          </div>
+          {/* BOTAO DA DIREITA */}
           <div className="button-frente">
-            <button className="icon-right" ><box-icon name='right-arrow-alt' ></box-icon></button>
+            {
+              bookRomance.length > 0 ?
+                <button onClick={goRight} className="icon-right" ><box-icon name='right-arrow-alt' ></box-icon></button> :
+                ""
+            }
           </div>
+
         </div>
 
       </div>
+
     </div>
 
-
-
   )
-
-
 
 }

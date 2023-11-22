@@ -30,7 +30,6 @@ export default function CreateUser() {
   const [senha, setSenha] = useState('') // Manipula o valor do input Senha
   const [cargoSelect, setCargoSelect] = useState() //Manipula cargo selecionado
 
-  
   const handleSave = (e)=> {
     e.preventDefault()
     const data = {

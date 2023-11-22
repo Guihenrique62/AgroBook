@@ -7,8 +7,9 @@ import addandRemove from '../scripts/functions'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import "../style/Estoque.css"
+
 function EstoquePage() {
-  const{ book,removeBook}= addandRemove()
+  const { book, removeBook } = addandRemove()
   const books = [{
     "_id": {
       "$oid": "64fbe4bc1a2ce80351f72b3b"
@@ -139,40 +140,40 @@ function EstoquePage() {
         <input type="text" className='input_search_home' />
         <button className='button_search_home'><i className='bx bx-search'></i></button>
       </div>
-   
-      
-    
+
+
+
       <div className='div_button_novo' >
-       <Link to="formEstoque" ><button className='button_estoque_novo' >novo</button></Link> 
+        <Link to="formEstoque" ><button className='button_estoque_novo' >novo</button></Link>
       </div>
 
       <div className='container_estoque'>
-        
-          {books.map((book)=>{
-        return(
-        
+
+        {books.map((book) => {
+          return (
+
 
             <div className='div_estoque_page' key={book._id}>
-            
-              <img className='img_estoque' src={book.capa} alt="err" srcset=""/>
+
+              <img className='img_estoque' src={book.capa} alt="err" srcset="" />
               <h2 className='titulo_estoque'>{book.titulo}</h2>
               <div className='div_button_estoque'>
                 <Link to={`estoque/${book._id}`} ><button className='button_estoque_editar' >editar</button></Link>
               </div>
-              
 
-          </div>
-          
-          
-       
-          
-        )
-      })}
-        </div>  
-        
-      
-    
-     
+
+            </div>
+
+
+
+
+          )
+        })}
+      </div>
+
+
+
+
     </>
   )
 }
