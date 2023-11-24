@@ -14,14 +14,20 @@ require('dotenv').config(); // SOLICÍTA AS VARIÁVEIS DE AMBIENTE
 // Controla todas as rotas de criação de usuário
 router.post("/api/order/create_order", async (req, res) => {
 
-    var {livro,usuario,data_vencimento} = req.body; // RESERVA TODAS AS VARIÁVEIS RECEBIDAS
+    var { livro, data_vencimento } = req.body; // RESERVA TODAS AS VARIÁVEIS RECEBIDAS
+
+    const check_data = new check_user(); // CRIA O CONSTRUTOR
+    const result = await check_data.initSyncSingIn(req); // EXECUTA A FUNÇÃO DO CONSTRUTOR
+    const cookieUserData = result[0]['validToken']; // RECUPERA OS DADOS DA FUNÇÃO
+
     const dateNow = new Date();
+
     // VERIFICA VALORES RECEBIDOS
-    if ( livro && usuario) {
-        
+    if (livro) {
+
         const query = { // CRIA O OBJETO
-            "livro": { "$oid": livro},
-            "usuario": { "$oid": usuario },
+            "livro": { "$oid": livro },
+            "usuario": { "$oid": cookieUserData.id },
             "status": 1,
             "data_aluguel": dateNow,
             "data_vencimento": data_vencimento,

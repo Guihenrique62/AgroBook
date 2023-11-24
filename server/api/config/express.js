@@ -16,6 +16,7 @@ module.exports = function () {
   var corsOptions = {
     origin: [
       "http://localhost:8080",
+      "http://localhost:3000",
       "http://localhost:57601",
       "http://localhost:57602",
       "http://localhost:5173",
