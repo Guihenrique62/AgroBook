@@ -2,13 +2,17 @@
 CRIADO: GUILHERME HENRIQUE PORTO DOS SANTOS
 MATRICULA: 202204463091
 EMAIL: guilhermeportosantos1@gmail.com
+---------
+EDITADO: JEAN CLEIDSON PEREIRA RODRIGUES
+MATRICULA: 202202257141
+EMAIL: jeantng2016@gmail.com
 */
 
 const express = require("express"); // EXTRAI O MODULO DO EXPRESS
 var router = express.Router(); // EXTRAI O MODULO DE ROTAS
+const check_user = require('../../../middleware/auth/jwt_mongodb'); // PUXA FUNÇÃO QUE VÁLIDA SESSÃO DO USUÁRIO
 const commands = require('../../../middleware/mongoDb/command/commands'); // EXTRAI OS COMANDOS NO MONGODB
 require('dotenv').config(); // SOLICÍTA AS VARIÁVEIS DE AMBIENTE
-
 
 // *************** POST ***************
 // Controla todas as rotas de criação de usuário
@@ -20,7 +24,8 @@ router.post("/api/order/create_order", async (req, res) => {
     const result = await check_data.initSyncSingIn(req); // EXECUTA A FUNÇÃO DO CONSTRUTOR
     const cookieUserData = result[0]['validToken']; // RECUPERA OS DADOS DA FUNÇÃO
 
-    const dateNow = new Date();
+    const dataAluguel = new Date();
+    const dataVencimento = new Date(new Date(dataAluguel.getTime()).getTime() + 60 * 60 * 24 * 1000); // ADICIONA 24 HORAS PARA O VENCIMENTO
 
     // VERIFICA VALORES RECEBIDOS
     if (livro) {
@@ -28,9 +33,9 @@ router.post("/api/order/create_order", async (req, res) => {
         const query = { // CRIA O OBJETO
             "livro": { "$oid": livro },
             "usuario": { "$oid": cookieUserData.id },
-            "status": 1,
-            "data_aluguel": dateNow,
-            "data_vencimento": data_vencimento,
+            "status": 0,
+            "data_aluguel": dataAluguel.getTime(),
+            "data_vencimento": dataVencimento.getTime(),
             "entregou": 0,
             "recebeu": 0
         }
