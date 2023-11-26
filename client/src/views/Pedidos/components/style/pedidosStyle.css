@@ -48,9 +48,14 @@
      padding: 30px;
 }
 .title_pedido{
-     padding: 20px;
+     padding: 10px;
+     display: flex;
+     flex-direction: row;
+     justify-content: space-between;
+     width: 95%;
 
 }
+
 .div_buttons_pedidoid{
      display: flex;
      justify-content: end;

@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from "react"
 import { Link } from "react-router-dom";
-
+import './style/pedidoPrincipal.css'
  
  
  
@@ -221,43 +221,103 @@ import { Link } from "react-router-dom";
     
      
      return (
-          <div>
+          
+
+          <div className="container_pedidos">
+               <div className="subcontainer_pedidos">
+                   <table className="tabela">
+                    <tr>
+                    <th>Nome:</th>
+                    <th>Titulo:</th>
+                    <th>Data de pedido</th>
+                    <th>Data de Vencimento:</th>
+                    <th>Status:</th>
+                    </tr>
+
+                    
+                        <tr>
+                        
+                                <td>
+                                   <Link to={"pedido/:pedidoID"}>
+                                     {pedidos_.map((nome)=>{
+                                    return nome.data_base.result.map((nome_user)=>(
+                                       <div className="div_userName_pedidos">
+                                        <p>{nome_user.user[0].nome}</p>
+                                       </div>
+                                    ))
+                                                   })}
+                                    </Link>
+                                </td>
+                                
+                                <td>
+                                    <Link to={"pedido/:pedidoID"}>
+                                    
+                                     {pedidos_.map((titulo)=>{
+                                    return titulo.data_base.result.map((title_pedido)=>(
+                                       <div className="div_userName_pedidos">
+                                        <p>{title_pedido.book[0].titulo}</p>
+                                       </div>
+                                    ))
+                                                   })}
+                                    </Link>
+                               
+                                </td>
+                            
+                                <td>
+                                    <Link to={"pedido/:pedidoID"}>
+                                    
+                                    {pedidos_.map((data_pedido)=>{
+                                    return data_pedido.data_base.result.map((data_pedido_user)=>(
+                                        <div className="div_userName_pedidos">
+                                          <p>{data_pedido_user.data_aluguel}</p>
+                                        </div>
+                                    ))
+                                                   })}
+                                    </Link>
+                                    
+                                </td>
+                            
+                            
+                                <td>
+                                    <Link to={"pedido/:pedidoID"}>
+                                    {pedidos_.map((data_vencimento)=>{
+                                    return data_vencimento.data_base.result.map((data_vencimento_user)=>(
+                                        <div className="div_userName_pedidos" >
+                                          <p>{data_vencimento_user.data_vencimento}</p>
+                                        </div>
+                                    ))
+                                                   })}
+                                    
+                                    </Link>
+                                    
+                                </td>
+                            
+                            
+                                <td>
+                                    <Link to={"pedido/:pedidoID"}>
+                                    
+                                    {pedidos_.map((dados)=>{
+                                    return dados.data_base.result.map((statu)=>(
+                                        <div className="div_userName_pedidos">
+                                            <p>{getStatusString(statu.status)}</p>
+                                        </div>
+                                    ))
+                                                   })}
+                                    </Link>
+                                    
+                                </td>
+                                
+                        </tr>
+                        
+                            
+                         
+                    
+                   
+                   
+                   
+                   </table>
+               </div>
                
-               <h2>Nome: </h2>
-                    <Link to={"pedido/:pedidoID"}>
-                     {pedidos_.map((nome)=>{
-                    return nome.data_base.result.map((nome_user)=>(
-                         <p>{nome_user.user[0].nome}</p>
-                    ))
-               })}
-                    </Link>
-              
-               <h2>Titulo:</h2>
-               {pedidos_.map((titulo)=>{
-                    return titulo.data_base.result.map((titulo_user)=>(
-                         <p>{titulo_user.book[0].titulo}</p>
-                    ))
-               })}
-               <h2>Data de pedido</h2>
-               {pedidos_.map((data_pedido)=>{
-                    return data_pedido.data_base.result.map((data_pedido_user)=>(
-                         <p>{data_pedido_user.data_aluguel}</p>
-                    ))
-               })}
-               <h2>Data de Vencimento</h2>
-               {pedidos_.map((data_vencimento)=>{
-                    return data_vencimento.data_base.result.map((data_vencimento_user)=>(
-                         <p>{data_vencimento_user.data_vencimento}</p>
-                    ))
-               })}
-               <h2>Status</h2>
-               {pedidos_.map((dados)=>{
-                    return dados.data_base.result.map((statu)=>(
-                         <p>{getStatusString(statu.status)}</p>
-                    ))
-               })}
-
-
                 </div>
             
           

@@ -1,6 +1,7 @@
 import { useState } from "react"
 import InputMask from "react-input-mask";
 import "../components/style/pedidosStyle.css"
+import { Link } from "react-router-dom";
 
 export default function PedidoID(){
 
@@ -53,6 +54,7 @@ export default function PedidoID(){
                <div className="subcontainer_pedidoId" >
                     <div className="title_pedido">
                          <h3>Solitação de Pedido</h3>
+                        <Link to={'/orders'}><i className='bx bx-x'></i></Link>
                     </div>
                     <div className="inputs_superior" >
                          <label>

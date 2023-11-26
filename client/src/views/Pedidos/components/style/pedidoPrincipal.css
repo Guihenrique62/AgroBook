@@ -1,0 +1,90 @@
+.container_pedidos{
+     display: flex;
+     flex-direction: column;
+     width: 80%;
+     height: 100%;
+     padding: 0 0  1rem 0;
+     font-family: 'Inter', sans-serif;
+     border-radius: 10px;
+     border: 1px solid #909090;
+     background: #fff;
+     box-shadow: 10px 10px 30px 0px rgba(0, 0, 0, 0.25);
+}
+
+
+table{
+     padding: 2px;
+     gap: 10px;
+     width: 100%;
+     
+     
+}
+th{
+     padding: 8px;
+     text-align: left;
+     border-bottom: 1px solid black;
+
+}
+td{
+  background-color: #909090;
+ 
+}
+
+
+ .div_userName_pedidos{
+     background-color: #fff;
+     box-shadow: 10px 10px 30px 0px rgba(0, 0, 0, 0.25); 
+     width: auto;
+     border-bottom: 1px solid black;
+     padding: 10px;
+    
+
+} 
+.button_devolvidos{
+     background-color:  #3AC661;
+     font-size: 16px;
+     width: auto;
+     height: 20px;
+     border: none;
+     cursor: pointer;
+     box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.25);
+     color: #fff;
+     border-radius: 5px;
+}
+.div_userName_devolvidos{
+     background-color: #fff;
+     width: auto
+     ;
+     box-shadow: 10px 10px 30px 0px rgba(0, 0, 0, 0.25); 
+     border-bottom: 1px solid black;
+     padding: 5px;
+
+}
+
+
+
+
+
+
+/* <style>
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  <link>th</link>, <link>td</link> {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+
+  <link>th</link> {
+    background-color: #f2f2f2;
+    color: #333;
+  }
+
+  <link>tr</link>:hover {
+    background-color: #f5f5f5;
+  }
+</style> */
+

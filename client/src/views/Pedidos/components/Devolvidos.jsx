@@ -1,4 +1,5 @@
 import { useState } from "react"
+import '../components/style/pedidoPrincipal.css'
 
 
 
@@ -202,34 +203,96 @@ export default function Devolvidos(){
       const [ open, setOpen]= useState(true)
        
      return(
-          <div>
-               <h2>Nome: </h2>
-               {pedidos_.map((nome)=>{
-                    return nome.data_base.result.map((nome_user)=>(
-                         
-                         <div>
-                          <p>{nome_user.user[0].nome}</p>
-                            <button>confirmar</button>  
-                         </div>
-                        
-                    ))
+
+          <div className="container_pedidos">
+
+
+                <div className="subcontainer_pedidos">
+                    <table>
+                        <tr>
+                            <th>
+                                Nome:
+                            </th>
+                            <th>
+                                Titulo
+                            </th>
+                            <th>
+                                Data de Vencimento
+                            </th>
+                            <th>
+                                Açoes:
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+
+                             
+                                
+                                {pedidos_.map((nome)=>{
+                                
+                                return nome.data_base.result.map((nome_user)=>(
+                                <div className="div_userName_devolvidos">
+                                  <p>{nome_user.user[0].nome}</p>
+                                  </div>
+                                                    
+                                                        ))
+                                       })}
+                                 
+                                    </td>
+                           
+                               
+                                <td>
+                                
+                                    
+                                   
+                                        {pedidos_.map((titulo)=>{
+                                        return titulo.data_base.result.map((titulo_user)=>(
+                                         <div className="div_userName_devolvidos">
+                                         <p>{titulo_user.book[0].titulo}</p>
+                                         </div>
+                                                                ))
+                                        
+                                               })}
+                                    
+                                
+                                </td>
+                           
+                            <td>
+
+                            
+                              
+                                    
+                                        {pedidos_.map((data_vencimento)=>{
+                                         return data_vencimento.data_base.result.map((data_vencimento_user)=>(
+                                        <div className="div_userName_devolvidos">
+                                         <p>{data_vencimento_user.data_vencimento}</p>
+                                        </div>
+                                                                ))
+                                               })}
+                                   
+                            
+                            </td>
+                            <td>
+                                
+                                    
+                                       
+                                            {pedidos_.map((buttons)=>{
+                                                return buttons.data_base.result.map((but)=>(
+
+                                                    <div className="div_userName_devolvidos">
+                                                    <button className="button_devolvidos">confirmar</button>
+                                                    </div>
+                                                ))
+                                            
+                                            })}
+                                       
+                                    
+                                
                     
-               })}
-               
-               <h2>Titulo:</h2>
-               {pedidos_.map((titulo)=>{
-                    return titulo.data_base.result.map((titulo_user)=>(
-                         <p>{titulo_user.book[0].titulo}</p>
-                    ))
-               })}
-               <h2>Data de Vencimento</h2>
-               {pedidos_.map((data_vencimento)=>{
-                    return data_vencimento.data_base.result.map((data_vencimento_user)=>(
-                         <p>{data_vencimento_user.data_vencimento}</p>
-                         
-                    ))
-                    
-               })}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
                
           </div>
      )

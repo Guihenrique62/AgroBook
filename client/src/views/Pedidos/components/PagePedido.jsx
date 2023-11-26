@@ -18,9 +18,6 @@ import Devolvidos from './Devolvidos'
  export default function PagePedido(){
    const[open,setOpen]= useState(true)
 
-   const alterar=()=>{
-   
-   }
     
      
      return(
