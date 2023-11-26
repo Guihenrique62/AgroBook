@@ -1,1 +1,1 @@
-nodemon main.js
+nodemon main
