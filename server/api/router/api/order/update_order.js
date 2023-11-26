@@ -6,6 +6,7 @@ EMAIL: jeantng2016@gmail.com
 
 const express = require("express"); // EXTRAI O MODULO DO EXPRESS
 var router = express.Router(); // EXTRAI O MODULO DE ROTAS
+const check_user = require('../../../middleware/auth/jwt_mongodb'); // PUXA FUNÇÃO QUE VÁLIDA SESSÃO DO USUÁRIO
 const commands = require('../../../middleware/mongoDb/command/commands'); // EXTRAI OS COMANDOS NO MONGODB
 require('dotenv').config(); // SOLICITA AS VARIÁVEIS DE AMBIENTE
 
@@ -16,6 +17,21 @@ router.post("/api/book/update_order", async (req, res) => {
     const { filter, newValue } = req.body; // RESERVA VALORES DO BODY
     const attrValid = ["_id", "livro", "usuario", "status", "data_aluguel", "data_vencimento", "entregou", "recebeu"]; // PERMITE APENAS ESSAS CHAVES COMO PARÂMETROS ACEITAVEIS PARA ATUALIZAR LIVROS
     const newAttrValid = ["livro", "usuario", "status", "data_aluguel", "data_vencimento", "entregou", "recebeu"]; // PERMITE APENAS ESSAS CHAVES COMO PARÂMETROS ACEITAVEIS PARA ATUALIZAR LIVROS
+
+    const check_data = new check_user(); // CRIA O CONSTRUTOR
+    const result = await check_data.initSyncSingIn(req); // EXECUTA A FUNÇÃO DO CONSTRUTOR
+    const cookieUserData = result[0]['validToken']; // RECUPERA OS DADOS DA FUNÇÃO
+
+    // VERIFICA SE O USUARIO E ADM OU COMUN
+    if (cookieUserData.cargo != 0) {
+        res.status(401).json({
+            "codigo": process.env.CODE_FAIL,
+            "resposta": process.env.MSG_SUCCESS_FAIL,
+            "mensagem": "Você não possui autorização para realizar essa mudança",
+            "data_base": ""
+        });
+        return true;
+    }
 
     // VERIFICA SE A VARIÁVEL FILTER ESTÁ VAZIA
     if (!filter || Object.keys(filter).length === 0 || typeof (filter) !== `object`) {

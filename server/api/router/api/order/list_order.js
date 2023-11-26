@@ -6,6 +6,7 @@ EMAIL: jeantng2016@gmail.com
 
 const express = require("express"); // EXTRAI O MODULO DO EXPRESS
 var router = express.Router(); // EXTRAI O MODULO DE ROTAS
+const check_user = require('../../../middleware/auth/jwt_mongodb'); // PUXA FUNÇÃO QUE VÁLIDA SESSÃO DO USUÁRIO
 const commands = require('../../../middleware/mongoDb/command/commands'); // EXTRAI OS COMANDOS NO MONGODB
 require('dotenv').config(); // SOLICÍTA AS VARIÁVEIS DE AMBIENTE
 
@@ -14,7 +15,11 @@ require('dotenv').config(); // SOLICÍTA AS VARIÁVEIS DE AMBIENTE
 router.post("/api/order/list_order", async (req, res) => {
 
     var { collections, filter, sort, limit } = req.body; // RESERVA TODAS AS VARIÁVEIS RECEBIDAS
-    
+
+    const check_data = new check_user(); // CRIA O CONSTRUTOR
+    const result = await check_data.initSyncSingIn(req); // EXECUTA A FUNÇÃO DO CONSTRUTOR
+    const cookieUserData = result[0]['validToken']; // RECUPERA OS DADOS DA FUNÇÃO
+
     // VERIFICA VALORES RECEBIDOS
     if (collections && filter && sort && limit) {
 
@@ -66,6 +71,12 @@ router.post("/api/order/list_order", async (req, res) => {
 
         // TENTA FORMATAR O JSON RECEBIDO PARA SER LIDO PELO MONGODB [ match ]
         try {
+
+            // VERIFICA SE O USUARIO E ADM OU COMUN
+            if (cookieUserData.cargo != 0) {
+                filter["usuario"] = { "$oid": cookieUserData.id }
+            }
+
             // ADICIONA O MATCH NO FILTER
             listLookup.push({ "$match": filter });
         } catch (errMatch) {

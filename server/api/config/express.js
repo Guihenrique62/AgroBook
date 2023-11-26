@@ -11,8 +11,8 @@ const Server = require("socket.io");
 
 module.exports = function () {
   var app = express();
-  var portApp = 57601;
-  var portAppHttp = 57602;
+  var portApp = 57603;
+  var portAppHttp = 57604;
   var corsOptions = {
     origin: [
       "http://localhost:8080",
