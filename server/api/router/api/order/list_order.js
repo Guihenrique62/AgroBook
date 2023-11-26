@@ -71,10 +71,10 @@ router.post("/api/order/list_order", async (req, res) => {
 
         // TENTA FORMATAR O JSON RECEBIDO PARA SER LIDO PELO MONGODB [ match ]
         try {
-            
+
             // VERIFICA SE O USUARIO E ADM OU COMUN
             if (cookieUserData.cargo != 0) {
-                filter["_id"] = { "$oid": cookieUserData.id }
+                filter["usuario"] = { "$oid": cookieUserData.id }
             }
 
             // ADICIONA O MATCH NO FILTER
