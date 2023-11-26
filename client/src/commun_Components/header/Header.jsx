@@ -24,14 +24,18 @@ export default function Header({ search }) {
 
     useEffect(() => {
       // Recuperar dados da sessionStorage ao carregar o componente
-      const dataUserFromSession = sessionStorage.getItem('dataUser');
-  
-      if (dataUserFromSession) {
-        const userData = JSON.parse(dataUserFromSession);
-        setUser(userData);
-      }else{
-        window.location.href = '/'
-      }
+      const fetchDataFromSession = () => {
+        const dataUserFromSession = sessionStorage.getItem('dataUser');
+    
+        if (dataUserFromSession) {
+          const userData = JSON.parse(dataUserFromSession);
+          setUser(userData);
+        } else {
+          window.location.href = '/';
+        }
+      };
+
+      fetchDataFromSession();
     }, []); // O array vazio faz com que esse efeito colateral seja executado apenas uma vez, ao montar o componente
 
 
