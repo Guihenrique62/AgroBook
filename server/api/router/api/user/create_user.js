@@ -26,6 +26,13 @@ router.post("/api/user/create_user", async (req, res) => {
     let validDocument = documento.length <= 11 ? cpf.isValid(JSON.stringify(documento)) : cnpj.isValid(JSON.stringify(documento)) // VERIFICA SE O VALOR NA ENTRADA [ DOCUMENTO ] É VÁLIDO
     const validEmail = validate(email); // VÁLIDA A ENTRADA DE E-MAIL USANDO BIBLIOTECA EXTERNA
     
+    console.log(
+        nome,
+        ((documento) && ((documento)).toString().length >= BigInt(process.env.DOCUMENT_MIN)),
+        email,
+        (senha && senha.toString().length >= BigInt(process.env.PWD_MIN))
+    );
+
     // VERIFICA SE O DOCUMENTO E INVÁLIDO
     if (!validDocument) {
 
@@ -55,7 +62,7 @@ router.post("/api/user/create_user", async (req, res) => {
     // VERIFICA VALORES RECEBIDOS
     if (
         nome // VERIFICA SE O NOME NÃO ESTÁ VAZIO
-        && (BigInt(documento) && (BigInt(documento)).toString().length >= BigInt(process.env.DOCUMENT_MIN)) // VERIFICA SE O DOCUMENTO E INTEIRO E MAIOR QUE 10
+        && ((documento) && ((documento)).toString().length >= BigInt(process.env.DOCUMENT_MIN)) // VERIFICA SE O DOCUMENTO E INTEIRO E MAIOR QUE 10
         && email // VERIFICA SE O E-MAIL NÃO ESTÁ VAZIO
         && (senha && senha.toString().length >= BigInt(process.env.PWD_MIN)) /* VERIFICA SE A SENHA NÃO ESTÁ VAZIA E SE É MAIOR QUE 8 */) {
 
