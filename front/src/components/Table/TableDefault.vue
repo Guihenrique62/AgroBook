@@ -29,6 +29,9 @@
                         <div v-if="typeof(props.item[row.key]) == 'string' && row.tipo != 'btnIcon'">
                             {{ props.item[row.key] }}
                         </div>
+                        <div v-if="typeof(props.item[row.key]) == 'number' && row.tipo != 'btnIcon'">
+                            {{ props.item[row.key] }}
+                        </div>
                         <div v-if="row.tipo == 'btnIcon'" @click="rowClick(props.item)">
                             <BtnIcon :icone="row.icone" cor="info"/>
                         </div>
