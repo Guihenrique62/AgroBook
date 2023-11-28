@@ -21,7 +21,7 @@ if (!statusDark) {
 }
 
 const myCustomTheme = {
-  dark: statusDark ? true : false,
+  dark: false,
   colors: {
     background: '#FFFFFF',
     surface: '#52F6AF',
