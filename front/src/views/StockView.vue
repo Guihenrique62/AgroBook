@@ -7,45 +7,52 @@
 
             <!-- TABS -->
             <v-col :cols="header[0]" class="text-start mb-2">
-                <ButtonConfirm v-if="reactiveVar.containerCriarLivro == false" texto="Novo" cor="success" class="mr-2"
-                    @click="btnCriarUsuario()" />
+                <ButtonConfirm
+                    v-if="reactiveVar.containerCriarLivro == false" texto="Cadastrar livro"
+                    cor="success" class="mr-2" @click="btnCriarLivro()" >
+                </ButtonConfirm>
             </v-col>
 
             <!-- FILTRO -->
             <v-col :cols="header[1]" class="d-flex align-center text-end">
-                <p class="font-weight-medium mr-2">
-                    ({{ (reactiveVar.listaLivrosEstoque).length }}) Registros
-                </p>
-                <FieldDefault v-if="reactiveVar.containerCriarLivro == false" v-model="reactiveVar.search"
-                    prependIcon="mdi-magnify" :carregar="false" texto="Buscar livro..." cor="white" />
+                <p v-if="reactiveVar.containerCriarLivro == false" class="font-weight-medium mr-2"> ({{ (reactiveVar.listaLivrosEstoque).length }}) Registros </p>
+                <FieldDefault 
+                    v-if="reactiveVar.containerCriarLivro == false"
+                    v-model="reactiveVar.search" prependIcon="mdi-magnify"
+                    :carregar="false" texto="Buscar livro..." cor="white" >
+                </FieldDefault>
             </v-col>
 
         </v-row>
 
-        <!-- CAIXA COM PEDIDOS -->
+        <!-- CAIXA COM LIVROS -->
         <v-row no-gutters class="mt-2">
 
-            <!-- LISTA DE PEDIDOS -->
-            <v-col cols="12" class="text-start" v-if="reactiveVar.cardAtivo == 'estoque'">
+            <!-- LISTA DE LIVROS -->
+            <v-col cols="12" class="text-start" v-if="reactiveVar.cardAtivo == 'livros'">
                 <TableDefault :itemsPorPagina="reactiveVar.itemsPerPage" :tamanhoItems="reactiveVar.totalItems"
                     :cabecalho="reactiveVar.headersEstoque" :items="reactiveVar.listaLivrosEstoque"
                     :search="reactiveVar.search" :carregando="reactiveVar.loading" @rowClickTable="rowClicked">
                 </TableDefault>
             </v-col>
 
-            <!-- CONTAINER ACEITAR PEDIDO -->
-            <v-col cols="12" class="text-start" v-if="reactiveVar.cardAtivo == 'aceitar_pedido'">
-                <ContainerAcceptOrder @rowClickTableClose="closePedidos" @rowReloadTablePedidos="reloadTablePedidos"
-                    :pedidoSelecionado="reactiveVar.pedidoSelecionado">
-                </ContainerAcceptOrder>
+            <!-- CONTAINER CRIAR LIVRO -->
+            <v-col cols="12" class="text-start" v-if="reactiveVar.cardAtivo == 'criar_livro'">
+                <ContainerStockData
+                    titulo="Criar livro"
+                    tipo="criar"
+                    @rowClickTableClose="closeCadastrarLivro">
+                </ContainerStockData>
             </v-col>
 
-            <!-- LISTA DE DEVOLUÇÃO -->
-            <v-col cols="12" class="text-start" v-if="reactiveVar.cardAtivo == 'devolucao'">
-                <TableDefault :itemsPorPagina="reactiveVar.itemsPerPage" :tamanhoItems="reactiveVar.totalItems"
-                    :cabecalho="reactiveVar.headersDevolucao" :items="reactiveVar.listaPedidos" :search="reactiveVar.search"
-                    :carregando="reactiveVar.loading" @rowClickTable="rowClicked">
-                </TableDefault>
+            <!-- CONTAINER EDITAR LIVRO -->
+            <v-col cols="12" class="text-start" v-if="reactiveVar.cardAtivo == 'editar_livro'">
+                <ContainerStockData
+                    titulo="Editar livro"
+                    tipo="editar"
+                    :livroSelecionado="reactiveVar.livroSelecionado"
+                    @rowClickTableClose="closeCadastrarLivro">
+                </ContainerStockData>
             </v-col>
 
         </v-row>
@@ -63,10 +70,11 @@ import ButtonOptions from '@/components/Button/BtnOption.vue';
 import ButtonConfirm from '@/components/Button/BtnConfirm.vue';
 import FieldDefault from '@/components/Field/FieldDefault.vue';
 import TableDefault from '@/components/Table/TableDefault.vue';
-import ContainerAcceptOrder from '@/components/Container/ContainerAcceptOrder.vue';
+import ContainerStockData from '@/components/Container/ContainerStockData.vue';
 
 export default defineComponent({
-    data() {
+    el: '#stockView',
+    data() { // RESPONSAVEL PELA MANIPULAÇÃO DOS DADOS
 
         // AXIOS - PARA REQUISIÇÃO DE API
         const axios = require('axios');
@@ -75,7 +83,7 @@ export default defineComponent({
         var reactiveVar = reactive(
             {
                 search: "",
-                cardAtivo: "estoque",
+                cardAtivo: "livros",
                 itemsPerPage: -1,
                 totalItems: 0,
                 livroSelecionado: [],
@@ -93,7 +101,7 @@ export default defineComponent({
                     { title: 'Idioma:', key: 'idioma', align: 'start' },
                     { title: 'Paginas:', key: 'paginas', tipo: 'int', align: 'start' },
                     { title: 'Estoque:', key: 'total_estoque', tipo: 'int', align: 'start' },
-                    { title: 'Visualizar:', key: '', tipo: 'btnIcon', icone: 'mdi-eye', align: 'start' }
+                    { title: 'Editar:', key: '', tipo: 'btnIcon', icone: 'mdi-folder-edit', align: 'start' }
                 ],
                 loading: true,
                 containerCriarLivro: false,
@@ -101,8 +109,8 @@ export default defineComponent({
             }
         );
 
-        // PUXA USUARIOS
-        const listaDeUsuarios = async () => {
+        // PUXA LIVROS
+        const listaDeLivros = async () => {
 
             // INICIA O LOAD NA TABELA PEDIDOS
             reactiveVar.loading = true;
@@ -159,20 +167,39 @@ export default defineComponent({
 
         }
 
-        listaDeUsuarios();
+        listaDeLivros();
 
         return {
-            reactiveVar
+            reactiveVar,
+            listaDeLivros
         }
     },
-    components: {
+    methods: { // RESPONSAVEL POR CONTROLAR OS CLICK DE ELEMENTOS
+        reloadTableLivros() { // RECARREGA A LISTA DE LIVROS
+            this.listaDeLivros();
+        },
+        rowClicked(row) { // AO CLICAR NO BOTAO DENTRO DA TABELA
+            this.reactiveVar.livroSelecionado = row;
+            this.reactiveVar.cardAtivo = "editar_livro";
+            this.reactiveVar.containerCriarLivro = false;
+        },
+        btnCriarLivro() {
+            this.reactiveVar.cardAtivo = "criar_livro";
+            this.reactiveVar.containerCriarLivro = true;
+        },
+        closeCadastrarLivro() {
+            this.reactiveVar.cardAtivo = "livros";
+            this.reactiveVar.containerCriarLivro = false;
+        },
+    },
+    components: { // RESPONSAVEL PELA IMPORTAÇÃO DOS COMPONENTES FILHO
         ButtonOptions,
         ButtonConfirm,
         FieldDefault,
         TableDefault,
-        ContainerAcceptOrder
+        ContainerStockData
     },
-    computed: {
+    computed: { // RESPONSAVEL PELA RESPONSIVIDADE
         header() {
             const { lg, md, xl } = this.$vuetify.display
             return lg ? [7, 5] : xl ? [7, 5] : md ? [7, 5] : [12, 12]

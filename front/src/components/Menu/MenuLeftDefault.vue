@@ -1,6 +1,6 @@
 <!-- HTML -->
 <template>
-    <v-navigation-drawer color="white">
+    <v-navigation-drawer color="white" temporary>
 
         <!-- DADOS PESSOAIS -->
         <v-list nav dense>

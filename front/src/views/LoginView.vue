@@ -162,6 +162,7 @@ export default defineComponent({
                     erroResponse = "Erro ao solicitar dados da api"
                 }
 
+                console.log(error);
                 Toast.fire(erroResponse, "", "error");
                 reactiveVar.mostrarRedirecionamento = false;
             });

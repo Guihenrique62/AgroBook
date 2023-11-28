@@ -1,25 +1,21 @@
 <!-- HTML -->
 <template>
     <v-responsive class="ma-0 pa-0">
-        <!-- <v-text-field v-model="selected" v-bind="$attrs" style="border: 1px solid #656565;" :loading="carregar"
-            :bg-color="cor" class="ma-0 shrink rounded" elevation="0" :append-inner-icon="prependIcon" density="compact"
-            clearable :label="texto" variant="solo" hide-details>
-        </v-text-field> -->
         <v-select
-            v-model="selected"
+            v-model="select"
             v-bind="$attrs"
+            :items="items"
+            :label="texto"
+            :bg-color="cor"
             style="border: 1px solid #656565;"
             class="ma-0 shrink rounded"
-            :items="items"
             item-title="title"
             item-value="value"
-            :label="texto"
+            density="compact"
+            variant="solo"
             persistent-hint
             return-object
-            density="compact"
             single-line
-            variant="solo"
-            :bg-color="cor"
             hide-details>
         </v-select>
     </v-responsive>
@@ -33,11 +29,7 @@ import { defineComponent, reactive } from 'vue';
 export default defineComponent({
     data() {
         return {
-            select: { title: 'Administrador', value: 0 },
-            items: [
-                { title: 'Administrador', value: 0 },
-                { title: 'Colaborador', value: 1 }
-            ],
+            select: []
         }
     },
     props: {
@@ -47,7 +39,7 @@ export default defineComponent({
         prependIcon: String,
         itemsTitle: String,
         itemsValor: String,
-        items: Object,
+        items: Object
     },
     computed: {
         selected: {
@@ -61,3 +53,7 @@ export default defineComponent({
     }
 });
 </script>
+
+<!-- STYLE -->
+<style scoped>
+</style>
