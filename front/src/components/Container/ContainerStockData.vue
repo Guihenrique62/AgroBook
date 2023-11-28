@@ -4,80 +4,113 @@
         <!-- ROW PRINCIPAL -->
         <v-row>
 
-            <!-- TITULO -->
-            <v-col cols="6" class="text-start d-flex align-center">
+            <!-- INICIO DO HEADER -->
+            <v-col cols="6" class="text-start d-flex align-center"> <!-- TITULO -->
                 <div class="text-truncate">Criar Usuário</div>
             </v-col>
-
-            <!-- BOTAO DE FECHAR -->
-            <v-col cols="6" class="text-end">
-                <ButtonClosed @click="rowClick()" cor="white" />
+            <v-col cols="6" class="text-end"> <!-- BOTAO DE FECHAR -->
+                <ButtonClosed @click="closeCard()" cor="white" />
             </v-col>
+            <!-- FIM DO HEADER -->
 
-            <!-- NOME -->
-            <v-col :cols="inputsLine2[0]">
+
+            <!-- INICIO DOS INPUTS COLUNA [1] -->
+            <v-col :cols="inputsLine4[0]"> <!-- TITULO/NOME LIVRO -->
                 <div>
-                    <div class="text-truncate">Nome do colaborador:</div>
-                    <FieldDefault :disabled="reactiveVar.fildsDisabled" v-model="reactiveVar.nome" prependIcon=""
+                    <div class="text-truncate">Nome do livro:</div>
+                    <FieldDefault tipo="text" :disabled="reactiveVar.fildsDisabled" v-model="reactiveVar.nomeLivro"
+                        prependIcon="" :carregar="false" texto="" cor="white">
+                    </FieldDefault>
+                </div>
+            </v-col>
+            <v-col :cols="inputsLine4[1]"> <!-- CAPA -->
+                <div>
+                    <div class="text-truncate">Capa:</div>
+                    <FieldDefault tipo="url" :disabled="reactiveVar.fildsDisabled" v-model="reactiveVar.capa" prependIcon=""
                         :carregar="false" texto="" cor="white">
                     </FieldDefault>
                 </div>
             </v-col>
-
-            <!-- DOCUMENTO -->
-            <v-col :cols="inputsLine2[1]">
+            <v-col :cols="inputsLine4[2]"> <!-- PAGINAS -->
                 <div>
-                    <div class="text-truncate">Cpf:</div>
-                    <FieldDefault :disabled="tipo == 'editar'" v-model="reactiveVar.cpf" prependIcon="" :carregar="false"
-                        texto="" cor="white">
+                    <div class="text-truncate">Nº de páginas:</div>
+                    <FieldDefault tipo="number" :disabled="reactiveVar.fildsDisabled" v-model="reactiveVar.paginas"
+                        prependIcon="" :carregar="false" texto="" cor="white">
                     </FieldDefault>
                 </div>
             </v-col>
-
-            <!-- EMAIL -->
-            <v-col :cols="inputsLine3[0]">
+            <v-col :cols="inputsLine4[3]"> <!-- ESTOQUE -->
                 <div>
-                    <div class="text-truncate">E-mail:</div>
-                    <FieldDefault :disabled="tipo == 'editar'" v-model="reactiveVar.email" prependIcon="" :carregar="false"
-                        texto="" cor="white">
+                    <div class="text-truncate">Nº livro(s) estoque:</div>
+                    <FieldDefault tipo="number" :disabled="reactiveVar.fildsDisabled" v-model="reactiveVar.estoque"
+                        prependIcon="" :carregar="false" texto="" cor="white">
                     </FieldDefault>
                 </div>
             </v-col>
+            <!-- FIM DOS INPUTS COLUNA [1] -->
 
-            <!-- SENHA -->
-            <v-col :cols="inputsLine3[1]">
+
+            <!-- INICIO DOS INPUTS COLUNA [2] -->
+            <v-col :cols="inputsLine4[0]"> <!-- AUTOR -->
                 <div>
-                    <div class="text-truncate">Senha:</div>
-                    <FieldDefault :disabled="reactiveVar.fildsDisabled" v-model="reactiveVar.senha" prependIcon=""
-                        :carregar="false" texto="" tipo="password" cor="white">
+                    <div class="text-truncate">Nome do autor:</div>
+                    <FieldDefault tipo="text" :disabled="reactiveVar.fildsDisabled" v-model="reactiveVar.nomeAutor"
+                        prependIcon="" :carregar="false" texto="" cor="white">
                     </FieldDefault>
                 </div>
             </v-col>
-
-            <!-- CARGO -->
-            <v-col :cols="inputsLine3[2]">
+            <v-col :cols="inputsLine4[1]"> <!-- LANÇAMENTO -->
                 <div>
-                    <div class="text-truncate">Cargo:</div>
+                    <div class="text-truncate">Data lançamento:</div>
+                    <FieldDefault tipo="date" :disabled="reactiveVar.fildsDisabled" v-model="reactiveVar.dataLancamento"
+                        prependIcon="" :carregar="false" texto="" cor="white">
+                    </FieldDefault>
+                </div>
+            </v-col>
+            <v-col :cols="inputsLine4[2]"> <!-- IDIOMA -->
+                <div>
+                    <div class="text-truncate">Idioma:</div>
                     <FieldOptions
-                        :disabled="reactiveVar.fildsDisabled" v-model="reactiveVar.cargo" prependIcon=""
-                        :carregar="false" texto="" cor="white" :items="reactiveVar.opcaoCargoUsuario">
+                        :items="reactiveVar.opcaoIdioma"
+                        :disabled="reactiveVar.fildsDisabled" v-model="reactiveVar.cargo" prependIcon="" :carregar="false"
+                        texto="" cor="white">
                     </FieldOptions>
                 </div>
             </v-col>
+            <v-col :cols="inputsLine4[2]"> <!-- CATEGORIAS -->
+                <div>
+                    <div class="text-truncate">Categoria(s):</div>
+                    <ComboboxDefault
+                        :items="reactiveVar.opcaoCategoria"
+                        :disabled="reactiveVar.fildsDisabled"
+                        :carregar="false"
+                        v-model="reactiveVar.categoriaLivro"
+                        cor="white"
+                        prependIcon=""
+                        texto="">
+                    </ComboboxDefault>
+                </div>
+            </v-col>
+            
+            <!-- FIM DOS INPUTS COLUNA [2] -->
 
-            <!-- BOTAO AÇÃO [ CRIAR ] -->
-            <v-col cols="12" class="text-end" v-if="tipo == 'criar'">
+
+            <!-- INICIO DOS BOTAO COLUNA [1] -->
+            <v-col cols="12" class="text-end" v-if="tipo == 'criar'"> <!-- BOTAO AÇÃO [ CRIAR ] -->
                 <ButtonConfirm :disabled="reactiveVar.loadSavarUsuario" :loading="reactiveVar.loadSavarUsuario"
                     @click="btnCriarUsuario()" texto="Salvar" cor="success" />
             </v-col>
+            <!-- FIM DOS BOTAO COLUNA [1] -->
 
-            <!-- BOTAO AÇÃO [ EXCUIR + EXCLUIR ] -->
-            <v-col cols="12" class="text-end" v-if="tipo == 'editar'">
+
+            <!-- INICIO DOS BOTAO COLUNA [2] -->
+            <v-col cols="12" class="text-end" v-if="tipo == 'editar'"> <!-- BOTAO AÇÃO [ EXCUIR + EXCLUIR ] -->
                 <ButtonConfirm class="mr-2" :disabled="reactiveVar.loadEditarUsuario"
                     :loading="reactiveVar.loadEditarUsuario" @click="btnExcluirUsuario()" texto="Excluir" cor="error" />
                 <ButtonConfirm :disabled="reactiveVar.loadEditarUsuario" :loading="reactiveVar.loadEditarUsuario"
                     @click="btnEditarUsuario()" texto="Editar" cor="success" />
             </v-col>
+            <!-- FIM DOS BOTAO COLUNA [2] -->
 
         </v-row>
     </v-container>
@@ -94,6 +127,7 @@ import ButtonConfirm from '@/components/Button/BtnConfirm.vue';
 import FieldDefault from '@/components/Field/FieldDefault.vue';
 import FieldOptions from '@/components/Field/FildOptions.vue';
 import TextAreaDefault from '@/components/TextArea/TextAreaDefault.vue';
+import ComboboxDefault from '@/components/Combobox/ComboboxDefault.vue';
 
 export default defineComponent({
     data() {
@@ -110,9 +144,16 @@ export default defineComponent({
                 salvarUsuario: [],
                 editarUsuario: [],
                 excluirUsuario: [],
-                opcaoCargoUsuario: [
-                    { title: "Administrador", value: 0 },
-                    { title: "Colaborador", value: 1 }
+                opcaoIdioma: [
+                    { title: 'Portugues', value: "portugues" },
+                    { title: 'Inglês', value: "ingles" },
+                    { title: 'Japônes', value: "japones" }
+                ],
+                opcaoCategoria: [
+                    'Ação',
+                    'Drama',
+                    'Suspense',
+                    'Comédia'
                 ],
                 nome: this.tipo == 'editar' ? this.pedidoSelecionado.nome : '',
                 cpf: this.tipo == 'editar' ? this.pedidoSelecionado.documento : '',
@@ -123,7 +164,7 @@ export default defineComponent({
         );
 
         // CRIAR O USUARIO
-        const salvarUsuario = async () => {
+        const salvarLivro = async () => {
 
             // INICIA O LOAD DE SALVAR USUARIO
             reactiveVar.loadSavarUsuario = true;
@@ -179,158 +220,37 @@ export default defineComponent({
 
         }
 
-        // CRIAR O USUARIO
-        const editaUsuario = async () => {
-
-            // INICIA O LOAD DE EDITAR USUÁRIO
-            reactiveVar.loadEditarUsuario = true;
-
-            let body = {
-                "filter": {
-                    "_id": { "$oid": this.pedidoSelecionado["_id"] }
-                },
-                "newValue": {}
-            };
-
-            if (reactiveVar.nome) { body.newValue = { "nome": reactiveVar.nome } };
-            if (reactiveVar.senha) { body.newValue = { "senha": reactiveVar.senha } };
-            if (reactiveVar.cargo.value) { body.newValue = { "cargo": reactiveVar.cargo } }
-
-            // HEADER
-            let config = {
-                method: 'POST',
-                withCredentials: true,
-                timeout: process.env.VUE_APP_AXIOS_TIMEOUT,
-                url: '/api/user/update_user',
-                headers: {
-                    'Accept': '*/*',
-                    'Content-Type': 'application/json',
-                    'Cache-Control': 'no-cache'
-                },
-                data: body
-            };
-
-            // RUN AXIOS
-            await axios.request(config)
-                .then((response) => {
-                    let usuario = response.data.data_base.result;
-                    let mensagem = response.data.mensagem;
-                    Toast.fire(mensagem, "", "success");
-                    reactiveVar.editarUsuario = usuario;
-                    this.$emit('rowReloadTableUsuarios', true);
-                    this.$emit('rowClickTableClose', true);
-                })
-                .catch((error) => {
-
-                    let erroResponse;
-                    try {
-                        erroResponse = error.response.data.mensagem;
-                    } catch (axiosErr) {
-                        erroResponse = "Erro ao solicitar dados da api"
-                    }
-
-                    console.log(error)
-                    Toast.fire(erroResponse, "", "error");
-                });
-
-            // PARA O LOAD DE EDITAR USUÁRIO
-            reactiveVar.loadEditarUsuario = false;
-
-        }
-
-        // EXCLUIR O USUARIO
-        const excluirUsuario = async () => {
-
-            // INICIA O LOAD DE EDITAR USUÁRIO
-            reactiveVar.loadEditarUsuario = true;
-
-            let body = {
-                "filter": {
-                    "_id": { "$oid": this.pedidoSelecionado["_id"] }
-                }
-            };
-
-            // HEADER
-            let config = {
-                method: 'DELETE',
-                withCredentials: true,
-                timeout: process.env.VUE_APP_AXIOS_TIMEOUT,
-                url: '/api/user/delete_user',
-                headers: {
-                    'Accept': '*/*',
-                    'Content-Type': 'application/json',
-                    'Cache-Control': 'no-cache'
-                },
-                data: body
-            };
-
-            // RUN AXIOS
-            await axios.request(config)
-                .then((response) => {
-                    let usuario = response.data.data_base.result;
-                    let mensagem = response.data.mensagem;
-                    Toast.fire(mensagem, "", "success");
-                    reactiveVar.excluirUsuario = usuario;
-                    this.$emit('rowReloadTableUsuarios', true);
-                    this.$emit('rowClickTableClose', true);
-                })
-                .catch((error) => {
-
-                    let erroResponse;
-                    try {
-                        erroResponse = error.response.data.mensagem;
-                    } catch (axiosErr) {
-                        erroResponse = "Erro ao solicitar dados da api"
-                    }
-
-                    console.log(error)
-                    Toast.fire(erroResponse, "", "error");
-                });
-
-            // PARA O LOAD DE EDITAR USUÁRIO
-            reactiveVar.loadEditarUsuario = false;
-
-        }
-
         return {
             reactiveVar,
-            salvarUsuario,
-            editaUsuario,
-            excluirUsuario
+            salvarLivro
         }
 
     },
-    components: {
+    components: { // RESPONSAVEL POR TODOS OS COMPONENTES FILHOS USADO NO SCOPO ATUAL
         ButtonClosed,
         ButtonConfirm,
         FieldDefault,
         FieldOptions,
-        TextAreaDefault
+        TextAreaDefault,
+        ComboboxDefault
     },
-    computed: {
-        inputsLine2() {
+    computed: { // RESPONSAVEL PELA RESPONSIVIDADE
+        inputsLine4() {
             const { lg, md, xl } = this.$vuetify.display
-            return lg ? [8, 4] : xl ? [8, 4] : md ? [8, 4] : [12, 12]
+            return lg ? [5, 3, 2, 2] : xl ? [5, 3, 2, 2] : md ? [5, 3, 2, 2] : [12, 12, 12, 12]
         },
         inputsLine3() {
             const { lg, md, xl } = this.$vuetify.display
             return lg ? [6, 3, 3] : xl ? [6, 3, 3] : md ? [6, 3, 3] : [12, 12, 12]
-        },
-        filter: {
-            get() {
-                return this.value;
-            },
-            set(val) {
-                this.$emit('data', val);
-            }
         }
     },
-    props: {
-        pedidoSelecionado: Object,
-        tipo: String
+    props: { // VARIAVEIS RECEBIDA DO PAI
+        titulo: String, // TITULO DO CARD
+        pedidoSelecionado: Object, // JSON RECEBIDO COM INFORMAÇÃO DO LIVRO
+        tipo: String // RECEBE SE E PARA EDITAR OU PARA CRIAR [ 'editar', 'criar' ]
     },
-    methods: {
-        rowClick: function () {
+    methods: { // CONTROLA TODOS OS CLICK NO SCOPO ATUAL
+        closeCard: function () {
             // VERIFICA SE FOI CRIADO O USUARIO
             if (!this.reactiveVar.nome && !this.reactiveVar.cpf && !this.reactiveVar.email && !this.reactiveVar.senha && !this.reactiveVar.cargo) {
                 this.$emit('rowClickTableClose', true);
@@ -402,3 +322,6 @@ export default defineComponent({
     },
 });
 </script>
+
+<!-- STYLE APENAS NO SCOPO ATUAL, REMOVE 'scoped' PARA AS APLICAÇÃO SEREM GLOBAL -->
+<style scoped></style>
