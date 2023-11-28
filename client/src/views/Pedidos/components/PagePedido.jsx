@@ -10,6 +10,7 @@ import React from 'react'
 import {  useState } from "react"
 import Pedidos from './Pedidos'
 import Devolvidos from './Devolvidos'
+import './style/PagePedidoStyle.css'
 
 
  
@@ -22,12 +23,14 @@ import Devolvidos from './Devolvidos'
      
      return(
           
-          <div>
-          
-           <p onClick={()=> setOpen(current=> !current)}>Pedidos</p>
-
+          <div className='div_pagePedido'>
+          <div className='container_pagePedido'>
+            <p onClick={()=> setOpen(current=> !current)} className='p_pagePedido'>Pedidos</p>
+          </div>
            { open === true ?  <Pedidos/> : null}
-           <p onClick={()=> setOpen(current => !current )}  >Devolvidos</p>
+           <div className='container_pagePedido'>
+             <p onClick={()=> setOpen(current => !current )} className='p_pagePedido' >Devolvidos</p>
+           </div>
           {open === false ? <Devolvidos/> : null}
           </div>
           

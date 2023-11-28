@@ -1,6 +1,6 @@
 import { useState } from "react"
 import '../components/style/pedidoPrincipal.css'
-
+import { format, formatDistance, formatRelative, subDays,parseISO } from 'date-fns'
 
 
 
@@ -198,6 +198,11 @@ export default function Devolvidos(){
           }
       }
      ]
+
+     const formatDate=(datas)=>{
+        return format(parseISO(datas), "dd/MM/yyyy")
+   } 
+
     
 
       const [ open, setOpen]= useState(true)
@@ -265,7 +270,7 @@ export default function Devolvidos(){
                                         {pedidos_.map((data_vencimento)=>{
                                          return data_vencimento.data_base.result.map((data_vencimento_user)=>(
                                         <div className="div_userName_devolvidos">
-                                         <p>{data_vencimento_user.data_vencimento}</p>
+                                         <p>{formatDate( data_vencimento_user.data_vencimento)}</p>
                                         </div>
                                                                 ))
                                                })}

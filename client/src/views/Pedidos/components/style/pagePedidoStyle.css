@@ -1,0 +1,21 @@
+.div_pagePedido{
+     display: flex;
+     flex-direction: row;
+}
+.container_pagePedido{
+     
+     display: flex;
+     flex-direction: row;
+    
+}
+.p_pagePedido{
+     cursor: pointer;
+     font-size: 20px;
+}
+.p_pagePedido:hover{
+     color: blue;
+}
+.pageSelecionado{
+     text-decoration: underline;
+     color: green;
+}
