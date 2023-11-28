@@ -51,16 +51,8 @@ export default defineComponent({
         const axios = require('axios');
         axios.defaults.baseURL = window.location.protocol + "//" + window.location.hostname + ":57601";
 
-        let fullName = JSON.parse(sessionStorage.getItem("uui.data"))["nome"];
-        let reseteSenhaStatus = JSON.parse(sessionStorage.getItem("uui.data"))["resetar_senha"];
-        let cargoUsuarioAtual = JSON.parse(sessionStorage.getItem("uui.data"))["cargo"];
-
         var reactiveVar = reactive(
-            {   
-                nome: fullName,
-                nomeAbreviado: ((fullName).split(" ")[0]).slice(0,1) + ((fullName).split(" ")[1]).slice(0,1),
-                reseteSenha: reseteSenhaStatus,
-                cargoUsuario: cargoUsuarioAtual,
+            {
                 filterBuscarLivro: "",
                 filterBuscarLivroLoad: false,
                 btnIndexLoad: null,

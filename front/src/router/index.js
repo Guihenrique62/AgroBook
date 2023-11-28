@@ -20,7 +20,7 @@ const routes = [
   // [ FIM ] ROTAS PEDIDOS
 
   // [ INICIO ] ROTAS ESTOQUE
-  { path: "/estoque", name: "Estoque de livros", component: "StockView", meta: { requiresAuth: true, title: `${appName} - Estoque` } },
+  { path: "/estoque", name: "Estoque de livros", component: () => import("@/layout/defaultNavLivros.vue"), children: [{ path: '/estoque', name: 'Estoque de livros', component: () => import(`@/views/StockView.vue`) }], meta: { requiresAuth: true, title: `${appName} - Estoque` } },
   // [ FIM ] ROTAS ESTOQUE
 
   // [ INICIO ] ROTAS LIVROS
