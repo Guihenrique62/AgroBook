@@ -72,8 +72,10 @@
 
             <!-- BOTAO AÇÃO [ EXCUIR + EXCLUIR ] -->
             <v-col cols="12" class="text-end" v-if="tipo == 'editar'">
-                <ButtonConfirm class="mr-2" :disabled="reactiveVar.loadEditarUsuario" :loading="reactiveVar.loadEditarUsuario" @click="btnExcluirUsuario()" texto="Excluir" cor="error" />
-                <ButtonConfirm :disabled="reactiveVar.loadEditarUsuario" :loading="reactiveVar.loadEditarUsuario" @click="btnEditarUsuario()" texto="Editar" cor="success" />
+                <ButtonConfirm class="mr-2" :disabled="reactiveVar.loadEditarUsuario"
+                    :loading="reactiveVar.loadEditarUsuario" @click="btnExcluirUsuario()" texto="Excluir" cor="error" />
+                <ButtonConfirm :disabled="reactiveVar.loadEditarUsuario" :loading="reactiveVar.loadEditarUsuario"
+                    @click="btnEditarUsuario()" texto="Editar" cor="success" />
             </v-col>
 
         </v-row>
@@ -182,12 +184,12 @@ export default defineComponent({
                 "filter": {
                     "_id": { "$oid": this.pedidoSelecionado["_id"] }
                 },
-                "newValue": {
-                    "nome": reactiveVar.nome,
-                    "senha": reactiveVar.senha,
-                    "cargo": reactiveVar.cargo.value
-                }
+                "newValue": {}
             };
+
+            if (reactiveVar.nome) { body.newValue = { "nome": reactiveVar.nome } };
+            if (reactiveVar.senha) { body.newValue = { "senha": reactiveVar.senha } };
+            if (reactiveVar.cargo.value) { body.newValue = { "cargo": reactiveVar.cargo } }
 
             // HEADER
             let config = {

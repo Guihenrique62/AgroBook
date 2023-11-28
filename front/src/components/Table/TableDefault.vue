@@ -30,7 +30,7 @@
                             {{ props.item[row.key] }}
                         </div>
                         <div v-if="row.tipo == 'btnIcon'" @click="rowClick(props.item)">
-                            <BtnIcon icone="mdi-account-edit" cor="info"/>
+                            <BtnIcon :icone="row.icone" cor="info"/>
                         </div>
                     </td>
                 </tr>

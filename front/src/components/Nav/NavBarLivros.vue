@@ -32,35 +32,7 @@
         </v-card>
 
         <!-- LATERAL MENU -->
-        <v-navigation-drawer v-model="reactiveVar.drawer" absolute temporary>
-            <!-- DADOS PESSOAIS -->
-            <v-list nav dense>
-
-                <v-responsive class="ma-0 mt-6 pa-0" width="500">
-                    <v-avatar color="primary" size="150"><div class="text-h4">JC</div></v-avatar>
-                    <div class="mt-2 text-h6 text-truncate">JEAN CLEIDSON PEREIRA RODRIGUES</div>
-                </v-responsive>
-
-            </v-list>
-
-            <!-- LINKS -->
-            <v-list nav dense>
-                
-                <v-list-item to="/" prepend-icon="mdi-home-variant-outline">Tela inicial</v-list-item>
-                <v-list-item to="/usuarios" prepend-icon="mdi-account-edit">Cadastros</v-list-item>
-                <v-list-item to="/estoque" prepend-icon="mdi-bookshelf">Estoque</v-list-item>
-                <v-list-item to="/biblioteca" prepend-icon="mdi-library">Minha Biblioteca</v-list-item>
-                <v-list-item to="/pedidos" prepend-icon="mdi-order-bool-descending-variant">Pedidos</v-list-item>
-
-                <v-list-group :value="1" title="item.name" class="d-none">
-                    <template v-slot:activator="{ props }">
-                        <v-list-item v-bind="props" :title="1"></v-list-item>
-                    </template>
-                    <v-list-item :loading="true" v-for="key, index in 10" :key="index" :value="1" :title="1" :append-icon="1" to="1" @click="1+1"></v-list-item>
-                </v-list-group>
-
-            </v-list>
-        </v-navigation-drawer>
+        <MenuLeftDefault v-model="reactiveVar.drawer"/>
 
     </v-layout>
 </template>
@@ -70,6 +42,9 @@
 // SYSTEM
 import { defineComponent, reactive } from 'vue';
 import { vue3Debounce } from 'vue-debounce'
+
+// COMPONENTS
+import MenuLeftDefault from '@/components/Menu/MenuLeftDefault.vue';
 
 export default defineComponent({
     data() {
@@ -103,6 +78,9 @@ export default defineComponent({
             btnBuscarLivro
         }
 
+    },
+    components: {
+        MenuLeftDefault
     },
     directives: {
         debounce: vue3Debounce({ lock: true })

@@ -94,7 +94,7 @@ export default defineComponent({
                     { title: 'Nome:', key: 'nome', objectKey: "nome", align: 'start', sortable: true },
                     { title: 'E-mail:', key: 'email', objectKey: "email", align: 'start' },
                     { title: 'Cargo:', key: 'cargo', tipo: "listaPersonalisada", listaPersonalizada: { 0: { titulo: "Administrado", cor: "#CBDC07" }, 1: { titulo: "Colaborador", cor: "#070FDC" }, 2: { titulo: "Entregue", cor: "#0BDC07" }, 3: { titulo: "Vencido", cor: "#FF6B00" }, 4: { titulo: "Recusado", cor: "#DC0707" } }, align: 'start' },
-                    { title: 'Editar:', key: 'email', tipo: "btnIcon", align: 'start' },
+                    { title: 'Editar:', key: '', tipo: "btnIcon", icone: "mdi-account-edit", align: 'start' },
                 ],
                 loading: true,
                 containerUsuario: false,

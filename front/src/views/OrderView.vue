@@ -106,8 +106,8 @@ export default defineComponent({
                     { title: 'Nome:', key: 'user', objectKey: "nome", align: 'start' },
                     { title: 'Titulo:', key: 'book', objectKey: "titulo", align: 'start' },
                     { title: 'Data pedido:', key: 'data_aluguel', tipo: 'diaMesAno', align: 'start', sortable: true },
-                    { title: 'Data vencimento:', key: 'data_vencimento', tipo: 'diaMesAno', align: 'start' },
-                    { title: 'Status:', key: 'status', tipo: "listaPersonalisada", listaPersonalizada: { 0: { titulo: "Aguardando", cor: "#CBDC07" }, 1: { titulo: "Alugado", cor: "#070FDC" }, 2: { titulo: "Entregue", cor: "#0BDC07" }, 3: { titulo: "Vencido", cor: "#FF6B00" }, 4: { titulo: "Recusado", cor: "#DC0707" } }, align: 'start' }
+                    { title: 'Status:', key: 'status', tipo: "listaPersonalisada", listaPersonalizada: { 0: { titulo: "Aguardando", cor: "#CBDC07" }, 1: { titulo: "Alugado", cor: "#070FDC" }, 2: { titulo: "Entregue", cor: "#0BDC07" }, 3: { titulo: "Vencido", cor: "#FF6B00" }, 4: { titulo: "Recusado", cor: "#DC0707" } }, align: 'start' },
+                    { title: 'Visualizar:', key: '', tipo: 'btnIcon', icone: 'mdi-eye', align: 'start' }
                 ],
                 headersDevolucao: [
                     { title: 'Nome:', key: 'user.0.nome', align: 'start', sortable: true },
