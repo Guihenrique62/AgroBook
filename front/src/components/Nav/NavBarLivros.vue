@@ -26,6 +26,7 @@
                         </v-toolbar-title>
                     </v-toolbar>
                 </v-card>
+                
 
             </v-toolbar>
 
@@ -69,8 +70,9 @@ export default defineComponent({
         );
 
         const btnBuscarLivro = async () => {
-            console.log("asd")
             reactiveVar.filterBuscarLivroLoad = true;
+            console.log("asd")
+            reactiveVar.filterBuscarLivroLoad = false;
         }
 
         return {

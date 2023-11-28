@@ -91,8 +91,8 @@ export default defineComponent({
                     { title: 'Titulo:', key: 'titulo', align: 'start', sortable: true },
                     { title: 'Autor:', key: 'autor', align: 'start' },
                     { title: 'Idioma:', key: 'idioma', align: 'start' },
-                    { title: 'Paginas:', key: 'paginas', align: 'start' },
-                    { title: 'Estoque:', key: 'total_estoque', align: 'start' },
+                    { title: 'Paginas:', key: 'paginas', tipo: 'int', align: 'start' },
+                    { title: 'Estoque:', key: 'total_estoque', tipo: 'int', align: 'start' },
                     { title: 'Visualizar:', key: '', tipo: 'btnIcon', icone: 'mdi-eye', align: 'start' }
                 ],
                 loading: true,
