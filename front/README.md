@@ -1,24 +1,21 @@
 # front-agrobook
 
-## Project setup
+## Para instalar os pacotes, rode o comando abaixo
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Para iniciar o projeto em modo de desenvolvimento, execulte o comando abaixo
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### Para finalizar o projeto execulte o comando abaixo
 ```
 npm run build
 ```
 
-### Lints and fixes files
+### Para verificar os arquivos execulte o comando abaixo
 ```
 npm run lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
