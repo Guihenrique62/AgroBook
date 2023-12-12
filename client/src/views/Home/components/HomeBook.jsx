@@ -1,6 +1,6 @@
 /*
-  CRIADO POR: Fillype da Silva Macedo Cunha
-  EMAIL: fillypecunha@gmail.com
+  CRIADO POR: Guilherme Henrique Porto dos Santos
+  EMAIL: guilhermeportosantos1@gmail.com
 */
 
 
