@@ -11,7 +11,14 @@
     overflow: hidden;
     flex-direction: column;
     gap: 1rem;  
+    align-items: center;
+    background-color: white;
+    margin-bottom: 2rem;
 
+}
+
+.slider-container-books{
+    width: 95%;
 }
 
 .slider-container-books .slider-books{
@@ -19,15 +26,29 @@
     grid-template-columns: repeat(10, 1fr);
     overflow-x: auto;
     scrollbar-width: none;
-}
-
-
-.slider-container-books .slider-books .card-home{
     
 }
 
+.slider-scrollbar {
+    height: 24px;
+    width: 100%;
+    background-color: aqua;
+    display: flex;
+    align-items: center;
+}
+
+.scrollbar-track {
+    height: 2px;
+    width: 100%;
+    background-color: #ccc;
+}
+
+.slider-container-books .slider-books::-webkit-scrollbar{
+    display: none;
+}
+
 .card-home{
-    padding: 10px;
+    padding: 5px;
     width: 200px;
     height: 300px;
     margin: 20px;
@@ -47,7 +68,7 @@
 }
 .titulo-book{
     text-align: center;
-    font-size: 20px;
+    font-size: 1rem;
     margin: 1px;
   
 }

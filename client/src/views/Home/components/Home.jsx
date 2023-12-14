@@ -48,8 +48,17 @@ export default function Home() {
             </div>
           ))}
         </div>
-        
+        <div className="slider-scrollbar">
+        <div className="scrollbar-track">
+            <div className="scrollbar-thumb">
+              
+            </div>
+        </div>
       </div>
+      </div>
+      
+      
+
 
       <h2 className="title-genero">Comedia</h2>
       <div className="slider-container-books">
