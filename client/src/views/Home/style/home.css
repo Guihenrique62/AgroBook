@@ -5,6 +5,8 @@
   CRIADO POR: VICTOR RAFAEL GONÇALVES SILVA
   EMAIL: victorrafaelgs13@gmail.com
 */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400&display=swap');
+
 .booksContainer{
     display: flex;
     text-align: center;
@@ -14,38 +16,40 @@
     align-items: center;
     background-color: white;
     margin-bottom: 2rem;
-
+    font-family: 'Inter', sans-serif;
 }
+
 
 .slider-container-books{
     width: 95%;
 }
 
-.slider-container-books .slider-books{
-    display: grid;
-    grid-template-columns: repeat(10, 1fr);
+.slider-books{
+    display: flex;
+    
     overflow-x: auto;
-    scrollbar-width: none;
+    width: 100%;
+    
     
 }
 
-.slider-scrollbar {
-    height: 24px;
-    width: 100%;
-    background-color: aqua;
-    display: flex;
-    align-items: center;
-}
-
-.scrollbar-track {
-    height: 2px;
-    width: 100%;
-    background-color: #ccc;
-}
-
-.slider-container-books .slider-books::-webkit-scrollbar{
-    display: none;
-}
+.slider-books::-webkit-scrollbar {
+    height: 8px;
+    
+  }
+.slider-books::-webkit-scrollbar-thumb {
+    background-color: #000000;
+    border-radius: 10px;
+    height: .3rem;
+    border: none;
+  }
+  
+  
+  
+.slider-books::-webkit-scrollbar-track {
+    background-color: none;
+    
+  }
 
 .card-home{
     padding: 5px;
@@ -56,8 +60,8 @@
     background-color: aliceblue;
     box-shadow: 1px 1px 20px rgba(9, 9, 9, 0.288);
     border-radius: 5px;
-    flex: none;
-    object-fit: cover;
+    flex: 0 0 auto;
+    
   
 }
 
@@ -80,26 +84,14 @@
     text-align: center;
 }
 .title-genero{
-    display: flex;
-    margin: 10px;
+    display: block;
+    width: 95%;
+    text-align: left;
+    padding: 2rem 0 0 0;
+    font-size: 2rem;
 }
-.teste{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 20px;
-}
-.button-frente{
-    display: flex;
-   
-}
-.icon-left{
-    cursor: pointer;
-    background-color: transparent;
-    border: none;
-}
-.icon-right{
-    cursor: pointer;
-    background-color: transparent;
-    border: none;
+
+.book-link{
+    text-decoration: none; /* Remove o sublinhado padrão do link */
+  color: inherit; 
 }

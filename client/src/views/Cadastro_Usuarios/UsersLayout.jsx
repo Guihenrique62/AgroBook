@@ -15,7 +15,7 @@ import './userLayout.css'
 export default function UsersLayout() {
   return (
     <>
-    <Header search={undefined}/>
+    <Header/>
     <Outlet/>
     </>
     

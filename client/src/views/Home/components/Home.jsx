@@ -28,6 +28,7 @@ export default function Home() {
     });
   }, []);
 
+
   return (
 
     loading ? (<Loader />) : 
@@ -39,7 +40,7 @@ export default function Home() {
         <div className="slider-books">
           {bookAcao.map((book) => (
             <div key={book._id} className="card-home" >
-              <Link to={`book/${book._id}`}>
+              <Link to={`book/${book._id}`} className="book-link">
                 <img className="home-imagem" src={book.capa} alt="" />
                 <div className="div-title">
                   <p className="titulo-book">{book.titulo}</p>
@@ -48,36 +49,12 @@ export default function Home() {
             </div>
           ))}
         </div>
-        <div className="slider-scrollbar">
-        <div className="scrollbar-track">
-            <div className="scrollbar-thumb">
-              
-            </div>
-        </div>
       </div>
-      </div>
-      
-      
-
 
       <h2 className="title-genero">Comedia</h2>
       <div className="slider-container-books">
-        {bookComedia.map((book) => (
-          <div key={book._id} className="card-home" >
-            <Link to={`book/${book._id}`}>
-              <img className="home-imagem" src={book.capa} alt="" />
-              <div className="div-title">
-                <p className="titulo-book">{book.titulo}</p>
-              </div>
-            </Link>
-          </div>
-        ))
-        }
-      </div>
-
-      <h2 className="title-genero">Romance</h2>
-      <div className="slider-container-books">  
-        {bookRomance.map((book) => (
+        <div className="slider-books">
+          {bookComedia.map((book) => (
             <div key={book._id} className="card-home" >
               <Link to={`book/${book._id}`}>
                 <img className="home-imagem" src={book.capa} alt="" />
@@ -87,8 +64,10 @@ export default function Home() {
               </Link>
             </div>
           ))
-        }
+          }
+        </div>
       </div>
+      
     </div>)
   )
 

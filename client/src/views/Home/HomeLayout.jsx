@@ -15,7 +15,7 @@ import FilterBooK from './components/filterBook'
 export default function HomeLayout() {
   return (
     <>
-        <Header search={()=>{console.log(3)}}/>
+        <Header search={()=>{console.log('render test')}}/>
        
         <Outlet/>
     </>
